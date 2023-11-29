@@ -14,6 +14,12 @@ typedef struct s_vars
 	char	*inp;
 }		t_vars;
 
+typedef struct s_prog
+{
+	char			**prog;
+	struct s_prog	*next;
+}		t_prog;
+
 /* functions */
 
 /* ft_handle_signals */
