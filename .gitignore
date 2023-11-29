@@ -1,0 +1,8 @@
+a.out
+*.o
+*.a
+*.h.*
+minishell
+.vscode
+*.h.gch
+.nfs*
