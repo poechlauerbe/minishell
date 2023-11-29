@@ -6,10 +6,8 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 11:57:44 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/11/29 11:58:11 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/11/29 12:06:35 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minishell.h"
-
-
+#include <stdio.h>
