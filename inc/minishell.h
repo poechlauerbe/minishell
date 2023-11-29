@@ -16,6 +16,7 @@ typedef struct s_vars
 
 typedef struct s_prog
 {
+	char			oper;
 	char			**prog;
 	struct s_prog	*next;
 }		t_prog;
