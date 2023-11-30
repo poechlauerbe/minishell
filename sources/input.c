@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 15:30:48 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/11/30 15:35:50 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/11/30 16:21:00 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ft_input_strlen(char **inp)
 		|| **inp == '\r' || **inp == '\f' || **inp == '\v')
 		*inp += 1;
 	temp = *inp;
-	while (*temp >= 33 && *temp <= 126)
+	while (*temp >= 33 && *temp <= 126 && *temp != '|')
 	{
 		// if (*temp == '|' || *temp == '<' || *temp == '>' )
 		// 	break;
@@ -34,54 +34,74 @@ int	ft_input_strlen(char **inp)
 	return (strlen);
 }
 
-void	ft_malloc_prog_2d_str(t_vars *vars, int str_c)
+void	ft_malloc_prog_2d_str(t_vars *vars)
 {
 	char	**prog;
 	char	*str;
 	char	*inp;
 	int		strlen;
 	int		i;
+	t_prg	*temp;
 
 	inp = vars->inp;
-	prog = ft_calloc(str_c + 1, sizeof(char *));
-	if (!prog)
-		ft_exit(vars, MALLOC_ERROR);
-	i = 0;
-	while (i < str_c)
+	temp = vars->p_start;
+	while (temp)
 	{
-		strlen = ft_input_strlen(&inp);
-		str = malloc((strlen + 1) * sizeof(char));
-		if (!str)
+		prog = ft_calloc(temp->str_c + 1, sizeof(char *));
+		if (!prog)
 			ft_exit(vars, MALLOC_ERROR);
-		ft_strlcpy(str, inp, strlen);
-		prog[i] = str;
-		inp += strlen;
-		i++;
+		i = 0;
+		while (i < temp->str_c)
+		{
+			strlen = ft_input_strlen(&inp);
+			str = malloc((strlen + 1) * sizeof(char));
+			if (!str)
+				ft_exit(vars, MALLOC_ERROR);
+			ft_strlcpy(str, inp, strlen);
+			prog[i] = str;
+			inp += strlen;
+			i++;
+		}
+		prog[i] = NULL;
+		temp->prog = prog;
+		temp = temp->next;
 	}
-	prog[i] = NULL;
-	vars->p_start->prog = prog;
 }
 
-void	ft_check_string_count(t_vars *vars, char *inp, int *str_c)
+void	ft_check_string_count(t_vars *vars, char *inp)
 {
+	t_prg	*temp;
+
 	// if (!inp || !*inp)
 	// 	ft_reset();
 	vars->p_start = malloc(sizeof(t_prg));
 	if (!vars->p_start)
 		ft_exit(vars, MALLOC_ERROR);
 	vars->p_start->next = NULL;
-	*str_c = 0;
+	temp = vars->p_start;
+	temp->str_c = 0;
 	while (*inp)
 	{
 		while (*inp == ' ' || *inp == '\n' || *inp == '\t'
 			|| *inp == '\r' || *inp == '\f' || *inp == '\v')
 			inp++;
-		if (*inp >= 33 && *inp <= 126)
-			*str_c += 1;
+		if (*inp >= 33 && *inp <= 126 && *inp != '|')
+			temp->str_c += 1;
 		while (*inp >= 33 && *inp <= 126)
 		{
-			// if (*inp == '|' || *inp == '<' || *inp == '>' )
-			// 	break;
+			// || *inp == '<' || *inp == '>'
+			if (*inp == '|')
+			{
+				temp->next = malloc(sizeof(t_prg));
+				if (!temp->next)
+					ft_exit(vars, MALLOC_ERROR);
+				temp = temp->next;
+				temp->next = NULL;
+				temp->str_c = 0;
+				temp->oper = '|';
+				inp++;
+				break;
+			}
 			inp++;
 		}
 	}
@@ -89,10 +109,7 @@ void	ft_check_string_count(t_vars *vars, char *inp, int *str_c)
 
 void	ft_check_input(t_vars *vars)
 {
-	int	str_c;
-
-	str_c = 0;
-	ft_check_string_count(vars, vars->inp, &str_c);
-	ft_malloc_prog_2d_str(vars, str_c);
+	ft_check_string_count(vars, vars->inp);
+	ft_malloc_prog_2d_str(vars);
 
 }

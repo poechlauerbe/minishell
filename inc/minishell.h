@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 16:52:48 by tbenz             #+#    #+#             */
-/*   Updated: 2023/11/30 15:35:09 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/11/30 15:56:37 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 
 typedef struct s_prg
 {
+	int				str_c;
 	char			oper;
 	char			**prog;
 	struct s_prg	*next;

@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 14:33:20 by tbenz             #+#    #+#             */
-/*   Updated: 2023/11/30 15:16:42 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/11/30 16:23:51 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	main(void)
 		{
 			add_history(vars.inp);
 			ft_check_input(&vars);
+			ft_printf("%s\n", vars.p_start->prog[0]);
 			ft_free_input(&vars);
 		}
 		else
