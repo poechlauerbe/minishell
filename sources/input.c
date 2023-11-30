@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 15:30:48 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/11/30 15:20:02 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/11/30 15:35:50 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,14 @@ void	ft_malloc_prog_2d_str(t_vars *vars, int str_c)
 	inp = vars->inp;
 	prog = ft_calloc(str_c + 1, sizeof(char *));
 	if (!prog)
-		ft_exit(vars);
+		ft_exit(vars, MALLOC_ERROR);
 	i = 0;
 	while (i < str_c)
 	{
 		strlen = ft_input_strlen(&inp);
 		str = malloc((strlen + 1) * sizeof(char));
 		if (!str)
-			ft_exit(vars);
+			ft_exit(vars, MALLOC_ERROR);
 		ft_strlcpy(str, inp, strlen);
 		prog[i] = str;
 		inp += strlen;
@@ -68,7 +68,7 @@ void	ft_check_string_count(t_vars *vars, char *inp, int *str_c)
 	// 	ft_reset();
 	vars->p_start = malloc(sizeof(t_prg));
 	if (!vars->p_start)
-		ft_exit(vars);
+		ft_exit(vars, MALLOC_ERROR);
 	vars->p_start->next = NULL;
 	*str_c = 0;
 	while (*inp)

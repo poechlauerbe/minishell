@@ -6,11 +6,16 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 13:28:25 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/11/30 15:21:30 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/11/30 15:34:10 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+void	err_mes(void)
+{
+	ft_putstr_fd("Error\n", 2);
+}
 
 void	ft_free_input(t_vars *vars)
 {
@@ -37,8 +42,10 @@ void	ft_free_input(t_vars *vars)
 	vars->p_start = NULL;
 }
 
-void	ft_exit(t_vars *vars)
+void	ft_exit(t_vars *vars, int errcd)
 {
+	if (errcd != OK)
+		err_mes();
 	ft_free_input(vars);
-	exit(OK);
+	exit(errcd);
 }
