@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 15:30:48 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/11/30 16:21:00 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/11/30 17:27:01 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_input_strlen(char **inp)
 	if (!*inp && !**inp)
 		return (strlen);
 	while (**inp == ' ' || **inp == '\n' || **inp == '\t'
-		|| **inp == '\r' || **inp == '\f' || **inp == '\v')
+		|| **inp == '\r' || **inp == '\f' || **inp == '\v' || **inp == '|')
 		*inp += 1;
 	temp = *inp;
 	while (*temp >= 33 && *temp <= 126 && *temp != '|')
@@ -51,13 +51,15 @@ void	ft_malloc_prog_2d_str(t_vars *vars)
 		if (!prog)
 			ft_exit(vars, MALLOC_ERROR);
 		i = 0;
+		if (*inp == '|')
+			inp++;
 		while (i < temp->str_c)
 		{
 			strlen = ft_input_strlen(&inp);
 			str = malloc((strlen + 1) * sizeof(char));
 			if (!str)
 				ft_exit(vars, MALLOC_ERROR);
-			ft_strlcpy(str, inp, strlen);
+			ft_strlcpy(str, inp, strlen + 1);
 			prog[i] = str;
 			inp += strlen;
 			i++;
