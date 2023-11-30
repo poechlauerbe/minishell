@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 14:33:20 by tbenz             #+#    #+#             */
-/*   Updated: 2023/11/30 17:21:49 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/11/30 17:44:21 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	main(void)
 		{
 			add_history(vars.inp);
 			ft_check_input(&vars);
+			ft_input(&vars);
 			ft_free_input(&vars);
 		}
 		free(vars.inp);
