@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+         #
+#    By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/26 15:17:18 by tbenz             #+#    #+#              #
-#    Updated: 2023/11/29 17:41:30 by tbenz            ###   ########.fr        #
+#    Updated: 2023/11/30 15:06:42 by bpochlau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,8 @@ SRCS_DIR		= ./sources/
 BONUS_SRCS_DIR	= ./bonus_sources/
 
 SRCS 			= $(addprefix $(SRCS_DIR),\
+				exit.c \
+				input.c \
 				minishell.c \
 				signal_handling.c \
 				utils.c)

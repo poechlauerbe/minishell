@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 16:52:48 by tbenz             #+#    #+#             */
-/*   Updated: 2023/11/30 16:22:17 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/11/30 16:39:11 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,16 @@
 # include <readline/history.h>
 # include <signal.h>
 
+# define OK 0
+# define MALLOC_ERROR 1000
+
+typedef struct s_prg
+{
+	char			oper;
+	char			**prog;
+	struct s_prg	*next;
+}		t_prg;
+
 /* key-value list which stores a key and the respective value. Includes pointer
 	to the previous and the next element of the list. */
 typedef struct s_keyval
@@ -35,6 +45,7 @@ typedef struct s_keyval
 typedef struct s_vars
 {
 	char		*inp;
+	t_prg		*p_start;
 	t_keyval	*envv;
 }		t_vars;
 
@@ -45,6 +56,13 @@ typedef struct s_vars
 void	ft_handle_singals(void);
 // handles SIGINT
 void	ft_handler_s(int signum, siginfo_t *info, void *no);
+// checks for input and stores each input in a 2d array
+void	ft_check_input(t_vars *vars);
+
+// frees the linked list where the input is stored
+void	ft_free_input(t_vars *vars);
+// exits and frees all open mallocs
+void	ft_exit(t_vars *vars, int errcd);
 
 /* key_value */
 /* returns a pointer to the value retrieved with the key or if no matching key
