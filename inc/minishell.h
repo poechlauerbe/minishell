@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 16:52:48 by tbenz             #+#    #+#             */
-/*   Updated: 2023/11/29 17:44:01 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/11/30 15:21:06 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,11 @@ void	ft_handle_singals(void);
 void	ft_handler_s(int signum, siginfo_t *info, void *no);
 // checks for input and stores each input in a 2d array
 void	ft_check_input(t_vars *vars);
+
+// frees the linked list where the input is stored
+void	ft_free_input(t_vars *vars);
+// exits and frees all open mallocs
+void	ft_exit(t_vars *vars);
 
 // handles the input given to readline
 void	ft_input(t_vars *vars);
