@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/29 16:52:48 by tbenz             #+#    #+#             */
+/*   Updated: 2023/11/29 17:44:01 by tbenz            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
@@ -33,5 +45,10 @@ void	ft_handle_singals(void);
 void	ft_handler_s(int signum, siginfo_t *info, void *no);
 // checks for input and stores each input in a 2d array
 void	ft_check_input(t_vars *vars);
+
+// handles the input given to readline
+void	ft_input(t_vars *vars);
+// prints the current working directory or an error if this is not possible
+void	ft_pwd(void);
 
 #endif
