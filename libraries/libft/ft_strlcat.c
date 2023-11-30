@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 16:21:51 by tbenz             #+#    #+#             */
-/*   Updated: 2023/09/07 15:42:35 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/11/30 16:11:40 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,3 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 	dst[j] = '\0';
 	return (src_len + dst_len);
 }
-/*
-int	main(void)
-{
-	char	src[] = "machst du";
-	char	dest[30] = "Was ";
-
-	printf("%ld\n", ft_strlcat(dest, src, 100));
-	printf("%s", dest);
-
-	return (0);
-} */

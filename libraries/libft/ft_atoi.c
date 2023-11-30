@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 11:40:54 by tbenz             #+#    #+#             */
-/*   Updated: 2023/11/05 12:55:33 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/11/30 16:13:24 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,3 @@ int	ft_atoi(const char *nptr)
 	}
 	return (sum * sign);
 }
-/*
-#include <stdio.h>
-int	main(void)
-{
-	char	*str = "\010 9";
-	printf("%d", ft_atoi(str));
-}
- */

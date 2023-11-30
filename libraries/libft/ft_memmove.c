@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:30:13 by tbenz             #+#    #+#             */
-/*   Updated: 2023/09/12 17:08:39 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/11/30 16:12:34 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,3 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 	}
 	return (destptr);
 }
-/*
-int	main(void)
-{
-	char	str[] ="Was mache ich hier?";
-	char	*strptr = &str[6];
-	printf("%s, %s\n", str, strptr);
-	ft_memmove(str, strptr, 6);
-	printf("%s\n", str);
-}
-*/

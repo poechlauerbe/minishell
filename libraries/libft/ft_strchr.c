@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 18:31:42 by tbenz             #+#    #+#             */
-/*   Updated: 2023/09/07 09:44:11 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/11/30 16:11:50 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,3 @@ char	*ft_strchr(const char *s, int c)
 		return (focc);
 	return (NULL);
 }
-
-/* int	main(void)
-{
-	char	*str1;
-
-	str1 = "Was machst dum da?";
-	printf("%s 213421", ft_strchr(str1, 'c' + 256));
-
-} */

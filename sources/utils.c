@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:21:46 by tbenz             #+#    #+#             */
-/*   Updated: 2023/11/29 17:43:07 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/11/30 15:10:04 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,6 @@ void	ft_input(t_vars *vars)
 		add_history(vars->inp);
 	if (ft_strncmp(vars->inp, "exit", 4) == 0)
 		exit(0);
-	if(ft_strncmp(vars->inp, "pwd", 3) == 0)
+	if (ft_strncmp(vars->inp, "pwd", 3) == 0)
 		ft_pwd();
 }

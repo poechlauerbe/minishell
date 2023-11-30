@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 17:46:29 by tbenz             #+#    #+#             */
-/*   Updated: 2023/09/08 18:15:20 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/11/30 16:12:03 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,3 @@ void	ft_putstr_fd(char *s, int fd)
 		s++;
 	}
 }
-/*
-int	main(void)
-{
-	ft_putstr_fd("Funktioniert das?", 1);
-}
- */

@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 17:22:16 by tbenz             #+#    #+#             */
-/*   Updated: 2023/10/08 16:29:36 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/11/30 16:12:17 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,3 @@ void	ft_putchar(int c, int *len)
 {
 	*len += write(1, &c, 1);
 }
-/*
-int	main(void)
-{
-	int i = 0;
-	ft_putchar('0', &i);
-	ft_putchar('0' + 256, &i);
-}
- */
