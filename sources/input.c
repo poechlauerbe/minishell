@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 15:30:48 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/11/30 14:19:05 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/11/30 15:20:02 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,15 @@ void	ft_malloc_prog_2d_str(t_vars *vars, int str_c)
 
 	inp = vars->inp;
 	prog = ft_calloc(str_c + 1, sizeof(char *));
-	// if (!prog)
-	// 	ft_exit();
+	if (!prog)
+		ft_exit(vars);
 	i = 0;
 	while (i < str_c)
 	{
 		strlen = ft_input_strlen(&inp);
 		str = malloc((strlen + 1) * sizeof(char));
-		// if (!str)
-		// 	ft_exit();
+		if (!str)
+			ft_exit(vars);
 		ft_strlcpy(str, inp, strlen);
 		prog[i] = str;
 		inp += strlen;
@@ -67,8 +67,8 @@ void	ft_check_string_count(t_vars *vars, char *inp, int *str_c)
 	// if (!inp || !*inp)
 	// 	ft_reset();
 	vars->p_start = malloc(sizeof(t_prg));
-	// if (!var->p_start)
-	// 	ft_exit();
+	if (!vars->p_start)
+		ft_exit(vars);
 	vars->p_start->next = NULL;
 	*str_c = 0;
 	while (*inp)
@@ -85,8 +85,6 @@ void	ft_check_string_count(t_vars *vars, char *inp, int *str_c)
 			inp++;
 		}
 	}
-	printf("%p\n", vars->p_start);
-	printf("%i\n", *str_c);
 }
 
 void	ft_check_input(t_vars *vars)
