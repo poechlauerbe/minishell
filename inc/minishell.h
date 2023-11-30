@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 16:52:48 by tbenz             #+#    #+#             */
-/*   Updated: 2023/11/30 15:21:06 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/11/30 15:35:09 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <signal.h>
 
 # define OK 0
+# define MALLOC_ERROR 1000
 
 typedef struct s_prg
 {
@@ -49,7 +50,7 @@ void	ft_check_input(t_vars *vars);
 // frees the linked list where the input is stored
 void	ft_free_input(t_vars *vars);
 // exits and frees all open mallocs
-void	ft_exit(t_vars *vars);
+void	ft_exit(t_vars *vars, int errcd);
 
 // handles the input given to readline
 void	ft_input(t_vars *vars);
