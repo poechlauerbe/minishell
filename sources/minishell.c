@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 14:33:20 by tbenz             #+#    #+#             */
-/*   Updated: 2023/11/29 14:07:58 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/11/30 12:55:13 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,11 @@ int	main(void)
 		vars.inp = readline("Prompt> $");
 		if (!vars.inp)
 			(exit(EOF + 128));
-		else if(ft_strlen(vars.inp) > 0 && )
+		else if(ft_strlen(vars.inp) > 0)
+		{
 			add_history(vars.inp);
+			ft_check_input(&vars);
+		}
 		else
 		{
 			free(vars.inp);
