@@ -1,31 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/28 14:33:20 by tbenz             #+#    #+#             */
-/*   Updated: 2023/11/29 17:25:34 by tbenz            ###   ########.fr       */
+/*   Created: 2023/11/29 17:21:46 by tbenz             #+#    #+#             */
+/*   Updated: 2023/11/29 17:43:07 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-void	ft_init(t_vars *vars)
+void	ft_pwd(void)
 {
-	ft_bzero(vars, sizeof(t_vars));
+	char	cwd[1024];
+
+	if (getcwd(cwd, sizeof(cwd)) != NULL)
+		ft_printf("%s\n", cwd);
+	else
+		perror("getcwd() error");
 }
 
-int	main(void)
+void	ft_input(t_vars *vars)
 {
-	t_vars	vars;
-
-	ft_init(&vars);
-	ft_handle_singals();
-	while (1)
-	{
-		vars.inp = readline("Prompt> $");
-		ft_input(&vars);
-	}
+	if (!vars->inp)
+		exit(EOF + 128);
+	else if (ft_strlen(vars->inp) > 0)
+		add_history(vars->inp);
+	if (ft_strncmp(vars->inp, "exit", 4) == 0)
+		exit(0);
+	if(ft_strncmp(vars->inp, "pwd", 3) == 0)
+		ft_pwd();
 }

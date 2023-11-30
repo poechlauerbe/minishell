@@ -6,7 +6,7 @@
 #    By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/26 15:17:18 by tbenz             #+#    #+#              #
-#    Updated: 2023/11/29 13:44:15 by tbenz            ###   ########.fr        #
+#    Updated: 2023/11/29 17:41:30 by tbenz            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,8 @@ BONUS_SRCS_DIR	= ./bonus_sources/
 
 SRCS 			= $(addprefix $(SRCS_DIR),\
 				minishell.c \
-				ft_handle_signals.c)
+				signal_handling.c \
+				utils.c)
 
 OBJ				= $(SRCS:.c=.o)
 OBJ_BONUS 		= $(SRCS_BONUS:.c=.o)
