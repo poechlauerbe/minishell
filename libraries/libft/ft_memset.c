@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 18:14:49 by tbenz             #+#    #+#             */
-/*   Updated: 2023/09/12 10:04:16 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/11/30 16:12:30 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,3 @@ void	*ft_memset(void *s, int c, size_t n)
 	}
 	return (ptr);
 }
-/*
-int	main(void)
-{
-	char str[] = "Was machst du?";
-    ft_memset(str, 88, 8);
-    printf("%s", str);
-    return 0;
-}
-*/

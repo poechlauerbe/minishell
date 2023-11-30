@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 14:35:23 by tbenz             #+#    #+#             */
-/*   Updated: 2023/09/06 15:48:26 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/11/30 16:13:04 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,3 @@ int	ft_isdigit(int c)
 		return (1);
 	return (0);
 }
-
-/*
-int	main(void)
-{
-	if (ft_isdigit(50) == 1)
-		printf("Working well");
-	else
-		printf("Something went wrong");
-}
-*/

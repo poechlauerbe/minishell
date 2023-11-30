@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 19:44:00 by tbenz             #+#    #+#             */
-/*   Updated: 2023/11/05 11:43:32 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/11/30 16:11:24 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,3 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	}
 	return ((unsigned char)*s1 - (unsigned char)*s2);
 }
-/*
-int	main(void)
-{
-	char	*s1 = "Wsd";
-	char	*s2 = "Wae";
-
-	printf("%d", ft_strncmp("test\200", "test\0", 6));
-}
- */

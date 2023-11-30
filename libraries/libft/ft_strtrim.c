@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 15:50:13 by tbenz             #+#    #+#             */
-/*   Updated: 2023/09/13 09:31:40 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/11/30 16:11:14 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,3 @@ char	*ft_strtrim(char const *s1, char const *set)
 		return (NULL);
 	return (ptr);
 }
-/*
-int	main(void)
-{
-	printf("%s", ft_strtrim("1abdbc", "adbc"));
-} */

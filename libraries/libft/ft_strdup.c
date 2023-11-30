@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 14:13:44 by tbenz             #+#    #+#             */
-/*   Updated: 2023/09/12 16:45:49 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/11/30 16:11:46 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,3 @@ char	*ft_strdup(const char *s)
 	ptr[len] = '\0';
 	return (ptr);
 }
-/*
-#include <stdio.h>
-int main(void)
-{
-	char	str[] = "lorem ipsum dolor sit amet";
-	char	*str_dup;
-	printf("%s", ft_strdup("Passt alles?"));
-}
- */
