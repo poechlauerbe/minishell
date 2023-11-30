@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 13:28:25 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/11/30 15:34:10 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/11/30 17:21:36 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	ft_free_input(t_vars *vars)
 	while (temp)
 	{
 		prog = temp->prog;
-		temp2 =temp->next;
+		temp2 = temp->next;
 		i = 0;
 		while (prog[i])
 		{
@@ -48,4 +48,10 @@ void	ft_exit(t_vars *vars, int errcd)
 		err_mes();
 	ft_free_input(vars);
 	exit(errcd);
+}
+
+int	ft_reset(t_vars *vars)
+{
+	ft_free_input(vars);
+	return (1);
 }
