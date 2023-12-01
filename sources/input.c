@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 15:30:48 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/11/30 17:27:01 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/01 14:11:00 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,20 @@ int	ft_input_strlen(char **inp)
 	temp = *inp;
 	while (*temp >= 33 && *temp <= 126 && *temp != '|')
 	{
-		// if (*temp == '|' || *temp == '<' || *temp == '>' )
+		// if (*temp == '<' || *temp == '>' )
 		// 	break;
+		if (*temp == '\'')
+		{
+			while (*temp)
+			{
+				temp++;
+				strlen++;
+				if (*temp == '\'')
+					break ;
+			}
+			// if (*temp == '\0')
+			// 	return (OPEN_QUOTES);
+		}
 		strlen++;
 		temp++;
 	}
@@ -92,6 +104,14 @@ void	ft_check_string_count(t_vars *vars, char *inp)
 		while (*inp >= 33 && *inp <= 126)
 		{
 			// || *inp == '<' || *inp == '>'
+			if (*inp == '\'')
+			{
+				inp++;
+				while (*inp != '\'')
+				{
+					inp++;
+				}
+			}
 			if (*inp == '|')
 			{
 				temp->next = malloc(sizeof(t_prg));
