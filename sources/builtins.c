@@ -1,36 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/28 14:33:20 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/01 14:59:33 by tbenz            ###   ########.fr       */
+/*   Created: 2023/12/01 13:35:10 by tbenz             #+#    #+#             */
+/*   Updated: 2023/12/01 14:28:16 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-int	main(int argc, char **argv, char **envp)
+void	ft_env(t_vars *vars)
 {
-	t_vars	vars;
+	int	i;
 
-	ft_init(&vars,argc, argv, envp);
-	ft_handle_singals();
-	while (1)
+/* 	if (!vars->envp || !vars->envp[0])
+		ft_printf("Nothing to see here"); */
+	i = 0;
+	while (vars->envp[i])
 	{
-		vars.inp = readline("Prompt> $");
-		if (!vars.inp)
-			(exit(EOF + 128));
-		else if (ft_strlen(vars.inp) > 0)
-		{
-			add_history(vars.inp);
-			ft_check_input(&vars);
-			ft_input(&vars);
-			ft_free_input(&vars);
-		}
-		free(vars.inp);
-		vars.inp = NULL;
+		ft_printf("%s\n", vars->envp[i]);
+		i++;
 	}
 }

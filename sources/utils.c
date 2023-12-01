@@ -3,23 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:21:46 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/01 11:31:47 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/01 15:00:09 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-void	ft_pwd(void)
+void	ft_init(t_vars *vars, int argc, char **argv, char **envp)
 {
-	char	cwd[1024];
-
-	if (getcwd(cwd, sizeof(cwd)) != NULL)
-		ft_printf("%s\n", cwd);
-	else
-		perror("getcwd() error");
+	ft_bzero(vars, sizeof(t_vars));
+	argc = 0;
+	argv = NULL;
+	vars->envp = envp;
 }
 
 void	ft_input(t_vars *vars)
@@ -34,6 +32,18 @@ void	ft_input(t_vars *vars)
 		ft_pwd();
 	if (ft_strncmp(vars->p_start->prog[0], "echo", 4) == 0)
 		ft_echo(vars->p_start->prog);
+	if (ft_strncmp(vars->inp, "env", 3) == 0)
+		ft_env(vars);
+}
+
+void	ft_pwd(void)
+{
+	char	cwd[1024];
+
+	if (getcwd(cwd, sizeof(cwd)) != NULL)
+		ft_printf("%s\n", cwd);
+	else
+		perror("getcwd() error");
 }
 
 int	ft_strcmp(const char *s1, const char *s2)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 16:52:48 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/01 11:30:37 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/01 15:01:41 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,15 @@ typedef struct s_vars
 {
 	char		*inp;
 	t_prg		*p_start;
+	char		**envp;
 	t_keyval	*envv;
 }		t_vars;
 
 /* functions */
+
+/* builtins */
+// prints the environment variables present
+void		ft_env(t_vars *vars);
 
 /* signal_handling */
 // ignores SIGQUIT and handles SIGINT
@@ -69,11 +74,11 @@ void		ft_free_input(t_vars *vars);
 void		ft_exit(t_vars *vars, int errcd);
 /* resets the input of the shell and returns 1 - might have to add free
 	additional functions, depending on other elements that might be added  */
-int		ft_reset(t_vars *vars);
+int			ft_reset(t_vars *vars);
 
 /* fun echo */
 // writes to the shell in standard output
-void	ft_echo(char **str);
+void		ft_echo(char **str);
 
 /* key_value */
 /* returns a pointer to the value retrieved with the key or if no matching key
@@ -91,11 +96,12 @@ void		ft_add_envv(t_vars *vars, char *key, char *val);
 t_keyval	*ft_val_retrieval(t_vars *vars, char *key);
 
 /* utils */
+// sets all variables to zero and initiates envp variables
+void		ft_init(t_vars *vars, int argc, char **argv, char **envp);
 // handles the input given to readline
 void		ft_input(t_vars *vars);
 // prints the current working directory or an error if this is not possible
 void		ft_pwd(void);
 // compares two strings (here: key-pairs) and returns 0 if they match.
 int			ft_strcmp(const char *s1, const char *s2);
-
 #endif
