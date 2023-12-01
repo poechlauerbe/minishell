@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 15:30:48 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/01 14:11:00 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/01 15:37:53 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,18 @@ int	ft_input_strlen(char **inp)
 				temp++;
 				strlen++;
 				if (*temp == '\'')
+					break ;
+			}
+			// if (*temp == '\0')
+			// 	return (OPEN_QUOTES);
+		}
+		if (*temp == '\"')
+		{
+			while (*temp)
+			{
+				temp++;
+				strlen++;
+				if (*temp == '\"')
 					break ;
 			}
 			// if (*temp == '\0')
@@ -108,9 +120,13 @@ void	ft_check_string_count(t_vars *vars, char *inp)
 			{
 				inp++;
 				while (*inp != '\'')
-				{
 					inp++;
-				}
+			}
+			if (*inp == '\"')
+			{
+				inp++;
+				while (*inp != '\"')
+					inp++;
 			}
 			if (*inp == '|')
 			{
