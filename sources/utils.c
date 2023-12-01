@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:21:46 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/01 11:27:47 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/01 11:31:47 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void	ft_input(t_vars *vars)
 		exit(0);
 	if (ft_strncmp(vars->inp, "pwd", 3) == 0)
 		ft_pwd();
+	if (ft_strncmp(vars->p_start->prog[0], "echo", 4) == 0)
+		ft_echo(vars->p_start->prog);
 }
 
 int	ft_strcmp(const char *s1, const char *s2)

@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 16:52:48 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/01 11:26:11 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/01 11:30:37 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,10 @@ void		ft_exit(t_vars *vars, int errcd);
 /* resets the input of the shell and returns 1 - might have to add free
 	additional functions, depending on other elements that might be added  */
 int		ft_reset(t_vars *vars);
+
+/* fun echo */
+// writes to the shell in standard output
+void	ft_echo(char **str);
 
 /* key_value */
 /* returns a pointer to the value retrieved with the key or if no matching key
