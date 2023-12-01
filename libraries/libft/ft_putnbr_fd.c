@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 18:24:19 by tbenz             #+#    #+#             */
-/*   Updated: 2023/09/08 18:46:05 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/11/30 16:12:09 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,3 @@ void	ft_putnbr_fd(int n, int fd)
 	else
 		ft_putchar_fd(i + 48, fd);
 }
-/*
-int	main(void)
-{
-	ft_putnbr_fd(-2147483647, 1);
-}
- */

@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 17:17:44 by tbenz             #+#    #+#             */
-/*   Updated: 2023/09/06 15:48:11 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/11/30 16:13:08 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,3 @@ int	ft_isascii(int c)
 		return (1);
 	return (0);
 }
-/*int	main(void)
-{
-	if (ft_isascii(128) == 1)
-		printf("Working well");
-	else
-		printf("Something went wrong");
-}
-*/

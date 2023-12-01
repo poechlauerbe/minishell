@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 14:37:57 by tbenz             #+#    #+#             */
-/*   Updated: 2023/09/12 10:45:49 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/11/30 16:11:10 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,3 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		ptr[0] = '\0';
 	return (ptr);
 }
-/*
-#include <stdio.h>
-int	main(void)
-{
-	printf("%s", ft_substr("hola", 4294967295, 0));
-}
- */

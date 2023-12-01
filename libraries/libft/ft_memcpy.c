@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 14:17:43 by tbenz             #+#    #+#             */
-/*   Updated: 2023/09/12 17:12:53 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/11/30 16:12:38 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,3 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	}
 	return (destptr);
 }
-/*
-int	main(void)
-{
-	char	str[] = "SrcString";
-	char	str2[] = "DestString";
-	printf("%s, %s\n", str, str2);
-	ft_memcpy(str2, str, 3);
-	printf("%s", str2);
-}
- */

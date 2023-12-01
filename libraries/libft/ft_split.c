@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 09:51:44 by tbenz             #+#    #+#             */
-/*   Updated: 2023/11/12 12:20:50 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/11/30 16:11:55 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,22 +82,3 @@ char	**ft_split(char const *s, char c)
 		return (NULL);
 	return (arr);
 }
-/*
-#include <stdio.h>
-int	main(void)
-{
-	char	**tab;
-	int		i = 0;
-	int		j = 0;
-	tab = ft_split("wa sf sfd dsf" , ' ');
-
-	printf("%s", tab[3]);
-	if (tab[4] == NULL)
-		printf("234");
-	// while (tab[i])
-	// {
-	// 	printf("%s", tab[i]);
-	// 	i++;
-	// }
-}
- */

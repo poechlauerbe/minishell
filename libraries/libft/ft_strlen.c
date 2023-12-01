@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 18:04:08 by tbenz             #+#    #+#             */
-/*   Updated: 2023/09/06 16:22:01 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/11/30 16:11:35 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,3 @@ size_t	ft_strlen(const char *s)
 		i++;
 	return (i);
 }
-/*
-int	main(void)
-{
-	printf("The length of the string is %zu", ft_strlen("Was soll das?"));
-}
-*/

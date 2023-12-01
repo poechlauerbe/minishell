@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 16:31:30 by tbenz             #+#    #+#             */
-/*   Updated: 2023/09/11 17:29:03 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/11/30 16:10:46 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,3 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 		dst[i] = '\0';
 	return (len);
 }
-/*
-int	main(void)
-{
-    size_t n;
-    char str[] = "lorem ipsum dolor sit amet";
-    n = ft_strlcpy(str, "lorem ipsum dolor sit amet", 0);
-    printf("%s, %zu\n", str, n);
-    return (0);
-}
- */
