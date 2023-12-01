@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 16:52:48 by tbenz             #+#    #+#             */
-/*   Updated: 2023/11/30 15:56:37 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/01 11:06:28 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ void	ft_check_input(t_vars *vars);
 void	ft_free_input(t_vars *vars);
 // exits and frees all open mallocs
 void	ft_exit(t_vars *vars, int errcd);
+
+void	ft_echo(char **str);
 
 // handles the input given to readline
 void	ft_input(t_vars *vars);

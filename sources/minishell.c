@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 14:33:20 by tbenz             #+#    #+#             */
-/*   Updated: 2023/11/30 17:43:42 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/01 11:09:05 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	ft_init(t_vars *vars)
 
 int	main(void)
 {
-	int i;
 	t_vars	vars;
 
 	ft_init(&vars);
@@ -33,6 +32,7 @@ int	main(void)
 		{
 			add_history(vars.inp);
 			ft_check_input(&vars);
+			ft_input(&vars);
 			ft_free_input(&vars);
 		}
 		else

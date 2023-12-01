@@ -6,21 +6,30 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:20:58 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/11/30 12:18:54 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/01 11:04:21 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-void	ft_echo(char *str, char *option)
+void	ft_echo(char **str)
 {
-	while (str)
-	{
-		write(1, str, 1);
-	}
-	if (option == NULL)
-		write(1, "\n", 1);
-	else if (*option == "n")
-		;
+	int	new_line_mark;
+	int	i;
 
+	new_line_mark = 0;
+	i = 0;
+	if (strncmp(str[1], "-n", 3) == 0)
+	{
+		new_line_mark = 1;
+		i = 1;
+	}
+	while (str[++i])
+	{
+		ft_printf("%s", str[i]);
+		if (str[i + 1])
+			write(1, " ",1);
+	}
+	if (new_line_mark == 0)
+		write(1, "\n", 1);
 }
