@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
+/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 16:52:48 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/01 15:01:41 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/02 15:28:05 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,7 @@ void		ft_env(t_vars *vars);
 void		ft_handle_singals(void);
 // handles SIGINT
 void		ft_handler_s(int signum, siginfo_t *info, void *no);
-// checks for input and stores each input in a 2d array
-void		ft_check_input(t_vars *vars);
+
 
 /* exit */
 // prints an error message
@@ -79,6 +78,16 @@ int			ft_reset(t_vars *vars);
 /* fun echo */
 // writes to the shell in standard output
 void		ft_echo(char **str);
+
+/* input utils*/
+// create new node in input linked list
+void		ft_new_node(t_vars *vars, t_prg **temp, char **inp);
+// check input for quotes
+void		ft_check_quotes(char **inp);
+
+/* input */
+// checks for input and stores each input in a 2d array
+void		ft_check_input(t_vars *vars);
 
 /* key_value */
 /* returns a pointer to the value retrieved with the key or if no matching key
