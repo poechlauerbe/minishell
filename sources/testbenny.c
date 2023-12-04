@@ -1,40 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fun_echo.c                                         :+:      :+:    :+:   */
+/*   testbenny.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/29 14:20:58 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/04 12:36:38 by bpochlau         ###   ########.fr       */
+/*   Created: 2023/12/04 10:17:45 by bpochlau          #+#    #+#             */
+/*   Updated: 2023/12/04 11:22:35 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-void	ft_echo(char **str)
+int main(int argc, char *argv[])
 {
-	int	new_line_mark;
-	int	i;
+	t_vars	vars;
+	t_prg	*temp;
+	int		i;
 
-	new_line_mark = 0;
-	i = 0;
-	if (!str[1])
+	vars.inp = argv[1];
+	ft_check_input(&vars);
+	temp = vars.p_start;
+	while (temp)
 	{
-		write(1, "\n", 1);
-		return ;
+		printf("oper: %c$\n", temp->oper);
+		i = -1;
+		while (temp->prog[++i])
+			printf("string[%i]: %s\n", i, temp->prog[i]);
+		printf("\n");
+		temp = temp->next;
 	}
-	if (strncmp(str[1], "-n", 3) == 0)
-	{
-		new_line_mark = 1;
-		i = 1;
-	}
-	while (str[++i])
-	{
-		ft_printf("%s", str[i]);
-		if (str[i + 1])
-			write(1, " ", 1);
-	}
-	if (new_line_mark == 0)
-		write(1, "\n", 1);
 }
