@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 16:52:48 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/01 15:01:41 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/01 15:40:50 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ typedef struct s_vars
 /* builtins */
 // prints the environment variables present
 void		ft_env(t_vars *vars);
+//
+void	ft_export(t_vars *vars);
 
 /* signal_handling */
 // ignores SIGQUIT and handles SIGINT
