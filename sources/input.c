@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 15:30:48 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/02 15:35:00 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/04 11:17:20 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ void	ft_check_string_count(t_vars *vars, char *inp)
 	if (!vars->p_start)
 		ft_exit(vars, MALLOC_ERROR);
 	vars->p_start->next = NULL;
+	vars->p_start->oper = '0';
 	temp = vars->p_start;
 	temp->str_c = 0;
 	while (*inp)
@@ -120,7 +121,7 @@ void	ft_check_string_count(t_vars *vars, char *inp)
 			if (*inp == '\'' || *inp == '\"')
 				ft_check_quotes(&inp);
 			if (*inp == '|' || *inp == '<' || *inp == '>' || ((temp->oper == '<'
-						|| temp->oper == '>') && temp->str_c == 2))
+						|| temp->oper == '>') && temp->str_c == 1))
 			{
 				ft_new_node(vars, &temp, &inp);
 				break ;

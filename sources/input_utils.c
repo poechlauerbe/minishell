@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 16:24:39 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/01 16:38:18 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/04 11:34:46 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,20 @@ void	ft_new_node(t_vars *vars, t_prg **temp, char **inp)
 	(*temp) = (*temp)->next;
 	(*temp)->next = NULL;
 	(*temp)->str_c = 0;
-	(*temp)->oper = **inp;
-	inp++;
+	if ( **inp == '|' || **inp == '<' || **inp == '>')
+		(*temp)->oper = **inp;
+	else
+	{
+		(*temp)->oper = '0';
+		while (**inp != '|' && **inp != '<' && **inp != '>'
+			&& **inp != ' ' && **inp != '\n' && **inp != '\t'
+			&& **inp != '\r' && **inp != '\f' && **inp != '\v')
+		{
+			*inp += 1;
+		}
+		return ;
+	}
+	(*inp) += 1;
 }
 
 void	ft_check_quotes(char **inp)
