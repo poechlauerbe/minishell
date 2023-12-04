@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 15:30:48 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/01 15:37:53 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/04 11:17:20 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ int	ft_input_strlen(char **inp)
 	if (!*inp && !**inp)
 		return (strlen);
 	while (**inp == ' ' || **inp == '\n' || **inp == '\t'
-		|| **inp == '\r' || **inp == '\f' || **inp == '\v' || **inp == '|')
+		|| **inp == '\r' || **inp == '\f' || **inp == '\v'
+		|| **inp == '|' || **inp == '<' || **inp == '>')
 		*inp += 1;
 	temp = *inp;
 	while (*temp >= 33 && *temp <= 126 && *temp != '|')
@@ -104,6 +105,7 @@ void	ft_check_string_count(t_vars *vars, char *inp)
 	if (!vars->p_start)
 		ft_exit(vars, MALLOC_ERROR);
 	vars->p_start->next = NULL;
+	vars->p_start->oper = '0';
 	temp = vars->p_start;
 	temp->str_c = 0;
 	while (*inp)
@@ -111,34 +113,18 @@ void	ft_check_string_count(t_vars *vars, char *inp)
 		while (*inp == ' ' || *inp == '\n' || *inp == '\t'
 			|| *inp == '\r' || *inp == '\f' || *inp == '\v')
 			inp++;
-		if (*inp >= 33 && *inp <= 126 && *inp != '|')
+		if (*inp >= 33 && *inp <= 126 && *inp != '|' && *inp != '<' && *inp != '>')
 			temp->str_c += 1;
 		while (*inp >= 33 && *inp <= 126)
 		{
 			// || *inp == '<' || *inp == '>'
-			if (*inp == '\'')
+			if (*inp == '\'' || *inp == '\"')
+				ft_check_quotes(&inp);
+			if (*inp == '|' || *inp == '<' || *inp == '>' || ((temp->oper == '<'
+						|| temp->oper == '>') && temp->str_c == 1))
 			{
-				inp++;
-				while (*inp != '\'')
-					inp++;
-			}
-			if (*inp == '\"')
-			{
-				inp++;
-				while (*inp != '\"')
-					inp++;
-			}
-			if (*inp == '|')
-			{
-				temp->next = malloc(sizeof(t_prg));
-				if (!temp->next)
-					ft_exit(vars, MALLOC_ERROR);
-				temp = temp->next;
-				temp->next = NULL;
-				temp->str_c = 0;
-				temp->oper = '|';
-				inp++;
-				break;
+				ft_new_node(vars, &temp, &inp);
+				break ;
 			}
 			inp++;
 		}

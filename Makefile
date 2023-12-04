@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+         #
+#    By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/26 15:17:18 by tbenz             #+#    #+#              #
-#    Updated: 2023/12/01 14:05:30 by tbenz            ###   ########.fr        #
+#    Updated: 2023/12/02 15:25:27 by bpochlau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ SRCS 			= $(addprefix $(SRCS_DIR),\
 				exit.c \
 				fun_echo.c \
 				input.c \
+				input_utils.c \
 				minishell.c \
 				signal_handling.c \
 				utils.c)
