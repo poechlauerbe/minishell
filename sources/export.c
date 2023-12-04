@@ -6,11 +6,28 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 15:22:09 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/04 16:35:23 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/04 16:56:56 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+
+/* To-Do:
+	Check quotes:
+		* Single quotes (closed?) --> can copy enclosed stuff;
+		*double quotes --> can't copy all symbols;
+		*double quotes inside single quotes --> will be printed;
+		*single quote inside double quotes: will be printed, but have to be
+			stored with escape character;
+	shorten or outsource to other functions
+ */
+
+
+char	*ft_check_quotes(char *arg)
+{
+
+}
 
 char	*ft_exp_value(char *arg)
 {
@@ -70,7 +87,11 @@ char	*ft_exp_identifier(char *arg)
 	j = 0;
 	len = 0;
 	if (arg[len] == '"' || arg[len] == '\'')
+	{
+		ft_check_quotes(arg);
 		arg++;
+	}
+
 	// needs test if quotes close at the end;
 	while (arg[len] && arg[len] != '=' && arg[len] != '"' && arg[len] != '\'')
 		len++;
@@ -111,14 +132,7 @@ void	ft_export(t_vars *vars, int i)
 		if (!id)
 			return ;
 		value = ft_exp_value(str);
-		// test for validity of input with quotes
 		//create key value pair
-		else
-		{
-			ft_printf("export: not valid in this context: %s", id);
-			free(id);
-			return ;
-		}
 		return (0);
 	}
 	else
