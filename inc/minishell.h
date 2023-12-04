@@ -56,6 +56,8 @@ typedef struct s_vars
 /* builtins */
 // prints the environment variables present
 void		ft_env(t_vars *vars);
+//
+void	ft_export(t_vars *vars);
 
 /* signal_handling */
 // ignores SIGQUIT and handles SIGINT

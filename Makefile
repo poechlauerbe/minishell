@@ -33,6 +33,7 @@ BONUS_SRCS_DIR	= ./bonus_sources/
 SRCS 			= $(addprefix $(SRCS_DIR),\
 				builtins.c \
 				exit.c \
+				export.c \
 				fun_echo.c \
 				input.c \
 				input_utils.c \
