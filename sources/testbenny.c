@@ -6,17 +6,46 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 10:17:45 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/05 13:52:12 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/05 16:00:31 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-int main(int argc, char *argv[])
+int	main(void)
 {
 	int	fd[2];
-	if (pipe(fd) == - 1)
-		return 1;
+	int	pid1;
+	int	pid2;
+
+	if (pipe(fd) == -1)
+		return (PIPE_ERROR);
+	pid1 = fork();
+	if (pid1 < 0)
+		return (FORK_ERROR_1);
+	if (pid1 == 0)
+	{
+		dup2(fd[1], STDOUT_FILENO);
+		close(fd[0]);
+		close(fd[1]);
+		execve()
+		exit(0);
+	}
+	pid2 = fork();
+	if (pid2 < 0)
+		return (FORK_ERROR_2);
+	if (pid2 == 0)
+	{
+		dup2(fd[0], STDIN_FILENO);
+		close(fd[0]);
+		close(fd[1]);
+		execlp("grep", "grep", "rtt", NULL);
+		exit(0);
+	}
+	close(fd[0]);
+	close(fd[1]);
+	waitpid(pid1, NULL, 0);
+	waitpid(pid2, NULL, 0);
 }
 
 // int main(int argc, char *argv[])
