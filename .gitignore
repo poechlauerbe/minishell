@@ -6,4 +6,4 @@ minishell
 .vscode
 *.h.gch
 .nfs*
-
+export.c

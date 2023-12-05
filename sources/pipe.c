@@ -6,13 +6,13 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 15:46:51 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/05 16:04:55 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/05 16:44:52 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-void	ft_pipe(t_vars *vars)
+int	ft_pipe(t_vars *vars)
 {
 	int		fd[2];
 	int		pid1;
@@ -49,4 +49,11 @@ void	ft_pipe(t_vars *vars)
 	close(fd[1]);
 	waitpid(pid1, NULL, 0);
 	waitpid(pid2, NULL, 0);
+	return (OK);
 }
+
+	// i = 0;
+	// while (i < count_pipe && pid[i] != 0)
+	// {
+	// 	pid[++i] = fork();
+	// }

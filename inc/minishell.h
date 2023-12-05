@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 16:52:48 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/05 15:41:39 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/05 16:15:08 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,10 @@ int			ft_remove_envv(t_vars *vars, char *key);
 void		ft_add_envv(t_vars *vars, char *key, char *val);
 // retrieves and returns the element with the matching key. Otherwise returns 0.
 t_keyval	*ft_val_retrieval(t_vars *vars, char *key);
+
+/* pipe */
+// pipe function
+int			ft_pipe(t_vars *vars);
 
 /* utils */
 // sets all variables to zero and initiates envp variables
