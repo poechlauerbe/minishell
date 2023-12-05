@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 14:33:20 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/01 14:59:33 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/05 14:06:04 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_vars	vars;
 
-	ft_init(&vars,argc, argv, envp);
+	ft_init(&vars, argc, argv, envp);
 	ft_handle_singals();
 	while (1)
 	{

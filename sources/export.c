@@ -6,12 +6,11 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 15:22:09 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/04 16:56:56 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/05 17:36:41 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-
 
 /* To-Do:
 	Check quotes:
@@ -20,55 +19,25 @@
 		*double quotes inside single quotes --> will be printed;
 		*single quote inside double quotes: will be printed, but have to be
 			stored with escape character;
+		*opening and closing quotes won't be printed if the symbols are not
+		special symbols;
+		otherwise the value is stored with singel quotes
 	shorten or outsource to other functions
  */
 
-
-char	*ft_check_quotes(char *arg)
-{
-
-}
-
-char	*ft_exp_value(char *arg)
-{
-	char	*value;
-	int		i;
-
-	while (*arg != '=' && *arg != '\0')
-		arg++;
-	if (*arg == '\0')
-	{
-		value = (char *)malloc(sizeof(char) * 2);
-		value[0] = '';
-		value[1] = '\0';
-	}
-	else
-	{
-		arg++;
-		i = 0;
-		if (arg[i] == '\'' || arg[i] == '"')
-			arg++;
-		value = (char *)malloc(sizeof(char) * (ft_strlen(arg) + 1));
-		while (arg[i])
-			value[i] = arg[i];
-		arg[i] = '\0'
-	}
-	return (value);
-}
-
-int	ft_idchecker(char *arg)
+int	ft_exp_idchecker(char *arg)
 {
 	int	j;
 
 	j = 0;
 	if (ft_isalpha(arg[j]))
-			j++;
+		j++;
 	else
 	{
 		ft_printf("export: not an identifier: %s", arg);
 		return (1);
 	}
-	while(ft_isalnum(arg[j]))
+	while (ft_isalnum(arg[j]))
 		j++;
 	if ((arg[j] != '=' && arg[j] != '\0'))
 	{
@@ -92,7 +61,6 @@ char	*ft_exp_identifier(char *arg)
 		arg++;
 	}
 
-	// needs test if quotes close at the end;
 	while (arg[len] && arg[len] != '=' && arg[len] != '"' && arg[len] != '\'')
 		len++;
 	id = (char *)malloc(sizeof(char) * (len + 1));
@@ -105,7 +73,7 @@ char	*ft_exp_identifier(char *arg)
 		len++;
 	}
 	id[len] = '\0';
-	if (!ft_idchecker(id))
+	if (!ft_exp_idchecker(id))
 		return (id);
 	else
 	{
@@ -114,17 +82,18 @@ char	*ft_exp_identifier(char *arg)
 	}
 }
 
-/* before using the function --> if (ft_strcmp(vars->p_start->prog[i][0], "export"));
+/* before using the function --> if (ft_strcmp(vars->p_start->prog[i][0],
+	"export"));
 	passing i and j to function?
 */
-void	ft_export(t_vars *vars, int i)
+void	ft_export(t_prg prg)
 {
 	int		j;
 	char	*str;
 	char	*id;
 	char	*value;
 
-	// check if after export there is an assignment of a variable
+	// have to check all the arguments, there can be several assignments in one program export a=1 b=2 c=3
 	str = vars->p_start->prog[1];
 	if (str)
 	{
@@ -133,6 +102,8 @@ void	ft_export(t_vars *vars, int i)
 			return ;
 		value = ft_exp_value(str);
 		//create key value pair
+
+		// check other arguments if they
 		return (0);
 	}
 	else
