@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
+/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 16:52:48 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/02 15:28:05 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/06 14:00:05 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ typedef struct s_keyval
 	struct s_keyval	*next;
 	struct s_keyval	*prev;
 }				t_keyval;
-
 typedef struct s_vars
 {
 	char		*inp;
@@ -51,20 +50,28 @@ typedef struct s_vars
 	t_keyval	*envv;
 }		t_vars;
 
+typedef struct s_quote
+{
+	int		sq;
+	int		dq;
+	int		i;
+	int		len;
+	char	*value;
+}				t_quote;
+
 /* functions */
 
 /* builtins */
 // prints the environment variables present
 void		ft_env(t_vars *vars);
 //
-void	ft_export(t_vars *vars);
+void		ft_export(t_vars *vars);
 
 /* signal_handling */
 // ignores SIGQUIT and handles SIGINT
 void		ft_handle_singals(void);
 // handles SIGINT
 void		ft_handler_s(int signum, siginfo_t *info, void *no);
-
 
 /* exit */
 // prints an error message
@@ -76,6 +83,29 @@ void		ft_exit(t_vars *vars, int errcd);
 /* resets the input of the shell and returns 1 - might have to add free
 	additional functions, depending on other elements that might be added  */
 int			ft_reset(t_vars *vars);
+
+/* export */
+/* prints the env variables when it does not have arguments, otherwise tries to
+	add a key value pair */
+void		ft_export(t_vars *vars);
+// extracts the key for the key value pair
+char		*ft_exp_identifier(char *arg);
+// checks the keys for invalid keys
+int			ft_exp_idchecker(char *arg);
+
+/* export utils */
+/* extracts the value of a key value pair; if only the key is put, it returns a
+	str that contains only a null terminator; if parenthesis are not properly
+	closed it returns NULL */
+char		*ft_exp_value(char *arg);
+// checks if parenthesis are properly closed
+int			ft_check_enclosing(char *arg);
+// creates a string with the value that is then being returned
+char		*ft_create_value(char *arg);
+// copies the value from the argument to a malloc'd string
+void		ft_copy_value(t_quote *quote, char *arg);
+// sets the ints of the struct to 0 and the char to NULL
+void		ft_init_quote(t_quote *quote);
 
 /* fun echo */
 // writes to the shell in standard output
@@ -96,7 +126,7 @@ void		ft_check_input(t_vars *vars);
 	was found, return NULL */
 char		*ft_return_val(t_vars *vars, char *key);
 // handles the else part of the ft_remove_envv function
-int			ft_remove_helper(t_vars *vars, t_keyval *tmp, char *key);
+int			ft_remove_helper(t_vars *vars, t_keyval *tmp);
 /* removes an environment variable from the key_value list, matching the key.
 	Return 0 on success and 1 if a matching key wasn't found. */
 int			ft_remove_envv(t_vars *vars, char *key);

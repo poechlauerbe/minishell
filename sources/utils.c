@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:21:46 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/05 14:03:05 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/06 13:29:06 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void	ft_input(t_vars *vars)
 		exit(0);
 	if (ft_strncmp(vars->inp, "pwd", 3) == 0)
 		ft_pwd();
+	if (ft_strncmp(vars->inp, "export", 6) == 0)
+		ft_export(vars);
 	if (ft_strncmp(vars->p_start->prog[0], "echo", 4) == 0)
 		ft_echo(vars->p_start->prog);
 	if (ft_strncmp(vars->inp, "env", 3) == 0)

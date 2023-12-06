@@ -6,31 +6,18 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 15:22:09 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/05 17:36:41 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/06 13:43:02 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-
-/* To-Do:
-	Check quotes:
-		* Single quotes (closed?) --> can copy enclosed stuff;
-		*double quotes --> can't copy all symbols;
-		*double quotes inside single quotes --> will be printed;
-		*single quote inside double quotes: will be printed, but have to be
-			stored with escape character;
-		*opening and closing quotes won't be printed if the symbols are not
-		special symbols;
-		otherwise the value is stored with singel quotes
-	shorten or outsource to other functions
- */
 
 int	ft_exp_idchecker(char *arg)
 {
 	int	j;
 
 	j = 0;
-	if (ft_isalpha(arg[j]))
+	if (ft_isalpha(arg[j]) || arg[j] == '_')
 		j++;
 	else
 	{
@@ -47,7 +34,7 @@ int	ft_exp_idchecker(char *arg)
 	return (0);
 }
 
-char	*ft_exp_identifier(char *arg)
+char	*ft_exp_id(char *arg)
 {
 	int		len;
 	int		j;
@@ -57,10 +44,10 @@ char	*ft_exp_identifier(char *arg)
 	len = 0;
 	if (arg[len] == '"' || arg[len] == '\'')
 	{
-		ft_check_quotes(arg);
+		if (ft_check_enclosing(arg))
+			return (NULL);
 		arg++;
 	}
-
 	while (arg[len] && arg[len] != '=' && arg[len] != '"' && arg[len] != '\'')
 		len++;
 	id = (char *)malloc(sizeof(char) * (len + 1));
@@ -82,29 +69,31 @@ char	*ft_exp_identifier(char *arg)
 	}
 }
 
-/* before using the function --> if (ft_strcmp(vars->p_start->prog[i][0],
-	"export"));
-	passing i and j to function?
-*/
-void	ft_export(t_prg prg)
+void	ft_export(t_vars *vars)
 {
-	int		j;
+	int		i;
 	char	*str;
 	char	*id;
 	char	*value;
 
-	// have to check all the arguments, there can be several assignments in one program export a=1 b=2 c=3
-	str = vars->p_start->prog[1];
-	if (str)
+	i = 1;
+	if (vars->p_start->prog[i])
 	{
-		id = ft_exp_identifier(str);
-		if (!id)
-			return ;
-		value = ft_exp_value(str);
-		//create key value pair
-
-		// check other arguments if they
-		return (0);
+		while (vars->p_start->prog[i])
+		{
+			str = vars->p_start->prog[i];
+			id = ft_exp_id(str);
+			if (!id)
+				return ;
+			value = ft_exp_value(str);
+			if (!value)
+				return ;
+			ft_printf("%s=%s\n", id, value);
+			// ft_add_envv(vars, id, value);
+			free (id);
+			free(value);
+			i++;
+		}
 	}
 	else
 		ft_env(vars);

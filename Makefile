@@ -6,7 +6,7 @@
 #    By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/26 15:17:18 by tbenz             #+#    #+#              #
-#    Updated: 2023/12/04 16:56:38 by tbenz            ###   ########.fr        #
+#    Updated: 2023/12/06 13:25:08 by tbenz            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,9 +34,11 @@ SRCS 			= $(addprefix $(SRCS_DIR),\
 				builtins.c \
 				exit.c \
 				export.c \
+				export_utils.c \
 				fun_echo.c \
 				input.c \
 				input_utils.c \
+				key_value.c \
 				minishell.c \
 				signal_handling.c \
 				utils.c)
