@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 16:52:48 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/06 14:00:05 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/06 16:01:54 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void		ft_export(t_vars *vars);
 // extracts the key for the key value pair
 char		*ft_exp_identifier(char *arg);
 // checks the keys for invalid keys
-int			ft_exp_idchecker(char *arg);
+int			ft_exp_idchecker(char *arg, char *comp);
 
 /* export utils */
 /* extracts the value of a key value pair; if only the key is put, it returns a
@@ -104,6 +104,8 @@ int			ft_check_enclosing(char *arg);
 char		*ft_create_value(char *arg);
 // copies the value from the argument to a malloc'd string
 void		ft_copy_value(t_quote *quote, char *arg);
+// gets the length of the string that should be created
+void	ft_quote_len(t_quote *quote , char *arg);
 // sets the ints of the struct to 0 and the char to NULL
 void		ft_init_quote(t_quote *quote);
 
