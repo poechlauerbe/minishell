@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 18:30:19 by tbenz             #+#    #+#             */
-/*   Updated: 2023/11/13 17:03:35 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/06 17:23:17 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -254,5 +254,16 @@ void	ft_putuns(unsigned int n, int *len);
 void	ft_puthex(char s, unsigned int nbr, int *len);
 // an implementation of the printf function
 int		ft_printf(const char *s, ...);
+
+/* printf_fd */
+// for description see printf functions; only difference writes to fd specified
+int		ft_printf_fd(int fd, const char *s, ...);
+void	ft_check_prntffd(char s, int *len, va_list *args, int fd);
+void	ft_putchar_pffd(int c, int *len, int fd);
+void	ft_putchar_pffd(int c, int *len, int fd);
+void	ft_putptr_pffd(void *ptr, int *len, int fd);
+void	ft_putnbr_pffd(int n, int *len, int fd);
+void	ft_putuns_pffd(unsigned int n, int *len, int fd);
+void	ft_puthex_pffd(char s, unsigned int nbr, int *len, int fd);
 
 #endif

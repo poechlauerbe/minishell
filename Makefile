@@ -6,7 +6,7 @@
 #    By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/26 15:17:18 by tbenz             #+#    #+#              #
-#    Updated: 2023/12/06 13:25:08 by tbenz            ###   ########.fr        #
+#    Updated: 2023/12/06 17:26:25 by tbenz            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,8 +33,8 @@ BONUS_SRCS_DIR	= ./bonus_sources/
 SRCS 			= $(addprefix $(SRCS_DIR),\
 				builtins.c \
 				exit.c \
-				export.c \
-				export_utils.c \
+				b_export_key_utils.c \
+				b_export_value_utils.c \
 				fun_echo.c \
 				input.c \
 				input_utils.c \
