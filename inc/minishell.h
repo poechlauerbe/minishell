@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 16:52:48 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/06 11:30:26 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/06 12:43:18 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ t_keyval	*ft_val_retrieval(t_vars *vars, char *key);
 /* pipe */
 // pipe function
 int			ft_pipe(t_vars *vars);
+void		ft_pipe_loop(t_vars *vars);
 
 /* utils */
 // sets all variables to zero and initiates envp variables

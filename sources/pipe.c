@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 15:46:51 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/06 12:03:39 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/06 12:42:40 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,21 +28,50 @@ void	ft_pipecount(t_vars *vars)
 	vars->pipe_count = count;
 }
 
+void	ft_close_pipes(int pipe_nr, int *fd)
+{
+	int	i;
+
+	pipe_nr *= 2;
+	i = -1;
+	while (++i < pipe_nr)
+		close(fd[i]);
+}
 
 void	ft_pipe_loop(t_vars *vars)
 {
-	int	*fd;
-	int	i;
+	int		*fd;
+	int		pid;
+	int		i;
+	t_prg *temp;
 
+	temp = vars->p_start;
+	ft_pipecount(vars);
 	fd = malloc(vars->pipe_count * 2 * sizeof(int));
 	if (!fd)
 		ft_exit(vars, MALLOC_ERROR);
-	i = 0;
-	while (i < vars->pipe_count)
-	{
+	i = -1;
+	while (++i < vars->pipe_count)
 		if (pipe(fd + i * 2) == -1)
 			ft_exit(vars, PIPE_ERROR);
-		i++;
+	i = -1;
+	while (++i < vars->pipe_count)
+	{
+		pid = fork();
+		if (pid < 0)
+			ft_exit(vars, FORK_ERROR);
+		if (pid == 0)
+		{
+			if (i != vars->pipe_count - 1)
+				if (dup2(fd[2 * i + 1], STDOUT_FILENO) == -1)
+					ft_exit(vars, DUP_ERROR);
+			if (i != 0)
+				if (dup2(fd[2 * i - 2], STDIN_FILENO) == -1)
+					ft_exit(vars, DUP_ERROR);
+			ft_close_pipes(vars->pipe_count, fd);
+			execve(temp->prog[0], temp->prog, NULL);
+			temp = temp->next;
+		}
 	}
 }
 
