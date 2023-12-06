@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 13:52:29 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/05 17:03:45 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/06 09:46:48 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,6 @@
 # define PIPE_ERROR 1100
 # define FORK_ERROR_1 1210
 # define FORK_ERROR_2 1220
+# define WAITPID_ERROR 1230
 
 #endif

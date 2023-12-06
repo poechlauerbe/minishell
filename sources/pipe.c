@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 15:46:51 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/05 16:44:52 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/06 09:46:37 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int	ft_pipe(t_vars *vars)
 		close(fd[0]);
 		close(fd[1]);
 		execve(temp->prog[0], temp->prog, NULL);
-		exit(0);
 	}
 	pid2 = fork();
 	if (pid2 < 0)
@@ -43,12 +42,13 @@ int	ft_pipe(t_vars *vars)
 		close(fd[0]);
 		close(fd[1]);
 		execve(temp->prog[0], temp->prog, NULL);
-		exit(0);
 	}
 	close(fd[0]);
 	close(fd[1]);
-	waitpid(pid1, NULL, 0);
-	waitpid(pid2, NULL, 0);
+	if (waitpid(pid1, NULL, 0) == -1)
+		return (WAITPID_ERROR);
+	if (waitpid(pid2, NULL, 0) == -1)
+		return (WAITPID_ERROR);
 	return (OK);
 }
 
