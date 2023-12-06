@@ -5,25 +5,25 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/29 16:52:48 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/06 16:49:28 by tbenz            ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2023/12/06 17:44:00 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
 // included libraries
 # include "../libraries/libft/libft.h"
+# include "macros_minishell.h"
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <signal.h>
-
-# define OK 0
-# define MALLOC_ERROR 1000
+# include <sys/wait.h>
 
 typedef struct s_prg
 {
@@ -46,6 +46,7 @@ typedef struct s_vars
 {
 	char		*inp;
 	t_prg		*p_start;
+	int			pipe_count;
 	char		**envp;
 	t_keyval	*envv;
 }		t_vars;
@@ -139,6 +140,11 @@ int			ft_remove_envv(t_vars *vars, char *key);
 void		ft_add_envv(t_vars *vars, char *key, char *val);
 // retrieves and returns the element with the matching key. Otherwise returns 0.
 t_keyval	*ft_val_retrieval(t_vars *vars, char *key);
+
+/* pipe */
+// pipe function
+int			ft_pipe(t_vars *vars);
+void		ft_pipe_loop(t_vars *vars);
 
 /* utils */
 // sets all variables to zero and initiates envp variables

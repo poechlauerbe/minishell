@@ -5,10 +5,11 @@
 #                                                     +:+ +:+         +:+      #
 #    By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/10/26 15:17:18 by tbenz             #+#    #+#              #
-#    Updated: 2023/12/06 17:26:25 by tbenz            ###   ########.fr        #
+#    Created: Invalid date        by                   #+#    #+#              #
+#    Updated: 2023/12/06 17:44:20 by tbenz            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
 
 NAME			= minishell
 NAME_BONUS		= minishell_bonus
@@ -27,8 +28,13 @@ LRL				= -lreadline
 
 REMOVE 			= rm -f
 
+INC_DIR			= ./inc
 SRCS_DIR		= ./sources/
 BONUS_SRCS_DIR	= ./bonus_sources/
+
+HEADER			= $(addprefix $(INC_DIR)/,\
+				macros_minishell.h \
+				minishell.h)
 
 SRCS 			= $(addprefix $(SRCS_DIR),\
 				builtins.c \
@@ -40,6 +46,7 @@ SRCS 			= $(addprefix $(SRCS_DIR),\
 				input_utils.c \
 				key_value.c \
 				minishell.c \
+				pipe.c \
 				signal_handling.c \
 				utils.c)
 
@@ -51,7 +58,7 @@ SRCS_BONUS 		= $(addprefix $(BONUS_SRCS_DIR),\
 
 all:			${LIBFT} ${NAME}
 
-${NAME}:		${LIBFT} $(OBJ)
+${NAME}:		${LIBFT} $(HEADER) $(OBJ)
 				${CC} ${OBJ} ${LIBFT} ${CFLAGS} ${LRL} -o ${NAME}
 				@echo "$(NAME): $(GREEN)$(NAME) was compiled.$(RESET)"
 				@echo
