@@ -3,12 +3,13 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+         #
+#    By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/10/26 15:17:18 by tbenz             #+#    #+#              #
-#    Updated: 2023/12/06 14:51:25 by bpochlau         ###   ########.fr        #
+#    Created: Invalid date        by                   #+#    #+#              #
+#    Updated: 2023/12/06 17:44:20 by tbenz            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
 
 NAME			= minishell
 NAME_BONUS		= minishell_bonus
@@ -38,10 +39,12 @@ HEADER			= $(addprefix $(INC_DIR)/,\
 SRCS 			= $(addprefix $(SRCS_DIR),\
 				builtins.c \
 				exit.c \
-				export.c \
+				b_export_key_utils.c \
+				b_export_value_utils.c \
 				fun_echo.c \
 				input.c \
 				input_utils.c \
+				key_value.c \
 				minishell.c \
 				pipe.c \
 				signal_handling.c \

@@ -48,6 +48,8 @@ CFILES = ft_atoi.c \
 		ft_lstnew.c \
 		ft_lstsize.c \
 		ft_printf.c \
+		ft_printf_fd.c \
+		ft_printf_fd_utils.c \
 		ft_putchar.c \
 		ft_puthex.c \
 		ft_putnbr.c \
