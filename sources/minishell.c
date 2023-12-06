@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 14:33:20 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/05 16:09:44 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/06 12:49:31 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	main(int argc, char **argv, char **envp)
 			add_history(vars.inp);
 			ft_check_input(&vars);
 			// ft_input(&vars);
-			ft_pipe(&vars);
+			ft_pipe_loop(&vars);
 			ft_free_input(&vars);
 		}
 		free(vars.inp);
