@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 10:17:45 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/06 15:13:06 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/06 15:58:00 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int main(int argc, char *argv[])
 		return (1);
 	vars.inp = argv[1];
 	ft_check_input(&vars);
-	ft_pipe_loop(&vars);
+	// ft_pipe_loop(&vars);
 	temp = vars.p_start;
 	while (temp)
 	{
@@ -136,4 +136,3 @@ int main(int argc, char *argv[])
 	// {
 	// 	pid[++i] = fork();
 	// }
-
