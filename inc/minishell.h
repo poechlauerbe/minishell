@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 16:52:48 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/05 16:15:08 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/06 11:30:26 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_vars
 {
 	char		*inp;
 	t_prg		*p_start;
+	int			pipe_count;
 	char		**envp;
 	t_keyval	*envv;
 }		t_vars;
