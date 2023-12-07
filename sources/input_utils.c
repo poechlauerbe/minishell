@@ -6,7 +6,7 @@
 /*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 16:24:39 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/07 18:01:03 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/07 18:01:43 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ void	ft_cleanup_redirectings(t_vars *vars)
 		}
 		if (!last)
 			temp = vars->p_start;
-
 	}
 }
 
