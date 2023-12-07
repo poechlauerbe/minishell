@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 16:24:39 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/04 11:34:46 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/07 13:03:14 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,18 @@ void	ft_check_quotes(char **inp)
 		*inp += 1;
 		while (**inp != '\"')
 			*inp += 1;
+	}
+}
+
+void	ft_cleanup_lst(t_vars *vars)
+{
+	t_prg	*temp;
+
+	temp = vars->p_start;
+	if (temp->oper == '0' && (!temp->prog || !*temp->prog))
+	{
+		vars->p_start = temp->next;
+		free(temp->prog);
+		free(temp);
 	}
 }

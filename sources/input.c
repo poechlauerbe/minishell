@@ -6,7 +6,7 @@
 /*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 15:30:48 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/07 11:59:32 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/07 17:43:31 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,17 +133,56 @@ void	ft_check_string_count(t_vars *vars, char *inp)
 	}
 }
 
-void	ft_cleanup_lst(t_vars *vars)
+void	ft_red_file(t_vars *vars, t_prg *lst)
 {
+	t_prg	*prog;
 	t_prg	*temp;
+	int		inp_files;
+	int		out_files;
+	int		i;
+	int		j;
 
-	temp = vars->p_start;
-	if (temp->oper == '0' && (!temp->prog || !*temp->prog))
+	temp = lst;
+	inp_files = 0;
+	out_files = 0;
+	prog = NULL;
+	while (temp->oper != '|')
 	{
-		vars->p_start = temp->next;
-		free(temp->prog);
-		free(temp);
+		if (temp->oper == '0')
+			prog = temp;
+		else if (temp->oper == '>')
+			out_files++;
+		else if (temp->oper == '<')
+			inp_files++;
+		temp = temp->next;
 	}
+	if (inp_files > 0)
+	{
+		// init in init function (= NULL)
+		prog->in_file = malloc((inp_files + 1) * sizeof(char *));
+		if (!prog->in_file)
+			ft_exit(vars, MALLOC_ERROR);
+		prog->in_file[inp_files] = NULL;
+	}
+	if (out_files > 0)
+	{
+		// init in init function (= NULL)
+		prog->out_file = malloc((out_files + 1) * sizeof(char *));
+		if (!prog->out_file)
+			ft_exit(vars, MALLOC_ERROR);
+		prog->out_file[out_files] = NULL;
+	}
+	i = 0;
+	j = 0;
+	while (temp->oper != '|')
+	{
+		if (temp->oper == '>')
+			prog->out_file[i++] = temp->prog;
+		else if (temp->oper == '<')
+			prog->in_file[j++] = temp->prog;
+		temp = temp->next;
+	}
+	if (access())
 }
 
 void	ft_check_input(t_vars *vars)
@@ -151,6 +190,6 @@ void	ft_check_input(t_vars *vars)
 	ft_check_string_count(vars, vars->inp);
 	ft_malloc_prog_2d_str(vars);
 	ft_cleanup_lst(vars);
-	// access()
+	ft_red_file(vars, vars->p_start);
 
 }

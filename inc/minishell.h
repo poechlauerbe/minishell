@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 16:52:48 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/06 15:41:45 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/07 17:21:51 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ typedef struct s_prg
 {
 	int				str_c;
 	char			oper;
+	char			**in_file;
+	char			**out_file;
 	char			**prog;
 	struct s_prg	*next;
 }		t_prg;
@@ -86,6 +88,8 @@ void		ft_echo(char **str);
 void		ft_new_node(t_vars *vars, t_prg **temp, char **inp);
 // check input for quotes
 void		ft_check_quotes(char **inp);
+// clean list if there are some redirecting signs
+void	ft_cleanup_lst(t_vars *vars)
 
 /* input */
 // checks for input and stores each input in a 2d array
