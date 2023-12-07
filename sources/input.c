@@ -6,7 +6,7 @@
 /*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 15:30:48 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/07 09:57:16 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/07 11:59:32 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,14 +114,16 @@ void	ft_check_string_count(t_vars *vars, char *inp)
 			|| *inp == '\r' || *inp == '\f' || *inp == '\v')
 			inp++;
 		if (*inp >= 33 && *inp <= 126 && *inp != '|' && *inp != '<' && *inp != '>')
+		{
+			if ((temp->oper == '<' || temp->oper == '>') && temp->str_c == 1)
+				ft_new_node(vars, &temp, &inp);
 			temp->str_c += 1;
+		}
 		while (*inp >= 33 && *inp <= 126)
 		{
-			// || *inp == '<' || *inp == '>'
 			if (*inp == '\'' || *inp == '\"')
 				ft_check_quotes(&inp);
-			if (*inp == '|' || *inp == '<' || *inp == '>' || ((temp->oper == '<'
-						|| temp->oper == '>') && temp->str_c == 1))
+			if (*inp == '|' || *inp == '<' || *inp == '>')
 			{
 				ft_new_node(vars, &temp, &inp);
 				break ;

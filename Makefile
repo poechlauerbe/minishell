@@ -6,7 +6,7 @@
 #    By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/26 15:17:18 by tbenz             #+#    #+#              #
-#    Updated: 2023/12/07 11:16:51 by bpochlau         ###   ########.fr        #
+#    Updated: 2023/12/07 11:54:26 by bpochlau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -91,7 +91,7 @@ re:				fclean all
 rebonus:		fclean ${NAME_BONUS}
 
 test:			${LIBFT} $(HEADER)
-				${CC} $(SRCS) ${LIBFT} ${LRL} -o ${NAME}
+				${CC} -g $(SRCS) ${LIBFT} ${LRL} -o ${NAME}
 
 TESTSRC 		= $(addprefix $(SRCS_DIR),\
 				exit.c \
@@ -101,6 +101,6 @@ TESTSRC 		= $(addprefix $(SRCS_DIR),\
 				testbenny.c)
 
 benny:			$(LIBFT) $(HEADER)
-				$(CC) $(TESTSRC) $(LIBFT)
+				$(CC) -g $(TESTSRC) $(LIBFT)
 
 .PHONY:			all clean fclean re rebonus
