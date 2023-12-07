@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+         #
+#    By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/26 15:17:18 by tbenz             #+#    #+#              #
-#    Updated: 2023/12/06 14:51:25 by bpochlau         ###   ########.fr        #
+#    Updated: 2023/12/07 11:16:51 by bpochlau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ LIBFT 			= ./libraries/libft/libft.a
 
 CC 				= cc
 
-CFLAGS 			= -Wall -Werror -Wextra -g
+CFLAGS 		= -Wall -Werror -Wextra -g
 
 LRL				= -lreadline
 
@@ -89,5 +89,18 @@ fclean:
 re:				fclean all
 
 rebonus:		fclean ${NAME_BONUS}
+
+test:			${LIBFT} $(HEADER)
+				${CC} $(SRCS) ${LIBFT} ${LRL} -o ${NAME}
+
+TESTSRC 		= $(addprefix $(SRCS_DIR),\
+				exit.c \
+				input.c \
+				input_utils.c \
+				pipe.c \
+				testbenny.c)
+
+benny:			$(LIBFT) $(HEADER)
+				$(CC) $(TESTSRC) $(LIBFT)
 
 .PHONY:			all clean fclean re rebonus

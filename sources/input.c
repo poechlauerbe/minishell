@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 15:30:48 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/06 16:06:28 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/07 09:57:16 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,6 @@ void	ft_check_input(t_vars *vars)
 	ft_check_string_count(vars, vars->inp);
 	ft_malloc_prog_2d_str(vars);
 	ft_cleanup_lst(vars);
-	access()
+	// access()
 
 }
