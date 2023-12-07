@@ -6,7 +6,7 @@
 /*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 15:30:48 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/07 17:43:31 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/07 17:51:03 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,9 +177,9 @@ void	ft_red_file(t_vars *vars, t_prg *lst)
 	while (temp->oper != '|')
 	{
 		if (temp->oper == '>')
-			prog->out_file[i++] = temp->prog;
+			prog->out_file[i++] = temp->prog[0];
 		else if (temp->oper == '<')
-			prog->in_file[j++] = temp->prog;
+			prog->in_file[j++] = temp->prog[0];
 		temp = temp->next;
 	}
 	if (access())

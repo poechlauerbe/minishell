@@ -6,7 +6,7 @@
 /*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 16:24:39 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/07 17:48:51 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/07 18:01:03 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,18 +52,35 @@ void	ft_check_quotes(char **inp)
 	}
 }
 
-// void	ft_cleanup_redirectings(t_vars *vars)
-// {
-// 	t_prg	*temp;
+void	ft_cleanup_redirectings(t_vars *vars)
+{
+	t_prg	*temp;
+	t_prg	*last;
 
-// 	temp = vars->p_start;
-// 	if (temp->oper == '<' || temp->oper == '>')
-// 	{
-// 		vars->p_start = temp->next;
-// 		free(temp->prog);
-// 		free(temp);
-// 	}
-// }
+	last = NULL;
+	temp = vars->p_start;
+	while (temp)
+	{
+		if (temp->oper == '<' || temp->oper == '>')
+		{
+			if (last == NULL)
+				vars->p_start = temp->next;
+			else
+				last->next = temp->next;
+			free(temp->prog);
+			free(temp);
+			temp = NULL;
+		}
+		if (temp != NULL)
+		{
+			last = temp;
+			temp = temp->next;
+		}
+		if (!last)
+			temp = vars->p_start;
+
+	}
+}
 
 void	ft_cleanup_lst(t_vars *vars)
 {
