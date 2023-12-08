@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 10:17:45 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/06 15:58:00 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/08 17:46:57 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,11 @@ int main(int argc, char *argv[])
 		while (temp->prog[++i])
 			printf("string[%i]: %s\n", i, temp->prog[i]);
 		printf("\n");
+		while(temp->in_file)
+		{
+			printf("in: %s$\n", temp->in_file->file);
+			temp->in_file = temp->in_file->next;
+		}
 		temp = temp->next;
 	}
 	ft_exit(&vars, OK);

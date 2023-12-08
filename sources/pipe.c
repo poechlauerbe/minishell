@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 15:46:51 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/06 15:51:02 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/08 17:46:09 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,19 @@ void	ft_close_pipes(int pipe_nr, int *fd)
 	i = -1;
 	while (++i < pipe_nr)
 		close(fd[i]);
+}
+
+int	ft_check_in_access(char *file)
+{
+	if(access(file, R_OK) == 0)
+		return OK;
+	else
+	{
+		ft_putstr_fd("bash: ", 2);
+		ft_putstr_fd(file, 2);
+		ft_putstr_fd(": No such file or directory\n", 2);
+		return (1);
+	}
 }
 
 void	ft_pipe_loop(t_vars *vars)
