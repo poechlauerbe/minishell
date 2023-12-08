@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 15:30:48 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/08 18:15:25 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/08 19:53:54 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,8 @@ void	ft_check_string_count(t_vars *vars, char *inp)
 	vars->p_start->oper = '0';
 	temp = vars->p_start;
 	temp->str_c = 0;
+	temp->in_file = NULL;
+	temp->out_file = NULL;
 	while (*inp)
 	{
 		while (*inp == ' ' || *inp == '\n' || *inp == '\t'
