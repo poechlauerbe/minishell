@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 16:24:39 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/05 14:03:40 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/08 20:36:17 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ void	ft_new_node(t_vars *vars, t_prg **temp, char **inp)
 	(*temp) = (*temp)->next;
 	(*temp)->next = NULL;
 	(*temp)->str_c = 0;
-	if (**inp == '|' || **inp == '<' || **inp == '>')
+	(*temp)->in_file = NULL;
+	(*temp)->out_file = NULL;
+	if ( **inp == '|' || **inp == '<' || **inp == '>')
 		(*temp)->oper = **inp;
 	else
 	{
@@ -49,5 +51,34 @@ void	ft_check_quotes(char **inp)
 		*inp += 1;
 		while (**inp != '\"')
 			*inp += 1;
+	}
+}
+
+void	ft_cleanup_redirectings(t_vars *vars)
+{
+	t_prg	*temp;
+	t_prg	*last;
+
+	last = NULL;
+	temp = vars->p_start;
+	while (temp)
+	{
+		if (temp->oper == '<' || temp->oper == '>')
+		{
+			if (last == NULL)
+				vars->p_start = temp->next;
+			else
+				last->next = temp->next;
+			free(temp->prog);
+			free(temp);
+			temp = NULL;
+		}
+		if (temp != NULL)
+		{
+			last = temp;
+			temp = temp->next;
+		}
+		if (!last)
+			temp = vars->p_start;
 	}
 }

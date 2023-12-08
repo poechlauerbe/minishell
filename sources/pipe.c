@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 15:46:51 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/06 15:12:57 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/08 19:30:38 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,48 @@ void	ft_close_pipes(int pipe_nr, int *fd)
 		close(fd[i]);
 }
 
+int	ft_check_in_access(char *file)
+{
+	if(access(file, R_OK) == 0)
+		return OK;
+	else
+	{
+		ft_putstr_fd("bash: ", 2);
+		ft_putstr_fd(file, 2);
+		ft_putstr_fd(": No such file or directory\n", 2);
+		return (1);
+	}
+}
+
+int	ft_check_out_access(char *file)
+{
+	if(access(file, F_OK) != 0)
+		return OK;
+	else
+	{
+		if(access(file, W_OK) == 0)
+			return OK;
+		else
+		{
+			ft_putstr_fd("bash: ", 2);
+			ft_putstr_fd(file, 2);
+			ft_putstr_fd(": Permission denied\n", 2);
+			return (1);
+		}
+	}
+}
+
+
 void	ft_pipe_loop(t_vars *vars)
 {
 	int		*fd;
+	int		fd_r_in;
+	int		fd_r_out;
 	int		*pid;
 	int		i;
-	// int		status;
 	int		commands;
-	t_prg *temp;
+	t_prg	*temp;
+	t_red	*reds;
 
 	ft_pipecount(vars);
 	commands = vars->pipe_count + 1;
@@ -68,12 +102,54 @@ void	ft_pipe_loop(t_vars *vars)
 			ft_exit(vars, FORK_ERROR);
 		if (pid[i] == 0)
 		{
-			if (i != commands - 1)
-				if (dup2(fd[2 * i + 1], STDOUT_FILENO) == -1)
+			if (temp->in_file != NULL)
+			{
+				reds = temp->in_file;
+				while (reds)
+				{
+					if (ft_check_in_access(reds->file) != OK)
+						exit(1);
+					reds = reds->next;
+				}
+				reds = temp->in_file;
+				while (reds->next && reds->next->file)
+					reds = reds->next;
+				fd_r_in = open(reds->file, O_RDONLY);
+				if (fd_r_in < 0)
+					ft_exit(vars, OPEN_FILE_ERROR);
+				if (dup2(fd_r_in, STDIN_FILENO) == -1)
 					ft_exit(vars, DUP_ERROR);
-			if (i != 0)
-				if (dup2(fd[2 * i - 2], STDIN_FILENO) == -1)
+			}
+			else
+				if (i != 0)
+					if (dup2(fd[2 * i - 2], STDIN_FILENO) == -1)
+						ft_exit(vars, DUP_ERROR);
+			if (temp->out_file != NULL)
+			{
+				reds = temp->out_file;
+				while (reds)
+				{
+					if (ft_check_out_access(reds->file) != OK)
+						exit(1);
+					fd_r_out = open(reds->file, O_RDWR | O_TRUNC | O_CREAT , 0644);
+					if (fd_r_out == -1)
+						ft_exit(vars, OPEN_FILE_ERROR);
+					close (fd_r_out);
+					reds = reds->next;
+				}
+				reds = temp->out_file;
+				while (reds->next && reds->next->file)
+					reds = reds->next;
+				fd_r_out = open(reds->file, O_RDWR | O_TRUNC);
+				if (fd_r_out == -1)
+					ft_exit(vars, OPEN_FILE_ERROR);
+				if (dup2(fd_r_out, STDOUT_FILENO) == -1)
 					ft_exit(vars, DUP_ERROR);
+			}
+			else
+				if (i != commands - 1)
+					if (dup2(fd[2 * i + 1], STDOUT_FILENO) == -1)
+						ft_exit(vars, DUP_ERROR);
 			ft_close_pipes(vars->pipe_count, fd);
 			execve(temp->prog[0], temp->prog, NULL);
 		}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/12/06 17:44:00 by tbenz            ###   ########.fr       */
+/*   Created: 2023/11/29 16:52:48 by tbenz             #+#    #+#             */
+/*   Updated: 2023/12/08 20:34:48 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,20 @@
 # include <signal.h>
 # include <sys/wait.h>
 
+// for the redirect sign - to handle multiple in- and out-files
+typedef struct s_red
+{
+	char			oper;
+	char			*file;
+	struct s_red	*next;
+}		t_red;
+
 typedef struct s_prg
 {
 	int				str_c;
 	char			oper;
+	t_red			*in_file;
+	t_red			*out_file;
 	char			**prog;
 	struct s_prg	*next;
 }		t_prg;
@@ -103,7 +113,7 @@ void		ft_handler_s(int signum, siginfo_t *info, void *no);
 
 /* exit */
 // prints an error message
-void		err_mes(void);
+// void		err_mes(void);
 // frees the linked list where the input is stored
 void		ft_free_input(t_vars *vars);
 // exits and frees all open mallocs
@@ -121,6 +131,10 @@ void		ft_echo(char **str);
 void		ft_new_node(t_vars *vars, t_prg **temp, char **inp);
 // check input for quotes
 void		ft_check_quotes(char **inp);
+// clean all nodes after storing them in the programs
+void		ft_cleanup_reds(t_vars *vars);
+// clean list if there is a redirecting sign at the beginning
+void		ft_cleanup_lst(t_vars *vars);
 
 /* input */
 // checks for input and stores each input in a 2d array
@@ -145,6 +159,9 @@ t_keyval	*ft_val_retrieval(t_vars *vars, char *key);
 // pipe function
 int			ft_pipe(t_vars *vars);
 void		ft_pipe_loop(t_vars *vars);
+
+/* redirect_utils */
+void		ft_red_new_node(t_vars *vars, t_red **lst, char *file, char oper);
 
 /* utils */
 // sets all variables to zero and initiates envp variables
