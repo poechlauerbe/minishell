@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 15:30:48 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/08 12:23:26 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/08 14:00:57 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,57 +137,40 @@ void	ft_red_file(t_vars *vars, t_prg *lst)
 {
 	t_prg	*prog;
 	t_prg	*temp;
-	t_red	*t_i;
-	t_red	*t_o;
-	int		inp_files;
-	int		out_files;
-	int		i;
-	int		j;
 
 	temp = lst;
-	inp_files = 0;
-	out_files = 0;
-	prog = NULL;
-	while (temp->oper != '|')
+	while (lst)
 	{
-		if (temp->oper == '0')
-			prog = temp;
-		else if (temp->oper == '>')
-			out_files++;
-		else if (temp->oper == '<')
-			inp_files++;
-		temp = temp->next;
-	}
-	if (inp_files > 0)
-	{
-		// init in init function (= NULL)
-		prog->in_file = malloc(sizeof(t_red));
-		if (!prog->in_file)
-			ft_exit(vars, MALLOC_ERROR);
-	}
-	if (out_files > 0)
-	{
-		// init in init function (= NULL)
-		prog->out_file = malloc(sizeof(t_red));
-		if (!prog->out_file)
-			ft_exit(vars, MALLOC_ERROR);
-	}
-	i = 0;
-	j = 0;
-	while (temp->oper != '|')
-	{
-		if (temp->oper == '>')
+		prog = NULL;
+		if (temp->oper == '|')
 		{
-			if (prog->out_file == NULL)
-				prog->out_file->file = temp->prog[0];
-			
-
+			prog = temp;
+			temp =temp->next;
+			lst = temp;
 		}
-		else if (temp->oper == '<')
-			prog->in_file[j++] = temp->prog[0];
-		temp = temp->next;
+		while (temp && temp->oper != '|')
+		{
+			if (temp->oper == '0')
+			{
+				if (prog == NULL)
+					prog = temp;
+				// else
+				// 	APPEND PROG STRING
+			}
+			temp = temp->next;
+		}
+		temp = lst;
+		while (temp && temp->oper != '|')
+		{
+			if (temp->oper == '>' || temp->oper == O_APP_OUT)
+				ft_red_new_node(vars, &prog->out_file, temp->prog[0], temp->oper);
+			else if (temp->oper == '<')
+				ft_red_new_node(vars, &prog->in_file, temp->prog[0], temp->oper);
+			temp = temp->next;
+		}
+		lst = temp;
 	}
-	if (access())
+	// if (access())
 }
 
 void	ft_check_input(t_vars *vars)
@@ -196,5 +179,6 @@ void	ft_check_input(t_vars *vars)
 	ft_malloc_prog_2d_str(vars);
 	ft_cleanup_lst(vars);
 	ft_red_file(vars, vars->p_start);
+	ft_cleanup_reds(vars);
 
 }

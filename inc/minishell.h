@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 16:52:48 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/08 12:15:12 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/08 13:54:23 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,10 @@ void		ft_echo(char **str);
 void		ft_new_node(t_vars *vars, t_prg **temp, char **inp);
 // check input for quotes
 void		ft_check_quotes(char **inp);
-// clean list if there are some redirecting signs
-void	ft_cleanup_lst(t_vars *vars)
+// clean all nodes after storing them in the programs
+void		ft_cleanup_reds(t_vars *vars);
+// clean list if there is a redirecting sign at the beginning
+void		ft_cleanup_lst(t_vars *vars);
 
 /* input */
 // checks for input and stores each input in a 2d array
@@ -122,6 +124,9 @@ t_keyval	*ft_val_retrieval(t_vars *vars, char *key);
 // pipe function
 int			ft_pipe(t_vars *vars);
 void		ft_pipe_loop(t_vars *vars);
+
+/* redirect_utils */
+void		ft_red_new_node(t_vars *vars, t_red **lst, char *file, char oper);
 
 /* utils */
 // sets all variables to zero and initiates envp variables

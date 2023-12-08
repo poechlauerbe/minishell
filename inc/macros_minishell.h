@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   macros_minishell.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 13:52:29 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/07 12:06:24 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/08 13:49:24 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@
 # define O_PIPE 124
 //  >
 # define O_RED_OUTPUT 62
+//  >>
+# define O_APP_OUT 61
 //  <
 # define O_RED_INPUT 60
+
 
 #endif

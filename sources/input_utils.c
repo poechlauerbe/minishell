@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 16:24:39 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/07 18:01:43 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/08 14:29:04 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,35 @@ void	ft_cleanup_redirectings(t_vars *vars)
 		}
 		if (!last)
 			temp = vars->p_start;
+	}
+}
+
+void	ft_cleanup_reds(t_vars *vars)
+{
+	t_prg	*temp;
+	t_prg	*last;
+	t_prg	*next;
+
+	temp = vars->p_start;
+	last = NULL;
+	while (temp)
+	{
+		next = temp->next;
+		if (temp->oper == '<' || temp->oper == '>' || temp->oper == O_APP_OUT)
+		{
+			if (temp->prog && temp->prog[0])
+				free(temp->prog[0]);
+			if (temp->prog)
+				free(temp->prog);
+			if (temp == vars->p_start)
+				vars->p_start = next;
+			else
+				last->next = next;
+			free(temp);
+		}
+		else
+			last = temp;
+		temp = next;
 	}
 }
 

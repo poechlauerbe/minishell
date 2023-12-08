@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+         #
+#    By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/26 15:17:18 by tbenz             #+#    #+#              #
-#    Updated: 2023/12/07 11:54:26 by bpochlau         ###   ########.fr        #
+#    Updated: 2023/12/08 12:49:14 by bpochlau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,7 @@ SRCS 			= $(addprefix $(SRCS_DIR),\
 				input_utils.c \
 				minishell.c \
 				pipe.c \
+				redirect_utils.c \
 				signal_handling.c \
 				utils.c)
 
@@ -98,6 +99,7 @@ TESTSRC 		= $(addprefix $(SRCS_DIR),\
 				input.c \
 				input_utils.c \
 				pipe.c \
+				redirect_utils.c \
 				testbenny.c)
 
 benny:			$(LIBFT) $(HEADER)

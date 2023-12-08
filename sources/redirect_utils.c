@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   red_utils.c                                        :+:      :+:    :+:   */
+/*   redirect_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 12:23:55 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/08 12:35:34 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/08 12:57:19 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	ft_red_new_node(t_vars *vars, t_red **lst, char *file, char oper)
 	else
 	{
 		temp = *lst;
-		while (temp)
+		while (temp->next)
 			temp = temp->next;
 		temp->next = new;
 	}
