@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 13:26:58 by tbenz             #+#    #+#             */
-/*   Updated: 2023/11/30 17:18:34 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/06 13:27:54 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	ft_add_envv(t_vars *vars, char *key, char *val)
 	vars->envv = entry;
 }
 
-int	ft_remove_helper(t_vars *vars, t_keyval *tmp, char *key)
+int	ft_remove_helper(t_vars *vars, t_keyval *tmp)
 {
 	t_keyval	*tmp2;
 
@@ -83,13 +83,12 @@ int	ft_remove_helper(t_vars *vars, t_keyval *tmp, char *key)
 int	ft_remove_envv(t_vars *vars, char *key)
 {
 	t_keyval	*tmp;
-	t_keyval	*tmp2;
 
 	tmp = ft_val_retrieval(vars, key);
 	if (!tmp)
 		return (1);
 	else
-		return (ft_remove_helper(vars, tmp, key));
+		return (ft_remove_helper(vars, tmp));
 }
 
 char	*ft_return_val(t_vars *vars, char *key)

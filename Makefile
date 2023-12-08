@@ -5,10 +5,11 @@
 #                                                     +:+ +:+         +:+      #
 #    By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/10/26 15:17:18 by tbenz             #+#    #+#              #
-#    Updated: 2023/12/08 12:49:14 by bpochlau         ###   ########.fr        #
+#    Created: Invalid date        by                   #+#    #+#              #
+#    Updated: 2023/12/08 20:35:09 by bpochlau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
 
 NAME			= minishell
 NAME_BONUS		= minishell_bonus
@@ -38,10 +39,12 @@ HEADER			= $(addprefix $(INC_DIR)/,\
 SRCS 			= $(addprefix $(SRCS_DIR),\
 				builtins.c \
 				exit.c \
-				export.c \
+				b_export_key_utils.c \
+				b_export_value_utils.c \
 				fun_echo.c \
 				input.c \
 				input_utils.c \
+				key_value.c \
 				minishell.c \
 				pipe.c \
 				redirect_utils.c \
