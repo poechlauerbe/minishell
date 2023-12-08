@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 16:52:48 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/08 13:54:23 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/08 18:10:00 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void		ft_handler_s(int signum, siginfo_t *info, void *no);
 
 /* exit */
 // prints an error message
-void		err_mes(void);
+// void		err_mes(void);
 // frees the linked list where the input is stored
 void		ft_free_input(t_vars *vars);
 // exits and frees all open mallocs
