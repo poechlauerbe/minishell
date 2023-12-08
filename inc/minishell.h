@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/12/06 17:44:00 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/08 17:53:50 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,20 +35,23 @@ typedef struct s_prg
 
 /* key-value list which stores a key and the respective value. Includes pointer
 	to the previous and the next element of the list. */
-typedef struct s_keyval
+typedef struct s_kv
 {
 	char			*key;
 	char			*val;
-	struct s_keyval	*next;
-	struct s_keyval	*prev;
-}				t_keyval;
+	struct s_kv	*next;
+	struct s_kv	*prev;
+	struct s_kv	*nxtao;
+	struct s_kv	*prvao;
+}				t_kv;
+
 typedef struct s_vars
 {
 	char		*inp;
 	t_prg		*p_start;
 	int			pipe_count;
-	char		**envp;
-	t_keyval	*envv;
+	t_kv	*envv;
+	t_kv	*shvar;
 }		t_vars;
 
 typedef struct s_quote
@@ -73,6 +76,22 @@ char		*ft_exp_key(char *arg);
 int			ft_exp_keychecker(char *arg, char *comp);
 // gets the length
 int			ft_key_len(char *arg);
+
+/* b_export_print */
+//
+void		ft_order_envv(t_vars *vars);
+//
+t_kv 	*ft_next_kv(t_kv *elem, t_kv *prev, t_kv *last);
+//
+t_kv	*ft_first_kv(t_kv *elem);
+//
+t_kv 	*ft_last_kv(t_kv *elem);
+//
+void		ft_export_print(t_vars *vars);
+//
+void		ft_add_ao(t_vars *vars, t_kv *elem);
+//
+void	ft_set_ptr(t_vars *vars, t_kv **elem, t_kv *prev);
 
 /* b_export_value_utils */
 // creates a string with the value that is then being returned
@@ -101,6 +120,12 @@ void		ft_handle_singals(void);
 // handles SIGINT
 void		ft_handler_s(int signum, siginfo_t *info, void *no);
 
+/* environment_var */
+// creates a struct that stores all the environment values in order
+void	ft_create_env(t_vars *vars, char **envp);
+// returns the last kvue entry
+t_kv	*ft_last_entry(t_kv *elem);
+
 /* exit */
 // prints an error message
 void		err_mes(void);
@@ -128,18 +153,23 @@ void		ft_check_input(t_vars *vars);
 
 /* key_value */
 /* returns a pointer to the value retrieved with the key or if no matching key
-	was found, return NULL */
-char		*ft_return_val(t_vars *vars, char *key);
-// handles the else part of the ft_remove_envv function
-int			ft_remove_helper(t_vars *vars, t_keyval *tmp);
+	was found, return NULL
+	important: i = 0: vars->envv; i = 1+: vars->shvar */
+char		*ft_return_val(t_vars *vars, char *key, int i);
+/* handles the else part of the ft_remove_envv function
+	important: i = 0: vars->envv; i = 1+: vars->shvar */
+int			ft_remove_helper(t_vars *vars, t_kv *tmp, int i);
 /* removes an environment variable from the key_value list, matching the key.
-	Return 0 on success and 1 if a matching key wasn't found. */
-int			ft_remove_envv(t_vars *vars, char *key);
+	Return 0 on success and 1 if a matching key wasn't found.
+	important: i = 0: vars->envv; i = 1+: vars->shvar */
+int			ft_remove_envv(t_vars *vars, char *key, int i);
 /* adds an environment variable to the key_value list or, if the key already
-	exists, changes the value of the matching element. */
-void		ft_add_envv(t_vars *vars, char *key, char *val);
-// retrieves and returns the element with the matching key. Otherwise returns 0.
-t_keyval	*ft_val_retrieval(t_vars *vars, char *key);
+	exists, changes the value of the matching element.
+	important: i = 0: vars->envv; i = 1+: vars->shvar */
+void		ft_add_envv(t_vars *vars, char *key, char *val, int i);
+/* retrieves and returns the element with the matching key. Otherwise returns 0.
+	important: i = 0: vars->envv; i = 1+: vars->shvar */
+t_kv	*ft_val_retrieval(t_vars *vars, char *key, int i);
 
 /* pipe */
 // pipe function
@@ -153,6 +183,8 @@ void		ft_init(t_vars *vars, int argc, char **argv, char **envp);
 void		ft_input(t_vars *vars);
 // prints the current working directory or an error if this is not possible
 void		ft_pwd(void);
+// sets the values for the tmp variable
+void		ft_set_val(t_vars *vars, t_kv **var, t_kv **tmp, char *key, char *val);
 // compares two strings (here: key-pairs) and returns 0 if they match.
 int			ft_strcmp(const char *s1, const char *s2);
 #endif
