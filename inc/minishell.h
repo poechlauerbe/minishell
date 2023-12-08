@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 16:52:48 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/07 17:21:51 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/08 12:15:12 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,20 @@
 # include <signal.h>
 # include <sys/wait.h>
 
+// for the redirect sign - to handle multiple in- and out-files
+typedef struct s_red
+{
+	char			oper;
+	char			*file;
+	struct s_red	*next;
+}		t_red;
+
 typedef struct s_prg
 {
 	int				str_c;
 	char			oper;
-	char			**in_file;
-	char			**out_file;
+	t_red			*in_file;
+	t_red			*out_file;
 	char			**prog;
 	struct s_prg	*next;
 }		t_prg;

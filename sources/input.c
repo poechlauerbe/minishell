@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 15:30:48 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/07 17:51:03 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/08 12:23:26 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,8 @@ void	ft_red_file(t_vars *vars, t_prg *lst)
 {
 	t_prg	*prog;
 	t_prg	*temp;
+	t_red	*t_i;
+	t_red	*t_o;
 	int		inp_files;
 	int		out_files;
 	int		i;
@@ -159,25 +161,28 @@ void	ft_red_file(t_vars *vars, t_prg *lst)
 	if (inp_files > 0)
 	{
 		// init in init function (= NULL)
-		prog->in_file = malloc((inp_files + 1) * sizeof(char *));
+		prog->in_file = malloc(sizeof(t_red));
 		if (!prog->in_file)
 			ft_exit(vars, MALLOC_ERROR);
-		prog->in_file[inp_files] = NULL;
 	}
 	if (out_files > 0)
 	{
 		// init in init function (= NULL)
-		prog->out_file = malloc((out_files + 1) * sizeof(char *));
+		prog->out_file = malloc(sizeof(t_red));
 		if (!prog->out_file)
 			ft_exit(vars, MALLOC_ERROR);
-		prog->out_file[out_files] = NULL;
 	}
 	i = 0;
 	j = 0;
 	while (temp->oper != '|')
 	{
 		if (temp->oper == '>')
-			prog->out_file[i++] = temp->prog[0];
+		{
+			if (prog->out_file == NULL)
+				prog->out_file->file = temp->prog[0];
+			
+
+		}
 		else if (temp->oper == '<')
 			prog->in_file[j++] = temp->prog[0];
 		temp = temp->next;
