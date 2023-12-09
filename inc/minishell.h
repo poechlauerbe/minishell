@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/09 15:22:36 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/09 15:49:09 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,20 @@
 # include <signal.h>
 # include <sys/wait.h>
 
+// for the redirect sign - to handle multiple in- and out-files
+typedef struct s_red
+{
+	char			oper;
+	char			*file;
+	struct s_red	*next;
+}		t_red;
+
 typedef struct s_prg
 {
 	int				str_c;
 	char			oper;
+	t_red			*in_file;
+	t_red			*out_file;
 	char			**prog;
 	struct s_prg	*next;
 }		t_prg;
@@ -134,7 +144,7 @@ t_kv		*ft_last_entry(t_kv *elem);
 
 /* exit */
 // prints an error message
-void		err_mes(void);
+// void		err_mes(void);
 // frees the linked list where the input is stored
 void		ft_free_input(t_vars *vars);
 // exits and frees all open mallocs
@@ -152,6 +162,10 @@ void		ft_echo(char **str);
 void		ft_new_node(t_vars *vars, t_prg **temp, char **inp);
 // check input for quotes
 void		ft_check_quotes(char **inp);
+// clean all nodes after storing them in the programs
+void		ft_cleanup_reds(t_vars *vars);
+// clean list if there is a redirecting sign at the beginning
+void		ft_cleanup_lst(t_vars *vars);
 
 /* input */
 // checks for input and stores each input in a 2d array
@@ -183,6 +197,9 @@ void		ft_remove_links_ao(t_kv **tmp);
 // pipe function
 int			ft_pipe(t_vars *vars);
 void		ft_pipe_loop(t_vars *vars);
+
+/* redirect_utils */
+void		ft_red_new_node(t_vars *vars, t_red **lst, char *file, char oper);
 
 /* utils */
 // sets all variables to zero and initiates envp variables

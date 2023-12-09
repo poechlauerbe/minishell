@@ -6,7 +6,7 @@
 #    By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/12/09 15:20:38 by tbenz            ###   ########.fr        #
+#    Updated: 2023/12/09 15:48:42 by tbenz            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ LIBFT 			= ./libraries/libft/libft.a
 
 CC 				= cc
 
-CFLAGS 			= -Wall -Werror -Wextra -g
+CFLAGS 		= -Wall -Werror -Wextra -g
 
 LRL				= -lreadline
 
@@ -51,6 +51,7 @@ SRCS 			= $(addprefix $(SRCS_DIR),\
 				key_value_remove.c \
 				minishell.c \
 				pipe.c \
+				redirect_utils.c \
 				signal_handling.c \
 				utils.c)
 
@@ -96,5 +97,19 @@ fclean:
 re:				fclean all
 
 rebonus:		fclean ${NAME_BONUS}
+
+test:			${LIBFT} $(HEADER)
+				${CC} -g $(SRCS) ${LIBFT} ${LRL} -o ${NAME}
+
+TESTSRC 		= $(addprefix $(SRCS_DIR),\
+				exit.c \
+				input.c \
+				input_utils.c \
+				pipe.c \
+				redirect_utils.c \
+				testbenny.c)
+
+benny:			$(LIBFT) $(HEADER)
+				$(CC) -g $(TESTSRC) $(LIBFT)
 
 .PHONY:			all clean fclean re rebonus
