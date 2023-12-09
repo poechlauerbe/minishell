@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 14:02:10 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/09 14:36:57 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/09 14:52:56 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	ft_order_envv(t_vars *vars)
 
 void	ft_export_print(t_vars *vars)
 {
-	t_kv *first;
+	t_kv	*first;
 
 	first = ft_first_kv(vars->envv);
 	while (first)

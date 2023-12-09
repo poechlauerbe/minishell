@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:49:29 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/09 14:49:30 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/09 15:43:39 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void	ft_env(t_vars *vars)
 	tmp = vars->envv;
 	while (tmp)
 	{
-		printf("%s=%s\n", tmp->key, tmp->val);
+		if (tmp->id == 'x')
+			printf("%s=%s\n", tmp->key, tmp->val);
 		tmp = tmp->next;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/09 14:51:16 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/09 15:22:36 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,25 +159,25 @@ void		ft_check_input(t_vars *vars);
 
 /* key_value */
 /* returns a pointer to the value retrieved with the key or if no matching key
-	was found, return NULL
-	important: i = 0: vars->envv; i = 1+: vars->shvar */
+	was found, return NULL */
 char		*ft_return_val(t_vars *vars, char *key);
-/* handles the else part of the ft_remove_envv function
-	important: i = 0: vars->envv; i = 1+: vars->shvar */
-int			ft_remove_helper(t_vars *vars, t_kv *tmp);
-/* removes an environment variable from the key_value list, matching the key.
-	Return 0 on success and 1 if a matching key wasn't found.
-	important: i = 0: vars->envv; i = 1+: vars->shvar */
-int			ft_remove_envv(t_vars *vars, char *key);
 /* adds an environment variable to the key_value list or, if the key already
-	exists, changes the value of the matching element.
-	important: i = 0: vars->envv; i = 1+: vars->shvar */
+	exists, changes the value of the matching element. */
 void		ft_add_envv(t_vars *vars, char *key, char *val, int id);
-/* retrieves and returns the element with the matching key. Otherwise returns 0.
-	important: i = 0: vars->envv; i = 1+: vars->shvar */
+// retrieves and returns the element with the matching key. Otherwise returns 0.
 t_kv		*ft_val_retrieval(t_vars *vars, char *key);
-//
-void		ft_remove_link_adj(t_kv **tmp);
+
+/* key_value_remove */
+/* removes an environment variable from the key_value list, matching the key.
+	Return 0 on success and 1 if a matching key wasn't found. */
+int			ft_remove_envv(t_vars *vars, char *key);
+// handles the else part of the ft_remove_envv function
+int			ft_remove_helper(t_vars *vars, t_kv *tmp);
+// adjusts the links of the linked list
+void		ft_remove_links(t_kv **tmp, t_kv **var);
+/* adjusts the links of the previous and following element of the one being
+	removed for the alphabetical ordering */
+void		ft_remove_links_ao(t_kv **tmp);
 
 /* pipe */
 // pipe function
@@ -191,8 +191,8 @@ void		ft_init(t_vars *vars, int argc, char **argv, char **envp);
 void		ft_input(t_vars *vars);
 // prints the current working directory or an error if this is not possible
 void		ft_pwd(void);
-// sets the values for the tmp variable
-void		ft_set_val(t_vars *vars, t_kv **var, t_kv **tmp, char *key, char *val);
+// sets the values for the tmp variable (except for key and value)
+void		ft_set_val(t_vars *vars, t_kv **var, t_kv **tmp);
 // compares two strings (here: key-pairs) and returns 0 if they match.
 int			ft_strcmp(const char *s1, const char *s2);
 #endif

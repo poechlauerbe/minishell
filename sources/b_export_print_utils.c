@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:36:23 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/09 14:37:00 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/09 15:30:27 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,13 @@ void	ft_add_ao(t_vars *vars, t_kv *elem)
 	t_kv	*prev;
 
 	prev = ft_first_kv(vars->envv);
+	if (!prev)
+		return ;
 	if (ft_strcmp(elem->key, prev->key) < 0)
 		ft_set_ptr(vars, &elem, NULL);
 	else
 	{
-		while (prev->nxtao)
+		while (prev && prev->nxtao)
 		{
 			if (ft_strcmp(elem->key, prev->key) < 0)
 			{

@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 12:51:48 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/09 14:32:39 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/09 15:36:35 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,12 @@ void	ft_create_env(t_vars *vars, char **envp)
 
 	while (*envp)
 	{
-		envv = (t_kv *)malloc(sizeof(t_kv));
+		envv = (t_kv *)ft_calloc(1, sizeof(t_kv));
 		if (!envv)
 			return ; //exit, free memory
 		envv->key = ft_exp_key(*envp);
 		envv->val = ft_exp_value(*envp);
 		envv->id = 'x';
-		envp++;
 		envv->next = NULL;
 		if (!vars->envv)
 		{
@@ -50,5 +49,6 @@ void	ft_create_env(t_vars *vars, char **envp)
 			last->next = envv;
 			envv->prev = last;
 		}
+		envp++;
 	}
 }

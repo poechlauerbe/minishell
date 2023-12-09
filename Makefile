@@ -6,7 +6,7 @@
 #    By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/12/09 14:37:37 by tbenz            ###   ########.fr        #
+#    Updated: 2023/12/09 15:20:38 by tbenz            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,6 +48,7 @@ SRCS 			= $(addprefix $(SRCS_DIR),\
 				input.c \
 				input_utils.c \
 				key_value.c \
+				key_value_remove.c \
 				minishell.c \
 				pipe.c \
 				signal_handling.c \
