@@ -6,21 +6,18 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 13:26:58 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/08 17:53:19 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/09 13:43:20 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-t_kv	*ft_val_retrieval(t_vars *vars, char *key, int i)
+t_kv	*ft_val_retrieval(t_vars *vars, char *key)
 {
 	t_kv	*tmp;
 	t_kv	*var;
 
-	if (!i)
-		var = vars->envv;
-	else
-		var = vars->shvar;
+	var = vars->envv;
 	if (!var)
 		return (NULL);
 	tmp = var;
@@ -34,34 +31,52 @@ t_kv	*ft_val_retrieval(t_vars *vars, char *key, int i)
 	return (NULL);
 }
 
-void	ft_add_envv(t_vars *vars, char *key, char *val, int i)
+void	ft_add_envv(t_vars *vars, char *key, char *val, int id)
 {
 	t_kv	*tmp;
 
-	tmp = ft_val_retrieval(vars, key, i);
+	tmp = ft_val_retrieval(vars, key);
 	if (tmp)
 	{
-		tmp->val = val;
+		if (!id)
+			tmp->id = 'x';
+		if (!tmp->val[0] && val[0])
+			tmp->val = val;
 		return ;
 	}
 	tmp = (t_kv *)malloc(sizeof(t_kv));
 	if (!tmp)
 		return ;
-	if (!i)
-		ft_set_val(vars, &vars->envv, &tmp, key, val);
+	ft_set_val(vars, &vars->envv, &tmp, key, val);
+	if (!id)
+		tmp->id = 'x';
 	else
-		ft_set_val(vars, &vars->shvar, &tmp, key, val);
+		tmp->id = 's';
 }
 
-int	ft_remove_helper(t_vars *vars, t_kv *tmp, int i)
+void	ft_remove_link_adj(t_kv **tmp)
 {
 	t_kv	*tmp2;
-	t_kv	**var;
 
-	if (!i)
-		var = &vars->envv;
-	else
-		var = &vars->shvar;
+	if ((*tmp)->prvao)
+	{
+		tmp2 = (*tmp)->prvao;
+		tmp2->nxtao = (*tmp)->nxtao;
+	}
+	if ((*tmp)->nxtao)
+	{
+		tmp2 = (*tmp)->nxtao;
+		tmp2->prvao = (*tmp)->prvao;
+	}
+}
+
+int	ft_remove_helper(t_vars *vars, t_kv *tmp)
+{
+	t_kv	**var;
+	t_kv	*tmp2;
+
+	var = &vars->envv;
+	ft_remove_link_adj(&tmp);
 	if (!tmp->prev && !tmp->next)
 	{
 		free (tmp);
@@ -73,30 +88,38 @@ int	ft_remove_helper(t_vars *vars, t_kv *tmp, int i)
 			*var = tmp->next;
 		else
 		{
-			tmp2 = tmp->prev;
-			tmp2->next = tmp->next;
+			if (tmp->prev)
+			{
+				tmp2 = tmp->prev;
+				tmp2->next = tmp->next;
+			}
+			if (tmp->next)
+			{
+				tmp2 = tmp->next;
+				tmp2->prev = tmp->prev;
+			}
 		}
 		free (tmp);
 	}
 	return (0);
 }
 
-int	ft_remove_envv(t_vars *vars, char *key, int i)
+int	ft_remove_envv(t_vars *vars, char *key)
 {
 	t_kv	*tmp;
 
-	tmp = ft_val_retrieval(vars, key, i);
+	tmp = ft_val_retrieval(vars, key);
 	if (!tmp)
 		return (1);
 	else
-		return (ft_remove_helper(vars, tmp, i));
+		return (ft_remove_helper(vars, tmp));
 }
 
-char	*ft_return_val(t_vars *vars, char *key, int i)
+char	*ft_return_val(t_vars *vars, char *key)
 {
 	t_kv	*tmp;
 
-	tmp = ft_val_retrieval(vars, key, i);
+	tmp = ft_val_retrieval(vars, key);
 	if (!tmp)
 		return (NULL);
 	else

@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 13:14:23 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/08 16:35:56 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/09 14:35:14 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_copy_value(t_quote *quote, char *arg)
 			quote->dq = 0;
 		if (((*arg == '\'' || *arg == '"') && !quote->dq && !quote->sq) \
 			|| (*arg == '\'' && !quote->sq && quote->dq) || (*arg == '"' \
-			&& quote->sq && !quote->dq))  //valgrind error read of size 1
+			&& quote->sq && !quote->dq)) //valgrind error read of size 1
 			arg++;
 		else
 		{

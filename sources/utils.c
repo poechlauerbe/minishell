@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:21:46 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/08 18:28:41 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/09 12:50:35 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ void	ft_input(t_vars *vars)
 		ft_echo(vars->p_start->prog);
 	if (ft_strncmp(vars->inp, "env", 3) == 0)
 		ft_env(vars);
+	if (ft_strncmp(vars->inp, "unset", 5) == 0)
+		ft_unset(vars);
 }
 
 void	ft_pwd(void)

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/01 13:35:10 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/08 17:51:15 by tbenz            ###   ########.fr       */
+/*   Created: 2023/12/09 14:49:29 by tbenz             #+#    #+#             */
+/*   Updated: 2023/12/09 14:49:30 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 // something is not working well here
 void	ft_env(t_vars *vars)
 {
-	int			i;
+	int		i;
 	t_kv	*tmp;
 
 	if (!vars->envv)
@@ -51,4 +51,18 @@ void	ft_export(t_vars *vars)
 	}
 	else
 		ft_export_print(vars);
+}
+
+void	ft_unset(t_vars *vars)
+{
+	char	*key;
+	int		i;
+
+	i = 1;
+	key = vars->p_start->prog[i];
+	while (key)
+	{
+		ft_remove_envv(vars, key);
+		key = vars->p_start->prog[++i];
+	}
 }
