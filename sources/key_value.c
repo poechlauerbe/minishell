@@ -6,19 +6,21 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 13:26:58 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/06 13:27:54 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/09 15:21:09 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-t_keyval	*ft_val_retrieval(t_vars *vars, char *key)
+t_kv	*ft_val_retrieval(t_vars *vars, char *key)
 {
-	t_keyval	*tmp;
+	t_kv	*tmp;
+	t_kv	*var;
 
-	if (!vars->envv)
+	var = vars->envv;
+	if (!var)
 		return (NULL);
-	tmp = vars->envv;
+	tmp = var;
 	while (tmp)
 	{
 		if (ft_strcmp(tmp->key, key) == 0)
@@ -29,71 +31,34 @@ t_keyval	*ft_val_retrieval(t_vars *vars, char *key)
 	return (NULL);
 }
 
-void	ft_add_envv(t_vars *vars, char *key, char *val)
+void	ft_add_envv(t_vars *vars, char *key, char *val, int id)
 {
-	t_keyval	*entry;
-	t_keyval	*tmp;
+	t_kv	*tmp;
 
 	tmp = ft_val_retrieval(vars, key);
 	if (tmp)
 	{
-		tmp->val = val;
+		if (!id)
+			tmp->id = 'x';
+		if (!tmp->val[0] && val[0])
+			tmp->val = val;
 		return ;
 	}
-	entry = (t_keyval *)malloc(sizeof(t_keyval));
-	if (!entry)
-		return ;
-	entry->key = key;
-	entry->val = val;
-	entry->prev = NULL;
-	if (!vars->envv)
-		entry->next = NULL;
-	else
-	{
-		entry->next = vars->envv;
-		tmp = entry->next;
-		tmp->prev = entry;
-	}
-	vars->envv = entry;
-}
-
-int	ft_remove_helper(t_vars *vars, t_keyval *tmp)
-{
-	t_keyval	*tmp2;
-
-	if (!tmp->prev && !tmp->next)
-	{
-		free (tmp);
-		vars->envv = NULL;
-	}
-	else
-	{
-		if (!tmp->prev)
-			vars->envv = tmp->next;
-		else
-		{
-			tmp2 = tmp->prev;
-			tmp2->next = tmp->next;
-		}
-		free (tmp);
-	}
-	return (0);
-}
-
-int	ft_remove_envv(t_vars *vars, char *key)
-{
-	t_keyval	*tmp;
-
-	tmp = ft_val_retrieval(vars, key);
+	tmp = (t_kv *)malloc(sizeof(t_kv));
 	if (!tmp)
-		return (1);
+		return ;
+	tmp->key = key;
+	tmp->val = val;
+	ft_set_val(vars, &vars->envv, &tmp);
+	if (!id)
+		tmp->id = 'x';
 	else
-		return (ft_remove_helper(vars, tmp));
+		tmp->id = 's';
 }
 
 char	*ft_return_val(t_vars *vars, char *key)
 {
-	t_keyval	*tmp;
+	t_kv	*tmp;
 
 	tmp = ft_val_retrieval(vars, key);
 	if (!tmp)

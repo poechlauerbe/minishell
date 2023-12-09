@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 13:14:23 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/06 16:47:33 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/09 15:41:22 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ void	ft_copy_value(t_quote *quote, char *arg)
 			quote->sq = 0;
 		else if (*arg == '"' && quote->sq == 0 && !quote->dq)
 			quote->dq = 1;
-		else if (arg[quote->i] == '"' && !quote->sq && quote->dq)
+		else if (*arg == '"' && !quote->sq && quote->dq)
 			quote->dq = 0;
 		if (((*arg == '\'' || *arg == '"') && !quote->dq && !quote->sq) \
-			|| (*arg == '\'' && quote->sq && !quote->dq) || (*arg == '"' \
-			&& !quote->sq && quote->dq))
+			|| (*arg == '\'' && !quote->sq && quote->dq) || (*arg == '"' \
+			&& quote->sq && !quote->dq))
 			arg++;
 		else
 		{

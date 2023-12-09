@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+         #
+#    By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/12/08 20:35:09 by bpochlau         ###   ########.fr        #
+#    Updated: 2023/12/09 15:48:42 by tbenz            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,10 +41,14 @@ SRCS 			= $(addprefix $(SRCS_DIR),\
 				exit.c \
 				b_export_key_utils.c \
 				b_export_value_utils.c \
+				b_export_print.c \
+				b_export_print_utils.c \
+				environment_var.c \
 				fun_echo.c \
 				input.c \
 				input_utils.c \
 				key_value.c \
+				key_value_remove.c \
 				minishell.c \
 				pipe.c \
 				redirect_utils.c \

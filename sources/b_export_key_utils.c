@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 15:22:09 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/06 17:24:42 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/08 13:08:33 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ char	*ft_copy_key(char *arg)
 
 char	*ft_exp_key(char *arg)
 {
-	int		len;
 	int		j;
 	char	*id;
 	char	*comp;
@@ -73,8 +72,7 @@ char	*ft_exp_key(char *arg)
 	while (*comp && (*comp != '=' && *comp != '\0'))
 		comp++;
 	j = 0;
-	len = 0;
-	if (arg[len] == '"' || arg[len] == '\'')
+	if (*arg == '"' || *arg == '\'')
 	{
 		if (ft_check_enclosing(arg))
 			return (NULL);
@@ -106,7 +104,7 @@ int	ft_exp_keychecker(char *arg, char *comp)
 		ft_printf_fd(2, "export: not an identifier: `%s%s'\n", arg, comp);
 		return (1);
 	}
-	while (ft_isalnum(arg[j]))
+	while (ft_isalnum(arg[j]) || arg[j] == '_')
 		j++;
 	if (arg[j] == '\'' || arg[j] == '"')
 		j++;

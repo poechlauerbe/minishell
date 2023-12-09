@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/29 16:52:48 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/08 20:34:48 by bpochlau         ###   ########.fr       */
+/*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
+/*   Updated: 2023/12/09 15:49:09 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -45,20 +44,23 @@ typedef struct s_prg
 
 /* key-value list which stores a key and the respective value. Includes pointer
 	to the previous and the next element of the list. */
-typedef struct s_keyval
+typedef struct s_kv
 {
 	char			*key;
 	char			*val;
-	struct s_keyval	*next;
-	struct s_keyval	*prev;
-}				t_keyval;
+	char			id;
+	struct s_kv		*next;
+	struct s_kv		*prev;
+	struct s_kv		*nxtao;
+	struct s_kv		*prvao;
+}				t_kv;
+
 typedef struct s_vars
 {
 	char		*inp;
 	t_prg		*p_start;
 	int			pipe_count;
-	char		**envp;
-	t_keyval	*envv;
+	t_kv		*envv;
 }		t_vars;
 
 typedef struct s_quote
@@ -84,6 +86,26 @@ int			ft_exp_keychecker(char *arg, char *comp);
 // gets the length
 int			ft_key_len(char *arg);
 
+/* b_export_print */
+// orders all the key-value elements alphabetically in a linked list
+void		ft_order_envv(t_vars *vars);
+// returns the next key-value element
+t_kv		*ft_next_kv(t_kv *elem, t_kv *prev, t_kv *last);
+// returns the first key-value element
+t_kv		*ft_first_kv(t_kv *elem);
+// returns the last key-value element
+t_kv		*ft_last_kv(t_kv *elem);
+/* prints all the environment variables (including the ones that have been
+	exported) in alphabetical order */
+void		ft_export_print(t_vars *vars);
+
+/* b_export_print_utils */
+/* adds an alphabetical ordering for the environment variables and shell
+	variables, connecting them via linked list */
+void		ft_add_ao(t_vars *vars, t_kv *elem);
+/* sets the pointers for the linked list of alphabetically ordered elements */
+void		ft_set_ptr(t_vars *vars, t_kv **elem, t_kv *prev);
+
 /* b_export_value_utils */
 // creates a string with the value that is then being returned
 char		*ft_create_value(char *arg);
@@ -104,12 +126,21 @@ void		ft_env(t_vars *vars);
 /* prints the env variables when it does not have arguments, otherwise tries to
 	add a key value pair */
 void		ft_export(t_vars *vars);
+/* erases a key-value combination from the saved variables and adjusts the
+	respective pointers */
+void		ft_unset(t_vars *vars);
 
 /* signal_handling */
 // ignores SIGQUIT and handles SIGINT
 void		ft_handle_singals(void);
 // handles SIGINT
 void		ft_handler_s(int signum, siginfo_t *info, void *no);
+
+/* environment_var */
+// creates a struct that stores all the environment values in order
+void		ft_create_env(t_vars *vars, char **envp);
+// returns the last kvue entry
+t_kv		*ft_last_entry(t_kv *elem);
 
 /* exit */
 // prints an error message
@@ -144,16 +175,23 @@ void		ft_check_input(t_vars *vars);
 /* returns a pointer to the value retrieved with the key or if no matching key
 	was found, return NULL */
 char		*ft_return_val(t_vars *vars, char *key);
-// handles the else part of the ft_remove_envv function
-int			ft_remove_helper(t_vars *vars, t_keyval *tmp);
+/* adds an environment variable to the key_value list or, if the key already
+	exists, changes the value of the matching element. */
+void		ft_add_envv(t_vars *vars, char *key, char *val, int id);
+// retrieves and returns the element with the matching key. Otherwise returns 0.
+t_kv		*ft_val_retrieval(t_vars *vars, char *key);
+
+/* key_value_remove */
 /* removes an environment variable from the key_value list, matching the key.
 	Return 0 on success and 1 if a matching key wasn't found. */
 int			ft_remove_envv(t_vars *vars, char *key);
-/* adds an environment variable to the key_value list or, if the key already
-	exists, changes the value of the matching element. */
-void		ft_add_envv(t_vars *vars, char *key, char *val);
-// retrieves and returns the element with the matching key. Otherwise returns 0.
-t_keyval	*ft_val_retrieval(t_vars *vars, char *key);
+// handles the else part of the ft_remove_envv function
+int			ft_remove_helper(t_vars *vars, t_kv *tmp);
+// adjusts the links of the linked list
+void		ft_remove_links(t_kv **tmp, t_kv **var);
+/* adjusts the links of the previous and following element of the one being
+	removed for the alphabetical ordering */
+void		ft_remove_links_ao(t_kv **tmp);
 
 /* pipe */
 // pipe function
@@ -170,6 +208,8 @@ void		ft_init(t_vars *vars, int argc, char **argv, char **envp);
 void		ft_input(t_vars *vars);
 // prints the current working directory or an error if this is not possible
 void		ft_pwd(void);
+// sets the values for the tmp variable (except for key and value)
+void		ft_set_val(t_vars *vars, t_kv **var, t_kv **tmp);
 // compares two strings (here: key-pairs) and returns 0 if they match.
 int			ft_strcmp(const char *s1, const char *s2);
 #endif
