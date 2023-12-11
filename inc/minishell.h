@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/09 15:49:09 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/11 14:07:49 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,9 @@ typedef struct s_quote
 // checks if parenthesis are properly closed
 int			ft_check_enclosing(char *arg);
 // extracts the key of argument
-char		*ft_copy_key(char *arg);
+char		*ft_copy_key(t_vars *vars, char *arg);
 // returns a copy of the key if it is valid or NULL if it is not valid
-char		*ft_exp_key(char *arg);
+char		*ft_exp_key(t_vars *vars, char *arg);
 // checks the key for valid input
 int			ft_exp_keychecker(char *arg, char *comp);
 // gets the length
@@ -108,13 +108,13 @@ void		ft_set_ptr(t_vars *vars, t_kv **elem, t_kv *prev);
 
 /* b_export_value_utils */
 // creates a string with the value that is then being returned
-char		*ft_create_value(char *arg);
+char		*ft_create_value(t_vars *vars, char *arg);
 // copies the value from the argument to a malloc'd string
 void		ft_copy_value(t_quote *quote, char *arg);
 /* extracts the value of a key value pair; if only the key is put, it returns a
 	str that contains only a null terminator; if parenthesis are not properly
 	closed it returns NULL */
-char		*ft_exp_value(char *arg);
+char		*ft_exp_value(t_vars *vars, char *arg);
 // sets the ints of the struct to 0 and the char to NULL
 void		ft_init_quote(t_quote *quote);
 // gets the length of the string that should be created
@@ -152,6 +152,8 @@ void		ft_exit(t_vars *vars, int errcd);
 /* resets the input of the shell and returns 1 - might have to add free
 	additional functions, depending on other elements that might be added  */
 int			ft_reset(t_vars *vars);
+//
+void	ft_free_envv(t_vars *vars);
 
 /* fun echo */
 // writes to the shell in standard output
