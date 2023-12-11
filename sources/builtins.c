@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:49:29 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/09 15:43:39 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/11 14:11:47 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,10 @@ void	ft_export(t_vars *vars)
 	{
 		while (vars->p_start->prog[i])
 		{
-			id = ft_exp_key(vars->p_start->prog[i]);
+			id = ft_exp_key(vars, vars->p_start->prog[i]);
 			if (!id)
 				return ;
-			value = ft_exp_value(vars->p_start->prog[i]);
+			value = ft_exp_value(vars, vars->p_start->prog[i]);
 			if (!value)
 				return ;
 			ft_add_envv(vars, id, value, 0);

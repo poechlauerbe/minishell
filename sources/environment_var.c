@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 12:51:48 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/09 15:36:35 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/11 14:12:17 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ void	ft_create_env(t_vars *vars, char **envp)
 	{
 		envv = (t_kv *)ft_calloc(1, sizeof(t_kv));
 		if (!envv)
-			return ; //exit, free memory
-		envv->key = ft_exp_key(*envp);
-		envv->val = ft_exp_value(*envp);
+			ft_exit(vars, MALLOC_ERROR);
+		envv->key = ft_exp_key(vars, *envp);
+		envv->val = ft_exp_value(vars, *envp);
 		envv->id = 'x';
 		envv->next = NULL;
 		if (!vars->envv)

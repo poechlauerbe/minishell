@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 13:14:23 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/09 15:41:22 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/11 14:08:20 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	ft_copy_value(t_quote *quote, char *arg)
 	quote->value[quote->i] = '\0';
 }
 
-char	*ft_create_value(char *arg)
+char	*ft_create_value(t_vars *vars, char *arg)
 {
 	t_quote	quote;
 
@@ -45,15 +45,12 @@ char	*ft_create_value(char *arg)
 	ft_quote_len(&quote, arg);
 	quote.value = (char *)malloc(sizeof(char) * (quote.len + 1));
 	if (!quote.value)
-	{
-		ft_putstr_fd("Error allocating memory\n", 2);
-		return (NULL);
-	}
+		ft_exit(vars, MALLOC_ERROR);
 	ft_copy_value(&quote, arg);
 	return (quote.value);
 }
 
-char	*ft_exp_value(char *arg)
+char	*ft_exp_value(t_vars *vars, char *arg)
 {
 	char	*value;
 
@@ -63,10 +60,7 @@ char	*ft_exp_value(char *arg)
 	{
 		value = (char *)malloc(sizeof(char));
 		if (!value)
-		{
-			ft_putstr_fd("Error allocating memory\n", 2);
-			return (NULL);
-		}
+			ft_exit(vars, MALLOC_ERROR);
 		value[0] = '\0';
 	}
 	else
@@ -74,7 +68,7 @@ char	*ft_exp_value(char *arg)
 		arg++;
 		if (ft_check_enclosing(arg))
 			return (NULL);
-		value = ft_create_value(arg);
+		value = ft_create_value(vars, arg);
 	}
 	return (value);
 }

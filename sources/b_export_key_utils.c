@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 15:22:09 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/08 13:08:33 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/11 14:03:46 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,14 @@ int	ft_check_enclosing(char *arg)
 	return (0);
 }
 
-char	*ft_copy_key(char *arg)
+char	*ft_copy_key(t_vars *vars, char *arg)
 {
 	int		i;
 	char	*id;
 
 	id = (char *)malloc(sizeof(char) * (ft_key_len(arg) + 1));
 	if (!id)
-	{
-		return (NULL);
-		ft_putstr_fd("Error allocating memory\n", 2);
-	}
+		ft_exit(vars, MALLOC_ERROR);
 	i = 0;
 	while (*arg && *arg != '=')
 	{
@@ -62,7 +59,7 @@ char	*ft_copy_key(char *arg)
 	return (id);
 }
 
-char	*ft_exp_key(char *arg)
+char	*ft_exp_key(t_vars *vars, char *arg)
 {
 	int		j;
 	char	*id;
@@ -78,7 +75,7 @@ char	*ft_exp_key(char *arg)
 			return (NULL);
 		arg++;
 	}
-	id = ft_copy_key(arg);
+	id = ft_copy_key(vars, arg);
 	if (!id)
 		return (NULL);
 	if (!ft_exp_keychecker(id, comp))
