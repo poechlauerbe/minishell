@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 15:30:48 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/08 20:36:48 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/11 17:49:28 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,5 +181,5 @@ void	ft_check_input(t_vars *vars)
 	ft_cleanup_lst(vars);
 	ft_red_file(vars, vars->p_start);
 	ft_cleanup_reds(vars);
-	// combine | and 0
+	ft_pipecount(vars);
 }
