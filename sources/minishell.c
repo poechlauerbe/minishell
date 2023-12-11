@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 14:33:20 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/11 15:37:58 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/11 15:40:14 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	main(int argc, char **argv, char **envp)
 	t_vars	vars;
 
 	ft_init(&vars, argc, argv, envp);
-	ft_handle_singals();
+	ft_handle_signals();
 	while (1)
 	{
 		vars.inp = readline("Prompt> $");
@@ -35,7 +35,6 @@ int	main(int argc, char **argv, char **envp)
 		vars.inp = NULL;
 	}
 }
-
 
 /* 	// Thorben test env-key values
 int	main(int argc, char **argv, char **envp)

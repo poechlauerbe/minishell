@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 14:56:01 by tbenz             #+#    #+#             */
-/*   Updated: 2023/11/29 16:52:44 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/11 15:45:55 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ft_handler_s(int signum, siginfo_t *info, void *no)
 	}
 }
 
-void	ft_handle_singals(void)
+void	ft_handle_signals(void)
 {
 	struct sigaction	act_int;
 	struct sigaction	act_quit;

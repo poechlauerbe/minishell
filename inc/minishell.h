@@ -132,7 +132,7 @@ void		ft_unset(t_vars *vars);
 
 /* signal_handling */
 // ignores SIGQUIT and handles SIGINT
-void		ft_handle_singals(void);
+void		ft_handle_signals(void);
 // handles SIGINT
 void		ft_handler_s(int signum, siginfo_t *info, void *no);
 
