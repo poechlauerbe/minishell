@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 13:26:58 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/09 15:21:09 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/11 14:10:23 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	ft_add_envv(t_vars *vars, char *key, char *val, int id)
 	}
 	tmp = (t_kv *)malloc(sizeof(t_kv));
 	if (!tmp)
-		return ;
+		ft_exit(vars, MALLOC_ERROR);
 	tmp->key = key;
 	tmp->val = val;
 	ft_set_val(vars, &vars->envv, &tmp);

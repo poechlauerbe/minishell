@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 13:28:25 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/08 18:09:40 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/11 14:43:56 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,33 @@ void	ft_free_input(t_vars *vars)
 		prog = temp->prog;
 		temp2 = temp->next;
 		i = 0;
-		while (prog[i])
+		while (prog && prog[i])
 		{
 			free(prog[i]);
 			i++;
 		}
-		free(prog);
-		free(temp);
-		temp = temp2;
+		if (prog)
+			free(prog);
+		if (temp)
+			free(temp);
 	}
 	vars->p_start = NULL;
+}
+
+void	ft_free_envv(t_vars *vars)
+{
+	t_kv	*tmp;
+
+	while (vars->envv)
+		{
+			tmp = vars->envv->next;
+			if (vars->envv->key)
+				free (vars->envv->key);
+			if (vars->envv->val)
+				free (vars->envv->val);
+			free (vars->envv);
+			vars->envv = tmp;
+		}
 }
 
 void	ft_exit(t_vars *vars, int errcd)
@@ -49,6 +66,7 @@ void	ft_exit(t_vars *vars, int errcd)
 	if (errcd != OK)
 		err_mes(errcd);
 	ft_free_input(vars);
+	ft_free_envv(vars);
 	exit(errcd);
 }
 
