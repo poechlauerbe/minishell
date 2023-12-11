@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 13:41:52 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/11 15:00:02 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/11 17:20:42 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,63 @@
 
 int	ft_builtin_check(t_vars *vars, t_prg *prog)
 {
-	if (ft_strncmp(prog->prog[0], "exit", 4) == 0)
+	if (ft_strncmp(prog->prog[0], "exit", 5) == 0)
 		ft_exit(vars, OK);
-	else if (ft_strncmp(prog->prog[0], "pwd", 3) == 0)
+	else if (ft_strncmp(prog->prog[0], "pwd", 4) == 0)
 		ft_pwd();
-	else if (ft_strncmp(prog->prog[0], "export", 6) == 0)
+	else if (ft_strncmp(prog->prog[0], "export", 7) == 0)
 		ft_export(vars);
-	else if (ft_strncmp(prog->prog[0], "echo", 4) == 0)
+	else if (ft_strncmp(prog->prog[0], "echo", 5) == 0)
 		ft_echo(prog->prog);
-	else if (ft_strncmp(prog->prog[0], "env", 3) == 0)
+	else if (ft_strncmp(prog->prog[0], "env", 4) == 0)
 		ft_env(vars);
-	else if (ft_strncmp(prog->prog[0], "unset", 5) == 0)
+	else if (ft_strncmp(prog->prog[0], "unset", 6) == 0)
 		ft_unset(vars);
 	else
 		return (NOT_USED);
 	return (USED);
+}
+
+void	ft_check_path(t_vars *vars, t_prg *prog)
+{
+	char	*line;
+	char	*dir;
+	char	*c_prog;
+	int		i;
+	int		j;
+	int		i_start;
+
+	line = ft_return_val(vars, "PATH");
+	if (!line)
+		exit(NOT_DEFINED);
+	i = 0;
+	while (line[i])
+	{
+		i_start = i;
+		while (line && line[i] != ':' && line[i] != '\0')
+			i++;
+		dir = malloc((i - i_start + 2) * sizeof(char));
+		if (!dir)
+			ft_exit(vars, MALLOC_ERROR);
+		j = 0;
+		while (j < i - i_start)
+		{
+			dir[j] = line[i_start + j];
+			j++;
+		}
+		dir[j] = '/';
+		dir[j + 1] = '\0';
+		c_prog = ft_strjoin(dir, prog->prog[0]);
+		if (!c_prog)
+			ft_exit(vars, MALLOC_ERROR);
+		free(dir);
+		if (access(c_prog, F_OK | X_OK) == OK)
+			execve(c_prog, prog->prog, NULL);
+		if (line[i])
+			i++;
+	}
+	ft_printf_fd(2, "%s: command not found\n", prog->prog[0]);
+	exit(127);
 }
 
 void	ft_check_prog(t_vars *vars, t_prg *prog)
@@ -51,4 +93,6 @@ void	ft_check_prog(t_vars *vars, t_prg *prog)
 		execve(prog->prog[0], prog->prog, NULL);
 	if (ft_builtin_check(vars, prog) == USED)
 		ft_exit(vars, OK);
+	ft_check_path(vars, prog);
+
 }
