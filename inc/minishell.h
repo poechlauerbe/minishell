@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/11 15:07:04 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/11 17:19:16 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,6 +205,8 @@ void		ft_check_prog(t_vars *vars, t_prg *prog);
 
 /* redirect_utils */
 void		ft_red_new_node(t_vars *vars, t_red **lst, char *file, char oper);
+
+int	ft_builtin_check(t_vars *vars, t_prg *prog);
 
 /* utils */
 // sets all variables to zero and initiates envp variables
