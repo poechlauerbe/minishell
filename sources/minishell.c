@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 14:33:20 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/11 15:05:26 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/11 15:37:58 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	main(int argc, char **argv, char **envp)
 	{
 		vars.inp = readline("Prompt> $");
 		if (!vars.inp)
-			ft_exit(&vars, (EOF + 128));
+			ft_exit(&vars, OK);
 		else if (ft_strlen(vars.inp) > 0)
 		{
 			add_history(vars.inp);

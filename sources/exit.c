@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 13:28:25 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/11 14:43:56 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/11 15:36:17 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	ft_free_input(t_vars *vars)
 			free(prog);
 		if (temp)
 			free(temp);
+		temp = temp2;
 	}
 	vars->p_start = NULL;
 }
