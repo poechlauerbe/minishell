@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/11 14:07:49 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/11 15:07:04 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,14 +200,15 @@ void		ft_remove_links_ao(t_kv **tmp);
 int			ft_pipe(t_vars *vars);
 void		ft_pipe_loop(t_vars *vars);
 
+/* prog */
+void		ft_check_prog(t_vars *vars, t_prg *prog);
+
 /* redirect_utils */
 void		ft_red_new_node(t_vars *vars, t_red **lst, char *file, char oper);
 
 /* utils */
 // sets all variables to zero and initiates envp variables
 void		ft_init(t_vars *vars, int argc, char **argv, char **envp);
-// handles the input given to readline
-void		ft_input(t_vars *vars);
 // prints the current working directory or an error if this is not possible
 void		ft_pwd(void);
 // sets the values for the tmp variable (except for key and value)

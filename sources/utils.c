@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:21:46 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/11 14:01:14 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/11 15:08:55 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,26 +19,6 @@ void	ft_init(t_vars *vars, int argc, char **argv, char **envp)
 	argv = NULL;
 	ft_create_env(vars, envp);
 	ft_order_envv(vars);
-}
-
-void	ft_input(t_vars *vars)
-{
-	if (!vars->inp)
-		exit(EOF + 128);
-	else if (ft_strlen(vars->inp) > 0)
-		add_history(vars->inp);
-	if (ft_strncmp(vars->inp, "exit", 4) == 0)
-		ft_exit(vars, OK);
-	if (ft_strncmp(vars->inp, "pwd", 3) == 0)
-		ft_pwd();
-	if (ft_strncmp(vars->inp, "export", 6) == 0)
-		ft_export(vars);
-	if (ft_strncmp(vars->p_start->prog[0], "echo", 4) == 0)
-		ft_echo(vars->p_start->prog);
-	if (ft_strncmp(vars->inp, "env", 3) == 0)
-		ft_env(vars);
-	if (ft_strncmp(vars->inp, "unset", 5) == 0)
-		ft_unset(vars);
 }
 
 void	ft_pwd(void)
