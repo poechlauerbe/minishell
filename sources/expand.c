@@ -6,13 +6,13 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 12:15:16 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/12 12:17:26 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/12 12:21:02 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-int	check_exit_code(t_vars *vars)
+int	ft_check_exit_code(t_vars *vars)
 {
 	return (vars->exit_code);
 }

@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/12 12:13:39 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/12 12:21:06 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,6 +155,10 @@ void		ft_exit(t_vars *vars, int errcd);
 int			ft_reset(t_vars *vars);
 //
 void	ft_free_envv(t_vars *vars);
+
+/* expand */
+// function for $?
+int		ft_check_exit_code(t_vars *vars);
 
 /* fun echo */
 // writes to the shell in standard output
