@@ -61,14 +61,12 @@ char	*ft_copy_key(t_vars *vars, char *arg)
 
 char	*ft_exp_key(t_vars *vars, char *arg)
 {
-	int		j;
 	char	*id;
 	char	*comp;
 
 	comp = arg;
 	while (*comp && (*comp != '=' && *comp != '\0'))
 		comp++;
-	j = 0;
 	if (*arg == '"' || *arg == '\'')
 	{
 		if (ft_check_enclosing(arg))

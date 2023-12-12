@@ -19,6 +19,10 @@ void	ft_init(t_vars *vars, int argc, char **argv, char **envp)
 	argv = NULL;
 	ft_create_env(vars, envp);
 	ft_order_envv(vars);
+	if (argc == 0)
+		return ;
+	if (argv == 0)
+		return ;
 }
 
 void	ft_pwd(void)

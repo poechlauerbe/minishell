@@ -14,9 +14,6 @@
 
 void	ft_handler_s(int signum, siginfo_t *info, void *no)
 {
-	siginfo_t	*infos;
-
-	infos = info;
 	no = NULL;
 	if (signum == SIGINT)
 	{
@@ -25,6 +22,10 @@ void	ft_handler_s(int signum, siginfo_t *info, void *no)
 		rl_on_new_line();
 		rl_redisplay();
 	}
+	if (info)
+		return ;
+	if (no)
+		return ;
 }
 
 void	ft_handle_signals(void)
