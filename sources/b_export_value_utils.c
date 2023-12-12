@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_export_value_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 13:14:23 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/11 14:08:20 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/12 13:27:36 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ char	*ft_exp_value(t_vars *vars, char *arg)
 	else
 	{
 		arg++;
-		if (ft_check_enclosing(arg))
+		if (ft_check_enclosing(&arg, vars))
 			return (NULL);
 		value = ft_create_value(vars, arg);
 	}
