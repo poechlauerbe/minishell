@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 12:15:16 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/12 14:14:05 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/12 14:59:37 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_varlen(char *arg, t_quote *quote)
 
 	varlen = 1;
 	i = quote->i + 1;
-	if (ft_isdigit(arg[i]))
+	if (ft_isdigit(arg[i]) || arg[i] == '?')
 		return (2);
 	return (varlen);
 }
@@ -34,7 +34,7 @@ void	ft_expand_str(t_vars *vars, char **arg, t_quote *quote, char *str)
 
 	temp = *arg;
 	varlen = ft_varlen(*arg, quote);
-	strlen = quote->len - varlen + ft_strlen(str);
+	strlen = ft_strlen(*arg)- varlen + ft_strlen(str);
 	*arg = malloc((strlen + 1) * sizeof(char));
 	if (!arg)
 		ft_exit(vars, MALLOC_ERROR);
@@ -42,7 +42,7 @@ void	ft_expand_str(t_vars *vars, char **arg, t_quote *quote, char *str)
 	while (++i < quote->i)
 		(*arg)[i] = temp[i];
 	j = 0;
-	while (str[j])
+	while (str && str[j])
 		(*arg)[i++] = str[j++];
 	j = i - j + varlen;
 	while (temp[j])
@@ -65,12 +65,38 @@ void	ft_expander(t_vars *vars, char **arg, t_quote *quote)
 {
 	int		i;
 	char	*str;
+	char	*temp;
 
 	i = quote->i + 1;
 	str = *arg;
 	if (ft_isdigit(str[i]) == 1)
 		ft_dig_expand(vars, arg, quote, i);
+	else if (str[i] == '?')
+	{
+		temp = ft_itoa(vars->exit_code);
+		if (!temp)
+			ft_exit(vars, MALLOC_ERROR);
+		ft_expand_str(vars, arg, quote, temp);
+		free(temp);
+	}
+}
 
+void	ft_expand_all_vars(t_vars *vars)
+{
+	t_prg	*temp;
+	int		i;
+
+	temp = vars->p_start;
+	while (temp)
+	{
+		i = 0;
+		while (temp->prog[i])
+		{
+			ft_check_enclosing(&temp->prog[i], vars);
+			i++;
+		}
+		temp = temp->next;
+	}
 }
 
 int	ft_check_exit_code(t_vars *vars)

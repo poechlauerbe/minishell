@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 10:17:45 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/12 14:24:49 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/12 15:01:45 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,23 +58,24 @@ int main(int argc, char *argv[])
 	if (argc == 1)
 		return (1);
 	vars.inp = argv[1];
+	vars.exit_code = 99;
 	ft_check_input(&vars);
-	// ft_pipe_loop(&vars);
-	temp = vars.p_start;
-	while (temp)
-	{
-		printf("oper: %c$\n", temp->oper);
-		i = -1;
-		while (temp->prog[++i])
-			printf("string[%i]: %s\n", i, temp->prog[i]);
-		printf("\n");
-		// while(temp->in_file)
-		// {
-		// 	printf("in: %s$\n", temp->in_file->file);
-		// 	temp->in_file = temp->in_file->next;
-		// }
-		temp = temp->next;
-	}
+	ft_pipe_loop(&vars);
+	// temp = vars.p_start;
+	// while (temp)
+	// {
+	// 	printf("oper: %c$\n", temp->oper);
+	// 	i = -1;
+	// 	while (temp->prog[++i])
+	// 		printf("string[%i]: %s\n", i, temp->prog[i]);
+	// 	printf("\n");
+	// 	// while(temp->in_file)
+	// 	// {
+	// 	// 	printf("in: %s$\n", temp->in_file->file);
+	// 	// 	temp->in_file = temp->in_file->next;
+	// 	// }
+	// 	temp = temp->next;
+	// }
 	// ft_exit(&vars, OK);
 }
 
