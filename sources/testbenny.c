@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 10:17:45 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/08 18:06:22 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/12 14:24:49 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,23 +59,23 @@ int main(int argc, char *argv[])
 		return (1);
 	vars.inp = argv[1];
 	ft_check_input(&vars);
-	ft_pipe_loop(&vars);
+	// ft_pipe_loop(&vars);
 	temp = vars.p_start;
-	// while (temp)
-	// {
-	// 	printf("oper: %c$\n", temp->oper);
-	// 	i = -1;
-	// 	while (temp->prog[++i])
-	// 		printf("string[%i]: %s\n", i, temp->prog[i]);
-	// 	printf("\n");
-	// 	while(temp->in_file)
-	// 	{
-	// 		printf("in: %s$\n", temp->in_file->file);
-	// 		temp->in_file = temp->in_file->next;
-	// 	}
-	// 	temp = temp->next;
-	// }
-	ft_exit(&vars, OK);
+	while (temp)
+	{
+		printf("oper: %c$\n", temp->oper);
+		i = -1;
+		while (temp->prog[++i])
+			printf("string[%i]: %s\n", i, temp->prog[i]);
+		printf("\n");
+		// while(temp->in_file)
+		// {
+		// 	printf("in: %s$\n", temp->in_file->file);
+		// 	temp->in_file = temp->in_file->next;
+		// }
+		temp = temp->next;
+	}
+	// ft_exit(&vars, OK);
 }
 
 // int	main(void)

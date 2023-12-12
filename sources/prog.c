@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 13:41:52 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/12 12:22:30 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/12 14:18:33 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,14 @@ int	ft_builtin_check(t_vars *vars, t_prg *prog)
 		ft_exit(vars, OK);
 	else if (ft_strncmp(prog->prog[0], "pwd", 4) == 0)
 		ft_pwd();
-	else if (ft_strncmp(prog->prog[0], "export", 7) == 0)
-		ft_export(vars);
+	// else if (ft_strncmp(prog->prog[0], "export", 7) == 0)
+	// 	ft_export(vars);
 	else if (ft_strncmp(prog->prog[0], "echo", 5) == 0)
 		ft_echo(prog->prog);
-	else if (ft_strncmp(prog->prog[0], "env", 4) == 0)
-		ft_env(vars);
-	else if (ft_strncmp(prog->prog[0], "unset", 6) == 0)
-		ft_unset(vars);
-	else if (ft_strncmp(prog->prog[0], "$?", 3) == 0)
-		ft_check_exit_code(vars);
+	// else if (ft_strncmp(prog->prog[0], "env", 4) == 0)
+	// 	ft_env(vars);
+	// else if (ft_strncmp(prog->prog[0], "unset", 6) == 0)
+	// 	ft_unset(vars);
 	else
 		return (NOT_USED);
 	vars->exit_code = OK;
