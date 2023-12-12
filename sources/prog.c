@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 13:41:52 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/12 14:30:50 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/12 15:08:30 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void	ft_check_path(t_vars *vars, t_prg *prog)
 			i++;
 	}
 	ft_printf_fd(2, "%s: command not found\n", prog->prog[0]);
+	vars->exit_code = 127;
 	exit(127);
 }
 
@@ -88,6 +89,7 @@ void	ft_check_prog(t_vars *vars, t_prg *prog)
 	if (acc_c == NOT_OK)
 	{
 		ft_printf_fd(2, "%s: command not found\n", prog->prog[0]);
+		vars->exit_code = 127;
 		exit(127);
 	}
 	else if (acc_c == OK)
