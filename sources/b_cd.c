@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 12:25:06 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/12 15:47:37 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/12 17:06:37 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_access_path(char *curpath)
 	if (acc_c == NOT_OK)
 	{
 		ft_printf_fd(2, "cd: %s: No such file or directory\n", curpath);
-		ft_exit(1);
+		exit(1);
 	}
 	else if (acc_c == OK)
 		chdir(curpath);
@@ -80,16 +80,16 @@ void	ft_check_path_null(t_vars *vars, char **curpath)
 	int		len;
 
 	len = ft_strlen(*curpath);
-	fpath = (char *)malloc(sizeof(char) * (len + ft_strlen(curpath) + 3));
+	fpath = (char *)malloc(sizeof(char) * (len + ft_strlen(*curpath) + 3));
 	if (!fpath)
 		ft_exit(vars, MALLOC_ERROR);
 	ft_strlcpy(fpath, "./", 3);
-	ft_strlcat()
+	ft_strlcat(fpath, *curpath, (len + ft_strlen(curpath) + 3));
 }
 
 void	ft_check_pot_path(t_vars *vars, char **curpath)
 {
-	char 	**cdpath;
+	char	**cdpath;
 	char	*temp;
 	int		i;
 
@@ -115,6 +115,36 @@ void	ft_check_pot_path(t_vars *vars, char **curpath)
 	free (cdpath);
 }
 
+void	ft_pwd_conc(t_vars *vars, char **curpath)
+{
+	char	*fpath;
+	char	*pwd;
+	int		plen;
+	int		pwdlen;
+	int		slash;
+
+	if (*curpath[0] != '/')
+	{
+		plen = ft_strlen(*curpath);
+		pwd = ft_return_val(vars, "PWD");
+		pwdlen = ft_strlen(ft_return_val(vars, "PWD"));
+		slash = 0;
+		if (pwd[pwdlen - 1] != '/')
+			slash = 1;
+		fpath = (char *)malloc(sizeof(char) * (plen + pwdlen + slash + 1));
+		ft_strlcpy(fpath, pwd, (pwdlen + 1));
+		if (slash)
+			ft_strlcat(fpath, "/", pwdlen + 2);
+		ft_strlcat(fpath, *curpath, (plen + pwdlen + slash + 1));
+	}
+	*curpath = fpath;
+}
+
+void	ft_can_form(t_vars *vars, char *curpath)
+{
+
+}
+
 void	ft_cd(t_vars *vars)
 {
 	int		acc_c;
@@ -134,9 +164,8 @@ void	ft_cd(t_vars *vars)
 		if (curpath[0] == '.')
 			ft_access_path(curpath);
 		else
-		{
 			ft_check_pot_path(vars, &curpath);
-
-		}
 	}
+	ft_pwd_conc(vars, &curpath);
+	ft_can_form(vars, curpath);
 }
