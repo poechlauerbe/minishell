@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 12:25:06 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/12 15:40:33 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/12 15:47:37 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	ft_check_pot_path(t_vars *vars, char **curpath)
 	int		i;
 
 	temp = NULL;
-	cdpath = ft_split(ft_return_val(vars, "CDPATH"), ',');
+	cdpath = ft_split(ft_return_val(vars, "CDPATH"), ':');
 	i = 0;
 	while (cdpath && cdpath[i])
 	{
