@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/11 17:50:38 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/12 15:54:07 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct s_vars
 	t_prg		*p_start;
 	int			pipe_count;
 	t_kv		*envv;
+	char		exit_code;
 }		t_vars;
 
 typedef struct s_quote
@@ -76,7 +77,7 @@ typedef struct s_quote
 
 /* b_export_key_utils */
 // checks if parenthesis are properly closed
-int			ft_check_enclosing(char *arg);
+int			ft_check_enclosing(char **arg, t_vars *vars);
 // extracts the key of argument
 char		*ft_copy_key(t_vars *vars, char *arg);
 // returns a copy of the key if it is valid or NULL if it is not valid
@@ -154,6 +155,12 @@ void		ft_exit(t_vars *vars, int errcd);
 int			ft_reset(t_vars *vars);
 //
 void	ft_free_envv(t_vars *vars);
+
+/* expand */
+void		ft_expand_all_vars(t_vars *vars);
+void		ft_expander(t_vars *vars, char **arg, t_quote *quote);
+// function for $?
+int			ft_check_exit_code(t_vars *vars);
 
 /* fun echo */
 // writes to the shell in standard output

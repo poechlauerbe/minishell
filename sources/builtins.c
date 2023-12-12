@@ -14,12 +14,10 @@
 // something is not working well here
 void	ft_env(t_vars *vars)
 {
-	int		i;
 	t_kv	*tmp;
 
 	if (!vars->envv)
 		ft_printf("\n");
-	i = 0;
 	tmp = vars->envv;
 	while (tmp)
 	{

@@ -6,7 +6,7 @@
 #    By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/12/11 14:42:48 by bpochlau         ###   ########.fr        #
+#    Updated: 2023/12/12 14:20:34 by bpochlau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,12 +38,13 @@ HEADER			= $(addprefix $(INC_DIR)/,\
 
 SRCS 			= $(addprefix $(SRCS_DIR),\
 				builtins.c \
-				exit.c \
 				b_export_key_utils.c \
 				b_export_value_utils.c \
 				b_export_print.c \
 				b_export_print_utils.c \
 				environment_var.c \
+				exit.c \
+				expand.c \
 				fun_echo.c \
 				input.c \
 				input_utils.c \
@@ -103,11 +104,23 @@ test:			${LIBFT} $(HEADER)
 				${CC} -g $(SRCS) ${LIBFT} ${LRL} -o ${NAME}
 
 TESTSRC 		= $(addprefix $(SRCS_DIR),\
+				builtins.c \
+				b_export_key_utils.c \
+				b_export_value_utils.c \
+				b_export_print.c \
+				b_export_print_utils.c \
+				environment_var.c \
 				exit.c \
+				expand.c \
+				fun_echo.c \
 				input.c \
 				input_utils.c \
+				key_value.c \
+				key_value_remove.c \
 				pipe.c \
+				prog.c \
 				redirect_utils.c \
+				utils.c \
 				testbenny.c)
 
 benny:			$(LIBFT) $(HEADER)

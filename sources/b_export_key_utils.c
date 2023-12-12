@@ -3,31 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   b_export_key_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 15:22:09 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/11 14:03:46 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/12 13:32:57 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-int	ft_check_enclosing(char *arg)
+int	ft_check_enclosing(char **arg, t_vars *vars)
 {
 	t_quote	quote;
 
-	ft_init_quote(&quote);
-	while (arg[quote.i])
+	quote.i = 0;
+	while ((*arg)[quote.i])
 	{
-		if (arg[quote.i] == '\'' && !quote.dq && !quote.sq)
+		if (quote.i == 0)
+			ft_init_quote(&quote);
+		if ((*arg)[quote.i] == '\'' && !quote.dq && !quote.sq)
 			quote.sq = 1;
-		else if (arg[quote.i] == '\'' && !quote.dq && quote.sq)
+		else if ((*arg)[quote.i] == '\'' && !quote.dq && quote.sq)
 			quote.sq = 0;
-		else if (arg[quote.i] == '"' && !quote.sq && !quote.dq)
+		else if ((*arg)[quote.i] == '"' && !quote.sq && !quote.dq)
 			quote.dq = 1;
-		else if (arg[quote.i] == '"' && !quote.sq && quote.dq)
+		else if ((*arg)[quote.i] == '"' && !quote.sq && quote.dq)
 			quote.dq = 0;
-		quote.i++;
+		if (quote.sq != 1 && (*arg)[quote.i] == '$' )
+			ft_expander(vars, arg, &quote);
+		else
+			quote.i++;
 	}
 	if (quote.sq != 0 || quote.dq != 0)
 	{
@@ -61,17 +66,15 @@ char	*ft_copy_key(t_vars *vars, char *arg)
 
 char	*ft_exp_key(t_vars *vars, char *arg)
 {
-	int		j;
 	char	*id;
 	char	*comp;
 
 	comp = arg;
 	while (*comp && (*comp != '=' && *comp != '\0'))
 		comp++;
-	j = 0;
 	if (*arg == '"' || *arg == '\'')
 	{
-		if (ft_check_enclosing(arg))
+		if (ft_check_enclosing(&arg, vars))
 			return (NULL);
 		arg++;
 	}
