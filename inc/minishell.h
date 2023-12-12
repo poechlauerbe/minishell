@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/12 14:43:21 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/12 15:54:07 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,7 +204,7 @@ void		ft_remove_links_ao(t_kv **tmp);
 
 /* pipe */
 // pipe function
-int			ft_pipe(t_vars *vars);
+void		ft_pipecount(t_vars *vars);
 void		ft_pipe_loop(t_vars *vars);
 
 /* prog */
@@ -212,6 +212,8 @@ void		ft_check_prog(t_vars *vars, t_prg *prog);
 
 /* redirect_utils */
 void		ft_red_new_node(t_vars *vars, t_red **lst, char *file, char oper);
+
+int	ft_builtin_check(t_vars *vars, t_prg *prog);
 
 /* utils */
 // sets all variables to zero and initiates envp variables

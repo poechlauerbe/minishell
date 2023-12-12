@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 15:46:51 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/11 14:42:20 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/11 17:49:08 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ void	ft_pipe_loop(t_vars *vars)
 	t_prg	*temp;
 	t_red	*reds;
 
-	ft_pipecount(vars);
 	commands = vars->pipe_count + 1;
 	temp = vars->p_start;
 	fd = malloc(vars->pipe_count * 2 * sizeof(int));

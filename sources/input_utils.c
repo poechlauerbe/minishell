@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 16:24:39 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/08 20:36:17 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/11 16:23:58 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_new_node(t_vars *vars, t_prg **temp, char **inp)
 	(*temp)->str_c = 0;
 	(*temp)->in_file = NULL;
 	(*temp)->out_file = NULL;
-	if ( **inp == '|' || **inp == '<' || **inp == '>')
+	if (**inp == '|' || **inp == '<' || **inp == '>')
 		(*temp)->oper = **inp;
 	else
 	{

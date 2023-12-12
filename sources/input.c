@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 15:30:48 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/12 14:33:50 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/12 15:56:06 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,5 +182,5 @@ void	ft_check_input(t_vars *vars)
 	ft_red_file(vars, vars->p_start);
 	ft_cleanup_reds(vars);
 	ft_expand_all_vars(vars);
-	// combine | and 0
+	ft_pipecount(vars);
 }
