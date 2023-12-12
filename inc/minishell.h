@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/11 15:07:04 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/12 12:13:39 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct s_vars
 	t_prg		*p_start;
 	int			pipe_count;
 	t_kv		*envv;
+	char		exit_code;
 }		t_vars;
 
 typedef struct s_quote
