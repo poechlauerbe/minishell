@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 12:15:16 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/12 14:59:37 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/12 17:36:43 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,9 @@ void	ft_expander(t_vars *vars, char **arg, t_quote *quote)
 		ft_expand_str(vars, arg, quote, temp);
 		free(temp);
 	}
+	else if (str[i] == ' ')
+		;
+	
 }
 
 void	ft_expand_all_vars(t_vars *vars)
