@@ -6,17 +6,19 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:20:58 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/04 12:36:38 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/13 13:27:59 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-void	ft_echo(char **str)
+void	ft_echo(t_vars *vars, char **str)
 {
 	int	new_line_mark;
 	int	i;
+	char *str_wo_q;
 
+	str_wo_q = NULL;
 	new_line_mark = 0;
 	i = 0;
 	if (!str[1])
@@ -31,7 +33,11 @@ void	ft_echo(char **str)
 	}
 	while (str[++i])
 	{
-		ft_printf("%s", str[i]);
+			str_wo_q = ft_create_value(vars, str[i]);
+			if (!str_wo_q)
+				ft_exit(vars, MALLOC_ERROR);
+			ft_printf("%s", str_wo_q);
+			free(str_wo_q);
 		if (str[i + 1])
 			write(1, " ", 1);
 	}
