@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+         #
+#    By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/12/12 14:20:34 by bpochlau         ###   ########.fr        #
+#    Updated: 2023/12/13 13:08:05 by tbenz            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ HEADER			= $(addprefix $(INC_DIR)/,\
 				minishell.h)
 
 SRCS 			= $(addprefix $(SRCS_DIR),\
+				b_cd_utils2.c \
 				builtins.c \
 				b_export_key_utils.c \
 				b_export_value_utils.c \

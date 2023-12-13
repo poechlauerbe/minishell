@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/12 15:54:07 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/13 16:59:01 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,4 +224,15 @@ void		ft_pwd(void);
 void		ft_set_val(t_vars *vars, t_kv **var, t_kv **tmp);
 // compares two strings (here: key-pairs) and returns 0 if they match.
 int			ft_strcmp(const char *s1, const char *s2);
+
+
+void		ft_remove_dot(t_vars *vars, char **curpath);
+int			ft_remove_dot_counter(char *curpath);
+
+int		ft_remove_dd_currlen(char *curpath, int i);
+int		ft_test_dir(t_vars *vars, char **curpath, int i);
+int		ft_remove_dot_dot(t_vars *vars, char **curpath);
+void	ft_create_curpath(char **cp, int i, int cl, int len);
+
+
 #endif
