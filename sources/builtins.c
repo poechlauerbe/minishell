@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:49:29 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/11 14:11:47 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/13 13:28:03 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,3 +65,29 @@ void	ft_unset(t_vars *vars)
 		key = vars->p_start->prog[++i];
 	}
 }
+
+/* void	ft_cd(t_vars *vars)
+{
+	int		acc_c;
+	char	*curpath;
+
+	if (vars->p_start->prog[2])
+		return (ft_printf_fd(2, "cd: too many arguments"));
+	curpath = vars->p_start->prog[1];
+	if (!curpath && !ft_return_val(vars, "HOME"))
+		return (ft_printf_fd(2, "cd: HOME not set"));
+	else if (!curpath && !ft_return_val(vars, "HOME"))
+		curpath = ft_return_val(vars, "HOME");
+	else if (curpath[0] == '/')
+		curpath = curpath;
+	else
+	{
+		if (curpath[0] == '.')
+		//shouldn't test fpr acces, just if path exists
+			ft_access_path(curpath);
+		else
+			ft_check_pot_path(vars, &curpath);
+	}
+	ft_pwd_conc(vars, &curpath);
+	ft_can_form(vars, curpath);
+} */

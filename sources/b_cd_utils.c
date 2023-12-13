@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   b_cd.c                                             :+:      :+:    :+:   */
+/*   b_cd_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 12:25:06 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/12 17:06:37 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/13 12:10:10 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-
+// probably shouldn't test for X_OK at this stage
 void	ft_access_path(char *curpath)
 {
 	int	acc_c;
@@ -113,59 +113,4 @@ void	ft_check_pot_path(t_vars *vars, char **curpath)
 		i++;
 	}
 	free (cdpath);
-}
-
-void	ft_pwd_conc(t_vars *vars, char **curpath)
-{
-	char	*fpath;
-	char	*pwd;
-	int		plen;
-	int		pwdlen;
-	int		slash;
-
-	if (*curpath[0] != '/')
-	{
-		plen = ft_strlen(*curpath);
-		pwd = ft_return_val(vars, "PWD");
-		pwdlen = ft_strlen(ft_return_val(vars, "PWD"));
-		slash = 0;
-		if (pwd[pwdlen - 1] != '/')
-			slash = 1;
-		fpath = (char *)malloc(sizeof(char) * (plen + pwdlen + slash + 1));
-		ft_strlcpy(fpath, pwd, (pwdlen + 1));
-		if (slash)
-			ft_strlcat(fpath, "/", pwdlen + 2);
-		ft_strlcat(fpath, *curpath, (plen + pwdlen + slash + 1));
-	}
-	*curpath = fpath;
-}
-
-void	ft_can_form(t_vars *vars, char *curpath)
-{
-
-}
-
-void	ft_cd(t_vars *vars)
-{
-	int		acc_c;
-	char	*curpath;
-
-	if (vars->p_start->prog[2])
-		return (ft_printf_fd(2, "cd: too many arguments"));
-	curpath = vars->p_start->prog[1];
-	if (!curpath && !ft_return_val(vars, "HOME"))
-		return (ft_printf_fd(2, "cd: HOME not set"));
-	else if (!curpath && !ft_return_val(vars, "HOME"))
-		curpath = ft_return_val(vars, "HOME");
-	else if (curpath[0] == '/')
-		curpath = curpath;
-	else
-	{
-		if (curpath[0] == '.')
-			ft_access_path(curpath);
-		else
-			ft_check_pot_path(vars, &curpath);
-	}
-	ft_pwd_conc(vars, &curpath);
-	ft_can_form(vars, curpath);
 }

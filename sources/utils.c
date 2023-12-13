@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:21:46 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/11 15:08:55 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/13 13:32:58 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@ void	ft_init(t_vars *vars, int argc, char **argv, char **envp)
 	ft_bzero(vars, sizeof(t_vars));
 	argc = 0;
 	argv = NULL;
-	ft_create_env(vars, envp);
-	ft_order_envv(vars);
+	envp = NULL;
+	// ft_create_env(vars, envp);
+	// ft_order_envv(vars);
 	if (argc == 0)
 		return ;
 	if (argv == 0)
