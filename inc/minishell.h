@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/12 15:54:07 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/13 12:53:48 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,7 +164,7 @@ int			ft_check_exit_code(t_vars *vars);
 
 /* fun echo */
 // writes to the shell in standard output
-void		ft_echo(char **str);
+void		ft_echo(t_vars *vars, char **str);
 
 /* input utils*/
 // create new node in input linked list

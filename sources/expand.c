@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 12:15:16 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/13 16:18:26 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/13 16:24:56 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,6 @@ void	ft_expander(t_vars *vars, char **arg, t_quote *quote)
 		str[i] = ' ';
 	else if (ft_isalpha(str[i]) || str[i] == '_')
 		ft_expand_env(vars, arg, quote, i);
-
 }
 
 void	ft_expand_all_vars(t_vars *vars)
