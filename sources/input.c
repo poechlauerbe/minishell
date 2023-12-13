@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 15:30:48 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/12 15:56:06 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/13 17:11:06 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,11 +174,40 @@ void	ft_red_file(t_vars *vars, t_prg *lst)
 	}
 }
 
+void	ft_combine(t_vars *vars, t_prg *prog, t_prg *p_prog, t_prg *last)
+{
+
+}
+
+void ft_comb_progs(t_vars *vars)
+{
+	t_prg	*temp;
+	t_prg	*p_temp;
+	t_prg	*last;
+	int		i;
+
+	i = 0;
+	temp = vars->p_start;
+	while (temp)
+	{
+		if (temp->oper == '0' && i != 0)
+		{
+			ft_combine(vars, temp, p_temp, last);
+			i++;
+		}
+		if (temp->oper == '|')
+			p_temp = temp;
+		last = temp;
+		temp = temp->next;
+	}
+}
+
 void	ft_check_input(t_vars *vars)
 {
 	ft_check_string_count(vars, vars->inp);
 	ft_malloc_prog_2d_str(vars);
 	ft_cleanup_lst(vars);
+	ft_comb_progs(vars);
 	ft_red_file(vars, vars->p_start);
 	ft_cleanup_reds(vars);
 	ft_expand_all_vars(vars);
