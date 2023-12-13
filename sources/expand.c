@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 12:15:16 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/12 17:36:43 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/13 16:18:26 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,14 @@ int	ft_varlen(char *arg, t_quote *quote)
 	i = quote->i + 1;
 	if (ft_isdigit(arg[i]) || arg[i] == '?')
 		return (2);
+	if (ft_isalpha(arg[i]) || arg[i] =='_')
+	{
+		while (arg[i] && arg[i] != '\'' && arg[i] != '"' && arg[i] != ' ')
+		{
+			varlen++;
+			i++;
+		}
+	}
 	return (varlen);
 }
 
@@ -61,6 +69,28 @@ void	ft_dig_expand(t_vars *vars, char **arg, t_quote *quote, int i)
 		ft_expand_str(vars, arg, quote, "");
 }
 
+void	ft_expand_env(t_vars *vars, char **arg, t_quote *quote, int i)
+{
+	char	*temp;
+	char	*str;
+	int		len;
+
+	len =ft_varlen(*arg, quote);
+	str = malloc(len * sizeof(char));
+	if (!str)
+		ft_exit(vars, MALLOC_ERROR);
+	ft_strlcpy(str, &(arg[0][i]), len);
+	temp = ft_return_val(vars, str);
+	if (temp)
+	{
+		ft_expand_str(vars, arg, quote, temp);
+	}
+	else if (len == 1)
+		ft_expand_str(vars, arg, quote, "$");
+	else
+		ft_expand_str(vars, arg, quote, "");
+}
+
 void	ft_expander(t_vars *vars, char **arg, t_quote *quote)
 {
 	int		i;
@@ -80,8 +110,10 @@ void	ft_expander(t_vars *vars, char **arg, t_quote *quote)
 		free(temp);
 	}
 	else if (str[i] == ' ')
-		;
-	
+		str[i] = ' ';
+	else if (ft_isalpha(str[i]) || str[i] == '_')
+		ft_expand_env(vars, arg, quote, i);
+
 }
 
 void	ft_expand_all_vars(t_vars *vars)
@@ -100,9 +132,4 @@ void	ft_expand_all_vars(t_vars *vars)
 		}
 		temp = temp->next;
 	}
-}
-
-int	ft_check_exit_code(t_vars *vars)
-{
-	return (vars->exit_code);
 }
