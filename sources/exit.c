@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 13:28:25 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/14 11:09:30 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/14 11:21:11 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,10 @@ void	ft_free_envv(t_vars *vars)
 
 void	ft_exit(t_vars *vars, int errcd)
 {
-	ft_putstr_fd("exit\n", 2);
+	if (errcd > 256)
+		err_mes(errcd);
+	else
+		ft_putstr_fd("exit\n", 2);
 	ft_free_input(vars);
 	ft_free_envv(vars);
 	exit(errcd);

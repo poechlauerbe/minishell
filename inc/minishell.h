@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/13 12:53:48 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/14 11:22:59 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,9 @@ typedef struct s_quote
 }				t_quote;
 
 /* functions */
+
+/* b_exit */
+void		ft_exit_prog(t_vars *vars,char **prog);
 
 /* b_export_key_utils */
 // checks if parenthesis are properly closed

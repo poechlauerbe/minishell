@@ -6,43 +6,11 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 13:41:52 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/14 11:04:35 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/14 11:17:46 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-
-void	ft_exit_prog(t_vars *vars,char **prog)
-{
-	int	i;
-	int num;
-
-	if (prog[1] && prog[2])
-		ft_putstr_fd("exit\nbash: exit: too many arguments\n", 2);
-	else if (prog[1])
-	{
-		i = 0;
-		while (prog[1][i] && ft_isdigit(prog[1][i]))
-			i++;
-		if (prog[1][i])
-		{
-			ft_putstr_fd("exit\nbash: exit: ", 2);
-			ft_putstr_fd(prog[1], 2);
-			ft_putstr_fd(": numeric argument required\n", 2);
-		}
-		else
-		{
-			num = ft_atoi(prog[1]);
-			while (num >= 256)
-				num -= 256;
-			while (num < 0)
-				num += 256;
-			ft_exit(vars, num);
-		}
-	}
-	else
-		ft_exit(vars, OK);
-}
 
 int	ft_builtin_check(t_vars *vars, t_prg *prog)
 {
