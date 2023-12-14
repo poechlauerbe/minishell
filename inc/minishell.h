@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/14 11:22:59 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/14 15:19:43 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,6 +182,9 @@ void		ft_cleanup_lst(t_vars *vars);
 /* input */
 // checks for input and stores each input in a 2d array
 void		ft_check_input(t_vars *vars);
+
+/* input_comb_progs */
+void		ft_comb_progs(t_vars *vars);
 
 /* key_value */
 /* returns a pointer to the value retrieved with the key or if no matching key
