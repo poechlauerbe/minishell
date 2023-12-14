@@ -6,13 +6,13 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 12:10:13 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/13 18:06:43 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/14 10:58:27 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-void	ft_pwd_conc(t_vars *vars, char **curpath)
+/* void	ft_pwd_conc(t_vars *vars, char **curpath)
 {
 	char	*fpath;
 	char	*pwd;
@@ -35,7 +35,7 @@ void	ft_pwd_conc(t_vars *vars, char **curpath)
 		ft_strlcat(fpath, *curpath, (plen + pwdlen + slash + 1));
 	}
 	*curpath = fpath;
-}
+} */
 
 int	ft_remove_dot_counter(char *curpath)
 {
@@ -79,9 +79,7 @@ void	ft_remove_dot(t_vars *vars, char **curpath)
 
 void	ft_can_form(t_vars *vars, char **curpath)
 {
-	char	**arr;
-
-	while (ft_strcmp(curpath, "./"))
+	while (ft_strcmp(*curpath, "./"))
 		ft_remove_dot(vars, curpath);
 	ft_remove_dot_dot(vars, curpath);
 }

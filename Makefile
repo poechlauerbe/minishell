@@ -6,7 +6,7 @@
 #    By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/12/13 13:08:05 by tbenz            ###   ########.fr        #
+#    Updated: 2023/12/14 10:56:43 by tbenz            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,10 @@ HEADER			= $(addprefix $(INC_DIR)/,\
 				minishell.h)
 
 SRCS 			= $(addprefix $(SRCS_DIR),\
-				b_cd_utils2.c \
+				b_cd_dot.c \
+				b_cd_dotdot.c \
+				b_cd_slashes.c \
+				b_cd_utils.c \
 				builtins.c \
 				b_export_key_utils.c \
 				b_export_value_utils.c \

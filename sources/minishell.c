@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 14:33:20 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/13 17:23:11 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/14 12:00:23 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,24 +72,25 @@
 int	main(void)
 {
 	int		i = 0;
-	int		exit;
 	char	*curpath;
-	char	*test = "/nfs/homes/tbenz/../tbenz/..";
+	char	*test = "/nfs/homes/tbenz";
 	t_vars	vars;
 
 	ft_init(&vars, 0, NULL, NULL);
 	curpath = (char *)malloc(sizeof(char) * 30);
-	while (*test)
+	if (!curpath)
+		;
+	else
 	{
-		curpath[i++] = *test;
-		test++;
+		while (*test)
+		{
+			curpath[i++] = *test;
+			test++;
+		}
+		curpath[i] = '\0';
+		ft_printf("%s\n", curpath);
+		ft_remove_slashes(&vars, &curpath);
+		ft_printf("%s\n", curpath);
+		free (curpath);
 	}
-	curpath[i] = '\0';
-	exit = ft_remove_dot_dot(&vars, &curpath);
-	ft_printf("%s\n", curpath);
-	ft_printf("%d", exit);
-	i = ft_strlen(curpath);
-	exit = ft_test_dir(&vars, &curpath, i);
-	ft_printf("%d", exit);
-	// free (curpath);
 }

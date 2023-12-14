@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/13 16:59:01 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/14 11:55:25 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -234,5 +234,10 @@ int		ft_test_dir(t_vars *vars, char **curpath, int i);
 int		ft_remove_dot_dot(t_vars *vars, char **curpath);
 void	ft_create_curpath(char **cp, int i, int cl, int len);
 
+void	ft_remove_trails(t_vars *vars, char **cp);
+int		ft__remove_nl_len(char *cp);
+void	ft_remove_nls(t_vars *vars, char **cp);
+void	ft_remove_ls(t_vars *vars, char **cp);
+void	ft_remove_slashes(t_vars *vars, char **cp);
 
 #endif

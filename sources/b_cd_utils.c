@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 12:25:06 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/13 12:10:10 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/14 11:12:37 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	*ft_create_full_path(t_vars *vars, char *path, char **cpath)
 	char	*fpath;
 
 	plen = ft_strlen(path);
-	cplen = ft_strlen(cpath);
+	cplen = ft_strlen(*cpath);
 	if (path[plen - 1] != '/')
 	{
 		fpath = (char *)malloc(sizeof(char) * (plen + cplen + 2));
@@ -47,7 +47,7 @@ char	*ft_create_full_path(t_vars *vars, char *path, char **cpath)
 			ft_exit(vars, MALLOC_ERROR);
 		ft_strlcpy(fpath, path, (plen + 1));
 		ft_strlcat(fpath, "/", (plen + 2));
-		ft_strlcat(fpath, cpath, (plen + cplen + 2));
+		ft_strlcat(fpath, *cpath, (plen + cplen + 2));
 	}
 	else
 	{
@@ -55,7 +55,7 @@ char	*ft_create_full_path(t_vars *vars, char *path, char **cpath)
 		if (!fpath)
 			ft_exit(vars, MALLOC_ERROR);
 		ft_strlcpy(fpath, path, (plen + 1));
-		ft_strlcat(fpath, cpath, (plen + cplen + 1));
+		ft_strlcat(fpath, *cpath, (plen + cplen + 1));
 	}
 	return (fpath);
 }
@@ -84,7 +84,7 @@ void	ft_check_path_null(t_vars *vars, char **curpath)
 	if (!fpath)
 		ft_exit(vars, MALLOC_ERROR);
 	ft_strlcpy(fpath, "./", 3);
-	ft_strlcat(fpath, *curpath, (len + ft_strlen(curpath) + 3));
+	ft_strlcat(fpath, *curpath, (len + ft_strlen(*curpath) + 3));
 }
 
 void	ft_check_pot_path(t_vars *vars, char **curpath)
@@ -100,7 +100,7 @@ void	ft_check_pot_path(t_vars *vars, char **curpath)
 	{
 		temp = ft_diff_paths(vars, cdpath[i++], curpath);
 		if (temp)
-			curpath = temp;
+			*curpath = temp;
 	}
 	if (!temp)
 		ft_check_path_null(vars, curpath);

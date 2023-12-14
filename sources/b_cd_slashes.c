@@ -6,36 +6,40 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 18:11:52 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/13 18:38:28 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/14 11:58:29 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-void	ft_remove_trail(t_vars *vars, char **cp)
+void	ft_remove_trails(t_vars *vars, char **cp)
 {
-	int		len;
-	char	*tmp;
+	size_t		len;
+	char		*tmp;
 
-	len = ft_strlen(*cp);
+	len = ft_strlen(*cp) - 1;
 	while ((*cp)[len] == '/')
 		len--;
-	if (len != ft_strlen(*cp))
+	if (len != (ft_strlen(*cp) - 1))
 	{
-		tmp = ft_substr(*cp, 0, len);
-		free (cp);
-		cp = tmp;
+		tmp = ft_substr(*cp, 0, (len + 1));
+		if (!tmp)
+			ft_exit(vars, MALLOC_ERROR);
+		free (*cp);
+		*cp = tmp;
 	}
 }
 
-int	ft__remove_nl_len(t_vars *vars, char *cp)
+int	ft__remove_nl_len(char *cp)
 {
-	int	i;
 	int	len;
 
-	i = 0;
+	len  = 0;
 	while (*cp == '/')
+	{
 		len++;
+		cp++;
+	}
 	while (*cp)
 	{
 		if (*cp == '/' && *(cp + 1) == '/')
@@ -49,35 +53,49 @@ int	ft__remove_nl_len(t_vars *vars, char *cp)
 	return (len);
 }
 
-void	ft_remove_nl(t_vars *vars, char **cp)
+void	ft_remove_nls(t_vars *vars, char **cp)
 {
 	int		len;
 	int		i;
 	int		j;
 	char	*tmp;
 
-	len = ft__remove_nl_len(vars, *cp);
+	len = ft__remove_nl_len(*cp);
 	tmp = (char *)calloc((len + 1), sizeof(char));
 	if (!tmp)
 		ft_exit(vars, MALLOC_ERROR);
 	i = 0;
-	while ((*cp)[i] == '/')
-		i++;
 	j = 0;
+	while ((*cp)[i] == '/')
+		tmp[j++] = (*cp)[i++];
 	while ((*cp)[i])
 	{
-		if ((*cp)[i] == '/' && (*cp)[i + 1] == '/')
-		{
-			while ((*cp)[i] == '/')
+		while ((*cp)[i] == '/' && (*cp)[i + 1] == '/')
 				i++;
-		}
-		else
-			tmp[j++] = (*cp)[i];
+		tmp[j++] = (*cp)[i];
 		i++;
 	}
 	tmp[j] = '\0';
 	free (*cp);
 	*cp = tmp;
+}
+
+void	ft_remove_ls(t_vars *vars, char **cp)
+{
+	int		len;
+	char	*tmp;
+
+	len = 0;
+	while ((*cp)[len] == '/')
+		len++;
+	if (len >= 3)
+	{
+		tmp = ft_substr(*cp, (len - 1), ft_strlen(*cp));
+		if (!tmp)
+			ft_exit(vars, MALLOC_ERROR);
+		free (*cp);
+		*cp = tmp;
+	}
 }
 
 void	ft_remove_slashes(t_vars *vars, char **cp)
