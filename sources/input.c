@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 15:30:48 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/14 15:57:55 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/14 16:20:18 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,6 @@ void	ft_red_file(t_vars *vars, t_prg *lst)
 		lst = temp;
 	}
 }
-
-
 
 void	ft_check_input(t_vars *vars)
 {

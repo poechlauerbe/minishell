@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 13:52:29 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/14 14:31:45 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/14 16:23:19 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@
 # define O_APP_OUT 63
 //  <
 # define O_RED_INPUT 60
+//  <<
+# define O_HEREDOC 61
 
 
 #endif
