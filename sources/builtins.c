@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:49:29 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/14 12:29:44 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/14 15:47:59 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,28 +66,26 @@ void	ft_unset(t_vars *vars)
 	}
 }
 
-/* void	ft_cd(t_vars *vars)
+void	ft_cd(t_vars *vars)
 {
-	int		acc_c;
 	char	*curpath;
 
 	if (vars->p_start->prog[2])
-		return (ft_printf_fd(2, "cd: too many arguments"));
+	{
+		(ft_printf_fd(2, "cd: too many arguments"));
+		return ;
+	}
 	curpath = vars->p_start->prog[1];
 	if (!curpath && !ft_return_val(vars, "HOME"))
-		return (ft_printf_fd(2, "cd: HOME not set"));
+	{
+		ft_printf_fd(2, "cd: HOME not set");
+		return ;
+	}
 	else if (!curpath && !ft_return_val(vars, "HOME"))
 		curpath = ft_return_val(vars, "HOME");
-	else if (curpath[0] == '/')
-		curpath = curpath;
-	else
-	{
-		if (curpath[0] == '.')
-		//shouldn't test fpr acces, just if path exists
-			ft_access_path(curpath);
-		else
-			ft_check_pot_path(vars, &curpath);
-	}
+	else if (curpath[0] != '/')
+		ft_check_pot_path(vars, &curpath);
 	ft_pwd_conc(vars, &curpath);
-	ft_can_form(vars, curpath);
-} */
+	ft_can_form(vars, &curpath);
+	// ft_chdir(vars, &curpath);
+}

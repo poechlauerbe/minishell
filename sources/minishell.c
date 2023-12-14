@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 14:33:20 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/14 13:05:53 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/14 18:53:58 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,43 +41,16 @@
 	}
 } */
 
-	// Thorben test env-key values
-// int	main(int argc, char **argv, char **envp)
-// {
-// 	t_vars	vars;
-// 	// t_kv	*first;
-
-// 	ft_init(&vars, argc, argv, envp);
-// 	ft_order_envv(&vars);
-// 	ft_add_envv(&vars, "HANS", "eins", 1);
-// 	char *input_new = {"export HANS"};
-// 	vars.inp = input_new;
-// 	printf("%s\n", vars.inp);
-// 	ft_check_input(&vars);
-// 	if (!vars.pipe_count)
-// 	{
-// 		if (ft_builtin_check(&vars, vars.p_start) == NOT_USED)
-// 			ft_pipe_loop(&vars);
-// 	}
-// 	else
-// 		ft_pipe_loop(&vars);
-// 	// ft_free_input(&vars);
-// 	// char *input_new2 = {"export"};
-// 	// vars.inp = input_new2;
-// 	// ft_check_input(&vars);
-// 	// ft_input(&vars);
-// 	ft_exit(&vars, 0);
-// }
-
-int	main(void)
+int	main(int argc, char **argv, char **envp)
 {
 	int		i = 0;
 	char	*curpath;
-	// char	*test = "/../nfs/homes/tbenz";
-	char	*test = "/../../../nfs/../homes";
+	char	*test = "//nfs/homes/../homes/tbenz/../";
+	// char	*test = "";
 	t_vars	vars;
 
-	ft_init(&vars, 0, NULL, NULL);
+	ft_init(&vars, argc, argv, envp);
+	ft_printf("%s\n", ft_return_val(&vars, "PWD"));
 	curpath = (char *)malloc(sizeof(char) * 30);
 	if (!curpath)
 		;
@@ -94,4 +67,5 @@ int	main(void)
 		ft_printf("%s\n", curpath);
 		free (curpath);
 	}
+	ft_free_envv(&vars);
 }

@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 18:11:52 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/14 11:58:29 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/14 15:07:04 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	ft__remove_nl_len(char *cp)
 {
 	int	len;
 
-	len  = 0;
+	len = 0;
 	while (*cp == '/')
 	{
 		len++;
@@ -71,7 +71,7 @@ void	ft_remove_nls(t_vars *vars, char **cp)
 	while ((*cp)[i])
 	{
 		while ((*cp)[i] == '/' && (*cp)[i + 1] == '/')
-				i++;
+			i++;
 		tmp[j++] = (*cp)[i];
 		i++;
 	}

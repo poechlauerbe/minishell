@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/14 11:55:25 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/14 15:47:05 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,36 @@ typedef struct s_quote
 }				t_quote;
 
 /* functions */
+
+/* b_cd_dot */
+/* dot components and any slash characters that separate them from the next
+	component are deleted*/
+void		ft_remove_dot(t_vars *vars, char **curpath);
+// counts the length of the string that shall be created
+int			ft_remove_dot_counter(char *curpath);
+
+/* b_cd_dotdot */
+// removes dotdot and preceding element
+int			ft_remove_dot_dot(t_vars *vars, char **cp);
+// creates the new current path variable
+void		ft_create_cp(t_vars *vars, char **cp, int i, int cl);
+/* if the dotdot has preceding elements, this function creates a new curpath
+	where the dotdot and the preceding element are omitted */
+void		ft_create_cp2(char **cp, int cl, int i, char **tmp);
+// tests whether the path indicated before i is a valid address
+int			ft_test_dir(t_vars *vars, char **cp, int i);
+// returns the length of the preceding element
+int			ft_remove_dd_currlen(char *cp, int i);
+
+
+
+
+
+
+/* b_cd_utils */
+
+int	ft_dot_dot_len(char *cp, int i);
+
 
 /* b_export_key_utils */
 // checks if parenthesis are properly closed
@@ -226,8 +256,13 @@ void		ft_set_val(t_vars *vars, t_kv **var, t_kv **tmp);
 int			ft_strcmp(const char *s1, const char *s2);
 
 
+
+
+
+void	ft_pwd_conc(t_vars *vars, char **curpath);
 void		ft_remove_dot(t_vars *vars, char **curpath);
 int			ft_remove_dot_counter(char *curpath);
+void	ft_can_form(t_vars *vars, char **curpath);
 
 int		ft_remove_dd_currlen(char *curpath, int i);
 int		ft_test_dir(t_vars *vars, char **curpath, int i);
@@ -239,5 +274,13 @@ int		ft__remove_nl_len(char *cp);
 void	ft_remove_nls(t_vars *vars, char **cp);
 void	ft_remove_ls(t_vars *vars, char **cp);
 void	ft_remove_slashes(t_vars *vars, char **cp);
+
+void	ft_check_pot_path(t_vars *vars, char **curpath);
+void	ft_check_path_null(t_vars *vars, char **curpath);
+char	*ft_diff_paths(t_vars *vars, char *path, char **curpath);
+char	*ft_create_full_path(t_vars *vars, char *path, char **cpath);
+// void	ft_access_path(char *curpath);
+
+
 
 #endif

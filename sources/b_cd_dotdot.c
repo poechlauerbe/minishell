@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:28:33 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/14 13:02:14 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/14 18:53:42 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,13 @@ int	ft_remove_dd_currlen(char *cp, int i)
 	int	len;
 
 	len = 0;
-	while (cp[i] && cp[i++] != '/')
+	while (cp[i] && cp[i] != '/')
+	{
 		len++;
-	len++;
+		i++;
+	}
+	while (cp[i++] == '/')
+		len++;
 	return (len);
 }
 
@@ -34,7 +38,7 @@ int	ft_test_dir(t_vars *vars, char **cp, int i)
 	if (!dir)
 		ft_exit(vars, MALLOC_ERROR);
 	j = -1;
-	while (++j < (i - 1))
+	while (++j < i)
 		dir[j] = (*cp)[j];
 	dir[j] = '\0';
 	if (access(dir, F_OK))
@@ -47,28 +51,15 @@ int	ft_test_dir(t_vars *vars, char **cp, int i)
 	return (0);
 }
 
-int	ft_dot_dot_len(char *cp, int i)
-{
-	int	len;
-
-	len = 0;
-	while (cp[i] == '.' || cp[i] == '/')
-	{
-		i++;
-		len++;
-	}
-	return (len);
-}
-
 void	ft_create_cp2(char **cp, int cl, int i, char **tmp)
 {
 	int	j;
 	int	k;
 
 	k = -1;
-	while ((*cp)[++k] && k < (i - cl))
+	j = ft_dot_dot_len(*cp, i);
+	while ((*cp)[++k] && k <= (i - cl))
 		(*tmp)[k] = (*cp)[k];
-	j = 3;
 	i += j;
 	while ((*cp)[i])
 	{
@@ -106,20 +97,29 @@ int	ft_remove_dot_dot(t_vars *vars, char **cp)
 {
 	int	curr_len;
 	int	i;
+	char	*temp;
 
+	i = 0;
+	while (cp[0][i + 1] == '/')
+		i++;
+	temp = ft_substr(*cp, i, (ft_strlen(*cp) - i));
+	if (!temp)
+		ft_exit(vars, MALLOC_ERROR);
 	i = -1;
-	while ((*cp)[++i])
+	while ((temp)[++i])
 	{
-		if ((*cp)[i] == '.' && (*cp)[i + 1] == '.' &&
-			((*cp)[i + 2] == '/' || (*cp)[i + 2] == '\0'))
+		if (!ft_strncmp(&temp[i], "/../", 4) ||
+			!ft_strncmp(&temp[i], "/..\0", 4))
 		{
-			if (ft_test_dir(vars, cp, i))
+			if (ft_test_dir(vars, &temp, i))
 				return (1);
-			ft_create_cp(vars, cp, i, curr_len);
+			ft_create_cp(vars, &temp, i, curr_len);
 			i = 0;
 		}
-		if (i == 0 || (*cp)[i - 1] == '/')
-			curr_len = ft_remove_dd_currlen(*cp, i);
+		if (i == 0 || (temp)[i - 1] == '/')
+			curr_len = ft_remove_dd_currlen(temp, i);
 	}
+	free (*cp);
+	*cp = temp;
 	return (0);
 }

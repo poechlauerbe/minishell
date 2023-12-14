@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   macros_minishell.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 13:52:29 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/11 16:32:27 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/14 15:08:04 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,5 @@
 # define O_APP_OUT 63
 //  <
 # define O_RED_INPUT 60
-
 
 #endif
