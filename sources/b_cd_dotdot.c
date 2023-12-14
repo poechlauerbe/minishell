@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:28:33 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/13 18:03:48 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/14 13:02:14 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ int	ft_test_dir(t_vars *vars, char **cp, int i)
 	char	*dir;
 	int		j;
 
-	if (i == 2|| ( (*cp)[i - 2] == '.' && (*cp)[i - 3] == '.'))
-		return (1);
+	if (i == 1)
+		return (0);
 	dir = (char *)calloc(i, sizeof(char));
 	if (!dir)
 		ft_exit(vars, MALLOC_ERROR);
@@ -60,48 +60,62 @@ int	ft_dot_dot_len(char *cp, int i)
 	return (len);
 }
 
-void	ft_create_cp(char **cp, int i, int cl, int len)
+void	ft_create_cp2(char **cp, int cl, int i, char **tmp)
 {
-	int		j;
-	int		k;
-	char	*temp;
+	int	j;
+	int	k;
 
-	temp = (char *)ft_calloc((len + 1), sizeof(char));
 	k = -1;
 	while ((*cp)[++k] && k < (i - cl))
-		temp[k] = (*cp)[k];
+		(*tmp)[k] = (*cp)[k];
 	j = 3;
 	i += j;
 	while ((*cp)[i])
 	{
-		temp[k++] = (*cp)[i];
+		(*tmp)[k++] = (*cp)[i];
 		i++;
 	}
-	temp[k] = '\0';
+	(*tmp)[k] = '\0';
+}
+
+void	ft_create_cp(t_vars *vars, char **cp, int i, int cl)
+{
+	size_t	len;
+	char	*temp;
+
+	len = ft_strlen(*cp) - cl - ft_dot_dot_len(*cp, i);
+	if (i == 1)
+	{
+		len = ft_dot_dot_len(*cp, 0);
+		if (len == ft_strlen(*cp))
+			temp = ft_substr(*cp, 0, 1);
+		else
+			temp = ft_substr(*cp, (len - 1), ft_strlen(*cp));
+	}
+	else
+		temp = (char *)ft_calloc((len + 1), sizeof(char));
+	if (!temp)
+		ft_exit(vars, MALLOC_ERROR);
+	if (i > 3)
+		ft_create_cp2(cp, cl, i, &temp);
 	free (*cp);
 	*cp = temp;
 }
 
 int	ft_remove_dot_dot(t_vars *vars, char **cp)
 {
-	int	tlen;
-	int	len;
 	int	curr_len;
 	int	i;
 
-	len = 0;
 	i = -1;
 	while ((*cp)[++i])
 	{
-		tlen = ft_strlen(*cp);
-		len = tlen;
 		if ((*cp)[i] == '.' && (*cp)[i + 1] == '.' &&
 			((*cp)[i + 2] == '/' || (*cp)[i + 2] == '\0'))
 		{
 			if (ft_test_dir(vars, cp, i))
 				return (1);
-			len -= (curr_len + ft_dot_dot_len(*cp, i));
-			ft_create_cp(cp, i, curr_len, len);
+			ft_create_cp(vars, cp, i, curr_len);
 			i = 0;
 		}
 		if (i == 0 || (*cp)[i - 1] == '/')

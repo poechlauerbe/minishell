@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 14:33:20 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/14 12:00:23 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/14 13:05:53 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,8 @@ int	main(void)
 {
 	int		i = 0;
 	char	*curpath;
-	char	*test = "/nfs/homes/tbenz";
+	// char	*test = "/../nfs/homes/tbenz";
+	char	*test = "/../../../nfs/../homes";
 	t_vars	vars;
 
 	ft_init(&vars, 0, NULL, NULL);
@@ -89,7 +90,7 @@ int	main(void)
 		}
 		curpath[i] = '\0';
 		ft_printf("%s\n", curpath);
-		ft_remove_slashes(&vars, &curpath);
+		ft_remove_dot_dot(&vars, &curpath);
 		ft_printf("%s\n", curpath);
 		free (curpath);
 	}

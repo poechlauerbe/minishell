@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:49:29 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/14 12:01:46 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/14 12:29:44 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	ft_unset(t_vars *vars)
 	}
 }
 
-void	ft_cd(t_vars *vars)
+/* void	ft_cd(t_vars *vars)
 {
 	int		acc_c;
 	char	*curpath;
@@ -90,4 +90,4 @@ void	ft_cd(t_vars *vars)
 	}
 	ft_pwd_conc(vars, &curpath);
 	ft_can_form(vars, curpath);
-}
+} */
