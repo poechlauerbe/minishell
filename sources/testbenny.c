@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 10:17:45 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/13 18:39:58 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/14 10:58:35 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int main(int argc, char *argv[])
 	int		i;
 
 	if (argc == 1)
-		return (1);
+		return (256);
 	vars.inp = argv[1];
 	vars.exit_code = 99;
 	ft_check_input(&vars);

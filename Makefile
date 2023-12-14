@@ -6,7 +6,7 @@
 #    By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/12/12 14:20:34 by bpochlau         ###   ########.fr        #
+#    Updated: 2023/12/14 11:27:07 by bpochlau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ HEADER			= $(addprefix $(INC_DIR)/,\
 
 SRCS 			= $(addprefix $(SRCS_DIR),\
 				builtins.c \
+				b_exit.c \
 				b_export_key_utils.c \
 				b_export_value_utils.c \
 				b_export_print.c \

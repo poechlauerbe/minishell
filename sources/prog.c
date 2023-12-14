@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 13:41:52 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/13 12:53:32 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/14 11:17:46 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	ft_builtin_check(t_vars *vars, t_prg *prog)
 {
 	if (ft_strncmp(prog->prog[0], "exit", 5) == 0)
-		ft_exit(vars, OK);
+		ft_exit_prog(vars, prog->prog);
 	else if (ft_strncmp(prog->prog[0], "pwd", 4) == 0)
 		ft_pwd();
 	else if (ft_strncmp(prog->prog[0], "export", 7) == 0)
