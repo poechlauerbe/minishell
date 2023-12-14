@@ -6,7 +6,7 @@
 #    By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/12/14 13:54:44 by bpochlau         ###   ########.fr        #
+#    Updated: 2023/12/14 15:48:59 by bpochlau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,6 +48,8 @@ SRCS 			= $(addprefix $(SRCS_DIR),\
 				expand.c \
 				fun_echo.c \
 				input.c \
+				input_comb_progs.c \
+				input_malloc.c \
 				input_utils.c \
 				key_value.c \
 				key_value_remove.c \
@@ -122,6 +124,7 @@ TESTSRC 		= $(addprefix $(SRCS_DIR),\
 				expand.c \
 				fun_echo.c \
 				input.c \
+				input_comb_progs.c \
 				input_utils.c \
 				key_value.c \
 				key_value_remove.c \

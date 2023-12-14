@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/14 15:19:43 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/14 15:49:15 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,6 +186,8 @@ void		ft_check_input(t_vars *vars);
 /* input_comb_progs */
 void		ft_comb_progs(t_vars *vars);
 
+/* input_malloc */
+void		ft_malloc_prog_2d_str(t_vars *vars);
 /* key_value */
 /* returns a pointer to the value retrieved with the key or if no matching key
 	was found, return NULL */
