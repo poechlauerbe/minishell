@@ -6,7 +6,7 @@
 #    By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/12/14 11:27:07 by bpochlau         ###   ########.fr        #
+#    Updated: 2023/12/14 13:54:44 by bpochlau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -104,8 +104,15 @@ rebonus:		fclean ${NAME_BONUS}
 test:			${LIBFT} $(HEADER)
 				${CC} -g $(SRCS) ${LIBFT} ${LRL} -o ${NAME}
 
+valgrind:		$(NAME)
+				valgrind --suppressions=valgrind_ignore_leaks.txt \
+				--leak-check=full --show-leak-kinds=all --track-origins=yes \
+				--verbose --show-mismatched-frees=yes --read-var-info=yes \
+				--track-fds=yes --trace-children=yes ./minishell
+
 TESTSRC 		= $(addprefix $(SRCS_DIR),\
 				builtins.c \
+				b_exit.c \
 				b_export_key_utils.c \
 				b_export_value_utils.c \
 				b_export_print.c \
@@ -127,4 +134,4 @@ TESTSRC 		= $(addprefix $(SRCS_DIR),\
 benny:			$(LIBFT) $(HEADER)
 				$(CC) -g $(TESTSRC) $(LIBFT)
 
-.PHONY:			all clean fclean re rebonus
+.PHONY:			all clean fclean re rebonus valgrind

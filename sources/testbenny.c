@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 10:17:45 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/14 10:58:35 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/14 12:59:37 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int main(int argc, char *argv[])
 		// }
 		temp = temp->next;
 	}
-	ft_exit(&vars, OK);
+	// ft_exit(&vars, OK);
 }
 
 // int	main(void)
