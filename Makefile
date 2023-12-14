@@ -6,7 +6,7 @@
 #    By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/12/14 15:48:59 by bpochlau         ###   ########.fr        #
+#    Updated: 2023/12/14 16:00:15 by bpochlau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -125,16 +125,18 @@ TESTSRC 		= $(addprefix $(SRCS_DIR),\
 				fun_echo.c \
 				input.c \
 				input_comb_progs.c \
+				input_malloc.c \
 				input_utils.c \
 				key_value.c \
 				key_value_remove.c \
 				pipe.c \
 				prog.c \
 				redirect_utils.c \
+				signal_handling.c \
 				utils.c \
 				testbenny.c)
 
 benny:			$(LIBFT) $(HEADER)
-				$(CC) -g $(TESTSRC) $(LIBFT)
+				$(CC) -g $(TESTSRC) $(LIBFT) ${LRL} 
 
 .PHONY:			all clean fclean re rebonus valgrind

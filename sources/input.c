@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 15:30:48 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/14 15:46:37 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/14 15:57:55 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ void	ft_check_string_count(t_vars *vars, char *inp)
 {
 	t_prg	*temp;
 
-	// if (!inp || !*inp)
-	// 	ft_reset();
 	vars->p_start = malloc(sizeof(t_prg));
 	if (!vars->p_start)
 		ft_exit(vars, MALLOC_ERROR);

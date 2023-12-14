@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   input_mall.c                                       :+:      :+:    :+:   */
+/*   input_malloc.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:46:54 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/14 15:47:12 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/14 16:05:58 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	ft_copy_progs(t_vars *vars, char **inp, t_prg *temp, char **prog)
 		}
 		ft_strlcpy(str, *inp, strlen + 1);
 		prog[i] = str;
-		inp += strlen;
+		*inp += strlen;
 		i++;
 	}
 	prog[i] = NULL;
