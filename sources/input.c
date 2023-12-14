@@ -6,101 +6,16 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 15:30:48 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/13 18:38:36 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/14 16:20:18 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-int	ft_input_strlen(char **inp)
-{
-	int		strlen;
-	char	*temp;
-
-	strlen = 0;
-	if (!*inp && !**inp)
-		return (strlen);
-	while (**inp == ' ' || **inp == '\n' || **inp == '\t'
-		|| **inp == '\r' || **inp == '\f' || **inp == '\v'
-		|| **inp == '|' || **inp == '<' || **inp == '>')
-		*inp += 1;
-	temp = *inp;
-	while (*temp >= 33 && *temp <= 126 && *temp != '|')
-	{
-		// if (*temp == '<' || *temp == '>' )
-		// 	break;
-		if (*temp == '\'')
-		{
-			while (*temp)
-			{
-				temp++;
-				strlen++;
-				if (*temp == '\'')
-					break ;
-			}
-			// if (*temp == '\0')
-			// 	return (OPEN_QUOTES);
-		}
-		if (*temp == '\"')
-		{
-			while (*temp)
-			{
-				temp++;
-				strlen++;
-				if (*temp == '\"')
-					break ;
-			}
-			// if (*temp == '\0')
-			// 	return (OPEN_QUOTES);
-		}
-		strlen++;
-		temp++;
-	}
-	return (strlen);
-}
-
-void	ft_malloc_prog_2d_str(t_vars *vars)
-{
-	char	**prog;
-	char	*str;
-	char	*inp;
-	int		strlen;
-	int		i;
-	t_prg	*temp;
-
-	inp = vars->inp;
-	temp = vars->p_start;
-	while (temp)
-	{
-		prog = ft_calloc(temp->str_c + 1, sizeof(char *));
-		if (!prog)
-			ft_exit(vars, MALLOC_ERROR);
-		i = 0;
-		if (*inp == '|')
-			inp++;
-		while (i < temp->str_c)
-		{
-			strlen = ft_input_strlen(&inp);
-			str = malloc((strlen + 1) * sizeof(char));
-			if (!str)
-				ft_exit(vars, MALLOC_ERROR);
-			ft_strlcpy(str, inp, strlen + 1);
-			prog[i] = str;
-			inp += strlen;
-			i++;
-		}
-		prog[i] = NULL;
-		temp->prog = prog;
-		temp = temp->next;
-	}
-}
-
 void	ft_check_string_count(t_vars *vars, char *inp)
 {
 	t_prg	*temp;
 
-	// if (!inp || !*inp)
-	// 	ft_reset();
 	vars->p_start = malloc(sizeof(t_prg));
 	if (!vars->p_start)
 		ft_exit(vars, MALLOC_ERROR);
@@ -171,91 +86,6 @@ void	ft_red_file(t_vars *vars, t_prg *lst)
 			temp = temp->next;
 		}
 		lst = temp;
-	}
-}
-
-void	ft_check_prog_len(int *count, t_prg *p_prog, t_prg *prog)
-{
-	char	**temp;
-
-	temp = p_prog->prog;
-	while (*temp)
-	{
-		*count += 1;
-		temp += 1;
-	}
-	temp = prog->prog;
-	while (*temp)
-	{
-		*count += 1;
-		temp += 1;
-	}
-}
-
-void	ft_transfer_prog_str(char **new_prog, char **p_prog, char **prog)
-{
-	int i;
-	int j;
-
-	i = 0;
-
-	while (p_prog[i])
-	{
-		new_prog[i] = p_prog[i];
-		i++;
-	}
-	j = 0;
-	while (prog[j])
-	{
-		new_prog[i] = prog[j];
-		i++;
-		j++;
-	}
-}
-
-void	ft_combine(t_vars *vars, t_prg *prog, t_prg *p_prog, t_prg *last)
-{
-	int		count;
-	char	**new_prog;
-
-	count = 0;
-	ft_check_prog_len( &count, p_prog, prog);
-	new_prog = malloc((count + 1) * sizeof(char *));
-	if (!new_prog)
-		ft_exit(vars, MALLOC_ERROR);
-	new_prog[count] = NULL;
-	ft_transfer_prog_str(new_prog, p_prog->prog, prog->prog);
-	if (p_prog->prog)
-		free(p_prog->prog);
-	p_prog->prog = new_prog;
-	last->next = prog->next;
-	if (prog->prog)
-		free(prog->prog);
-	free(prog);
-}
-
-void ft_comb_progs(t_vars *vars)
-{
-	t_prg	*temp;
-	t_prg	*p_last;
-	t_prg	*last;
-	int		i;
-
-	i = 0;
-	temp = vars->p_start;
-	p_last = vars->p_start;
-	while (temp)
-	{
-		if (temp->oper == '0')
-		{
-			if (i != 0)
-				ft_combine(vars, temp, p_last, last);
-			i++;
-		}
-		if (temp->oper == '|')
-			p_last = temp;
-		last = temp;
-		temp = temp->next;
 	}
 }
 
