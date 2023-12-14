@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 11:12:25 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/14 11:55:17 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/14 12:06:32 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ int	ft_endof_atoi(const char *nptr)
 	return (i);
 }
 
-void	ft_exit_prog(t_vars *vars,char **prog)
+void	ft_exit_prog(t_vars *vars, char **prog)
 {
-	int num;
+	int		num;
 	char	*str_wo_q;
 
 	if (prog[1] && prog[2])
@@ -41,7 +41,7 @@ void	ft_exit_prog(t_vars *vars,char **prog)
 			ft_exit(vars, MALLOC_ERROR);
 		if (str_wo_q[ft_endof_atoi(str_wo_q)])
 			ft_printf_fd(2, "exit\nbash: exit: %s: numeric argument required\n",
-						prog[1]);
+				prog[1]);
 		else
 		{
 			num = ft_atoi(prog[1]);
