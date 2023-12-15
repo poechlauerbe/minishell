@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 14:33:20 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/12 15:43:34 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/15 16:11:33 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,30 +41,33 @@ int	main(int argc, char **argv, char **envp)
 	}
 }
 
-	// Thorben test env-key values
-// int	main(int argc, char **argv, char **envp)
-// {
-// 	t_vars	vars;
-// 	// t_kv	*first;
+/* int	main(int argc, char **argv, char **envp)
+{
+	int		i = 0;
+	char	*curpath;
+	char	*test = "cd /nfs/homes/";
+	// char	*test = "";
+	t_vars	vars;
 
-// 	ft_init(&vars, argc, argv, envp);
-// 	ft_order_envv(&vars);
-// 	ft_add_envv(&vars, "HANS", "eins", 1);
-// 	char *input_new = {"export HANS"};
-// 	vars.inp = input_new;
-// 	printf("%s\n", vars.inp);
-// 	ft_check_input(&vars);
-// 	if (!vars.pipe_count)
-// 	{
-// 		if (ft_builtin_check(&vars, vars.p_start) == NOT_USED)
-// 			ft_pipe_loop(&vars);
-// 	}
-// 	else
-// 		ft_pipe_loop(&vars);
-// 	// ft_free_input(&vars);
-// 	// char *input_new2 = {"export"};
-// 	// vars.inp = input_new2;
-// 	// ft_check_input(&vars);
-// 	// ft_input(&vars);
-// 	ft_exit(&vars, 0);
-// }
+	ft_init(&vars, argc, argv, envp);
+	ft_printf("%s\n", ft_return_val(&vars, "PWD"));
+	curpath = (char *)malloc(sizeof(char) * ft_strlen(test) + 1);
+	if (!curpath)
+		;
+	else
+	{
+		while (*test)
+		{
+			curpath[i++] = *test;
+			test++;
+		}
+		curpath[i] = '\0';
+		vars.inp = curpath;
+		ft_check_input(&vars);
+		ft_printf("%s\n", ft_return_val(&vars, "PWD"));
+		ft_cd(&vars);
+		ft_printf("%s\n", ft_return_val(&vars, "PWD"));
+	}
+	free (curpath);
+	ft_exit(&vars, OK);
+} */

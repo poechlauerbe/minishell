@@ -6,12 +6,12 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:49:29 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/11 14:11:47 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/15 16:06:04 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-// something is not working well here
+
 void	ft_env(t_vars *vars)
 {
 	t_kv	*tmp;
@@ -64,4 +64,33 @@ void	ft_unset(t_vars *vars)
 		ft_remove_envv(vars, key);
 		key = vars->p_start->prog[++i];
 	}
+}
+
+int	ft_cd(t_vars *vars)
+{
+	char	*curpath;
+
+	if (vars->p_start->prog[2])
+		return (ft_printf_fd(2, "cd: too many arguments"));
+	curpath = (char *)calloc(ft_strlen(vars->p_start->prog[1]) + 1, \
+				sizeof(char));
+	if (!curpath)
+		ft_exit(vars, MALLOC_ERROR);
+	ft_strlcpy(curpath, vars->p_start->prog[1], \
+				ft_strlen(vars->p_start->prog[1]) + 1);
+	// curpath = vars->p_start->prog[1];
+	if (!curpath && !ft_return_val(vars, "HOME"))
+		return (ft_printf_fd(2, "cd: HOME not set"));
+	else if (!curpath && !ft_return_val(vars, "HOME"))
+		curpath = ft_return_val(vars, "HOME");
+	else if (curpath[0] != '/')
+		ft_check_pot_path(vars, &curpath);
+	ft_pwd_conc(vars, &curpath);
+	if (ft_can_form(vars, &curpath))
+	{
+		ft_printf_fd(2, "cd: No such file or directory: %s", \
+		vars->p_start->prog[2]);
+		return (1);
+	}
+	return (ft_chdir(vars, &curpath));
 }
