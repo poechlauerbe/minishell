@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:29:49 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/14 18:54:20 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/15 12:42:30 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,36 +45,4 @@ void	ft_can_form(t_vars *vars, char **curpath)
 	while (ft_strcmp(*curpath, "./"))
 		ft_remove_dot(vars, curpath);
 	ft_remove_dot_dot(vars, curpath);
-}
-
-int	ft_dot_dot_len(char *cp, int i)
-{
-/* 	int	len;
-
-	len = 0;
-	while (cp[i] == '.' || cp[i] == '/')
-	{
-		i++;
-		len++;
-	}
-	return (len);
-} */
-
-	int	len;
-
-	len = 0;
-
-	if (!ft_strncmp(&cp[i], "/../", 4))
-	{
-		len += 4;
-		i += 4;
-	}
-	else if (!ft_strncmp(&cp[i], "/..\0", 4))
-	{
-		len += 3;
-		i += 3;
-	}
-	while (cp[i++] == '/')
-		len++;
-	return (len);
 }

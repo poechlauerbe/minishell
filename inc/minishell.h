@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/14 15:47:05 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/15 13:10:00 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,9 @@ int			ft_remove_dot_counter(char *curpath);
 /* b_cd_dotdot */
 // removes dotdot and preceding element
 int			ft_remove_dot_dot(t_vars *vars, char **cp);
+/* handles the loop to create temp. new string which can then be passed to
+	curpath */
+int			ft_remove_dd2(t_vars *vars, char **temp, int i);
 // creates the new current path variable
 void		ft_create_cp(t_vars *vars, char **cp, int i, int cl);
 /* if the dotdot has preceding elements, this function creates a new curpath
@@ -92,18 +95,45 @@ void		ft_create_cp(t_vars *vars, char **cp, int i, int cl);
 void		ft_create_cp2(char **cp, int cl, int i, char **tmp);
 // tests whether the path indicated before i is a valid address
 int			ft_test_dir(t_vars *vars, char **cp, int i);
+
+/* b_cd_dotdot2 */
 // returns the length of the preceding element
 int			ft_remove_dd_currlen(char *cp, int i);
+// returns the length of the dotdot element to be removed including brackets
+int			ft_dot_dot_len(char *cp, int i);
 
+/* b_cd_path */
+/* tests the combinations of the path entered and those stored in CDPATH; if a
+	valid path is encounterd, it is returned */
+void		ft_check_pot_path(t_vars *vars, char **curpath);
+/* if no valid path is found with the combinations stored in CDPATH, curpath is
+	set to ./curpath which consecutively will be replaced with the current
+	directory */
+void		ft_check_path_null(t_vars *vars, char **curpath);
+// tests if one of the different paths in CDPATH exists
+char		*ft_diff_paths(t_vars *vars, char *path, char **curpath);
+// joins the current path in CDPATH with the curpath and returns the string
+char		*ft_create_full_path(t_vars *vars, char *path, char **cpath);
 
-
-
-
+/* b_cd_slashes */
+// calls the different functions to remove slashes
+void		ft_remove_slashes(t_vars *vars, char **cp);
+// removes any trailing slashes from curpath
+void		ft_remove_trails(t_vars *vars, char **cp);
+// removes non-leading slashes (and non-trailing) slashes from curpath
+void		ft_remove_nls(t_vars *vars, char **cp);
+/* returns the length of curpath after removing all the non-leading and
+	non-trailing slashes from curpath */
+int			ft__remove_nl_len(char *cp);
+/* removes leading slashes if there are three or more from curpath and leaves
+	only one */
+void		ft_remove_ls(t_vars *vars, char **cp);
 
 /* b_cd_utils */
-
-int	ft_dot_dot_len(char *cp, int i);
-
+// if curpath doesn't start with a dot, joins the PWD with curpath
+void		ft_pwd_conc(t_vars *vars, char **curpath);
+// converts curpath according to the canonical form
+void		ft_can_form(t_vars *vars, char **curpath);
 
 /* b_export_key_utils */
 // checks if parenthesis are properly closed
@@ -160,6 +190,9 @@ void		ft_export(t_vars *vars);
 /* erases a key-value combination from the saved variables and adjusts the
 	respective pointers */
 void		ft_unset(t_vars *vars);
+/* if directory exists and one has the necessary rights, moves one to the dir
+	entered*/
+void		ft_cd(t_vars *vars);
 
 /* signal_handling */
 // ignores SIGQUIT and handles SIGINT
@@ -183,8 +216,8 @@ void		ft_exit(t_vars *vars, int errcd);
 /* resets the input of the shell and returns 1 - might have to add free
 	additional functions, depending on other elements that might be added  */
 int			ft_reset(t_vars *vars);
-//
-void	ft_free_envv(t_vars *vars);
+// frees the environment variables
+void		ft_free_envv(t_vars *vars);
 
 /* expand */
 void		ft_expand_all_vars(t_vars *vars);
@@ -243,7 +276,7 @@ void		ft_check_prog(t_vars *vars, t_prg *prog);
 /* redirect_utils */
 void		ft_red_new_node(t_vars *vars, t_red **lst, char *file, char oper);
 
-int	ft_builtin_check(t_vars *vars, t_prg *prog);
+int			ft_builtin_check(t_vars *vars, t_prg *prog);
 
 /* utils */
 // sets all variables to zero and initiates envp variables
@@ -254,33 +287,5 @@ void		ft_pwd(void);
 void		ft_set_val(t_vars *vars, t_kv **var, t_kv **tmp);
 // compares two strings (here: key-pairs) and returns 0 if they match.
 int			ft_strcmp(const char *s1, const char *s2);
-
-
-
-
-
-void	ft_pwd_conc(t_vars *vars, char **curpath);
-void		ft_remove_dot(t_vars *vars, char **curpath);
-int			ft_remove_dot_counter(char *curpath);
-void	ft_can_form(t_vars *vars, char **curpath);
-
-int		ft_remove_dd_currlen(char *curpath, int i);
-int		ft_test_dir(t_vars *vars, char **curpath, int i);
-int		ft_remove_dot_dot(t_vars *vars, char **curpath);
-void	ft_create_curpath(char **cp, int i, int cl, int len);
-
-void	ft_remove_trails(t_vars *vars, char **cp);
-int		ft__remove_nl_len(char *cp);
-void	ft_remove_nls(t_vars *vars, char **cp);
-void	ft_remove_ls(t_vars *vars, char **cp);
-void	ft_remove_slashes(t_vars *vars, char **cp);
-
-void	ft_check_pot_path(t_vars *vars, char **curpath);
-void	ft_check_path_null(t_vars *vars, char **curpath);
-char	*ft_diff_paths(t_vars *vars, char *path, char **curpath);
-char	*ft_create_full_path(t_vars *vars, char *path, char **cpath);
-// void	ft_access_path(char *curpath);
-
-
 
 #endif

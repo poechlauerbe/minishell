@@ -6,26 +6,11 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:28:33 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/14 18:53:42 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/15 12:43:46 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-
-int	ft_remove_dd_currlen(char *cp, int i)
-{
-	int	len;
-
-	len = 0;
-	while (cp[i] && cp[i] != '/')
-	{
-		len++;
-		i++;
-	}
-	while (cp[i++] == '/')
-		len++;
-	return (len);
-}
 
 int	ft_test_dir(t_vars *vars, char **cp, int i)
 {
@@ -93,10 +78,29 @@ void	ft_create_cp(t_vars *vars, char **cp, int i, int cl)
 	*cp = temp;
 }
 
+int	ft_remove_dd2(t_vars *vars, char **temp, int i)
+{
+	int	cl;
+
+	while ((*temp)[++i])
+	{
+		if (!ft_strncmp(&((*temp)[i]), "/../", 4) ||
+			!ft_strncmp(&((*temp)[i]), "/..\0", 4))
+		{
+			if (ft_test_dir(vars, temp, i))
+				return (1);
+			ft_create_cp(vars, temp, i, cl);
+			i = 0;
+		}
+		if (i == 0 || (*temp)[i - 1] == '/')
+			cl = ft_remove_dd_currlen(*temp, i);
+	}
+	return (0);
+}
+
 int	ft_remove_dot_dot(t_vars *vars, char **cp)
 {
-	int	curr_len;
-	int	i;
+	int		i;
 	char	*temp;
 
 	i = 0;
@@ -106,19 +110,8 @@ int	ft_remove_dot_dot(t_vars *vars, char **cp)
 	if (!temp)
 		ft_exit(vars, MALLOC_ERROR);
 	i = -1;
-	while ((temp)[++i])
-	{
-		if (!ft_strncmp(&temp[i], "/../", 4) ||
-			!ft_strncmp(&temp[i], "/..\0", 4))
-		{
-			if (ft_test_dir(vars, &temp, i))
-				return (1);
-			ft_create_cp(vars, &temp, i, curr_len);
-			i = 0;
-		}
-		if (i == 0 || (temp)[i - 1] == '/')
-			curr_len = ft_remove_dd_currlen(temp, i);
-	}
+	if (ft_remove_dd2(vars, &temp, i))
+		return (1);
 	free (*cp);
 	*cp = temp;
 	return (0);

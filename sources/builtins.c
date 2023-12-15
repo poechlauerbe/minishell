@@ -6,12 +6,12 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:49:29 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/14 15:47:59 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/15 13:10:20 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-// something is not working well here
+
 void	ft_env(t_vars *vars)
 {
 	t_kv	*tmp;
