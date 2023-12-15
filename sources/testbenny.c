@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   testbenny.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 10:17:45 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/14 12:59:37 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/15 07:56:24 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,11 @@ int main(int argc, char *argv[])
 		while (temp->prog[++i])
 			printf("string[%i]: %s\n", i, temp->prog[i]);
 		printf("\n");
-		// while(temp->in_file)
-		// {
-		// 	printf("in: %s$\n", temp->in_file->file);
-		// 	temp->in_file = temp->in_file->next;
-		// }
+		while(temp->out_file)
+		{
+			printf("in: %s, %c$\n", temp->out_file->file, temp->out_file->oper);
+			temp->out_file = temp->out_file->next;
+		}
 		temp = temp->next;
 	}
 	// ft_exit(&vars, OK);

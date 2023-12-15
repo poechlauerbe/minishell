@@ -6,7 +6,7 @@
 /*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 16:24:39 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/15 06:54:16 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/15 07:57:27 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ void	ft_new_node(t_vars *vars, t_prg **temp, char **inp)
 			(*temp)->oper = O_APP_OUT;
 			*inp += 1;
 		}
-		(*temp)->oper = **inp;
+		else
+			(*temp)->oper = **inp;
 		// if (*inp == '>' || *inp == '>')
 		// 	ERROR
 	}
