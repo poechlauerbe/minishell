@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:49:29 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/15 17:01:11 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/15 17:10:54 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,13 +86,14 @@ int	ft_cd(t_vars *vars)
 	if (!cp)
 	{
 		if (!ft_return_val(vars, "HOME"))
-			return (ft_printf_fd(2, "cd: HOME not set"));
+			return (ft_printf_fd(2, "cd: HOME not set\"));
 		else
 		{
 			cp = (char *)calloc(ft_strlen(ft_return_val(vars, "HOME")) \
 			+ 1, sizeof(char));
 			if (!cp)
 				ft_exit(vars, MALLOC_ERROR);
+			ft_strlcpy(cp, ft_return_val(vars, "HOME"), ft_strlen(ft_return_val(vars, "HOME")) + 1);
 		}
 	}
 	else if (cp[0] != '/')
