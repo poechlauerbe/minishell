@@ -6,16 +6,11 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 12:51:48 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/11 14:12:17 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/15 16:01:51 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-
-/* t_kv	*ft_alphabet_sort()
-{
-
-} */
 
 t_kv	*ft_last_entry(t_kv *elem)
 {

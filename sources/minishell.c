@@ -6,13 +6,13 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 14:33:20 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/14 18:53:58 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/15 16:11:33 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-/* int	main(int argc, char **argv, char **envp)
+int	main(int argc, char **argv, char **envp)
 {
 	t_vars	vars;
 
@@ -39,19 +39,19 @@
 		free(vars.inp);
 		vars.inp = NULL;
 	}
-} */
+}
 
-int	main(int argc, char **argv, char **envp)
+/* int	main(int argc, char **argv, char **envp)
 {
 	int		i = 0;
 	char	*curpath;
-	char	*test = "//nfs/homes/../homes/tbenz/../";
+	char	*test = "cd /nfs/homes/";
 	// char	*test = "";
 	t_vars	vars;
 
 	ft_init(&vars, argc, argv, envp);
 	ft_printf("%s\n", ft_return_val(&vars, "PWD"));
-	curpath = (char *)malloc(sizeof(char) * 30);
+	curpath = (char *)malloc(sizeof(char) * ft_strlen(test) + 1);
 	if (!curpath)
 		;
 	else
@@ -62,10 +62,12 @@ int	main(int argc, char **argv, char **envp)
 			test++;
 		}
 		curpath[i] = '\0';
-		ft_printf("%s\n", curpath);
-		ft_remove_dot_dot(&vars, &curpath);
-		ft_printf("%s\n", curpath);
-		free (curpath);
+		vars.inp = curpath;
+		ft_check_input(&vars);
+		ft_printf("%s\n", ft_return_val(&vars, "PWD"));
+		ft_cd(&vars);
+		ft_printf("%s\n", ft_return_val(&vars, "PWD"));
 	}
-	ft_free_envv(&vars);
-}
+	free (curpath);
+	ft_exit(&vars, OK);
+} */

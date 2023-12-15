@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/15 13:10:00 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/15 16:00:21 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,9 @@ void		ft_remove_ls(t_vars *vars, char **cp);
 // if curpath doesn't start with a dot, joins the PWD with curpath
 void		ft_pwd_conc(t_vars *vars, char **curpath);
 // converts curpath according to the canonical form
-void		ft_can_form(t_vars *vars, char **curpath);
+int			ft_can_form(t_vars *vars, char **curpath);
+// if possible, changes the current directory to curpath
+int		ft_chdir(t_vars *vars, char **curpath);
 
 /* b_export_key_utils */
 // checks if parenthesis are properly closed
@@ -192,7 +194,7 @@ void		ft_export(t_vars *vars);
 void		ft_unset(t_vars *vars);
 /* if directory exists and one has the necessary rights, moves one to the dir
 	entered*/
-void		ft_cd(t_vars *vars);
+int			ft_cd(t_vars *vars);
 
 /* signal_handling */
 // ignores SIGQUIT and handles SIGINT
@@ -244,6 +246,8 @@ void		ft_cleanup_lst(t_vars *vars);
 void		ft_check_input(t_vars *vars);
 
 /* key_value */
+// changes the value of a given key value to val
+void		ft_new_value(t_vars *vars, char *key, char *val);
 /* returns a pointer to the value retrieved with the key or if no matching key
 	was found, return NULL */
 char		*ft_return_val(t_vars *vars, char *key);

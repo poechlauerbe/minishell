@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:29:49 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/15 12:42:30 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/15 16:10:58 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,29 @@ void	ft_pwd_conc(t_vars *vars, char **curpath)
 	}
 }
 
-void	ft_can_form(t_vars *vars, char **curpath)
+int	ft_can_form(t_vars *vars, char **curpath)
 {
-	while (ft_strcmp(*curpath, "./"))
-		ft_remove_dot(vars, curpath);
-	ft_remove_dot_dot(vars, curpath);
+	ft_remove_dot(vars, curpath);
+	if (ft_remove_dot_dot(vars, curpath))
+		return (1);
+	return (0);
+}
+
+int	ft_chdir(t_vars *vars, char **curpath)
+{
+	if (!access(*curpath, F_OK | X_OK))
+	{
+		if (!chdir(*curpath))
+		{
+			ft_new_value(vars, "OLDPWD", ft_return_val(vars, "PWD"));
+			ft_new_value(vars, "PWD", *curpath);
+			free (*curpath);
+			return (0);
+		}
+		else
+			perror("cd");
+	}
+	perror("access");
+	free (*curpath);
+	return (1);
 }
