@@ -6,7 +6,7 @@
 #    By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/12/15 16:00:44 by tbenz            ###   ########.fr        #
+#    Updated: 2023/12/15 16:20:03 by tbenz            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,7 @@ SRCS 			= $(addprefix $(SRCS_DIR),\
 				b_cd_slashes.c \
 				b_cd_utils.c \
 				builtins.c \
+				b_exit.c \
 				b_export_key_utils.c \
 				b_export_value_utils.c \
 				b_export_print.c \
@@ -53,13 +54,15 @@ SRCS 			= $(addprefix $(SRCS_DIR),\
 				expand.c \
 				fun_echo.c \
 				input.c \
+				input_comb_progs.c \
+				input_malloc.c \
 				input_utils.c \
 				key_value.c \
 				key_value_remove.c \
 				minishell.c \
 				pipe.c \
 				prog.c \
-				redirect_utils.c \
+				input_redirecting.c \
 				signal_handling.c \
 				utils.c)
 
@@ -109,8 +112,15 @@ rebonus:		fclean ${NAME_BONUS}
 test:			${LIBFT} $(HEADER)
 				${CC} -g $(SRCS) ${LIBFT} ${LRL} -o ${NAME}
 
+valgrind:		$(NAME)
+				valgrind --suppressions=valgrind_ignore_leaks.txt \
+				--leak-check=full --show-leak-kinds=all --track-origins=yes \
+				--verbose --show-mismatched-frees=yes --read-var-info=yes \
+				--track-fds=yes --trace-children=yes ./minishell
+
 TESTSRC 		= $(addprefix $(SRCS_DIR),\
 				builtins.c \
+				b_exit.c \
 				b_export_key_utils.c \
 				b_export_value_utils.c \
 				b_export_print.c \
@@ -120,16 +130,19 @@ TESTSRC 		= $(addprefix $(SRCS_DIR),\
 				expand.c \
 				fun_echo.c \
 				input.c \
+				input_comb_progs.c \
+				input_malloc.c \
 				input_utils.c \
 				key_value.c \
 				key_value_remove.c \
 				pipe.c \
 				prog.c \
-				redirect_utils.c \
+				input_redirecting.c \
+				signal_handling.c \
 				utils.c \
 				testbenny.c)
 
 benny:			$(LIBFT) $(HEADER)
-				$(CC) -g $(TESTSRC) $(LIBFT)
+				$(CC) -g $(TESTSRC) $(LIBFT) ${LRL}
 
-.PHONY:			all clean fclean re rebonus
+.PHONY:			all clean fclean re rebonus valgrind

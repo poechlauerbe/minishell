@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 13:52:29 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/14 15:08:04 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/15 16:20:36 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # define OPEN_FILE_ERROR 1500
 
 // standard error codes bash:
+# define PERMISSION_DENIED 126
 # define COMMAND_NOT_FOUND 127
 # define NO_SUCH_FILE_OR_DIRECTORY 1
 # define NUMERIC_ARGUMENTS_REQUIRED 2
@@ -41,5 +42,8 @@
 # define O_APP_OUT 63
 //  <
 # define O_RED_INPUT 60
+//  <<
+# define O_HEREDOC 61
+
 
 #endif

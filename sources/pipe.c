@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 15:46:51 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/11 17:49:08 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/13 12:22:12 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void	ft_pipe_loop(t_vars *vars)
 	int		fd_r_out;
 	int		*pid;
 	int		i;
+	int		status;
 	int		commands;
 	t_prg	*temp;
 	t_red	*reds;
@@ -157,7 +158,9 @@ void	ft_pipe_loop(t_vars *vars)
 	ft_close_pipes(vars->pipe_count, fd);
 	i = -1;
 	while (++i < commands)
-		waitpid(pid[i], NULL, 0);
+		waitpid(pid[i], &status, 0);
+	if (WIFEXITED(status))
+    	vars->exit_code = WEXITSTATUS(status);
 	free(pid);
 	free(fd);
 }

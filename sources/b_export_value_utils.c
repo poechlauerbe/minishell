@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 13:14:23 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/12 13:27:36 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/13 13:29:00 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void	ft_copy_value(t_quote *quote, char *arg)
 		else if (*arg == '"' && !quote->sq && quote->dq)
 			quote->dq = 0;
 		if (((*arg == '\'' || *arg == '"') && !quote->dq && !quote->sq) \
-			|| (*arg == '\'' && !quote->sq && quote->dq) || (*arg == '"' \
-			&& quote->sq && !quote->dq))
+			|| (*arg == '\'' && quote->sq && !quote->dq) || (*arg == '"' \
+			&& !quote->sq && quote->dq))
 			arg++;
 		else
 		{

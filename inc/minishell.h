@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/15 16:00:21 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/15 16:19:33 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -229,7 +229,7 @@ int			ft_check_exit_code(t_vars *vars);
 
 /* fun echo */
 // writes to the shell in standard output
-void		ft_echo(char **str);
+void		ft_echo(t_vars *vars, char **str);
 
 /* input utils*/
 // create new node in input linked list
@@ -245,6 +245,11 @@ void		ft_cleanup_lst(t_vars *vars);
 // checks for input and stores each input in a 2d array
 void		ft_check_input(t_vars *vars);
 
+/* input_comb_progs */
+void		ft_comb_progs(t_vars *vars);
+
+/* input_malloc */
+void		ft_malloc_prog_2d_str(t_vars *vars);
 /* key_value */
 // changes the value of a given key value to val
 void		ft_new_value(t_vars *vars, char *key, char *val);

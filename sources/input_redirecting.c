@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 12:23:55 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/08 19:57:05 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/14 13:47:35 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,20 @@ void	ft_red_new_node(t_vars *vars, t_red **lst, char *file, char oper)
 {
 	t_red	*new;
 	t_red	*temp;
+	char	*str_wo_q;
 
 	new = malloc(sizeof(t_red));
 	if (!new)
 		ft_exit(vars, MALLOC_ERROR);
 	new->next = NULL;
-	new->file = file;
+	str_wo_q = ft_create_value(vars, file);
+	if (!str_wo_q)
+	{
+		free(new);
+		ft_exit(vars, MALLOC_ERROR);
+	}
+	new->file = str_wo_q;
+	// free(file);
 	new->oper = oper;
 	if (*lst == NULL)
 		*lst = new;
