@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 15:30:48 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/14 16:20:18 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/15 07:21:36 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_check_string_count(t_vars *vars, char *inp)
 			inp++;
 		if (*inp >= 33 && *inp <= 126 && *inp != '|' && *inp != '<' && *inp != '>')
 		{
-			if ((temp->oper == '<' || temp->oper == '>') && temp->str_c == 1)
+			if ((temp->oper == '<' || temp->oper == '>' || temp->oper == O_APP_OUT) && temp->str_c == 1)
 				ft_new_node(vars, &temp, &inp);
 			temp->str_c += 1;
 		}
@@ -71,8 +71,6 @@ void	ft_red_file(t_vars *vars, t_prg *lst)
 			{
 				if (prog == NULL)
 					prog = temp;
-				// else
-				// 	APPEND PROG STRING
 			}
 			temp = temp->next;
 		}
@@ -82,6 +80,10 @@ void	ft_red_file(t_vars *vars, t_prg *lst)
 			if (temp->oper == '>' || temp->oper == O_APP_OUT)
 				ft_red_new_node(vars, &prog->out_file, temp->prog[0], temp->oper);
 			else if (temp->oper == '<')
+				ft_red_new_node(vars, &prog->in_file, temp->prog[0], temp->oper);
+			else if (temp->oper == O_APP_OUT)
+				ft_red_new_node(vars, &prog->out_file, temp->prog[0], temp->oper);
+			else if (temp->oper == O_HEREDOC)
 				ft_red_new_node(vars, &prog->in_file, temp->prog[0], temp->oper);
 			temp = temp->next;
 		}
