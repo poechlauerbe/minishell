@@ -6,7 +6,7 @@
 /*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 10:17:45 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/15 07:56:24 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/15 08:10:20 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int main(int argc, char *argv[])
 	vars.inp = argv[1];
 	vars.exit_code = 99;
 	ft_check_input(&vars);
-	// ft_pipe_loop(&vars);
+	ft_pipe_loop(&vars);
 	temp = vars.p_start;
 	while (temp)
 	{
