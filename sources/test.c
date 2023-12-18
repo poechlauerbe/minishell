@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 15:07:23 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/09 14:16:09 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/18 16:44:17 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,15 @@
 int	main(int argc, char **argv, char **envp)
 {
 	t_vars	vars;
+	char	*inp = "~/bpocahlau";
 
 	ft_init(&vars, argc, argv, envp);
-	while (vars.envv)
-	{
-		printf("%s=%s\n", vars.envv->key, vars.envv->val);
-		vars.envv = vars.envv->next;
-	}
+	vars.inp = inp;
+	ft_check_input(&vars);
+	ft_home_expand(&vars, &vars.p_start->prog[0]);
+	ft_printf("%s\n", vars.p_start->prog[0]);
+	ft_free_input(&vars);
 }
-
-
 
 /*
 	Thorben test env-key values
