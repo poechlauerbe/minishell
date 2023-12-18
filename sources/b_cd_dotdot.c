@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:28:33 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/15 14:58:05 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/18 12:35:31 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_test_dir(t_vars *vars, char **cp, int i)
 
 	if (i == 1)
 		return (0);
-	dir = (char *)calloc(i, sizeof(char));
+	dir = (char *)calloc((i + 1), sizeof(char));
 	if (!dir)
 		ft_exit(vars, MALLOC_ERROR);
 	j = -1;
@@ -69,7 +69,7 @@ void	ft_create_cp(t_vars *vars, char **cp, int i, int cl)
 			temp = ft_substr(*cp, (len - 1), ft_strlen(*cp));
 	}
 	else
-		temp = (char *)ft_calloc((len + 1), sizeof(char));
+		temp = (char *)ft_calloc((len + 2), sizeof(char));
 	if (!temp)
 		ft_exit(vars, MALLOC_ERROR);
 	if (i > 3)

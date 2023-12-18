@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/15 16:19:33 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/18 11:43:24 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ typedef struct s_quote
 /* dot components and any slash characters that separate them from the next
 	component are deleted*/
 void		ft_remove_dot(t_vars *vars, char **curpath);
+// createst new curpath removing single dots
+void		ft_cur_wo_dot(t_vars *vars, char **curpath, int len);
 // counts the length of the string that shall be created
 int			ft_remove_dot_counter(char *curpath);
 

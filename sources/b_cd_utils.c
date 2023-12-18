@@ -6,35 +6,38 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:29:49 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/18 11:03:08 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/18 11:36:46 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-void    ft_home(t_vars *vars, char **curpath)
+void	ft_home(t_vars *vars, char **curpath)
 {
-    char	*fpath;
+	char	*fpath;
 	char	*pwd;
 	int		plen;
 	int		pwdlen;
 	int		slash;
 
-    plen = ft_strlen(&(*curpath)[1]);
-	pwd = ft_return_val(vars, "HOME");
-	pwdlen = ft_strlen(ft_return_val(vars, "HOME"));
-	slash = 0;
-	if (pwd[pwdlen - 1] != '/')
-		slash = 1;
-	fpath = (char *)malloc(sizeof(char) * (plen + pwdlen + slash + 1));
-	if (!fpath)
-		ft_exit(vars, MALLOC_ERROR);
-	ft_strlcpy(fpath, pwd, (pwdlen + 1));
-	if (slash)
-		ft_strlcat(fpath, "/", pwdlen + 2);
-	ft_strlcat(fpath, *curpath, (plen + pwdlen + slash + 1));
-	free (*curpath);
-	*curpath = fpath;
+	if (*curpath && (*curpath)[0] == '~')
+	{
+		plen = ft_strlen(&(*curpath)[1]);
+		pwd = ft_return_val(vars, "HOME");
+		pwdlen = ft_strlen(ft_return_val(vars, "HOME"));
+		slash = 0;
+		if (pwd[pwdlen - 1] != '/')
+			slash = 1;
+		fpath = (char *)malloc(sizeof(char) * (plen + pwdlen + slash + 1));
+		if (!fpath)
+			ft_exit(vars, MALLOC_ERROR);
+		ft_strlcpy(fpath, pwd, (pwdlen + 1));
+		if (slash)
+			ft_strlcat(fpath, "/", pwdlen + 2);
+		ft_strlcat(fpath, *curpath, (plen + pwdlen + slash + 1));
+		free (*curpath);
+		*curpath = fpath;
+	}
 }
 
 void	ft_pwd_conc(t_vars *vars, char **curpath)
@@ -45,12 +48,9 @@ void	ft_pwd_conc(t_vars *vars, char **curpath)
 	int		pwdlen;
 	int		slash;
 
-
-	if (*curpath && (*curpath)[0] == '~')
-        ft_home(vars, curpath);
-    else if (*curpath && (*curpath)[0] != '/')
+	if (*curpath && (*curpath)[0] != '/')
 	{
-        plen = ft_strlen(*curpath);
+		plen = ft_strlen(*curpath);
 		pwd = ft_return_val(vars, "PWD");
 		pwdlen = ft_strlen(ft_return_val(vars, "PWD"));
 		slash = 0;
