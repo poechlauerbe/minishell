@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/18 11:43:24 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/18 13:42:44 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,12 +132,14 @@ int			ft__remove_nl_len(char *cp);
 void		ft_remove_ls(t_vars *vars, char **cp);
 
 /* b_cd_utils */
+// callocs a new current path
+void		ft_malloc_cp(t_vars *vars, char **cp, char *str);
 // if curpath doesn't start with a dot, joins the PWD with curpath
 void		ft_pwd_conc(t_vars *vars, char **curpath);
 // converts curpath according to the canonical form
 int			ft_can_form(t_vars *vars, char **curpath);
 // if possible, changes the current directory to curpath
-int		ft_chdir(t_vars *vars, char **curpath);
+int			ft_chdir(t_vars *vars, char **curpath);
 
 /* b_export_key_utils */
 // checks if parenthesis are properly closed

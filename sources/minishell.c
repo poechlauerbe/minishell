@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 14:33:20 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/18 12:35:47 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/18 13:23:25 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	main(int argc, char **argv, char **envp)
 {
 	int		i = 0;
 	char	*curpath;
-	char	*test = "cd ..";
+	char	*test = "cd '/nfs/homes/tbenz/Desktop/42 Core Curriculum'";
 	// char	*test = "";
 	t_vars	vars;
 

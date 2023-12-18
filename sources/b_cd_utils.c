@@ -6,11 +6,19 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:29:49 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/18 11:36:46 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/18 13:40:44 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+void	ft_malloc_cp(t_vars *vars, char **cp, char *str)
+{
+	*cp = (char *)calloc(ft_strlen(str) + 1, sizeof(char));
+	if (!*cp)
+		ft_exit(vars, MALLOC_ERROR);
+	ft_strlcpy(*cp, str, ft_strlen(str) + 1);
+}
 
 void	ft_home(t_vars *vars, char **curpath)
 {

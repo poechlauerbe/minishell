@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:28:33 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/18 12:35:31 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/18 13:36:09 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int	ft_test_dir(t_vars *vars, char **cp, int i)
 	{
 		free(dir);
 		free (*cp);
+		ft_printf_fd(2, "cd: No such file or directory: %s", \
+					vars->p_start->prog[1]);
 		return (1);
 	}
 	free (dir);
