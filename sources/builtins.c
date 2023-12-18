@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
+/*   By: thorben <thorben@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:49:29 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/15 17:10:54 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/17 17:22:12 by thorben          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	ft_cd(t_vars *vars)
 	char	*cp;
 
 	if (vars->p_start->prog[1] && vars->p_start->prog[2])
-		return (ft_printf_fd(2, "cd: too many arguments"));
+		return (ft_printf_fd(2, "cd: too many arguments\n"));
 	if (vars->p_start->prog[1])
 	{
 		cp = (char *)calloc(ft_strlen(vars->p_start->prog[1]) + 1, \
@@ -86,7 +86,7 @@ int	ft_cd(t_vars *vars)
 	if (!cp)
 	{
 		if (!ft_return_val(vars, "HOME"))
-			return (ft_printf_fd(2, "cd: HOME not set\"));
+			return (ft_printf_fd(2, "cd: HOME not set\n"));
 		else
 		{
 			cp = (char *)calloc(ft_strlen(ft_return_val(vars, "HOME")) \

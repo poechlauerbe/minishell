@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 14:33:20 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/15 17:09:54 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/18 11:14:04 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	main(int argc, char **argv, char **envp)
 {
 	int		i = 0;
 	char	*curpath;
-	char	*test = "cd";
+	char	*test = "cd ..";
 	// char	*test = "";
 	t_vars	vars;
 
@@ -64,9 +64,11 @@ int	main(int argc, char **argv, char **envp)
 		curpath[i] = '\0';
 		vars.inp = curpath;
 		ft_check_input(&vars);
-		ft_printf("%s\n", ft_return_val(&vars, "PWD"));
+		ft_printf("PWD: %s\n", ft_return_val(&vars, "PWD"));
 		ft_cd(&vars);
-		ft_printf("%s\n", ft_return_val(&vars, "PWD"));
+		ft_printf("PWD: %s\n", ft_return_val(&vars, "PWD"));
+		ft_cd(&vars);
+		ft_printf("PWD: %s\n", ft_return_val(&vars, "PWD"));
 	}
 	free (curpath);
 	ft_exit(&vars, OK);
