@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_cd_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thorben <thorben@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:29:49 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/17 17:18:54 by thorben          ###   ########.fr       */
+/*   Updated: 2023/12/18 11:03:08 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ void	ft_pwd_conc(t_vars *vars, char **curpath)
 	int		pwdlen;
 	int		slash;
 
-	
-	if (*curpath && *curpath[0] == '~')
+
+	if (*curpath && (*curpath)[0] == '~')
         ft_home(vars, curpath);
-    else if (*curpath && *curpath[0] != '/')
+    else if (*curpath && (*curpath)[0] != '/')
 	{
         plen = ft_strlen(*curpath);
 		pwd = ft_return_val(vars, "PWD");

@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 13:26:58 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/15 15:59:38 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/18 11:13:25 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_new_value(t_vars *vars, char *key, char *val)
 	tmp = vars->envv;
 	while (tmp)
 	{
-		if (strcmp(tmp->key, key))
+		if (!strcmp(tmp->key, key))
 			break ;
 		tmp = tmp->next;
 	}
