@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:21:46 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/14 14:09:26 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/20 12:52:21 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	ft_init(t_vars *vars, int argc, char **argv, char **envp)
 	ft_bzero(vars, sizeof(t_vars));
 	ft_create_env(vars, envp);
 	ft_order_envv(vars);
+	vars->envp = envp;
 	if (argc == 0)
 		return ;
 	if (argv == 0)

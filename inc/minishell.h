@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/15 16:19:33 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/20 13:40:06 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ typedef struct s_vars
 	int			pipe_count;
 	t_kv		*envv;
 	char		exit_code;
+	char		**envp;
+	int			alloc;
 }		t_vars;
 
 typedef struct s_quote
@@ -296,5 +298,12 @@ void		ft_pwd(void);
 void		ft_set_val(t_vars *vars, t_kv **var, t_kv **tmp);
 // compares two strings (here: key-pairs) and returns 0 if they match.
 int			ft_strcmp(const char *s1, const char *s2);
+
+void	ft_new_envp(t_vars *vars, char *id, char *val);
+void	ft_free_envp(char **envp);
+void	ft_malloc_envp(t_vars *vars, char ***arr, char **str);
+int		ft_envp_len(t_vars *vars);
+void	ft_remove_envp(t_vars *vars, char *id);
+void	ft_malloc_envpr(t_vars *vars, char ***arr, char *id);
 
 #endif

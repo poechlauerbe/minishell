@@ -6,7 +6,7 @@
 #    By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/12/15 16:20:03 by tbenz            ###   ########.fr        #
+#    Updated: 2023/12/20 11:54:36 by tbenz            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,7 @@ SRCS 			= $(addprefix $(SRCS_DIR),\
 				builtins.c \
 				b_exit.c \
 				b_export_key_utils.c \
+				b_export_new_envp.c \
 				b_export_value_utils.c \
 				b_export_print.c \
 				b_export_print_utils.c \
@@ -64,6 +65,7 @@ SRCS 			= $(addprefix $(SRCS_DIR),\
 				prog.c \
 				input_redirecting.c \
 				signal_handling.c \
+				test.c \
 				utils.c)
 
 OBJ				= $(SRCS:.c=.o)
