@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 15:22:09 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/21 14:48:04 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/21 15:03:40 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	ft_check_enclosing(char **arg, t_vars *vars)
 			quote.dq = 1;
 		else if ((*arg)[quote.i] == '"' && !quote.sq && quote.dq)
 			quote.dq = 0;
-		if (quote.sq != 1 && (*arg)[quote.i] == '$' )
+		if (quote.sq != 1 && (*arg)[quote.i] == '$')
 			ft_expander(vars, arg, &quote);
 		quote.i++;
 	}

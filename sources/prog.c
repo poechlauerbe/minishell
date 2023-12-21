@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 13:41:52 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/15 16:47:16 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/21 15:42:26 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,10 @@ int	ft_builtin_check(t_vars *vars, t_prg *prog)
 	else if (ft_strncmp(prog->prog[0], "cd", 3) == 0)
 		ft_cd(vars);
 	else
-		return (NOT_USED);
+	{
+		if (ft_check_shvar(vars, prog))
+			return (NOT_USED);
+	}
 	vars->exit_code = OK;
 	return (USED);
 }

@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 15:07:23 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/21 14:02:41 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/21 15:42:20 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,15 @@ int	main(int argc, char **argv, char **envp)
 	}
 } */
 
-
-
-
-int	main(int argc, char **argv, char **envp)
+/* int	main(int argc, char **argv, char **envp)
 {
 	t_vars	vars;
 
 	ft_init(&vars, argc, argv, envp);
-	char *inp = "echo ä";
+	char *inp = "7eins=1";
 	// ft_printf("%s", inp);
 	vars.inp = inp;
 	ft_check_input(&vars);
-	ft_echo(&vars, vars.p_start->prog);
-}
+	ft_builtin_check(&vars, vars.p_start);
+	ft_exit(vars, )
+} */

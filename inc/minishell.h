@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/15 16:19:33 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/21 15:25:26 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -296,5 +296,7 @@ void		ft_pwd(void);
 void		ft_set_val(t_vars *vars, t_kv **var, t_kv **tmp);
 // compares two strings (here: key-pairs) and returns 0 if they match.
 int			ft_strcmp(const char *s1, const char *s2);
+
+int			ft_check_shvar(t_vars *vars, t_prg *prog);
 
 #endif
