@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_malloc.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:46:54 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/14 16:05:58 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/21 14:17:12 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_input_strlen_2(char **temp, int *strlen)
 {
-	while (**temp >= 33 && **temp <= 126 && **temp != '|')
+	while ((**temp >= 33 || **temp < 0) && **temp != 127 && **temp != '|')
 	{
 		if (**temp == '\'')
 		{
@@ -49,9 +49,9 @@ int	ft_input_strlen(char **inp)
 	strlen = 0;
 	if (!*inp && !**inp)
 		return (strlen);
-	while (**inp == ' ' || **inp == '\n' || **inp == '\t'
+	while ((**inp == ' ' || **inp == '\n' || **inp == '\t'
 		|| **inp == '\r' || **inp == '\f' || **inp == '\v'
-		|| **inp == '|' || **inp == '<' || **inp == '>')
+		|| **inp == '|' || **inp == '<' || **inp == '>') && **inp > 0)
 		*inp += 1;
 	temp = *inp;
 	ft_input_strlen_2(&temp, &strlen);
