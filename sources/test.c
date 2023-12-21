@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 15:07:23 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/20 13:42:28 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/20 14:28:16 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@
 
 } */
 
-int	main(int argc, char **argv, char **envp)
+/* int	main(int argc, char **argv, char **envp)
 {
 	t_vars	vars;
 	// t_kv	*first;
@@ -83,6 +83,5 @@ int	main(int argc, char **argv, char **envp)
 	vars.inp = input_new2;
 	ft_check_input(&vars);
 	ft_input(&vars); */
-	ft_free_envp(vars.envp);
 	ft_exit(&vars, OK);
-}
+} */

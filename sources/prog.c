@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 13:41:52 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/15 16:47:16 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/20 17:19:49 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	ft_check_path(t_vars *vars, t_prg *prog)
 			ft_exit(vars, MALLOC_ERROR);
 		free(dir);
 		if (access(c_prog, F_OK | X_OK) == OK)
-			execve(c_prog, prog->prog, NULL);
+			execve(c_prog, prog->prog, vars->envp);
 		if (line[i])
 			i++;
 	}

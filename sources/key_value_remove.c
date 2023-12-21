@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:55:38 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/09 15:37:53 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/20 16:53:12 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int	ft_remove_helper(t_vars *vars, t_kv *tmp)
 		*var = NULL;
 	else
 		ft_remove_links(&tmp, var);
+	free(tmp->key);
+	free(tmp->val);
 	free (tmp);
 	return (0);
 }

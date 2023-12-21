@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:49:29 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/20 11:42:15 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/20 17:36:02 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,12 @@ void	ft_env(t_vars *vars)
 	while (tmp)
 	{
 		if (tmp->id == 'x')
-			printf("%s=%s\n", tmp->key, tmp->val);
+		{
+			if (tmp->val)
+				printf("%s=%s\n", tmp->key, tmp->val);
+			else
+				printf("%s\n", tmp->key);
+		}
 		tmp = tmp->next;
 	}
 }
@@ -30,7 +35,7 @@ void	ft_env(t_vars *vars)
 void	ft_export(t_vars *vars)
 {
 	int		i;
-	char	*id;
+	char	*key;
 	char	*value;
 
 	i = 1;
@@ -38,15 +43,13 @@ void	ft_export(t_vars *vars)
 	{
 		while (vars->p_start->prog[i])
 		{
-			id = ft_exp_key(vars, vars->p_start->prog[i]);
-			if (!id)
+			key = ft_exp_key(vars, vars->p_start->prog[i]);
+			if (!key)
 				return ;
 			value = ft_exp_value(vars, vars->p_start->prog[i]);
-			if (!value)
-				return ;
-			ft_add_envv(vars, id, value, 0);
+			ft_add_envv(vars, key, value, 0);
+			ft_new_envp(vars);
 			i++;
-			ft_new_envp(vars, id, value);
 		}
 	}
 	else
@@ -63,6 +66,7 @@ void	ft_unset(t_vars *vars)
 	while (key)
 	{
 		ft_remove_envv(vars, key);
+		ft_new_envp(vars);
 		key = vars->p_start->prog[++i];
 	}
 }

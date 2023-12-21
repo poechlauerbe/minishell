@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 11:41:51 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/20 13:40:35 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/20 17:48:52 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,34 +15,48 @@
 int	ft_envp_len(t_vars *vars)
 {
 	int		len;
-	char **tmp;
+	t_kv *tmp;
 
 	len = 0;
-	tmp = vars->envp;
-	while (*tmp)
+	tmp = vars->envv;
+	while (tmp)
 	{
-		tmp++;
-		len++;
+		if (tmp->id == 'x')
+			len++;
+		tmp = tmp->next;
 	}
 	return (len);
 }
 
-void	ft_malloc_envp(t_vars *vars, char ***arr, char **str)
+void	ft_malloc_envp(t_vars *vars, char ***arr)
 {
 	int		i;
-	int		len;
+	int		idl;
+	int		vall;
 	char	*tmp;
+	t_kv	*tmp2;
 
 	i = 0;
-	while (vars->envp[i])
+	tmp2 = vars->envv;
+	while (tmp2)
 	{
-		len = ft_strlen(vars->envp[i]);
-		tmp = ft_calloc(len + 1, sizeof(char));
-		ft_strlcpy(tmp, vars->envp[i], len + 1);
-		(*arr)[i] = tmp;
-		i++;
+		if (tmp2->id == 'x')
+		{
+			idl = ft_strlen(tmp2->key);
+			if (tmp2->val)
+				vall = ft_strlen(tmp2->val);
+			tmp = ft_calloc(idl+ vall + 2, sizeof(char));
+			if (!tmp)
+				ft_exit(vars, MALLOC_ERROR);
+			ft_strlcpy(tmp, tmp2->key, idl + 1);
+			ft_strlcat(tmp, "=", idl + 2);
+			if (tmp2->val)
+			ft_strlcat(tmp, tmp2->val, idl + vall + 2);
+			(*arr)[i] = tmp;
+			i++;
+		}
+		tmp2 = tmp2->next;
 	}
-	(*arr)[i] = *str;
 }
 
 void	ft_free_envp(char **envp)
@@ -58,21 +72,16 @@ void	ft_free_envp(char **envp)
 	free (envp);
 }
 
-void	ft_new_envp(t_vars *vars, char *id, char *val)
+void	ft_new_envp(t_vars *vars)
 {
 	int 	len;
 	char	**arr;
-	char	*str;
 
 	len = ft_envp_len(vars);
-	arr = ft_calloc(len + 2, sizeof(char *));
-	str = ft_calloc (ft_strlen(id) + ft_strlen(val) + 2, sizeof(char));
-	if (!arr || !str)
+	arr = ft_calloc(len + 1, sizeof(char *));
+	if (!arr)
 		ft_exit(vars, MALLOC_ERROR);
-	ft_strlcat(str, id, ft_strlen(id) + 1);
-	ft_strlcat(str, "=", ft_strlen(str) + 2);
-	ft_strlcat(str, val, ft_strlen(str) + ft_strlen(val) + 1);
-	ft_malloc_envp(vars, &arr, &str);
+	ft_malloc_envp(vars, &arr);
 	if (vars->alloc)
 		ft_free_envp(vars->envp);
 	vars->envp = arr;
@@ -80,32 +89,33 @@ void	ft_new_envp(t_vars *vars, char *id, char *val)
 		vars->alloc = 1;
 }
 
-void	ft_malloc_envpr(t_vars *vars, char ***arr, char *id)
+void	ft_malloc_envpr(t_vars *vars, char ***arr, char *key)
 {
-	int		i;
 	int		j;
 	int		len;
 	char	*tmp;
+	t_kv	*tmp2;
 
-	i = 0;
 	j = 0;
-	while (vars->envp[i])
+	tmp2 = vars->envv;
+	while (tmp2)
 	{
-		len = ft_strlen(id);
-		if (!ft_strncmp(vars->envp[i], id, len) && vars->envp[i][len] == '=')
+		if (!ft_strcmp(tmp2->key, key))
 			;
 		else
 		{
-			len = ft_strlen(vars->envp[i]);
-			tmp = ft_calloc(len + 1, sizeof(char));
-			ft_strlcpy(tmp, vars->envp[i], len + 1);
+			len = ft_strlen(tmp2->key) + ft_strlen(tmp2->key) + 2;
+			tmp = ft_calloc(len, sizeof(char));
+			ft_strlcpy(tmp, tmp2->key, ft_strlen(tmp2->key) + 1);
+			ft_strlcat(tmp, "=", ft_strlen(tmp2->key) + 2);
+			ft_strlcat(tmp, tmp2->val, len);
 			(*arr)[j++] = tmp;
 		}
-		i++;
+		tmp2 = tmp2->next;
 	}
 }
 
-void	ft_remove_envp(t_vars *vars, char *id)
+void	ft_remove_envp(t_vars *vars, char *key)
 {
 	int		len;
 	char	**arr;
@@ -114,16 +124,10 @@ void	ft_remove_envp(t_vars *vars, char *id)
 	arr = ft_calloc(len, sizeof(char *));
 	if (!arr)
 		ft_exit(vars, MALLOC_ERROR);
-	ft_malloc_envpr(vars, &arr, id);
+	ft_malloc_envpr(vars, &arr, key);
 	if (vars->alloc)
 		ft_free_envp(vars->envp);
 	vars->envp = arr;
-/* 	int	i = 0;
-	while (vars->envp[i])
-	{
-		ft_printf("%s\n", vars->envp[i]);
-		i++;
-	} */
 	if (!vars->alloc)
 		vars->alloc = 1;
 }

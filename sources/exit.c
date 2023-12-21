@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 13:28:25 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/14 11:21:11 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/20 14:05:09 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ void	ft_exit(t_vars *vars, int errcd)
 		ft_putstr_fd("exit\n", 2);
 	ft_free_input(vars);
 	ft_free_envv(vars);
+	if (vars->alloc)
+		ft_free_envp(vars->envp);
 	exit(errcd);
 }
 

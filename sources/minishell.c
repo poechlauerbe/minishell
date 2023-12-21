@@ -6,13 +6,13 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 14:33:20 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/20 11:53:37 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/20 17:49:24 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-/* int	main(int argc, char **argv, char **envp)
+int	main(int argc, char **argv, char **envp)
 {
 	t_vars	vars;
 
@@ -39,7 +39,7 @@
 		free(vars.inp);
 		vars.inp = NULL;
 	}
-} */
+}
 
 /* int	main(int argc, char **argv, char **envp)
 {
@@ -71,5 +71,16 @@
 		ft_printf("PWD: %s\n", ft_return_val(&vars, "PWD"));
 	}
 	free (curpath);
+	ft_exit(&vars, OK);
+} */
+
+/* int	main(int argc, char **argv, char **envp)
+{
+	t_vars	vars;
+
+	ft_init(&vars, argc, argv, envp);
+	vars.inp = "export var";
+	ft_check_input(&vars);
+	ft_export(&vars);
 	ft_exit(&vars, OK);
 } */
