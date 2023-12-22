@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:29:49 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/18 13:40:44 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/22 12:39:56 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,27 @@
 
 void	ft_malloc_cp(t_vars *vars, char **cp, char *str)
 {
-	*cp = (char *)calloc(ft_strlen(str) + 1, sizeof(char));
+	int	len;
+	int	i;
+
+	i = -1;
+	len = 0;
+	while (str[++i])
+	{
+		if (str[i] != '"' && str[i] != '\'')
+			len++;
+	}
+	*cp = (char *)calloc(len + 1, sizeof(char));
 	if (!*cp)
 		ft_exit(vars, MALLOC_ERROR);
-	ft_strlcpy(*cp, str, ft_strlen(str) + 1);
+	len = 0;
+	i = -1;
+	while (str[++i])
+	{
+		if (str[i] != '"' && str[i] != '\'')
+			(*cp)[len++] = str[i];
+	}
+	(*cp)[i] = '\0';
 }
 
 void	ft_home(t_vars *vars, char **curpath)
@@ -86,6 +103,7 @@ int	ft_can_form(t_vars *vars, char **curpath)
 
 int	ft_chdir(t_vars *vars, char **curpath)
 {
+	ft_printf("%s\n", *curpath);
 	if (!access(*curpath, F_OK | X_OK))
 	{
 		if (!chdir(*curpath))
