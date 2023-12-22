@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thorben <thorben@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:49:29 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/17 17:22:12 by thorben          ###   ########.fr       */
+/*   Updated: 2023/12/22 13:04:14 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ft_export(t_vars *vars)
 	{
 		while (vars->p_start->prog[i])
 		{
-			id = ft_exp_key(vars, vars->p_start->prog[i]);
+			id = ft_exp_key(vars, vars->p_start->prog[i], 0);
 			if (!id)
 				return ;
 			value = ft_exp_value(vars, vars->p_start->prog[i]);

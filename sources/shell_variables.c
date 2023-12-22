@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 14:51:31 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/21 15:26:35 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/22 13:05:30 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	ft_check_shvar(t_vars *vars, t_prg *prog)
 	{
 		if (strchr(prog->prog[i], '='))
 		{
-			key = ft_exp_key(vars, prog->prog[i]);
+			key = ft_exp_key(vars, prog->prog[i], 1);
 			val = ft_exp_value(vars, prog->prog[i]);
 			if (!key || ! val)
 			{
