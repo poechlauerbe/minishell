@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 15:30:48 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/28 17:07:08 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/28 17:15:37 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,11 +148,11 @@ int	ft_check_redirect_file(t_vars *vars)
 
 void	ft_check_input(t_vars *vars)
 {
+	if (ft_check_redirect_file(vars))
+		return ;
 	ft_check_string_count(vars, vars->inp);
 	ft_malloc_prog_2d_str(vars);
 	ft_cleanup_lst(vars);
-	if (ft_check_redirect_file(vars))
-		return ;
 	ft_comb_progs(vars);
 	ft_red_file(vars, vars->p_start);
 	ft_cleanup_reds(vars);

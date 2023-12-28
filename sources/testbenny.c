@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   testbenny.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 10:17:45 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/15 08:10:20 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/28 17:13:37 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,13 @@ int main(int argc, char *argv[])
 		printf("\n");
 		while(temp->out_file)
 		{
-			printf("in: %s, %c$\n", temp->out_file->file, temp->out_file->oper);
+			printf("out: %s, %c$\n", temp->out_file->file, temp->out_file->oper);
 			temp->out_file = temp->out_file->next;
+		}
+		while(temp->in_file)
+		{
+			printf("out: %s, %c$\n", temp->in_file->file, temp->in_file->oper);
+			temp->in_file = temp->in_file->next;
 		}
 		temp = temp->next;
 	}
