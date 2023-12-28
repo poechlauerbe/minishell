@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 15:30:48 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/15 07:21:36 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/28 15:58:07 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	ft_red_file(t_vars *vars, t_prg *lst)
 		if (temp->oper == '|')
 		{
 			prog = temp;
-			temp =temp->next;
+			temp = temp->next;
 			lst = temp;
 		}
 		while (temp && temp->oper != '|')
@@ -91,11 +91,41 @@ void	ft_red_file(t_vars *vars, t_prg *lst)
 	}
 }
 
+int	ft_check_redirect_file(t_vars *vars)
+{
+	t_prg	*temp;
+
+	temp = vars->p_start;
+	while (temp)
+	{
+		if (temp->prog[0] == NULL && temp->next)
+		{
+			ft_printf_fd(2, "bash: syntax error near unexpected token `%c'\n",
+				temp->next->oper);
+			vars->syntax_err = SYNTAX_ERROR;
+			vars->exit_code = SYNTAX_ERROR;
+			return (SYNTAX_ERROR);
+		}
+		if (temp->prog[0] == NULL)
+		{
+			ft_printf_fd(2,
+				"bash: syntax error near unexpected token `newline'\n");
+			vars->syntax_err = SYNTAX_ERROR;
+			vars->exit_code = SYNTAX_ERROR;
+			return (SYNTAX_ERROR);
+		}
+		temp = temp->next;
+	}
+	return (OK);
+}
+
 void	ft_check_input(t_vars *vars)
 {
 	ft_check_string_count(vars, vars->inp);
 	ft_malloc_prog_2d_str(vars);
 	ft_cleanup_lst(vars);
+	if (ft_check_redirect_file(vars))
+		return ;
 	ft_comb_progs(vars);
 	ft_red_file(vars, vars->p_start);
 	ft_cleanup_reds(vars);

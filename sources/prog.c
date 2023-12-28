@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 13:41:52 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/14 11:17:46 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/28 15:22:39 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,5 +97,4 @@ void	ft_check_prog(t_vars *vars, t_prg *prog)
 	if (ft_builtin_check(vars, prog) == USED)
 		ft_exit(vars, OK);
 	ft_check_path(vars, prog);
-
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 14:33:20 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/12 15:43:34 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/28 15:45:24 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,15 @@ int	main(int argc, char **argv, char **envp)
 		{
 			add_history(vars.inp);
 			ft_check_input(&vars);
-			if (!vars.pipe_count)
+			if (!vars.pipe_count && !vars.syntax_err)
 			{
 				if (ft_builtin_check(&vars, vars.p_start) == NOT_USED)
 					ft_pipe_loop(&vars);
 			}
-			else
+			else if (!vars.syntax_err)
 				ft_pipe_loop(&vars);
 			ft_free_input(&vars);
+			vars.syntax_err = OK;
 		}
 		free(vars.inp);
 		vars.inp = NULL;
