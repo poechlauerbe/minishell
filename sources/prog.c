@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   prog.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 13:41:52 by bpochlau          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/12/28 15:22:39 by bpochlau         ###   ########.fr       */
+=======
+/*   Updated: 2023/12/15 16:47:16 by tbenz            ###   ########.fr       */
+>>>>>>> main
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +19,7 @@
 int	ft_builtin_check(t_vars *vars, t_prg *prog)
 {
 	if (ft_strncmp(prog->prog[0], "exit", 5) == 0)
-		ft_exit_prog(vars, prog->prog);
+		ft_exit(vars, OK);
 	else if (ft_strncmp(prog->prog[0], "pwd", 4) == 0)
 		ft_pwd();
 	else if (ft_strncmp(prog->prog[0], "export", 7) == 0)
@@ -26,6 +30,8 @@ int	ft_builtin_check(t_vars *vars, t_prg *prog)
 		ft_env(vars);
 	else if (ft_strncmp(prog->prog[0], "unset", 6) == 0)
 		ft_unset(vars);
+	else if (ft_strncmp(prog->prog[0], "cd", 3) == 0)
+		ft_cd(vars);
 	else
 		return (NOT_USED);
 	vars->exit_code = OK;

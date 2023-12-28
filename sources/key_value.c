@@ -6,11 +6,32 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 13:26:58 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/11 14:10:23 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/18 11:13:25 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+void	ft_new_value(t_vars *vars, char *key, char *val)
+{
+	int		len;
+	t_kv	*tmp;
+
+	tmp = vars->envv;
+	while (tmp)
+	{
+		if (!strcmp(tmp->key, key))
+			break ;
+		tmp = tmp->next;
+	}
+	if (tmp->val)
+	{
+		len = ft_strlen(val);
+		free (tmp->val);
+		tmp->val = (char *)calloc((len + 1), sizeof(char));
+		ft_strlcpy(tmp->val, val, (len + 1));
+	}
+}
 
 t_kv	*ft_val_retrieval(t_vars *vars, char *key)
 {
@@ -40,8 +61,8 @@ void	ft_add_envv(t_vars *vars, char *key, char *val, int id)
 	{
 		if (!id)
 			tmp->id = 'x';
-		if (!tmp->val[0] && val[0])
-			tmp->val = val;
+		if (val[0])
+			ft_new_value(vars, key, val);
 		return ;
 	}
 	tmp = (t_kv *)malloc(sizeof(t_kv));
