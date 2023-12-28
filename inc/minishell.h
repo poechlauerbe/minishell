@@ -6,7 +6,11 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
+<<<<<<< HEAD
+/*   Updated: 2023/12/28 16:00:06 by bpochlau         ###   ########.fr       */
+=======
 /*   Updated: 2023/12/15 16:19:33 by tbenz            ###   ########.fr       */
+>>>>>>> main
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +66,7 @@ typedef struct s_vars
 	int			pipe_count;
 	t_kv		*envv;
 	char		exit_code;
+	int			syntax_err;
 }		t_vars;
 
 typedef struct s_quote

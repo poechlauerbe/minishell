@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redirect_utils.c                                   :+:      :+:    :+:   */
+/*   input_redirecting.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 12:23:55 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/14 13:47:35 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/15 07:20:48 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_cleanup_reds(t_vars *vars)
 	while (temp)
 	{
 		next = temp->next;
-		if (temp->oper == '<' || temp->oper == '>' || temp->oper == O_APP_OUT)
+		if (temp->oper == '<' || temp->oper == '>' || temp->oper == O_APP_OUT || temp->oper == O_HEREDOC)
 		{
 			if (temp->prog)
 				free(temp->prog);

@@ -6,7 +6,11 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 13:41:52 by bpochlau          #+#    #+#             */
+<<<<<<< HEAD
+/*   Updated: 2023/12/28 15:22:39 by bpochlau         ###   ########.fr       */
+=======
 /*   Updated: 2023/12/15 16:47:16 by tbenz            ###   ########.fr       */
+>>>>>>> main
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,5 +103,4 @@ void	ft_check_prog(t_vars *vars, t_prg *prog)
 	if (ft_builtin_check(vars, prog) == USED)
 		ft_exit(vars, OK);
 	ft_check_path(vars, prog);
-
 }
