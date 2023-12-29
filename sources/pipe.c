@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 15:46:51 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/29 12:04:45 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/29 16:02:59 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,17 @@ void	ft_close_pipes(int pipe_nr, int *fd)
 		close(fd[i]);
 }
 
-int	ft_check_in_access(char *file)
+int	ft_check_in_access(char *file, int *pid, int i)
 {
-	if(access(file, R_OK) == 0)
-		return OK;
+	int	j;
+
+	if (access(file, R_OK) == 0)
+		return (OK);
 	else
 	{
+		j = -1;
+		while (++j < i)
+			waitpid(pid[j], NULL, 0);
 		ft_putstr_fd("bash: ", 2);
 		ft_putstr_fd(file, 2);
 		ft_putstr_fd(": No such file or directory\n", 2);
@@ -51,16 +56,21 @@ int	ft_check_in_access(char *file)
 	}
 }
 
-int	ft_check_out_access(char *file)
+int	ft_check_out_access(char *file, int *pid, int i)
 {
-	if(access(file, F_OK) != 0)
-		return OK;
+	int	j;
+
+	if (access(file, F_OK) != 0)
+		return (OK);
 	else
 	{
-		if(access(file, W_OK) == 0)
-			return OK;
+		if (access(file, W_OK) == 0)
+			return (OK);
 		else
 		{
+			j = -1;
+			while (++j < i)
+				waitpid(pid[j], NULL, 0);
 			ft_putstr_fd("bash: ", 2);
 			ft_putstr_fd(file, 2);
 			ft_putstr_fd(": Permission denied\n", 2);
@@ -107,7 +117,7 @@ void	ft_pipe_loop(t_vars *vars)
 				reds = temp->in_file;
 				while (reds)
 				{
-					if (ft_check_in_access(reds->file) != OK)
+					if (ft_check_in_access(reds->file, pid, i) != OK)
 						exit(1);
 					reds = reds->next;
 				}
@@ -129,9 +139,9 @@ void	ft_pipe_loop(t_vars *vars)
 				reds = temp->out_file;
 				while (reds)
 				{
-					if (ft_check_out_access(reds->file) != OK)
+					if (ft_check_out_access(reds->file, pid, i) != OK)
 						exit(1);
-					fd_r_out = open(reds->file, O_RDWR | O_TRUNC | O_CREAT , 0644);
+					fd_r_out = open(reds->file, O_RDWR | O_TRUNC | O_CREAT, 0644);
 					if (fd_r_out == -1)
 						ft_exit(vars, OPEN_FILE_ERROR);
 					close (fd_r_out);
@@ -159,13 +169,11 @@ void	ft_pipe_loop(t_vars *vars)
 		temp = temp->next;
 	}
 	ft_close_pipes(vars->pipe_count, fd);
-	// if (pid[i] == 0)
-	// 	ft_exit(vars, OK);
 	i = -1;
 	while (++i < commands)
 		waitpid(pid[i], &status, 0);
 	if (WIFEXITED(status))
-    	vars->exit_code = WEXITSTATUS(status);
+		vars->exit_code = WEXITSTATUS(status);
 	free(pid);
 	free(fd);
 }
