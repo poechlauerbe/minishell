@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 15:46:51 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/29 17:34:56 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/29 18:34:31 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,18 +42,16 @@ void	ft_check_output_file(t_vars *vars, t_prg *temp, t_red *reds, int i)
 	{
 		if (ft_check_out_access(reds->file, vars->pid, i) != OK)
 			exit(1);
-		fd_r_out = open(reds->file, O_RDWR | O_TRUNC | O_CREAT, 0644);
+		if (reds->oper == O_RED_OUTPUT)
+			fd_r_out = open(reds->file, O_RDWR | O_TRUNC | O_CREAT, 0644);
+		else
+			fd_r_out = open(reds->file, O_RDWR | O_APPEND | O_CREAT, 0644);
 		if (fd_r_out == -1)
 			ft_exit(vars, OPEN_FILE_ERROR);
-		close (fd_r_out);
+		if (reds->next)
+			close (fd_r_out);
 		reds = reds->next;
 	}
-	reds = temp->out_file;
-	while (reds->next && reds->next->file)
-		reds = reds->next;
-	fd_r_out = open(reds->file, O_RDWR | O_TRUNC);
-	if (fd_r_out == -1)
-		ft_exit(vars, OPEN_FILE_ERROR);
 	if (dup2(fd_r_out, STDOUT_FILENO) == -1)
 		ft_exit(vars, DUP_ERROR);
 }
@@ -68,13 +66,9 @@ void	ft_child_process(t_vars *vars, int commands, t_prg *temp, int i)
 	else if (i != 0 && dup2(vars->fd[2 * i - 2], STDIN_FILENO) == -1)
 		ft_exit(vars, DUP_ERROR);
 	if (temp->out_file != NULL)
-	{
-
-	}
-	else
-		if (i != commands - 1)
-			if (dup2(vars->fd[2 * i + 1], STDOUT_FILENO) == -1)
-				ft_exit(vars, DUP_ERROR);
+		ft_check_output_file(vars, temp, reds, i);
+	else if (i != --commands && dup2(vars->fd[2 * i + 1], STDOUT_FILENO) == -1)
+		ft_exit(vars, DUP_ERROR);
 	ft_close_pipes(vars->pipe_count, vars->fd);
 	ft_check_prog(vars, temp);
 	ft_free_pipe_fd_and_pid(vars);
