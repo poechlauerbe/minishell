@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 15:07:23 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/09 14:16:09 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/29 19:22:53 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,14 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_vars	vars;
 
-	ft_init(&vars, argc, argv, envp);
-	while (vars.envv)
-	{
-		printf("%s=%s\n", vars.envv->key, vars.envv->val);
-		vars.envv = vars.envv->next;
-	}
+	printf("%s", ft_strjoin(NULL, "hello"));
+
+	// ft_init(&vars, argc, argv, envp);
+	// while (vars.envv)
+	// {
+	// 	printf("%s=%s\n", vars.envv->key, vars.envv->val);
+	// 	vars.envv = vars.envv->next;
+	// }
 }
 
 

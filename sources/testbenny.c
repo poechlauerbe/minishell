@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 10:17:45 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/29 17:06:01 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/29 19:06:41 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int main(int argc, char *argv[])
 	// else if (!vars.syntax_err)
 	// 	ft_pipe(&vars);
 
-	ft_pipe(&vars);
+	// ft_pipe(&vars);
 
 	// temp = vars.p_start;
 	// while (temp)

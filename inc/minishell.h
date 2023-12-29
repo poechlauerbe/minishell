@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/29 17:06:01 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/29 20:23:47 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct s_red
 {
 	char			oper;
 	char			*file;
+	char			*heredoc;
 	struct s_red	*next;
 }		t_red;
 
@@ -139,6 +140,9 @@ void		ft_pwd_conc(t_vars *vars, char **curpath);
 int			ft_can_form(t_vars *vars, char **curpath);
 // if possible, changes the current directory to curpath
 int			ft_chdir(t_vars *vars, char **curpath);
+
+/* b_exit */
+void		ft_exit_prog(t_vars *vars, char **prog);
 
 /* b_export_key_utils */
 // checks if parenthesis are properly closed
