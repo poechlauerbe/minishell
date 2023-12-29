@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 12:23:55 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/29 12:42:35 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/29 14:42:40 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	ft_red_new_node(t_vars *vars, t_red **lst, char *file, char oper)
 		free(new);
 		ft_exit(vars, MALLOC_ERROR);
 	}
-	free(new->file);
+	free(file);
 	new->file = str_wo_q;
 	new->oper = oper;
 	if (*lst == NULL)

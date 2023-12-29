@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 15:30:48 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/29 13:30:55 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/29 14:28:10 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,6 @@ void	ft_red_file(t_vars *vars, t_prg *lst)
 				ft_red_new_node(vars, &prog->out_file, temp->prog[0], temp->oper);
 			else if (temp->oper == '<')
 				ft_red_new_node(vars, &prog->in_file, temp->prog[0], temp->oper);
-			else if (temp->oper == O_APP_OUT)
-				ft_red_new_node(vars, &prog->out_file, temp->prog[0], temp->oper);
 			else if (temp->oper == O_HEREDOC)
 				ft_red_new_node(vars, &prog->in_file, temp->prog[0], temp->oper);
 			temp = temp->next;

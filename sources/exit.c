@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 13:28:25 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/29 12:58:58 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/29 14:36:03 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_free_reds(t_red **file)
 		next = temp;
 		if (temp->file)
 			free(temp->file);
-		free(temp);
+		// free(temp);
 		if (temp == *file)
 			*file = NULL;
 		temp = next;
@@ -45,6 +45,8 @@ void	ft_free_input(t_vars *vars)
 	int		i;
 
 	temp = vars->p_start;
+	// if (vars->inp)
+	// 	free(vars->inp);
 	while (temp)
 	{
 		prog = temp->prog;
