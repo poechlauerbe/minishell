@@ -6,7 +6,7 @@
 #    By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/12/29 16:35:00 by bpochlau         ###   ########.fr        #
+#    Updated: 2023/12/29 17:28:17 by bpochlau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,6 +62,7 @@ SRCS 			= $(addprefix $(SRCS_DIR),\
 				key_value_remove.c \
 				minishell.c \
 				pipe.c \
+				pipe_utils.c \
 				prog.c \
 				input_redirecting.c \
 				signal_handling.c \
@@ -144,6 +145,7 @@ TESTSRC 		= $(addprefix $(SRCS_DIR),\
 				key_value.c \
 				key_value_remove.c \
 				pipe.c \
+				pipe_utils.c \
 				prog.c \
 				input_redirecting.c \
 				signal_handling.c \

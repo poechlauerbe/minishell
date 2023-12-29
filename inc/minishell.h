@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/29 16:56:26 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/29 17:06:01 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -284,7 +284,7 @@ void		ft_remove_links_ao(t_kv **tmp);
 /* pipe */
 // pipe function
 void		ft_pipecount(t_vars *vars);
-void		ft_pipe_loop(t_vars *vars);
+void		ft_pipe(t_vars *vars);
 
 /* pipe_utils */
 // counts how many pipes are in the input

@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 10:17:45 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/29 15:29:23 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/29 17:06:01 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,12 @@ int main(int argc, char *argv[])
 	// if (!vars.pipe_count && !vars.syntax_err)
 	// {
 	// 	if (ft_builtin_check(&vars, vars.p_start) == NOT_USED)
-	// 		ft_pipe_loop(&vars);
+	// 		ft_pipe(&vars);
 	// }
 	// else if (!vars.syntax_err)
-	// 	ft_pipe_loop(&vars);
+	// 	ft_pipe(&vars);
 
-	ft_pipe_loop(&vars);
+	ft_pipe(&vars);
 
 	// temp = vars.p_start;
 	// while (temp)
