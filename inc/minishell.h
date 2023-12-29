@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/29 14:31:06 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/29 16:25:37 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ typedef struct s_vars
 	t_kv		*envv;
 	char		exit_code;
 	int			syntax_err;
+	int			*pid;
+	int			*fd;
 }		t_vars;
 
 typedef struct s_quote
@@ -227,6 +229,8 @@ void		ft_expand_all_vars(t_vars *vars);
 void		ft_expander(t_vars *vars, char **arg, t_quote *quote);
 // function for $?
 int			ft_check_exit_code(t_vars *vars);
+
+/* free */
 
 /* fun echo */
 // writes to the shell in standard output

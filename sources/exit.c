@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 13:28:25 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/29 14:54:25 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/29 16:25:46 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ void	ft_free_input(t_vars *vars)
 	vars->p_start = NULL;
 }
 
+
+
 void	ft_free_envv(t_vars *vars)
 {
 	t_kv	*tmp;
@@ -96,6 +98,7 @@ void	ft_exit(t_vars *vars, int errcd)
 	// else
 	// 	ft_putstr_fd("exit\n", 2);
 	ft_free_input(vars);
+	ft_free_pipes(vars);
 	// ft_free_envv(vars);
 	exit(errcd);
 }
