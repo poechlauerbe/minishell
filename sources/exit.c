@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 13:28:25 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/14 11:21:11 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/29 12:58:58 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,24 @@ void	err_mes(int errcd)
 	ft_putstr_fd("Error\n", 2);
 	ft_putnbr_fd(errcd, 2);
 	ft_putstr_fd("\n", 2);
+}
+
+void	ft_free_reds(t_red **file)
+{
+	t_red	*temp;
+	t_red	*next;
+
+	temp = *file;
+	while (temp)
+	{
+		next = temp;
+		if (temp->file)
+			free(temp->file);
+		free(temp);
+		if (temp == *file)
+			*file = NULL;
+		temp = next;
+	}
 }
 
 void	ft_free_input(t_vars *vars)
@@ -31,6 +49,11 @@ void	ft_free_input(t_vars *vars)
 	{
 		prog = temp->prog;
 		temp2 = temp->next;
+		// printf("%s")
+		// if (temp->in_file)
+		// 	ft_free_reds(&temp->in_file);
+		// if (temp->out_file)
+		// 	ft_free_reds(&temp->out_file);
 		i = 0;
 		while (prog && prog[i])
 		{
@@ -66,10 +89,10 @@ void	ft_exit(t_vars *vars, int errcd)
 {
 	if (errcd > 256)
 		err_mes(errcd);
-	else
-		ft_putstr_fd("exit\n", 2);
+	// else
+	// 	ft_putstr_fd("exit\n", 2);
 	ft_free_input(vars);
-	ft_free_envv(vars);
+	// ft_free_envv(vars);
 	exit(errcd);
 }
 

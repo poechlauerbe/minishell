@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 15:30:48 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/28 17:15:37 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/29 13:30:55 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,8 +146,29 @@ int	ft_check_redirect_file(t_vars *vars)
 	return (OK);
 }
 
+int	ft_start_pipe(t_vars *vars)
+{
+	int		i;
+	char	*temp;
+
+	temp = vars->inp;
+	i = 0;
+	while (temp[i] && (temp[i] == 32 || (temp[i] > 8 && temp[i] < 14)))
+		i++;
+	if (temp[i] == '|')
+	{
+		vars->exit_code = SYNTAX_ERROR;
+		vars->syntax_err = SYNTAX_ERROR;
+		ft_printf_fd(2, "bash: syntax error near unexpected token `|'\n");
+		return (SYNTAX_ERROR);
+	}
+	return (OK);
+}
+
 void	ft_check_input(t_vars *vars)
 {
+	if (ft_start_pipe(vars))
+		return ;
 	if (ft_check_redirect_file(vars))
 		return ;
 	ft_check_string_count(vars, vars->inp);

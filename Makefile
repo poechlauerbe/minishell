@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+         #
+#    By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/12/15 16:20:03 by tbenz            ###   ########.fr        #
+#    Updated: 2023/12/28 18:35:23 by bpochlau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -119,6 +119,12 @@ valgrind:		$(NAME)
 				--track-fds=yes --trace-children=yes ./minishell
 
 TESTSRC 		= $(addprefix $(SRCS_DIR),\
+				b_cd_dot.c \
+				b_cd_dotdot.c \
+				b_cd_dotdot2.c \
+				b_cd_path.c \
+				b_cd_slashes.c \
+				b_cd_utils.c \
 				builtins.c \
 				b_exit.c \
 				b_export_key_utils.c \

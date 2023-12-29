@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 15:46:51 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/13 12:22:12 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/29 12:04:45 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,10 +152,15 @@ void	ft_pipe_loop(t_vars *vars)
 						ft_exit(vars, DUP_ERROR);
 			ft_close_pipes(vars->pipe_count, fd);
 			ft_check_prog(vars, temp);
+			free(pid);
+			free(fd);
+			ft_exit(vars, OK);
 		}
 		temp = temp->next;
 	}
 	ft_close_pipes(vars->pipe_count, fd);
+	// if (pid[i] == 0)
+	// 	ft_exit(vars, OK);
 	i = -1;
 	while (++i < commands)
 		waitpid(pid[i], &status, 0);

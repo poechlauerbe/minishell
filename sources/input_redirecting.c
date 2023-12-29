@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_redirecting.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 12:23:55 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/15 07:20:48 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/29 12:42:35 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	ft_red_new_node(t_vars *vars, t_red **lst, char *file, char oper)
 	t_red	*temp;
 	char	*str_wo_q;
 
-	new = malloc(sizeof(t_red));
+	new = ft_calloc(1, sizeof(t_red));
 	if (!new)
 		ft_exit(vars, MALLOC_ERROR);
 	new->next = NULL;
@@ -55,8 +55,8 @@ void	ft_red_new_node(t_vars *vars, t_red **lst, char *file, char oper)
 		free(new);
 		ft_exit(vars, MALLOC_ERROR);
 	}
+	free(new->file);
 	new->file = str_wo_q;
-	// free(file);
 	new->oper = oper;
 	if (*lst == NULL)
 		*lst = new;
@@ -72,9 +72,19 @@ void	ft_red_new_node(t_vars *vars, t_red **lst, char *file, char oper)
 void	ft_cleanup_lst(t_vars *vars)
 {
 	t_prg	*temp;
+	t_prg	*temp2;
+	int		flag;
 
+	flag = 0;
 	temp = vars->p_start;
-	if (temp->oper == '0' && (!temp->prog || !*temp->prog))
+	temp2 = vars->p_start->next;
+	while (temp2 && temp2->oper != '|')
+	{
+		if (temp2->oper == '0')
+			flag++;
+		temp2 = temp2->next;
+	}
+	if (temp->oper == '0' && (!temp->prog || !*temp->prog) && flag)
 	{
 		vars->p_start = temp->next;
 		free(temp->prog);
