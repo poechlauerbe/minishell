@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 13:28:25 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/29 16:25:46 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/29 16:32:12 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,60 +17,6 @@ void	err_mes(int errcd)
 	ft_putstr_fd("Error\n", 2);
 	ft_putnbr_fd(errcd, 2);
 	ft_putstr_fd("\n", 2);
-}
-
-void	ft_free_reds(t_red **file)
-{
-	t_red	*temp;
-	t_red	*next;
-
-	temp = *file;
-	while (temp)
-	{
-		next = temp->next;
-		if (temp->file)
-		{
-			free(temp->file);
-			temp->file = NULL;
-		}
-		free(temp);
-		if (temp == *file)
-			*file = NULL;
-		temp = next;
-	}
-}
-
-void	ft_free_input(t_vars *vars)
-{
-	t_prg	*temp;
-	t_prg	*temp2;
-	char	**prog;
-	int		i;
-
-	temp = vars->p_start;
-	// if (vars->inp)
-	// 	free(vars->inp);
-	while (temp)
-	{
-		prog = temp->prog;
-		temp2 = temp->next;
-		if (temp->in_file)
-			ft_free_reds(&temp->in_file);
-		if (temp->out_file)
-			ft_free_reds(&temp->out_file);
-		i = 0;
-		while (prog && prog[i])
-		{
-			free(prog[i]);
-			i++;
-		}
-		if (prog)
-			free(prog);
-		if (temp)
-			free(temp);
-		temp = temp2;
-	}
-	vars->p_start = NULL;
 }
 
 

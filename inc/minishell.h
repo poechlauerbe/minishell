@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/29 16:25:37 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/29 16:32:51 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -231,6 +231,8 @@ void		ft_expander(t_vars *vars, char **arg, t_quote *quote);
 int			ft_check_exit_code(t_vars *vars);
 
 /* free */
+void	ft_free_pipes(t_vars *vars);
+void	ft_free_input(t_vars *vars);
 
 /* fun echo */
 // writes to the shell in standard output
