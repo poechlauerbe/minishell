@@ -6,13 +6,13 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 16:24:45 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/29 16:32:22 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/29 16:40:38 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-void	ft_free_pipes(t_vars *vars)
+void	ft_free_pipe_fd_and_pid(t_vars *vars)
 {
 	if (vars->pid)
 	{
