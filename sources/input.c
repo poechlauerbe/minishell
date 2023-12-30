@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 15:30:48 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/30 21:19:02 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/30 21:45:07 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,7 @@ int	ft_check_redirect_file(t_vars *vars)
 	return (OK);
 }
 
-int	ft_start_pipe(t_vars *vars)
+int	ft_start(t_vars *vars)
 {
 	int		i;
 	char	*temp;
@@ -165,11 +165,18 @@ int	ft_start_pipe(t_vars *vars)
 	i = 0;
 	while (temp[i] && (temp[i] == 32 || (temp[i] > 8 && temp[i] < 14)))
 		i++;
-	if (temp[i] == '|')
+	if (temp[i] == '|' || temp[i] == '}')
 	{
 		vars->exit_code = SYNTAX_ERROR;
 		vars->no_exec = SYNTAX_ERROR;
-		ft_printf_fd(2, "bash: syntax error near unexpected token `|'\n");
+		ft_printf_fd(2, "bash: syntax error near unexpected token `%c'\n", temp[i]);
+		return (SYNTAX_ERROR);
+	}
+	else if (temp[i] == '{')
+	{
+		vars->exit_code = SYNTAX_ERROR;
+		vars->no_exec = SYNTAX_ERROR;
+		ft_printf_fd(2, "bash: not handled in minishell`%c'\n", temp[i]);
 		return (SYNTAX_ERROR);
 	}
 	return (OK);
@@ -177,7 +184,7 @@ int	ft_start_pipe(t_vars *vars)
 
 void	ft_check_input(t_vars *vars)
 {
-	if (ft_start_pipe(vars))
+	if (ft_start(vars))
 		return ;
 	if (ft_check_redirect_file(vars))
 		return ;
