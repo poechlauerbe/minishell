@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 14:33:20 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/30 12:51:08 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/30 13:01:57 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,16 @@ int	main(int argc, char **argv, char **envp)
 		ft_printf("PWD: %s\n", ft_return_val(&vars, "PWD"));
 	}
 	free (curpath);
+	ft_exit(&vars, OK);
+} */
+
+/* int	main(int argc, char **argv, char **envp)
+{
+	t_vars	vars;
+
+	ft_init(&vars, argc, argv, envp);
+	vars.inp = "export var";
+	ft_check_input(&vars);
+	ft_export(&vars);
 	ft_exit(&vars, OK);
 } */

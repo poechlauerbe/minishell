@@ -6,7 +6,7 @@
 #    By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/12/30 12:49:03 by tbenz            ###   ########.fr        #
+#    Updated: 2023/12/30 12:59:24 by tbenz            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,7 @@ SRCS 			= $(addprefix $(SRCS_DIR),\
 				b_echo.c \
 				b_exit.c \
 				b_export_key_utils.c \
+				b_export_new_envp.c \
 				b_export_value_utils.c \
 				b_export_print.c \
 				b_export_print_utils.c \
