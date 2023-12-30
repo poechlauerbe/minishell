@@ -5,10 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/09 14:49:29 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/22 13:04:14 by tbenz            ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2023/12/30 12:49:26 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../inc/minishell.h"
 
@@ -72,15 +73,8 @@ int	ft_cd(t_vars *vars)
 
 	if (vars->p_start->prog[1] && vars->p_start->prog[2])
 		return (ft_printf_fd(2, "cd: too many arguments\n"));
-	if (vars->p_start->prog[1])
-	{
-		cp = (char *)calloc(ft_strlen(vars->p_start->prog[1]) + 1, \
-				sizeof(char));
-		if (!cp)
-			ft_exit(vars, MALLOC_ERROR);
-		ft_strlcpy(cp, vars->p_start->prog[1], \
-					ft_strlen(vars->p_start->prog[1]) + 1);
-	}
+	else if (vars->p_start->prog[1])
+		ft_malloc_cp(vars, &cp, vars->p_start->prog[1]);
 	else
 		cp = NULL;
 	if (!cp)
@@ -88,22 +82,12 @@ int	ft_cd(t_vars *vars)
 		if (!ft_return_val(vars, "HOME"))
 			return (ft_printf_fd(2, "cd: HOME not set\n"));
 		else
-		{
-			cp = (char *)calloc(ft_strlen(ft_return_val(vars, "HOME")) \
-			+ 1, sizeof(char));
-			if (!cp)
-				ft_exit(vars, MALLOC_ERROR);
-			ft_strlcpy(cp, ft_return_val(vars, "HOME"), ft_strlen(ft_return_val(vars, "HOME")) + 1);
-		}
+			ft_malloc_cp(vars, &cp, ft_return_val(vars, "HOME"));
 	}
 	else if (cp[0] != '/')
 		ft_check_pot_path(vars, &cp);
 	ft_pwd_conc(vars, &cp);
 	if (ft_can_form(vars, &cp))
-	{
-		ft_printf_fd(2, "cd: No such file or directory: %s", \
-		vars->p_start->prog[2]);
 		return (1);
-	}
 	return (ft_chdir(vars, &cp));
 }
