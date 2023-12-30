@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   macros_minishell.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 13:52:29 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/29 13:04:29 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/30 12:43:48 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

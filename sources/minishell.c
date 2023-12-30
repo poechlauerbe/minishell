@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 14:33:20 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/29 17:06:01 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/30 12:43:36 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	main(int argc, char **argv, char **envp)
 {
 	int		i = 0;
 	char	*curpath;
-	char	*test = "cd ..";
+	char	*test = "cd '/nfs/homes/tbenz/Desktop/42 Core Curriculum'";
 	// char	*test = "";
 	t_vars	vars;
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/29 17:06:01 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/30 12:42:54 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ typedef struct s_quote
 /* dot components and any slash characters that separate them from the next
 	component are deleted*/
 void		ft_remove_dot(t_vars *vars, char **curpath);
+// createst new curpath removing single dots
+void		ft_cur_wo_dot(t_vars *vars, char **curpath, int len);
 // counts the length of the string that shall be created
 int			ft_remove_dot_counter(char *curpath);
 
@@ -133,6 +135,8 @@ int			ft__remove_nl_len(char *cp);
 void		ft_remove_ls(t_vars *vars, char **cp);
 
 /* b_cd_utils */
+// callocs a new current path
+void		ft_malloc_cp(t_vars *vars, char **cp, char *str);
 // if curpath doesn't start with a dot, joins the PWD with curpath
 void		ft_pwd_conc(t_vars *vars, char **curpath);
 // converts curpath according to the canonical form
