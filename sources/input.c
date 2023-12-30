@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 15:30:48 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/30 13:16:13 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/30 20:58:14 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,18 @@ int	ft_check_redirect_file(t_vars *vars)
 				vars->no_exec = no_execOR;
 				vars->exit_code = no_execOR;
 				return (no_execOR);
+			}
+			else
+			{
+				while (temp[j] && (temp[j] == 32 || (temp[j] > 8 && temp[j] < 14)))
+					j++;
+				if (temp[j] == '|')
+				{
+					ft_printf_fd(2, "bash: syntax error near unexpected token `%c'\n", 	temp[j]);
+					vars->no_exec = no_execOR;
+					vars->exit_code = no_execOR;
+					return (no_execOR);
+				}
 			}
 			i = j;
 		}
