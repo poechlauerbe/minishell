@@ -6,11 +6,12 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 15:07:23 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/29 19:22:53 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/30 13:17:20 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "../inc/minishell.h"
+#include "../inc/minishell.h"
 
 /* int main (void)
 {
@@ -29,42 +30,32 @@
 //  return 0;
 // }
 
-#include "../inc/minishell.h"
 
-int	main(int argc, char **argv, char **envp)
+/* int	main(int argc, char **argv, char **envp)
 {
 	t_vars	vars;
+/nfs/homes/tbenz/Desktop/42 Core Curriculum
+	ft_init(&vars, argc, argv, envp);
+	while (vars.envv)
+	{
+		printf("%s=%s\n", vars.envv->key, vars.envv->val);
+		vars.envv = vars.envv->next;
+	}
+} */
 
-	printf("%s", ft_strjoin(NULL, "hello"));
-
-	// ft_init(&vars, argc, argv, envp);
-	// while (vars.envv)
-	// {
-	// 	printf("%s=%s\n", vars.envv->key, vars.envv->val);
-	// 	vars.envv = vars.envv->next;
-	// }
-}
-
-
-
-/*
-	Thorben test env-key values
-int	main(int argc, char **argv, char **envp)
+/* int	main(int argc, char **argv, char **envp)
 {
 	t_vars	vars;
-	// t_kv	*first;
 
 	ft_init(&vars, argc, argv, envp);
-	ft_order_envv(&vars);
-	ft_add_envv(&vars, "HANS", "eins", 1);
-	char *input_new = {"export HANS"};
-	vars.inp = input_new;
+	char *inp = "cd /nfs/homes/tbenz/Desktop";
+	// ft_printf("%s", inp);
+	vars.inp = inp;
 	ft_check_input(&vars);
-	ft_input(&vars);
-	ft_free_input(&vars);
-	char *input_new2 = {"export"};
-	vars.inp = input_new2;
+	ft_builtin_check(&vars, vars.p_start);
+	char *inp2 = "cd \"42 Core Curriculum\"";
+	vars.inp = inp2;
 	ft_check_input(&vars);
-	ft_input(&vars);
-}
-*/
+	ft_builtin_check(&vars, vars.p_start);
+	ft_exit(&vars, OK);
+} */

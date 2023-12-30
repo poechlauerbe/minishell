@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 13:41:52 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/29 20:26:29 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/30 13:17:02 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,10 @@ int	ft_builtin_check(t_vars *vars, t_prg *prog)
 	else if (ft_strncmp(prog->prog[0], "cd", 3) == 0)
 		ft_cd(vars);
 	else
-		return (NOT_USED);
+	{
+		if (ft_check_shvar(vars, prog))
+			return (NOT_USED);
+	}
 	vars->exit_code = OK;
 	return (USED);
 }
@@ -70,7 +73,7 @@ void	ft_check_path(t_vars *vars, t_prg *prog)
 			ft_exit(vars, MALLOC_ERROR);
 		free(dir);
 		if (access(c_prog, F_OK | X_OK) == OK)
-			execve(c_prog, prog->prog, NULL);
+			execve(c_prog, prog->prog, vars->envp);
 		if (line[i])
 			i++;
 	}

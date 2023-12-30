@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+         #
+#    By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/12/29 17:28:17 by bpochlau         ###   ########.fr        #
+#    Updated: 2023/12/30 13:06:41 by tbenz            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,11 +47,13 @@ SRCS 			= $(addprefix $(SRCS_DIR),\
 				b_echo.c \
 				b_exit.c \
 				b_export_key_utils.c \
+				b_export_new_envp.c \
 				b_export_value_utils.c \
 				b_export_print.c \
 				b_export_print_utils.c \
 				environment_var.c \
 				exit.c \
+				expand_home.c \
 				expand.c \
 				free.c \
 				input.c \
@@ -66,6 +68,8 @@ SRCS 			= $(addprefix $(SRCS_DIR),\
 				prog.c \
 				input_redirecting.c \
 				signal_handling.c \
+				shell_variables.c \
+				test.c \
 				utils.c)
 
 OBJ				= $(SRCS:.c=.o)
@@ -149,6 +153,7 @@ TESTSRC 		= $(addprefix $(SRCS_DIR),\
 				prog.c \
 				input_redirecting.c \
 				signal_handling.c \
+				test.c \
 				utils.c \
 				testbenny.c)
 

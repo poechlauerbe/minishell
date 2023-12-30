@@ -1,48 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   b_cd_dotdot2.c                                     :+:      :+:    :+:   */
+/*   shell_variables.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/15 12:41:44 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/18 12:35:23 by tbenz            ###   ########.fr       */
+/*   Created: 2023/12/21 14:51:31 by tbenz             #+#    #+#             */
+/*   Updated: 2023/12/22 13:05:30 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-int	ft_dot_dot_len(char *cp, int i)
+int	ft_check_shvar(t_vars *vars, t_prg *prog)
 {
-	int	len;
+	char	*key;
+	char	*val;
+	int		i;
+	int		j;
 
-	len = 0;
-	if (!ft_strncmp(&cp[i], "/../", 4))
+	i = 0;
+	j = 0;
+	while(prog->prog[i])
 	{
-		len += 4;
-		i += 4;
-	}
-	else if (!ft_strncmp(&cp[i], "/..\0", 4))
-	{
-		len += 3;
-		i += 3;
-	}
-	while (cp[i++] == '/')
-		len++;
-	return (len);
-}
-
-int	ft_remove_dd_currlen(char *cp, int i)
-{
-	int	len;
-
-	len = 0;
-	while (cp[i] && cp[i] != '/')
-	{
-		len++;
+		if (strchr(prog->prog[i], '='))
+		{
+			key = ft_exp_key(vars, prog->prog[i], 1);
+			val = ft_exp_value(vars, prog->prog[i]);
+			if (!key || ! val)
+			{
+				if (key)
+					free (key);
+				if (val)
+					free (val);
+				return (1);
+			}
+			ft_add_envv(vars, key, val, 1);
+			j++;
+		}
 		i++;
 	}
-	while (cp[i++] == '/')
-		len++;
-	return (len);
+	if (j)
+		return (0);
+	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/30 12:20:00 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/30 13:14:45 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ typedef struct s_vars
 	int			pipe_count;
 	t_kv		*envv;
 	char		exit_code;
+	char		**envp;
+	int			alloc;
 	int			no_exec;
 	int			*pid;
 	int			*fd;
@@ -83,6 +85,8 @@ typedef struct s_quote
 /* dot components and any slash characters that separate them from the next
 	component are deleted*/
 void		ft_remove_dot(t_vars *vars, char **curpath);
+// createst new curpath removing single dots
+void		ft_cur_wo_dot(t_vars *vars, char **curpath, int len);
 // counts the length of the string that shall be created
 int			ft_remove_dot_counter(char *curpath);
 
@@ -134,6 +138,8 @@ int			ft__remove_nl_len(char *cp);
 void		ft_remove_ls(t_vars *vars, char **cp);
 
 /* b_cd_utils */
+// callocs a new current path
+void		ft_malloc_cp(t_vars *vars, char **cp, char *str);
 // if curpath doesn't start with a dot, joins the PWD with curpath
 void		ft_pwd_conc(t_vars *vars, char **curpath);
 // converts curpath according to the canonical form
@@ -149,10 +155,13 @@ void		ft_exit_prog(t_vars *vars, char **prog);
 int			ft_check_enclosing(char **arg, t_vars *vars);
 // extracts the key of argument
 char		*ft_copy_key(t_vars *vars, char *arg);
-// returns a copy of the key if it is valid or NULL if it is not valid
-char		*ft_exp_key(t_vars *vars, char *arg);
-// checks the key for valid input
-int			ft_exp_keychecker(char *arg, char *comp);
+/* returns a copy of the key if it is valid or NULL if it is not valid
+	func is set to 0 if export calls, and to 1 if shvar calls */
+char		*ft_exp_key(t_vars *vars, char *arg, int func);
+/* checks the key for valid input; if func is 0 (keychecker called by export)
+	prints error messages; if func is set to 1 (called by shvar) doesn't print
+	error messages */
+int			ft_exp_keychecker(char *arg, char *comp, int func);
 // gets the length
 int			ft_key_len(char *arg);
 
@@ -317,5 +326,20 @@ void		ft_pwd(void);
 void		ft_set_val(t_vars *vars, t_kv **var, t_kv **tmp);
 // compares two strings (here: key-pairs) and returns 0 if they match.
 int			ft_strcmp(const char *s1, const char *s2);
+
+
+void	ft_home(t_vars *vars, char **curpath);
+void	ft_etc_passwd_loop(t_vars *vars, char **str, char **tmp, int fd);
+void	ft_etc_passwd(t_vars *vars, char **str, char **tmp);
+void	ft_home_expand(t_vars *vars, char **str);
+
+void	ft_new_envp(t_vars *vars);
+void	ft_free_envp(char **envp);
+void	ft_malloc_envp(t_vars *vars, char ***arr);
+int		ft_envp_len(t_vars *vars);
+void	ft_remove_envp(t_vars *vars, char *key);
+void	ft_malloc_envpr(t_vars *vars, char ***arr, char *key);
+
+int			ft_check_shvar(t_vars *vars, t_prg *prog);
 
 #endif
