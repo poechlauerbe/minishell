@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/30 12:58:20 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/30 13:07:12 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -322,6 +322,12 @@ void		ft_pwd(void);
 void		ft_set_val(t_vars *vars, t_kv **var, t_kv **tmp);
 // compares two strings (here: key-pairs) and returns 0 if they match.
 int			ft_strcmp(const char *s1, const char *s2);
+
+
+void	ft_home(t_vars *vars, char **curpath);
+void	ft_etc_passwd_loop(t_vars *vars, char **str, char **tmp, int fd);
+void	ft_etc_passwd(t_vars *vars, char **str, char **tmp);
+void	ft_home_expand(t_vars *vars, char **str);
 
 void	ft_new_envp(t_vars *vars);
 void	ft_free_envp(char **envp);
