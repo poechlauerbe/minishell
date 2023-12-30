@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/30 12:42:54 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/30 12:49:54 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,10 +149,13 @@ int			ft_chdir(t_vars *vars, char **curpath);
 int			ft_check_enclosing(char **arg, t_vars *vars);
 // extracts the key of argument
 char		*ft_copy_key(t_vars *vars, char *arg);
-// returns a copy of the key if it is valid or NULL if it is not valid
-char		*ft_exp_key(t_vars *vars, char *arg);
-// checks the key for valid input
-int			ft_exp_keychecker(char *arg, char *comp);
+/* returns a copy of the key if it is valid or NULL if it is not valid
+	func is set to 0 if export calls, and to 1 if shvar calls */
+char		*ft_exp_key(t_vars *vars, char *arg, int func);
+/* checks the key for valid input; if func is 0 (keychecker called by export)
+	prints error messages; if func is set to 1 (called by shvar) doesn't print
+	error messages */
+int			ft_exp_keychecker(char *arg, char *comp, int func);
 // gets the length
 int			ft_key_len(char *arg);
 
@@ -317,5 +320,7 @@ void		ft_pwd(void);
 void		ft_set_val(t_vars *vars, t_kv **var, t_kv **tmp);
 // compares two strings (here: key-pairs) and returns 0 if they match.
 int			ft_strcmp(const char *s1, const char *s2);
+
+int			ft_check_shvar(t_vars *vars, t_prg *prog);
 
 #endif

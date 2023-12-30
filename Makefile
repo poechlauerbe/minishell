@@ -6,7 +6,7 @@
 #    By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/12/30 12:43:19 by tbenz            ###   ########.fr        #
+#    Updated: 2023/12/30 12:49:03 by tbenz            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,6 +66,7 @@ SRCS 			= $(addprefix $(SRCS_DIR),\
 				prog.c \
 				input_redirecting.c \
 				signal_handling.c \
+				shell_variables.c \
 				test.c \
 				utils.c)
 
@@ -150,6 +151,7 @@ TESTSRC 		= $(addprefix $(SRCS_DIR),\
 				prog.c \
 				input_redirecting.c \
 				signal_handling.c \
+				test.c \
 				utils.c \
 				testbenny.c)
 

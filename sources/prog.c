@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prog.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 13:41:52 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/29 16:14:05 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/30 12:51:28 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,10 @@ int	ft_builtin_check(t_vars *vars, t_prg *prog)
 	else if (ft_strncmp(prog->prog[0], "cd", 3) == 0)
 		ft_cd(vars);
 	else
-		return (NOT_USED);
+	{
+		if (ft_check_shvar(vars, prog))
+			return (NOT_USED);
+	}
 	vars->exit_code = OK;
 	return (USED);
 }

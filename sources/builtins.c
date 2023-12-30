@@ -5,10 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/09 14:49:29 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/18 13:40:33 by tbenz            ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2023/12/30 12:49:26 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../inc/minishell.h"
 
@@ -38,7 +39,7 @@ void	ft_export(t_vars *vars)
 	{
 		while (vars->p_start->prog[i])
 		{
-			id = ft_exp_key(vars, vars->p_start->prog[i]);
+			id = ft_exp_key(vars, vars->p_start->prog[i], 0);
 			if (!id)
 				return ;
 			value = ft_exp_value(vars, vars->p_start->prog[i]);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 12:15:16 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/13 16:24:56 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/21 16:10:49 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ void	ft_expand_env(t_vars *vars, char **arg, t_quote *quote, int i)
 		ft_exit(vars, MALLOC_ERROR);
 	ft_strlcpy(str, &(arg[0][i]), len);
 	temp = ft_return_val(vars, str);
+	free (str);
 	if (temp)
 	{
 		ft_expand_str(vars, arg, quote, temp);
