@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/29 20:23:47 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/30 12:20:00 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ typedef struct s_vars
 	int			pipe_count;
 	t_kv		*envv;
 	char		exit_code;
-	int			syntax_err;
+	int			no_exec;
 	int			*pid;
 	int			*fd;
 }		t_vars;

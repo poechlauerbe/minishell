@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 10:17:45 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/29 19:06:41 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/30 12:20:00 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,12 @@ int main(int argc, char *argv[])
 	vars.inp = argv[1];
 	vars.exit_code = 99;
 	ft_check_input(&vars);
-	// if (!vars.pipe_count && !vars.syntax_err)
+	// if (!vars.pipe_count && !vars.no_exec)
 	// {
 	// 	if (ft_builtin_check(&vars, vars.p_start) == NOT_USED)
 	// 		ft_pipe(&vars);
 	// }
-	// else if (!vars.syntax_err)
+	// else if (!vars.no_exec)
 	// 	ft_pipe(&vars);
 
 	// ft_pipe(&vars);
