@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/18 15:56:24 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/30 13:07:12 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,11 @@ typedef struct s_vars
 	int			pipe_count;
 	t_kv		*envv;
 	char		exit_code;
+	char		**envp;
+	int			alloc;
+	int			syntax_err;
+	int			*pid;
+	int			*fd;
 }		t_vars;
 
 typedef struct s_quote
@@ -79,6 +84,8 @@ typedef struct s_quote
 /* dot components and any slash characters that separate them from the next
 	component are deleted*/
 void		ft_remove_dot(t_vars *vars, char **curpath);
+// createst new curpath removing single dots
+void		ft_cur_wo_dot(t_vars *vars, char **curpath, int len);
 // counts the length of the string that shall be created
 int			ft_remove_dot_counter(char *curpath);
 
@@ -130,22 +137,27 @@ int			ft__remove_nl_len(char *cp);
 void		ft_remove_ls(t_vars *vars, char **cp);
 
 /* b_cd_utils */
+// callocs a new current path
+void		ft_malloc_cp(t_vars *vars, char **cp, char *str);
 // if curpath doesn't start with a dot, joins the PWD with curpath
 void		ft_pwd_conc(t_vars *vars, char **curpath);
 // converts curpath according to the canonical form
 int			ft_can_form(t_vars *vars, char **curpath);
 // if possible, changes the current directory to curpath
-int		ft_chdir(t_vars *vars, char **curpath);
+int			ft_chdir(t_vars *vars, char **curpath);
 
 /* b_export_key_utils */
 // checks if parenthesis are properly closed
 int			ft_check_enclosing(char **arg, t_vars *vars);
 // extracts the key of argument
 char		*ft_copy_key(t_vars *vars, char *arg);
-// returns a copy of the key if it is valid or NULL if it is not valid
-char		*ft_exp_key(t_vars *vars, char *arg);
-// checks the key for valid input
-int			ft_exp_keychecker(char *arg, char *comp);
+/* returns a copy of the key if it is valid or NULL if it is not valid
+	func is set to 0 if export calls, and to 1 if shvar calls */
+char		*ft_exp_key(t_vars *vars, char *arg, int func);
+/* checks the key for valid input; if func is 0 (keychecker called by export)
+	prints error messages; if func is set to 1 (called by shvar) doesn't print
+	error messages */
+int			ft_exp_keychecker(char *arg, char *comp, int func);
 // gets the length
 int			ft_key_len(char *arg);
 
@@ -227,6 +239,10 @@ void		ft_expander(t_vars *vars, char **arg, t_quote *quote);
 // function for $?
 int			ft_check_exit_code(t_vars *vars);
 
+/* free */
+void		ft_free_pipe_fd_and_pid(t_vars *vars);
+void		ft_free_input(t_vars *vars);
+
 /* fun echo */
 // writes to the shell in standard output
 void		ft_echo(t_vars *vars, char **str);
@@ -277,7 +293,17 @@ void		ft_remove_links_ao(t_kv **tmp);
 /* pipe */
 // pipe function
 void		ft_pipecount(t_vars *vars);
-void		ft_pipe_loop(t_vars *vars);
+void		ft_pipe(t_vars *vars);
+
+/* pipe_utils */
+// counts how many pipes are in the input
+void		ft_pipecount(t_vars *vars);
+// closes all the open pipes of the pipeloop
+void		ft_close_pipes(int pipe_nr, int *fd);
+// checks if the input file is accesable
+int			ft_check_in_access(char *file, int *pid, int i);
+// checks if the output file is accesable
+int			ft_check_out_access(char *file, int *pid, int i);
 
 /* prog */
 void		ft_check_prog(t_vars *vars, t_prg *prog);
@@ -302,5 +328,14 @@ void	ft_home(t_vars *vars, char **curpath);
 void	ft_etc_passwd_loop(t_vars *vars, char **str, char **tmp, int fd);
 void	ft_etc_passwd(t_vars *vars, char **str, char **tmp);
 void	ft_home_expand(t_vars *vars, char **str);
+
+void	ft_new_envp(t_vars *vars);
+void	ft_free_envp(char **envp);
+void	ft_malloc_envp(t_vars *vars, char ***arr);
+int		ft_envp_len(t_vars *vars);
+void	ft_remove_envp(t_vars *vars, char *key);
+void	ft_malloc_envpr(t_vars *vars, char ***arr, char *key);
+
+int			ft_check_shvar(t_vars *vars, t_prg *prog);
 
 #endif

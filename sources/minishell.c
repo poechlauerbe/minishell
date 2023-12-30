@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 14:33:20 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/18 16:44:23 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/30 13:08:44 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,15 @@ int	main(int argc, char **argv, char **envp)
 		{
 			add_history(vars.inp);
 			ft_check_input(&vars);
-			if (!vars.pipe_count)
+			if (!vars.pipe_count && !vars.syntax_err)
 			{
 				if (ft_builtin_check(&vars, vars.p_start) == NOT_USED)
-					ft_pipe_loop(&vars);
+					ft_pipe(&vars);
 			}
-			else
-				ft_pipe_loop(&vars);
+			else if (!vars.syntax_err)
+				ft_pipe(&vars);
 			ft_free_input(&vars);
+			vars.syntax_err = OK;
 		}
 		free(vars.inp);
 		vars.inp = NULL;
@@ -45,7 +46,7 @@ int	main(int argc, char **argv, char **envp)
 {
 	int		i = 0;
 	char	*curpath;
-	char	*test = "cd ..";
+	char	*test = "cd '/nfs/homes/tbenz/Desktop/42 Core Curriculum'";
 	// char	*test = "";
 	t_vars	vars;
 
@@ -71,5 +72,16 @@ int	main(int argc, char **argv, char **envp)
 		ft_printf("PWD: %s\n", ft_return_val(&vars, "PWD"));
 	}
 	free (curpath);
+	ft_exit(&vars, OK);
+} */
+
+/* int	main(int argc, char **argv, char **envp)
+{
+	t_vars	vars;
+
+	ft_init(&vars, argc, argv, envp);
+	vars.inp = "export var";
+	ft_check_input(&vars);
+	ft_export(&vars);
 	ft_exit(&vars, OK);
 } */

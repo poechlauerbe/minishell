@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thorben <thorben@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/09 14:49:29 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/17 17:22:12 by thorben          ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2023/12/30 13:00:18 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../inc/minishell.h"
 
@@ -22,7 +23,12 @@ void	ft_env(t_vars *vars)
 	while (tmp)
 	{
 		if (tmp->id == 'x')
-			printf("%s=%s\n", tmp->key, tmp->val);
+		{
+			if (tmp->val)
+				printf("%s=%s\n", tmp->key, tmp->val);
+			else
+				printf("%s\n", tmp->key);
+		}
 		tmp = tmp->next;
 	}
 }
@@ -30,7 +36,7 @@ void	ft_env(t_vars *vars)
 void	ft_export(t_vars *vars)
 {
 	int		i;
-	char	*id;
+	char	*key;
 	char	*value;
 
 	i = 1;
@@ -38,13 +44,12 @@ void	ft_export(t_vars *vars)
 	{
 		while (vars->p_start->prog[i])
 		{
-			id = ft_exp_key(vars, vars->p_start->prog[i]);
+			id = ft_exp_key(vars, vars->p_start->prog[i], 0);
 			if (!id)
 				return ;
 			value = ft_exp_value(vars, vars->p_start->prog[i]);
-			if (!value)
-				return ;
-			ft_add_envv(vars, id, value, 0);
+			ft_add_envv(vars, key, value, 0);
+			ft_new_envp(vars);
 			i++;
 		}
 	}
@@ -62,6 +67,7 @@ void	ft_unset(t_vars *vars)
 	while (key)
 	{
 		ft_remove_envv(vars, key);
+		ft_new_envp(vars);
 		key = vars->p_start->prog[++i];
 	}
 }
@@ -72,15 +78,8 @@ int	ft_cd(t_vars *vars)
 
 	if (vars->p_start->prog[1] && vars->p_start->prog[2])
 		return (ft_printf_fd(2, "cd: too many arguments\n"));
-	if (vars->p_start->prog[1])
-	{
-		cp = (char *)calloc(ft_strlen(vars->p_start->prog[1]) + 1, \
-				sizeof(char));
-		if (!cp)
-			ft_exit(vars, MALLOC_ERROR);
-		ft_strlcpy(cp, vars->p_start->prog[1], \
-					ft_strlen(vars->p_start->prog[1]) + 1);
-	}
+	else if (vars->p_start->prog[1])
+		ft_malloc_cp(vars, &cp, vars->p_start->prog[1]);
 	else
 		cp = NULL;
 	if (!cp)
@@ -88,22 +87,12 @@ int	ft_cd(t_vars *vars)
 		if (!ft_return_val(vars, "HOME"))
 			return (ft_printf_fd(2, "cd: HOME not set\n"));
 		else
-		{
-			cp = (char *)calloc(ft_strlen(ft_return_val(vars, "HOME")) \
-			+ 1, sizeof(char));
-			if (!cp)
-				ft_exit(vars, MALLOC_ERROR);
-			ft_strlcpy(cp, ft_return_val(vars, "HOME"), ft_strlen(ft_return_val(vars, "HOME")) + 1);
-		}
+			ft_malloc_cp(vars, &cp, ft_return_val(vars, "HOME"));
 	}
 	else if (cp[0] != '/')
 		ft_check_pot_path(vars, &cp);
 	ft_pwd_conc(vars, &cp);
 	if (ft_can_form(vars, &cp))
-	{
-		ft_printf_fd(2, "cd: No such file or directory: %s", \
-		vars->p_start->prog[2]);
 		return (1);
-	}
 	return (ft_chdir(vars, &cp));
 }

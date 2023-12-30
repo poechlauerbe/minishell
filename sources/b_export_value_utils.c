@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_export_value_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 13:14:23 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/13 13:29:00 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/20 17:40:15 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,17 +57,12 @@ char	*ft_exp_value(t_vars *vars, char *arg)
 	while (*arg != '=' && *arg != '\0')
 		arg++;
 	if (*arg == '\0')
-	{
-		value = (char *)malloc(sizeof(char));
-		if (!value)
-			ft_exit(vars, MALLOC_ERROR);
-		value[0] = '\0';
-	}
+		return (NULL);
 	else
 	{
 		arg++;
-		if (ft_check_enclosing(&arg, vars))
-			return (NULL);
+		// if (ft_check_enclosing(&arg, vars))
+		// 	return (NULL);
 		value = ft_create_value(vars, arg);
 	}
 	return (value);
