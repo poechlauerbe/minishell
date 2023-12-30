@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/18 13:42:44 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/30 12:42:54 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,9 @@ typedef struct s_vars
 	int			pipe_count;
 	t_kv		*envv;
 	char		exit_code;
+	int			syntax_err;
+	int			*pid;
+	int			*fd;
 }		t_vars;
 
 typedef struct s_quote
@@ -231,6 +234,10 @@ void		ft_expander(t_vars *vars, char **arg, t_quote *quote);
 // function for $?
 int			ft_check_exit_code(t_vars *vars);
 
+/* free */
+void		ft_free_pipe_fd_and_pid(t_vars *vars);
+void		ft_free_input(t_vars *vars);
+
 /* fun echo */
 // writes to the shell in standard output
 void		ft_echo(t_vars *vars, char **str);
@@ -281,7 +288,17 @@ void		ft_remove_links_ao(t_kv **tmp);
 /* pipe */
 // pipe function
 void		ft_pipecount(t_vars *vars);
-void		ft_pipe_loop(t_vars *vars);
+void		ft_pipe(t_vars *vars);
+
+/* pipe_utils */
+// counts how many pipes are in the input
+void		ft_pipecount(t_vars *vars);
+// closes all the open pipes of the pipeloop
+void		ft_close_pipes(int pipe_nr, int *fd);
+// checks if the input file is accesable
+int			ft_check_in_access(char *file, int *pid, int i);
+// checks if the output file is accesable
+int			ft_check_out_access(char *file, int *pid, int i);
 
 /* prog */
 void		ft_check_prog(t_vars *vars, t_prg *prog);

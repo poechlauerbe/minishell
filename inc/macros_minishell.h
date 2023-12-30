@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 13:52:29 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/18 13:43:02 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/30 12:43:48 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # define COMMAND_NOT_FOUND 127
 # define NO_SUCH_FILE_OR_DIRECTORY 1
 # define NUMERIC_ARGUMENTS_REQUIRED 2
+# define SYNTAX_ERROR 2
 
 // for ft_builtin_check:
 # define USED 100

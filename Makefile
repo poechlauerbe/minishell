@@ -6,7 +6,7 @@
 #    By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/12/22 11:42:25 by tbenz            ###   ########.fr        #
+#    Updated: 2023/12/30 12:43:19 by tbenz            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,13 +37,14 @@ HEADER			= $(addprefix $(INC_DIR)/,\
 				minishell.h)
 
 SRCS 			= $(addprefix $(SRCS_DIR),\
+				builtins.c \
 				b_cd_dot.c \
 				b_cd_dotdot.c \
 				b_cd_dotdot2.c \
 				b_cd_path.c \
 				b_cd_slashes.c \
 				b_cd_utils.c \
-				builtins.c \
+				b_echo.c \
 				b_exit.c \
 				b_export_key_utils.c \
 				b_export_value_utils.c \
@@ -52,7 +53,7 @@ SRCS 			= $(addprefix $(SRCS_DIR),\
 				environment_var.c \
 				exit.c \
 				expand.c \
-				fun_echo.c \
+				free.c \
 				input.c \
 				input_comb_progs.c \
 				input_malloc.c \
@@ -61,6 +62,7 @@ SRCS 			= $(addprefix $(SRCS_DIR),\
 				key_value_remove.c \
 				minishell.c \
 				pipe.c \
+				pipe_utils.c \
 				prog.c \
 				input_redirecting.c \
 				signal_handling.c \
@@ -120,7 +122,14 @@ valgrind:		$(NAME)
 				--track-fds=yes --trace-children=yes ./minishell
 
 TESTSRC 		= $(addprefix $(SRCS_DIR),\
+				b_cd_dot.c \
+				b_cd_dotdot.c \
+				b_cd_dotdot2.c \
+				b_cd_path.c \
+				b_cd_slashes.c \
+				b_cd_utils.c \
 				builtins.c \
+				b_echo.c \
 				b_exit.c \
 				b_export_key_utils.c \
 				b_export_value_utils.c \
@@ -129,7 +138,7 @@ TESTSRC 		= $(addprefix $(SRCS_DIR),\
 				environment_var.c \
 				exit.c \
 				expand.c \
-				fun_echo.c \
+				free.c \
 				input.c \
 				input_comb_progs.c \
 				input_malloc.c \
@@ -137,6 +146,7 @@ TESTSRC 		= $(addprefix $(SRCS_DIR),\
 				key_value.c \
 				key_value_remove.c \
 				pipe.c \
+				pipe_utils.c \
 				prog.c \
 				input_redirecting.c \
 				signal_handling.c \

@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 14:33:20 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/22 12:37:02 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/30 12:43:36 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,15 @@ int	main(int argc, char **argv, char **envp)
 		{
 			add_history(vars.inp);
 			ft_check_input(&vars);
-			if (!vars.pipe_count)
+			if (!vars.pipe_count && !vars.syntax_err)
 			{
 				if (ft_builtin_check(&vars, vars.p_start) == NOT_USED)
-					ft_pipe_loop(&vars);
+					ft_pipe(&vars);
 			}
-			else
-				ft_pipe_loop(&vars);
+			else if (!vars.syntax_err)
+				ft_pipe(&vars);
 			ft_free_input(&vars);
+			vars.syntax_err = OK;
 		}
 		free(vars.inp);
 		vars.inp = NULL;

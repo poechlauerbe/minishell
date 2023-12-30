@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prog.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 13:41:52 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/15 16:47:16 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/29 16:14:05 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	ft_builtin_check(t_vars *vars, t_prg *prog)
 {
+	if (!prog->prog || !prog->prog[0] || !prog->prog[0][0])
+		return (NOT_USED);
 	if (ft_strncmp(prog->prog[0], "exit", 5) == 0)
 		ft_exit(vars, OK);
 	else if (ft_strncmp(prog->prog[0], "pwd", 4) == 0)
@@ -82,6 +84,8 @@ void	ft_check_prog(t_vars *vars, t_prg *prog)
 	int	acc_c;
 
 	acc_c = 1;
+	if (!prog->prog || !prog->prog[0] || !prog->prog[0][0])
+		return ;
 	if (ft_strncmp(prog->prog[0], "./", 2) == 0)
 		acc_c = access(prog->prog[0], F_OK | X_OK);
 	else if (ft_strncmp(prog->prog[0], "../", 3) == 0)
@@ -99,5 +103,4 @@ void	ft_check_prog(t_vars *vars, t_prg *prog)
 	if (ft_builtin_check(vars, prog) == USED)
 		ft_exit(vars, OK);
 	ft_check_path(vars, prog);
-
 }
