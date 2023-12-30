@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 15:30:48 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/30 12:50:52 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/30 13:16:13 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,32 +109,32 @@ int	ft_check_redirect_file(t_vars *vars)
 			if (!temp[j])
 			{
 				ft_printf_fd(2, "bash: syntax error near unexpected token `newline'\n");
-				vars->syntax_err = SYNTAX_ERROR;
-				vars->exit_code = SYNTAX_ERROR;
-				return (SYNTAX_ERROR);
+				vars->no_exec = no_execOR;
+				vars->exit_code = no_execOR;
+				return (no_execOR);
 			}
 			else if ((temp[j] == '<' || temp[j] == '>')
 				&& (temp[j + 1] != '<' && temp[j + 1] != '>'))
 			{
 				ft_printf_fd(2, "bash: syntax error near unexpected token `%c'\n", temp[j]);
-				vars->syntax_err = SYNTAX_ERROR;
-				vars->exit_code = SYNTAX_ERROR;
-				return (SYNTAX_ERROR);
+				vars->no_exec = no_execOR;
+				vars->exit_code = no_execOR;
+				return (no_execOR);
 			}
 			else if (ft_strncmp(&temp[j], "<<<", 3) == 0)
 			{
 				ft_printf_fd(2, "bash: syntax error near unexpected token `<<<'\n");
-				vars->syntax_err = SYNTAX_ERROR;
-				vars->exit_code = SYNTAX_ERROR;
-				return (SYNTAX_ERROR);
+				vars->no_exec = no_execOR;
+				vars->exit_code = no_execOR;
+				return (no_execOR);
 			}
 			else if ((temp[j] == '<' || temp[j] == '>')
 				&& (temp[j + 1] == '<' || temp[j + 1] == '>'))
 			{
 				ft_printf_fd(2, "bash: syntax error near unexpected token `%c%c'\n", temp[j], temp[j + 1]);
-				vars->syntax_err = SYNTAX_ERROR;
-				vars->exit_code = SYNTAX_ERROR;
-				return (SYNTAX_ERROR);
+				vars->no_exec = no_execOR;
+				vars->exit_code = no_execOR;
+				return (no_execOR);
 			}
 			i = j;
 		}
@@ -155,10 +155,10 @@ int	ft_start_pipe(t_vars *vars)
 		i++;
 	if (temp[i] == '|')
 	{
-		vars->exit_code = SYNTAX_ERROR;
-		vars->syntax_err = SYNTAX_ERROR;
+		vars->exit_code = no_execOR;
+		vars->no_exec = no_execOR;
 		ft_printf_fd(2, "bash: syntax error near unexpected token `|'\n");
-		return (SYNTAX_ERROR);
+		return (no_execOR);
 	}
 	return (OK);
 }
@@ -177,4 +177,5 @@ void	ft_check_input(t_vars *vars)
 	ft_cleanup_reds(vars);
 	ft_expand_all_vars(vars);
 	ft_pipecount(vars);
+	ft_heredoc(vars);
 }
