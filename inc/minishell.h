@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/30 13:14:45 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/30 13:22:45 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -281,6 +281,10 @@ char		*ft_return_val(t_vars *vars, char *key);
 void		ft_add_envv(t_vars *vars, char *key, char *val, int id);
 // retrieves and returns the element with the matching key. Otherwise returns 0.
 t_kv		*ft_val_retrieval(t_vars *vars, char *key);
+
+/* heredoc */
+void		ft_heredoc_exec(t_vars *vars, t_red *red_in);
+void		ft_heredoc(t_vars *vars);
 
 /* key_value_remove */
 /* removes an environment variable from the key_value list, matching the key.

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/12/30 13:00:18 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/30 13:20:25 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ void	ft_export(t_vars *vars)
 	{
 		while (vars->p_start->prog[i])
 		{
-			id = ft_exp_key(vars, vars->p_start->prog[i], 0);
-			if (!id)
+			key = ft_exp_key(vars, vars->p_start->prog[i], 0);
+			if (!key)
 				return ;
 			value = ft_exp_value(vars, vars->p_start->prog[i]);
 			ft_add_envv(vars, key, value, 0);

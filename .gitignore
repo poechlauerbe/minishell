@@ -6,5 +6,4 @@ minishell
 .vscode
 *.h.gch
 .nfs*
-test
 minishell_tester
