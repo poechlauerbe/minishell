@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 13:52:29 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/30 21:19:25 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/30 21:28:00 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,12 @@
 # define OPEN_FILE_ERROR 1500
 
 // standard error codes bash:
-# define PERMISSION_DENIED 126
-# define COMMAND_NOT_FOUND 127
 # define NO_SUCH_FILE_OR_DIRECTORY 1
 # define NUMERIC_ARGUMENTS_REQUIRED 2
 # define SYNTAX_ERROR 2
+# define PERMISSION_DENIED 126
+# define IS_A_DIRECTORY 126
+# define COMMAND_NOT_FOUND 127
 
 // for ft_builtin_check:
 # define USED 100
