@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fun_echo.c                                         :+:      :+:    :+:   */
+/*   b_echo.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:20:58 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/13 13:27:59 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/30 21:15:33 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	ft_echo(t_vars *vars, char **str)
 	if (!str[1])
 	{
 		write(1, "\n", 1);
+		vars->exit_code = OK;
 		return ;
 	}
 	if (strncmp(str[1], "-n", 3) == 0)
@@ -33,14 +34,15 @@ void	ft_echo(t_vars *vars, char **str)
 	}
 	while (str[++i])
 	{
-			str_wo_q = ft_create_value(vars, str[i]);
-			if (!str_wo_q)
-				ft_exit(vars, MALLOC_ERROR);
-			ft_printf("%s", str_wo_q);
-			free(str_wo_q);
+		str_wo_q = ft_create_value(vars, str[i]);
+		if (!str_wo_q)
+			ft_exit(vars, MALLOC_ERROR);
+		ft_printf("%s", str_wo_q);
+		free(str_wo_q);
 		if (str[i + 1])
 			write(1, " ", 1);
 	}
 	if (new_line_mark == 0)
 		write(1, "\n", 1);
+	vars->exit_code = OK;
 }
