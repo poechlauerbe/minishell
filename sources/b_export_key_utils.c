@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 15:22:09 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/21 13:25:09 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/30 12:59:50 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	ft_check_enclosing(char **arg, t_vars *vars)
 			quote.dq = 1;
 		else if ((*arg)[quote.i] == '"' && !quote.sq && quote.dq)
 			quote.dq = 0;
-		if (quote.sq != 1 && (*arg)[quote.i] == '$' )
+		if (quote.sq != 1 && (*arg)[quote.i] == '$')
 			ft_expander(vars, arg, &quote);
 		quote.i++;
 	}
@@ -63,7 +63,7 @@ char	*ft_copy_key(t_vars *vars, char *arg)
 	return (id);
 }
 
-char	*ft_exp_key(t_vars *vars, char *arg)
+char	*ft_exp_key(t_vars *vars, char *arg, int func)
 {
 	char	*id;
 	char	*comp;
@@ -80,7 +80,7 @@ char	*ft_exp_key(t_vars *vars, char *arg)
 	id = ft_copy_key(vars, arg);
 	if (!id)
 		return (NULL);
-	if (!ft_exp_keychecker(id, comp))
+	if (!ft_exp_keychecker(id, comp, func))
 		return (id);
 	else
 	{
@@ -89,7 +89,7 @@ char	*ft_exp_key(t_vars *vars, char *arg)
 	}
 }
 
-int	ft_exp_keychecker(char *arg, char *comp)
+int	ft_exp_keychecker(char *arg, char *comp, int func)
 {
 	int	j;
 
@@ -100,7 +100,8 @@ int	ft_exp_keychecker(char *arg, char *comp)
 		j++;
 	else
 	{
-		ft_printf_fd(2, "export: not an identifier: `%s%s'\n", arg, comp);
+		if (!func)
+			ft_printf_fd(2, "export: not an identifier: `%s%s'\n", arg, comp);
 		return (1);
 	}
 	while (ft_isalnum(arg[j]) || arg[j] == '_')
@@ -109,7 +110,8 @@ int	ft_exp_keychecker(char *arg, char *comp)
 		j++;
 	if ((arg[j] != '=' && arg[j] != '\0'))
 	{
-		ft_printf_fd(2, "export: not an identifier: `%s%s'\n", arg, comp);
+		if (!func)
+			ft_printf_fd(2, "export: not an identifier: `%s%s'\n", arg, comp);
 		return (1);
 	}
 	return (0);

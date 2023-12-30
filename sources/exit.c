@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 13:28:25 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/20 14:05:09 by tbenz            ###   ########.fr       */
+/*   Updated: 2023/12/30 13:01:22 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,32 +19,7 @@ void	err_mes(int errcd)
 	ft_putstr_fd("\n", 2);
 }
 
-void	ft_free_input(t_vars *vars)
-{
-	t_prg	*temp;
-	t_prg	*temp2;
-	char	**prog;
-	int		i;
 
-	temp = vars->p_start;
-	while (temp)
-	{
-		prog = temp->prog;
-		temp2 = temp->next;
-		i = 0;
-		while (prog && prog[i])
-		{
-			free(prog[i]);
-			i++;
-		}
-		if (prog)
-			free(prog);
-		if (temp)
-			free(temp);
-		temp = temp2;
-	}
-	vars->p_start = NULL;
-}
 
 void	ft_free_envv(t_vars *vars)
 {
@@ -66,9 +41,10 @@ void	ft_exit(t_vars *vars, int errcd)
 {
 	if (errcd > 256)
 		err_mes(errcd);
-	else
-		ft_putstr_fd("exit\n", 2);
+	// else
+	// 	ft_putstr_fd("exit\n", 2);
 	ft_free_input(vars);
+	ft_free_pipe_fd_and_pid(vars);
 	ft_free_envv(vars);
 	if (vars->alloc)
 		ft_free_envp(vars->envp);
