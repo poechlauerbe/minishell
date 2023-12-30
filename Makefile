@@ -6,7 +6,7 @@
 #    By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/12/30 13:23:49 by bpochlau         ###   ########.fr        #
+#    Updated: 2023/12/30 13:44:31 by bpochlau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,7 +70,6 @@ SRCS 			= $(addprefix $(SRCS_DIR),\
 				input_redirecting.c \
 				signal_handling.c \
 				shell_variables.c \
-				test.c \
 				utils.c)
 
 OBJ				= $(SRCS:.c=.o)
@@ -124,41 +123,5 @@ valgrind:		$(NAME)
 				--leak-check=full --show-leak-kinds=all --track-origins=yes \
 				--verbose --show-mismatched-frees=yes --read-var-info=yes \
 				--track-fds=yes --trace-children=yes ./minishell
-
-TESTSRC 		= $(addprefix $(SRCS_DIR),\
-				b_cd_dot.c \
-				b_cd_dotdot.c \
-				b_cd_dotdot2.c \
-				b_cd_path.c \
-				b_cd_slashes.c \
-				b_cd_utils.c \
-				builtins.c \
-				b_echo.c \
-				b_exit.c \
-				b_export_key_utils.c \
-				b_export_value_utils.c \
-				b_export_print.c \
-				b_export_print_utils.c \
-				environment_var.c \
-				exit.c \
-				expand.c \
-				free.c \
-				input.c \
-				input_comb_progs.c \
-				input_malloc.c \
-				input_utils.c \
-				key_value.c \
-				key_value_remove.c \
-				pipe.c \
-				pipe_utils.c \
-				prog.c \
-				input_redirecting.c \
-				signal_handling.c \
-				test.c \
-				utils.c \
-				testbenny.c)
-
-benny:			$(LIBFT) $(HEADER)
-				$(CC) -g $(TESTSRC) $(LIBFT) ${LRL}
 
 .PHONY:			all clean fclean re rebonus valgrind
