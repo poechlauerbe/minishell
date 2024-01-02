@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/02 18:41:46 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/02 19:06:50 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,7 +163,7 @@ char		*ft_exp_key(t_vars *vars, char *arg, int func);
 /* checks the key for valid input; if func is 0 (keychecker called by export)
 	prints error messages; if func is set to 1 (called by shvar) doesn't print
 	error messages */
-int			ft_exp_keychecker(char *arg, char *comp, int func);
+int			ft_exp_keychecker(t_vars *vars, char *arg, char *comp, int func);
 // gets the length
 int			ft_key_len(char *arg);
 
@@ -179,6 +179,8 @@ t_kv		*ft_last_kv(t_kv *elem);
 /* prints all the environment variables (including the ones that have been
 	exported) in alphabetical order */
 void		ft_export_print(t_vars *vars);
+// prints an error message an sets the exit code for an invalid key
+void	ft_key_err_print(t_vars *vars, char *key, char *val);
 
 /* b_export_print_utils */
 /* adds an alphabetical ordering for the environment variables and shell
