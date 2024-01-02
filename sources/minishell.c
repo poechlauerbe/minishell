@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 14:33:20 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/02 12:34:59 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/02 18:14:55 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	main(int argc, char **argv, char **envp)
 	{
 		vars.inp = readline("Prompt> $");
 		if (!vars.inp)
-			ft_exit(&vars, OK);
+			ft_exit(&vars, vars.exit_code);
 		else if (ft_strlen(vars.inp) > 0)
 		{
 			add_history(vars.inp);
@@ -61,7 +61,7 @@ int	main(int argc, char **argv, char **envp)
 // 			free(line);
 // 		}
 // 		if (!vars.inp)
-// 			ft_exit(&vars, OK);
+// 			ft_exit(&vars, vars.exit_code);
 // 		else if (ft_strlen(vars.inp) > 0)
 // 		{
 // 			// add_history(vars.inp);
