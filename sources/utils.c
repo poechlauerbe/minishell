@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:21:46 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/20 17:01:37 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/02 18:41:20 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,20 @@ void	ft_init(t_vars *vars, int argc, char **argv, char **envp)
 		return ;
 }
 
-void	ft_pwd(void)
+void	ft_pwd(t_vars *vars)
 {
 	char	cwd[1024];
 
 	if (getcwd(cwd, sizeof(cwd)) != NULL)
+	{
 		ft_printf("%s\n", cwd);
+		vars->exit_code = 0;
+	}
 	else
+	{
 		perror("getcwd() error");
+		vars->exit_code = 1;
+	}
 }
 
 void	ft_set_val(t_vars *vars, t_kv **var, t_kv **tmp)

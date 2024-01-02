@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/02 16:26:26 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/02 18:41:46 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -327,7 +327,7 @@ int			ft_builtin_check(t_vars *vars, t_prg *prog);
 // sets all variables to zero and initiates envp variables
 void		ft_init(t_vars *vars, int argc, char **argv, char **envp);
 // prints the current working directory or an error if this is not possible
-void		ft_pwd(void);
+void		ft_pwd(t_vars *vars);
 // sets the values for the tmp variable (except for key and value)
 void		ft_set_val(t_vars *vars, t_kv **var, t_kv **tmp);
 // compares two strings (here: key-pairs) and returns 0 if they match.

@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/01/02 16:26:06 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/02 18:42:34 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	ft_env(t_vars *vars)
 		}
 		tmp = tmp->next;
 	}
+	vars->exit_code = 0;
 }
 
 void	ft_export(t_vars *vars)
@@ -70,6 +71,7 @@ void	ft_unset(t_vars *vars)
 		ft_new_envp(vars);
 		key = vars->p_start->prog[++i];
 	}
+	vars->exit_code = 0;
 }
 
 void	ft_cd(t_vars *vars)
