@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/12/30 13:20:25 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/02 16:26:06 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,12 @@ void	ft_unset(t_vars *vars)
 	}
 }
 
-int	ft_cd(t_vars *vars)
+void	ft_cd(t_vars *vars)
 {
 	char	*cp;
 
 	if (vars->p_start->prog[1] && vars->p_start->prog[2])
-		return (ft_printf_fd(2, "cd: too many arguments\n"));
+		return (ft_print_err_cd(vars, 1));
 	else if (vars->p_start->prog[1])
 		ft_malloc_cp(vars, &cp, vars->p_start->prog[1]);
 	else
@@ -85,7 +85,7 @@ int	ft_cd(t_vars *vars)
 	if (!cp)
 	{
 		if (!ft_return_val(vars, "HOME"))
-			return (ft_printf_fd(2, "cd: HOME not set\n"));
+			return (ft_print_err_cd(vars, 2));
 		else
 			ft_malloc_cp(vars, &cp, ft_return_val(vars, "HOME"));
 	}
@@ -93,6 +93,6 @@ int	ft_cd(t_vars *vars)
 		ft_check_pot_path(vars, &cp);
 	ft_pwd_conc(vars, &cp);
 	if (ft_can_form(vars, &cp))
-		return (1);
-	return (ft_chdir(vars, &cp));
+		return ;
+	ft_chdir(vars, &cp);
 }
