@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 15:30:48 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/02 14:47:25 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/02 14:59:02 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ int	ft_check_redirect_file(t_vars *vars)
 				vars->exit_code = SYNTAX_ERROR;
 				return (SYNTAX_ERROR);
 			}
-			else if (!temp->prog[0] && temp->next->oper == '|')
+			else if (!temp->prog[0] && temp->next && temp->next->oper == '|')
 			{
 				ft_printf_fd(2, "bash: syntax error near unexpected token `|'\n");
 				vars->no_exec = SYNTAX_ERROR;
@@ -132,8 +132,7 @@ int	ft_check_redirect_file(t_vars *vars)
 				return (SYNTAX_ERROR);
 			}
 		}
-		else
-			temp = temp->next;
+		temp = temp->next;
 	}
 	return (OK);
 }
