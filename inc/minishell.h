@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/30 13:22:45 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/02 16:26:26 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,9 @@ void		ft_pwd_conc(t_vars *vars, char **curpath);
 // converts curpath according to the canonical form
 int			ft_can_form(t_vars *vars, char **curpath);
 // if possible, changes the current directory to curpath
-int			ft_chdir(t_vars *vars, char **curpath);
+void		ft_chdir(t_vars *vars, char **curpath);
+// prints an error message an sets the error code
+void		ft_print_err_cd(t_vars *vars, int error);
 
 /* b_exit */
 void		ft_exit_prog(t_vars *vars, char **prog);
@@ -210,7 +212,7 @@ void		ft_export(t_vars *vars);
 void		ft_unset(t_vars *vars);
 /* if directory exists and one has the necessary rights, moves one to the dir
 	entered*/
-int			ft_cd(t_vars *vars);
+void		ft_cd(t_vars *vars);
 
 /* signal_handling */
 // ignores SIGQUIT and handles SIGINT

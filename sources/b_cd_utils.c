@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_cd_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:29:49 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/30 13:38:13 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/02 16:25:51 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,17 @@ int	ft_can_form(t_vars *vars, char **curpath)
 {
 	ft_remove_dot(vars, curpath);
 	if (ft_remove_dot_dot(vars, curpath))
+	{
+		vars->exit_code = 1;
 		return (1);
+	}
 	return (0);
 }
 
-int	ft_chdir(t_vars *vars, char **curpath)
+void	ft_chdir(t_vars *vars, char **curpath)
 {
-	ft_printf("%s\n", *curpath);
+	char	*tmp;
+
 	if (!access(*curpath, F_OK | X_OK))
 	{
 		if (!chdir(*curpath))
@@ -83,12 +87,26 @@ int	ft_chdir(t_vars *vars, char **curpath)
 			ft_new_value(vars, "OLDPWD", ft_return_val(vars, "PWD"));
 			ft_new_value(vars, "PWD", *curpath);
 			free (*curpath);
-			return (0);
+			vars->exit_code = 0;
+			return ;
 		}
 		else
 			perror("cd");
 	}
-	perror("access");
+	tmp = ft_strjoin("minishell: cd: ", vars->p_start->prog[1]);
+	if (!tmp)
+		ft_exit(vars, MALLOC_ERROR);
+	perror(tmp);
 	free (*curpath);
-	return (1);
+	free (tmp);
+	vars->exit_code = 1;
+}
+
+void	ft_print_err_cd(t_vars *vars, int error)
+{
+	if (error == 1)
+		ft_printf_fd(2, "minishell: cd: too many arguments\n");
+	else if (error == 2)
+		ft_printf_fd(2, "cd: HOME not set\n");
+	vars->exit_code = 1;
 }
