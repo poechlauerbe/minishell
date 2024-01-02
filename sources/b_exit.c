@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 11:12:25 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/30 21:20:32 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/02 18:09:09 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,5 @@ void	ft_exit_prog(t_vars *vars, char **prog)
 		free(str_wo_q);
 	}
 	else
-		ft_exit(vars, OK);
+		ft_exit(vars, vars->exit_code);
 }

@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 12:15:16 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/02 17:00:23 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/02 18:10:08 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ int	ft_varlen(char *arg, t_quote *quote)
 	i = quote->i + 1;
 	if (ft_isdigit(arg[i]) || arg[i] == '?')
 		return (2);
-	if (ft_isalpha(arg[i]) || arg[i] == '_')
+	if ((ft_isalpha(arg[i]) || arg[i] == '_'))
 	{
-		while (arg[i] && arg[i] != '\'' && arg[i] != '"' && arg[i] != ' ')
+		while (arg[i] && arg[i] != '\'' && arg[i] != '"' && arg[i] != ' ' && arg[i] != '$' && arg[i] != '/')
 		{
 			varlen++;
 			i++;
@@ -42,7 +42,8 @@ void	ft_expand_str(t_vars *vars, char **arg, t_quote *quote, char *str)
 
 	temp = *arg;
 	varlen = ft_varlen(*arg, quote);
-	strlen = ft_strlen(*arg)- varlen + ft_strlen(str);
+	strlen = ft_strlen(*arg) - varlen + ft_strlen(str);
+	ft_printf("varlen: %i, strlen: %i\n", varlen, strlen);
 	*arg = malloc((strlen + 1) * sizeof(char));
 	if (!arg)
 		ft_exit(vars, MALLOC_ERROR);
@@ -56,6 +57,8 @@ void	ft_expand_str(t_vars *vars, char **arg, t_quote *quote, char *str)
 	while (temp[j])
 		(*arg)[i++] = temp[j++];
 	(*arg)[i] = '\0';
+	if (temp)
+		free(temp);
 }
 
 void	ft_dig_expand(t_vars *vars, char **arg, t_quote *quote, int i)
