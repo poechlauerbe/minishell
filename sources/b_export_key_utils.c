@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 15:22:09 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/30 12:59:50 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/02 18:24:15 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ char	*ft_exp_key(t_vars *vars, char *arg, int func)
 		return (id);
 	else
 	{
+		vars->exit_code = 1;
 		free(id);
 		return (NULL);
 	}
@@ -101,7 +102,7 @@ int	ft_exp_keychecker(char *arg, char *comp, int func)
 	else
 	{
 		if (!func)
-			ft_printf_fd(2, "export: not an identifier: `%s%s'\n", arg, comp);
+			ft_printf_fd(2, "minishell: export: `%s%s': not a valid identifier\n", arg, comp);
 		return (1);
 	}
 	while (ft_isalnum(arg[j]) || arg[j] == '_')
@@ -111,7 +112,7 @@ int	ft_exp_keychecker(char *arg, char *comp, int func)
 	if ((arg[j] != '=' && arg[j] != '\0'))
 	{
 		if (!func)
-			ft_printf_fd(2, "export: not an identifier: `%s%s'\n", arg, comp);
+			ft_printf_fd(2, "minishell: export: `%s%s': not a valid identifier\n", arg, comp);
 		return (1);
 	}
 	return (0);
