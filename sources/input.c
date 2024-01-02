@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 15:30:48 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/02 14:59:02 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/02 15:24:26 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,6 +163,28 @@ int	ft_start(t_vars *vars)
 	return (OK);
 }
 
+void	ft_quote_remover(t_vars *vars)
+{
+	t_prg	*temp;
+	int		i;
+	char	*str_wo_q;
+
+	temp = vars->p_start;
+	while (temp)
+	{
+		i = -1;
+		while (temp->prog[++i])
+		{
+			str_wo_q = ft_create_value(vars, temp->prog[i]);
+			if (!str_wo_q)
+				ft_exit(vars, MALLOC_ERROR);
+			free(temp->prog[i]);
+			temp->prog[i] = str_wo_q;
+		}
+		temp = temp->next;
+	}
+}
+
 void	ft_check_input(t_vars *vars)
 {
 	if (ft_start(vars))
@@ -176,6 +198,7 @@ void	ft_check_input(t_vars *vars)
 	ft_red_file(vars, vars->p_start);
 	ft_cleanup_reds(vars);
 	ft_expand_all_vars(vars);
+	ft_quote_remover(vars);
 	ft_pipecount(vars);
 	ft_heredoc(vars);
 }
