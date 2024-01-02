@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 13:41:52 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/30 13:17:02 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/30 21:13:28 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	ft_builtin_check(t_vars *vars, t_prg *prog)
 		if (ft_check_shvar(vars, prog))
 			return (NOT_USED);
 	}
-	vars->exit_code = OK;
+	// vars->exit_code = OK;
 	return (USED);
 }
 

@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 11:12:25 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/14 14:16:58 by bpochlau         ###   ########.fr       */
+/*   Updated: 2023/12/30 21:20:32 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	ft_exit_prog(t_vars *vars, char **prog)
 		{
 			ft_printf_fd(2, "exit\nbash: exit: %s: numeric argument required\n",
 				prog[1]);
-			vars->exit_code = 2;
+			ft_exit(vars, SYNTAX_ERROR);
 		}
 		else
 		{
