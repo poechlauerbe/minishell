@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 14:39:12 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/03 11:58:27 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/03 12:23:00 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ void	ft_home_expand(t_vars *vars, char **str)
 
 	if ((*str)[0] == '~' && (*str)[1] == '/')
 		ft_home(vars, str);
-	if ((*str)[0] == '~')
+	if ((*str)[0] == '~' && !ft_isdigit((*str)[1]))
 	{
 		tmp = NULL;
 		ft_etc_passwd(vars, str, &tmp);
