@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 13:26:58 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/20 17:34:01 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/03 12:02:17 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	ft_new_value(t_vars *vars, char *key, char *val)
 		len = ft_strlen(val);
 		free (tmp->val);
 		tmp->val = (char *)calloc((len + 1), sizeof(char));
+		if (!tmp->val)
+			ft_exit(vars, MALLOC_ERROR);
 		ft_strlcpy(tmp->val, val, (len + 1));
 	}
 }

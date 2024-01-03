@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 18:04:08 by tbenz             #+#    #+#             */
-/*   Updated: 2023/11/30 16:11:35 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/03 11:44:50 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 
 size_t	ft_strlen(const char *s)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
+	if (!s)
+		return (i);
 	while (s[i] != '\0')
 		i++;
 	return (i);

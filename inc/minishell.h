@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/02 19:06:50 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/03 11:57:25 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -340,6 +340,8 @@ void	ft_home(t_vars *vars, char **curpath);
 void	ft_etc_passwd_loop(t_vars *vars, char **str, char **tmp, int fd);
 void	ft_etc_passwd(t_vars *vars, char **str, char **tmp);
 void	ft_home_expand(t_vars *vars, char **str);
+void	ft_user_home(t_vars *vars, char **str, char **tmp);
+void	ft_home_usr_retrvl(t_vars *vars, char **home, char **usr);
 
 void	ft_new_envp(t_vars *vars);
 void	ft_free_envp(char **envp);
