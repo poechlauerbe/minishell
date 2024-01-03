@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 12:15:16 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/03 13:22:59 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/03 13:46:35 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,18 @@ void	ft_expander(t_vars *vars, char **arg, t_quote *quote)
 		ft_expand_env(vars, arg, quote, i);
 }
 
+void	ft_check_resplit(t_vars *vars, char *str, t_prg *prg)
+{
+	int	i;
+
+	while (str[i] && (str[i] == 32 || (str[i] > 8 && str[i] < 14)))
+		i++;
+	while (ft_isalpha(str[i]))
+		i++;
+	if (str[i] == ' ' || (str[i] > 8 && str[i] < 14))
+		ft_resplit();
+}
+
 void	ft_expand_all_vars(t_vars *vars)
 {
 	t_prg	*temp;
@@ -140,6 +152,7 @@ void	ft_expand_all_vars(t_vars *vars)
 			ft_check_enclosing(&temp->prog[i], vars);
 			i++;
 		}
+		ft_check_resplit(vars, temp->prog[0], temp);
 		temp = temp->next;
 	}
 }
