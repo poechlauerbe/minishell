@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/03 11:57:25 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/03 15:19:26 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -324,6 +324,8 @@ void		ft_check_prog(t_vars *vars, t_prg *prog);
 void		ft_red_new_node(t_vars *vars, t_red **lst, char *file, char oper);
 
 int			ft_builtin_check(t_vars *vars, t_prg *prog);
+
+void		ft_prog_not_found(t_vars *vars, char **nfd);
 
 /* utils */
 // sets all variables to zero and initiates envp variables
