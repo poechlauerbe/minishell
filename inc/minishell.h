@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/03 16:12:38 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/03 16:33:40 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,7 +180,7 @@ t_kv		*ft_last_kv(t_kv *elem);
 	exported) in alphabetical order */
 void		ft_export_print(t_vars *vars);
 // prints an error message an sets the exit code for an invalid key
-void	ft_key_err_print(t_vars *vars, char *key, char *val);
+void		ft_key_err_print(t_vars *vars, char *key, char *val);
 
 /* b_export_print_utils */
 /* adds an alphabetical ordering for the environment variables and shell
@@ -274,6 +274,10 @@ void		ft_comb_progs(t_vars *vars);
 
 /* input_malloc */
 void		ft_malloc_prog_2d_str(t_vars *vars);
+
+/* input_resplit */
+void		ft_check_resplit(t_vars *vars, char *str, t_prg *prg);
+
 /* key_value */
 // changes the value of a given key value to val
 void		ft_new_value(t_vars *vars, char *key, char *val);
@@ -325,7 +329,7 @@ void		ft_red_new_node(t_vars *vars, t_red **lst, char *file, char oper);
 
 int			ft_builtin_check(t_vars *vars, t_prg *prog);
 
-void	ft_prog_not_found(t_vars *vars, t_prg *prog);
+void		ft_prog_not_found(t_vars *vars, t_prg *prog);
 
 /* utils */
 // sets all variables to zero and initiates envp variables

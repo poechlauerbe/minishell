@@ -6,7 +6,7 @@
 #    By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/01/03 18:34:08 by tbenz            ###   ########.fr        #
+#    Updated: 2024/01/03 18:37:56 by tbenz            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,6 +60,7 @@ SRCS 			= $(addprefix $(SRCS_DIR),\
 				input_comb_progs.c \
 				input_heredoc.c \
 				input_malloc.c \
+				input_resplit.c \
 				input_utils.c \
 				key_value.c \
 				key_value_remove.c \
