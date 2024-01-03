@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 14:39:12 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/18 16:43:25 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/03 11:58:27 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,11 +82,53 @@ void	ft_etc_passwd(t_vars *vars, char **str, char **tmp)
 	close (fd);
 }
 
+void	ft_home_usr_retrvl(t_vars *vars, char **home, char **usr)
+{
+	t_kv	*home_env;
+	t_kv	*user_env;
+
+	home_env = (ft_val_retrieval(vars, "HOME"));
+	if (!home_env)
+	{
+		*home = "/nfs/homes/";
+		user_env = (ft_val_retrieval(vars, "USER"));
+		if (user_env)
+			*usr = user_env->val;
+		else
+			*usr = NULL;
+	}
+	else
+	{
+		*home = home_env->val;
+		*usr = NULL;
+	}
+}
+
+void	ft_user_home(t_vars *vars, char **str, char **tmp)
+{
+	char	*home;
+	int		len;
+	char	*usr;
+
+	ft_home_usr_retrvl(vars, &home, &usr);
+	len = ft_strlen(&(*str)[1]);
+	*tmp = calloc(len + ft_strlen(home) + ft_strlen(usr) + 1, sizeof(char));
+	if (!*tmp)
+		ft_exit(vars, MALLOC_ERROR);
+	ft_strlcpy(*tmp, home, ft_strlen(home) + 1);
+	if (usr)
+		ft_strlcat(*tmp, usr, ft_strlen(*tmp) + ft_strlen(usr) + 1);
+	ft_strlcat(*tmp, &(*str)[1], len + ft_strlen(home) + 1);
+	if (access(*tmp, F_OK))
+	{
+		free (*tmp);
+		*tmp = NULL;
+	}
+}
+
 void	ft_home_expand(t_vars *vars, char **str)
 {
 	char	*tmp;
-	char	*home;
-	int		len;
 
 	if ((*str)[0] == '~' && (*str)[1] == '/')
 		ft_home(vars, str);
@@ -96,18 +138,7 @@ void	ft_home_expand(t_vars *vars, char **str)
 		ft_etc_passwd(vars, str, &tmp);
 		if (!tmp)
 		{
-			home = "/nfs/homes/";
-			len = ft_strlen(&(*str)[1]);
-			tmp = calloc(len + ft_strlen(home) + 1, sizeof(char));
-			if (!tmp)
-				ft_exit(vars, MALLOC_ERROR);
-			ft_strlcpy(tmp, home, ft_strlen(home) + 1);
-			ft_strlcat(tmp, &(*str)[1], len + ft_strlen(home) + 1);
-			if (access(tmp, F_OK))
-			{
-				free (tmp);
-				tmp = NULL;
-			}
+			ft_user_home(vars, str, &tmp);
 		}
 		if (tmp)
 		{
