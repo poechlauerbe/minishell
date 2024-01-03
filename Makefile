@@ -6,7 +6,7 @@
 #    By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/01/03 11:08:33 by tbenz            ###   ########.fr        #
+#    Updated: 2024/01/03 12:27:17 by tbenz            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,7 +70,6 @@ SRCS 			= $(addprefix $(SRCS_DIR),\
 				input_redirecting.c \
 				signal_handling.c \
 				shell_variables.c \
-				test.c \
 				utils.c)
 
 OBJ				= $(SRCS:.c=.o)
