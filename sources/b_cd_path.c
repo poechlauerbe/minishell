@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   b_cd_utils.c                                       :+:      :+:    :+:   */
+/*   b_cd_path.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 12:25:06 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/14 15:29:00 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/03 18:33:22 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ void	ft_check_path_null(t_vars *vars, char **curpath)
 		ft_exit(vars, MALLOC_ERROR);
 	ft_strlcpy(fpath, "./", 3);
 	ft_strlcat(fpath, *curpath, (len + ft_strlen(*curpath) + 3));
+	free(*curpath);
+	*curpath = fpath;
 }
 
 void	ft_check_pot_path(t_vars *vars, char **curpath)

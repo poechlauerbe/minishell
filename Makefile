@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+         #
+#    By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/01/03 16:32:49 by bpochlau         ###   ########.fr        #
+#    Updated: 2024/01/03 18:37:56 by tbenz            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
