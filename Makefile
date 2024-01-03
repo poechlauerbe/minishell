@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+         #
+#    By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/01/03 12:27:17 by tbenz            ###   ########.fr        #
+#    Updated: 2024/01/03 14:34:20 by bpochlau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,6 +60,7 @@ SRCS 			= $(addprefix $(SRCS_DIR),\
 				input_comb_progs.c \
 				input_heredoc.c \
 				input_malloc.c \
+				input_resplit.c \
 				input_utils.c \
 				key_value.c \
 				key_value_remove.c \
