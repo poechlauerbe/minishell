@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/03 16:33:40 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/03 17:15:15 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ typedef struct s_vars
 	int			no_exec;
 	int			*pid;
 	int			*fd;
+	int			tmp_count;
 }		t_vars;
 
 typedef struct s_quote

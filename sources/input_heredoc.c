@@ -6,11 +6,43 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 20:34:56 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/29 20:35:47 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/03 17:58:20 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+void	ft_create_name(t_vars *vars, t_red *red_in)
+{
+	char	*num_itoa;
+
+	vars->tmp_count++;
+	num_itoa = ft_itoa(vars->tmp_count);
+	if (!num_itoa)
+		ft_exit(vars, MALLOC_ERROR);
+	free(red_in->file);
+	red_in->file = ft_strjoin("./m_s_h_", num_itoa);
+	if (!red_in->file)
+		ft_exit(vars, MALLOC_ERROR);
+}
+
+void	ft_make_tmp_file(t_vars *vars, t_red *red_in)
+{
+	int	i;
+	int	fd;
+
+	ft_create_name(vars, red_in);
+	fd = open(red_in->file, O_RDWR | O_TRUNC | O_CREAT, 0644);
+	if (fd < 0)
+		ft_exit(vars, OPEN_FILE_ERROR);
+	i = 0;
+	while (red_in->heredoc[i])
+	{
+		write(fd, &red_in->heredoc[i], 1);
+		i++;
+	}
+	close(fd);
+}
 
 void	ft_heredoc_exec(t_vars *vars, t_red *red_in)
 {
@@ -36,7 +68,7 @@ void	ft_heredoc_exec(t_vars *vars, t_red *red_in)
 		}
 		str = get_next_line(0);
 	}
-	ft_exit(vars, OK);
+	ft_make_tmp_file(vars, red_in);
 }
 
 
