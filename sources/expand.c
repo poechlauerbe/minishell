@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 12:15:16 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/03 12:22:18 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/03 13:22:59 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,10 @@ void	ft_expand_env(t_vars *vars, char **arg, t_quote *quote, int i)
 	else if (len == 1)
 		ft_expand_str(vars, arg, quote, "$");
 	else
+	{
 		ft_expand_str(vars, arg, quote, "");
+		quote->i--;
+	}
 }
 
 void	ft_expander(t_vars *vars, char **arg, t_quote *quote)
