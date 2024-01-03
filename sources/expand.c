@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 12:15:16 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/03 11:10:42 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/03 12:22:18 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void	ft_expand_str(t_vars *vars, char **arg, t_quote *quote, char *str)
 	temp = *arg;
 	varlen = ft_varlen(*arg, quote);
 	strlen = ft_strlen(*arg) - varlen + ft_strlen(str);
-	ft_printf("varlen: %i, strlen: %i\n", varlen, strlen);
 	*arg = malloc((strlen + 1) * sizeof(char));
 	if (!arg)
 		ft_exit(vars, MALLOC_ERROR);
