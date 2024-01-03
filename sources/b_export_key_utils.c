@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_export_key_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 15:22:09 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/03 13:22:31 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/03 14:05:27 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	*ft_copy_key(t_vars *vars, char *arg)
 	if (!id)
 		ft_exit(vars, MALLOC_ERROR);
 	i = 0;
-	while (*arg && *arg != '=')
+	while (*arg && !(*arg == '=' || (*arg == '+' && *(arg + 1) == '=')))
 	{
 		if (*arg != '\'' && *arg != '"')
 		{
@@ -109,7 +109,7 @@ int	ft_exp_keychecker(t_vars *vars, char *arg, char *comp, int func)
 		j++;
 	if (arg[j] == '\'' || arg[j] == '"')
 		j++;
-	if ((arg[j] != '=' && arg[j] != '\0'))
+	if (arg[j] && !(arg[j] == '=' || (arg[j] == '+' && arg[j + 1] == '=')))
 	{
 		if (!func)
 			ft_key_err_print(vars, arg, comp);
@@ -123,7 +123,7 @@ int	ft_key_len(char *arg)
 	int	len;
 
 	len = 0;
-	while (*arg && *arg != '=')
+	while (*arg && !(*arg == '=' || (*arg == '+' && *(arg + 1) == '=')))
 	{
 		if (*arg != '"' && *arg != '\'')
 			len++;

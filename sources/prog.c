@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 13:41:52 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/02 18:41:51 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/03 16:13:05 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,14 +77,26 @@ void	ft_check_path(t_vars *vars, t_prg *prog)
 		if (line[i])
 			i++;
 	}
-	ft_printf_fd(2, "%s: command not found\n", prog->prog[0]);
+	ft_prog_not_found(vars, prog);
 	vars->exit_code = 127;
 	exit(127);
 }
 
+void	ft_prog_not_found(t_vars *vars, t_prg *prog)
+{
+	char	*nfd;
+
+	nfd = NULL;
+	nfd = ft_strjoin(prog->prog[0], ": command not found\n");
+	if (!nfd)
+		ft_exit(vars, MALLOC_ERROR);
+	ft_printf_fd(2, nfd);
+	free (nfd);
+}
+
 void	ft_check_prog(t_vars *vars, t_prg *prog)
 {
-	int	acc_c;
+	int		acc_c;
 
 	acc_c = 1;
 	if (!prog->prog || !prog->prog[0] || !prog->prog[0][0])
@@ -97,7 +109,7 @@ void	ft_check_prog(t_vars *vars, t_prg *prog)
 		acc_c = access(prog->prog[0], F_OK | X_OK);
 	if (acc_c == NOT_OK)
 	{
-		ft_printf_fd(2, "%s: command not found\n", prog->prog[0]);
+		ft_prog_not_found(vars, prog);
 		vars->exit_code = 127;
 		exit(127);
 	}
