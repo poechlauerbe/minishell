@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 13:41:52 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/03 15:17:56 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/03 15:20:56 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,6 @@ void	ft_check_path(t_vars *vars, t_prg *prog)
 
 void	ft_prog_not_found(t_vars *vars, char **nfd)
 {
-	int		len;
-	char	*nf;
-
 	*nfd = ft_strjoin(vars->p_start->prog[0], ": command not found\n");
 	if (!nfd)
 		ft_exit(vars, MALLOC_ERROR);
