@@ -6,11 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 20:34:56 by bpochlau          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/01/04 17:41:13 by tbenz            ###   ########.fr       */
-=======
-/*   Updated: 2024/01/04 17:40:41 by bpochlau         ###   ########.fr       */
->>>>>>> main
+/*   Updated: 2024/01/04 18:17:20 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +75,7 @@ void	ft_heredoc_exec(t_vars *vars, t_prg *prog)
 	prog->heredoc = NULL;
 	ft_prep_delimiter(vars, prog);
 	len = ft_strlen(prog->prog[0]);
-<<<<<<< HEAD
 	// write(2, ">", 1);
-=======
-	// write(1, ">", 1);
->>>>>>> main
 	str = get_next_line(0);
 	while (ft_strncmp(str, prog->prog[0], len) != 0)
 	{
@@ -98,11 +90,7 @@ void	ft_heredoc_exec(t_vars *vars, t_prg *prog)
 			if (!prog->heredoc)
 				ft_exit(vars, MALLOC_ERROR);
 		}
-<<<<<<< HEAD
-		// write(2, ">", 1);
-=======
 		// write(1, ">", 1);
->>>>>>> main
 		str = get_next_line(0);
 	}
 	ft_check_enclosing(&prog->heredoc, vars);
