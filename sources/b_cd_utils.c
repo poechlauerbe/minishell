@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:29:49 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/03 17:59:43 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/03 19:12:51 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,15 +74,15 @@ int	ft_can_form(t_vars *vars, char **curpath)
 		vars->exit_code = 1;
 		return (1);
 	}
-/* 	if ((*curpath)[ft_strlen(*curpath) - 1] == '/' && ft_strlen(curpath) > 1
-		&& curpath[ft_strlen(*curpath) - 2] != ''/)
-	{
-		tmp = ft_substr(*curpath, 0, strlen(*curpath) - 1);
-		if (!tmp)
-			ft_exit(vars, MALLOC_ERROR);
-		free (*curpath);
-		*curpath = tmp;
-	} */
+	// if (ft_strlen(*curpath) > 1 && (*curpath)[ft_strlen(*curpath) - 1] == '/'
+	// 	&& *curpath[ft_strlen(*curpath) - 2] != '/')
+	// {
+	// 	tmp = ft_substr(*curpath, 0, strlen(*curpath) - 1);
+	// 	if (!tmp)
+	// 		ft_exit(vars, MALLOC_ERROR);
+	// 	free (*curpath);
+	// 	*curpath = tmp;
+	// }
 	return (0);
 }
 

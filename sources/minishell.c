@@ -6,13 +6,13 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 14:33:20 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/03 18:35:21 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/04 12:30:27 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-int	main(int argc, char **argv, char **envp)
+/* int	main(int argc, char **argv, char **envp)
 {
 	t_vars	vars;
 
@@ -40,10 +40,10 @@ int	main(int argc, char **argv, char **envp)
 		free(vars.inp);
 		vars.inp = NULL;
 	}
-}
+} */
 
 // FOR TESTER:
-/* int	main(int argc, char **argv, char **envp)
+int	main(int argc, char **argv, char **envp)
 {
 	t_vars	vars;
 
@@ -79,7 +79,7 @@ int	main(int argc, char **argv, char **envp)
 		free(vars.inp);
 		vars.inp = NULL;
 	}
-} */
+}
 
 
 
