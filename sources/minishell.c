@@ -6,13 +6,17 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 14:33:20 by tbenz             #+#    #+#             */
+<<<<<<< HEAD
+/*   Updated: 2024/01/04 17:39:29 by tbenz            ###   ########.fr       */
+=======
 /*   Updated: 2024/01/04 18:08:54 by bpochlau         ###   ########.fr       */
+>>>>>>> main
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-int	main(int argc, char **argv, char **envp)
+/* int	main(int argc, char **argv, char **envp)
 {
 	t_vars	vars;
 
@@ -40,10 +44,14 @@ int	main(int argc, char **argv, char **envp)
 		free(vars.inp);
 		vars.inp = NULL;
 	}
-}
+} */
 
 // FOR TESTER:
+<<<<<<< HEAD
+int	main(int argc, char **argv, char **envp)
+=======
 /* int	main(int argc, char **argv, char **envp)
+>>>>>>> main
 {
 	t_vars	vars;
 
@@ -79,7 +87,11 @@ int	main(int argc, char **argv, char **envp)
 		free(vars.inp);
 		vars.inp = NULL;
 	}
+<<<<<<< HEAD
+}
+=======
 } */
+>>>>>>> main
 
 
 
