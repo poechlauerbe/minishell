@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/04 14:45:54 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/04 15:37:13 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_prg
 	char			oper;
 	t_red			*in_file;
 	t_red			*out_file;
+	char			*heredoc;
 	char			**prog;
 	struct s_prg	*next;
 }		t_prg;
@@ -68,6 +69,7 @@ typedef struct s_vars
 	int			no_exec;
 	int			*pid;
 	int			*fd;
+	int			tmp_count;
 }		t_vars;
 
 typedef struct s_quote
@@ -291,7 +293,7 @@ void		ft_add_envv(t_vars *vars, char *key, char *val, int id);
 t_kv		*ft_val_retrieval(t_vars *vars, char *key);
 
 /* heredoc */
-void		ft_heredoc_exec(t_vars *vars, t_red *red_in);
+void		ft_heredoc_exec(t_vars *vars, t_prg *prog);
 void		ft_heredoc(t_vars *vars);
 
 /* key_value_remove */
