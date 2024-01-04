@@ -6,55 +6,98 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 20:34:56 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/29 20:35:47 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/04 14:18:30 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-void	ft_heredoc_exec(t_vars *vars, t_red *red_in)
+void	ft_create_name(t_vars *vars, t_prg *prog)
+{
+	char	*num_itoa;
+
+	vars->tmp_count++;
+	num_itoa = ft_itoa(vars->tmp_count);
+	if (!num_itoa)
+		ft_exit(vars, MALLOC_ERROR);
+	free(prog->prog[0]);
+	prog->prog[0] = ft_strjoin("/tmp/m_s_h_", num_itoa);
+	free(num_itoa);
+	if (!prog->prog[0])
+		ft_exit(vars, MALLOC_ERROR);
+}
+
+void	ft_make_tmp_file(t_vars *vars, t_prg *prog)
+{
+	int	i;
+	int	fd;
+
+	ft_create_name(vars, prog);
+	fd = open(prog->prog[0], O_RDWR | O_TRUNC | O_CREAT, 0644);
+	if (fd < 0)
+		ft_exit(vars, OPEN_FILE_ERROR);
+	i = 0;
+	while (prog->heredoc[i])
+	{
+		write(fd, &prog->heredoc[i], 1);
+		i++;
+	}
+	close(fd);
+}
+
+void	ft_prep_delimiter(t_vars *vars, t_prg *prog)
+{
+	char	*new;
+	int		len;
+
+	len = ft_strlen(prog->prog[0]);
+	new = ft_calloc((len + 2), sizeof(char));
+	if (!new)
+		ft_exit(vars, MALLOC_ERROR);
+	ft_strlcpy(new, prog->prog[0], len + 1);
+	free(prog->prog[0]);
+	new[len] = '\n';
+	prog->prog[0] = new;
+}
+
+void	ft_heredoc_exec(t_vars *vars, t_prg *prog)
 {
 	char	*str;
 	char	*old;
 	int		len;
 
-	red_in->heredoc = NULL;
-	len = ft_strlen(red_in->file);
+	prog->heredoc = NULL;
+	ft_prep_delimiter(vars, prog);
+	len = ft_strlen(prog->prog[0]);
 	str = get_next_line(0);
-	while (ft_strncmp(str, red_in->file, len) != 0)
+	while (ft_strncmp(str, prog->prog[0], len) != 0)
 	{
-		old = red_in->heredoc;
+		old = prog->heredoc;
 		if (!old)
-			red_in->heredoc = str;
+			prog->heredoc = str;
 		else
 		{
-			red_in->heredoc = ft_strjoin(old, str);
+			prog->heredoc = ft_strjoin(old, str);
 			free(old);
 			free(str);
-			if (!red_in->heredoc)
+			if (!prog->heredoc)
 				ft_exit(vars, MALLOC_ERROR);
 		}
 		str = get_next_line(0);
 	}
-	ft_exit(vars, OK);
+	ft_make_tmp_file(vars, prog);
 }
 
 
 void	ft_heredoc(t_vars *vars)
 {
 	t_prg	*prog;
-	t_red	*red_in;
 
 	prog = vars->p_start;
 	while (prog)
 	{
-		red_in = prog->in_file;
-		while (red_in)
-		{
-			if (red_in->oper == O_HEREDOC)
-				ft_heredoc_exec(vars, red_in);
-			red_in = red_in->next;
-		}
+		if (prog->oper == O_HEREDOC)
+			ft_heredoc_exec(vars, prog);
 		prog = prog->next;
 	}
 }
