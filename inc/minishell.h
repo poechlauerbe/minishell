@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/04 14:29:20 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/04 15:37:13 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -358,9 +358,14 @@ int		ft_envp_len(t_vars *vars);
 void	ft_remove_envp(t_vars *vars, char *key);
 void	ft_malloc_envpr(t_vars *vars, char ***arr, char *key);
 
+// checks whether a shell variable has to be created
 int			ft_check_shvar(t_vars *vars, t_prg *prog);
-
-
+/* checks whether the instructions are valid and all the shell variables can be
+	created */
+int	ft_check_validity(t_vars *vars, t_prg *prog);
+// creates the new shell variables
+void	ft_create_shvar(t_vars *vars, t_prg *prog, int i);
+// returns an error message for directories entered into bash
 void	ft_is_dir(t_vars *vars, t_prg *prog, char *nfd);
 
 #endif
