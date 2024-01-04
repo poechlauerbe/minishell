@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/03 17:15:15 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/04 12:08:39 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_prg
 	char			oper;
 	t_red			*in_file;
 	t_red			*out_file;
+	char			*heredoc;
 	char			**prog;
 	struct s_prg	*next;
 }		t_prg;
@@ -292,7 +293,7 @@ void		ft_add_envv(t_vars *vars, char *key, char *val, int id);
 t_kv		*ft_val_retrieval(t_vars *vars, char *key);
 
 /* heredoc */
-void		ft_heredoc_exec(t_vars *vars, t_red *red_in);
+void		ft_heredoc_exec(t_vars *vars, t_prg *prog);
 void		ft_heredoc(t_vars *vars);
 
 /* key_value_remove */

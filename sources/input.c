@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 15:30:48 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/03 16:27:23 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/04 12:13:18 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,11 +194,11 @@ void	ft_check_input(t_vars *vars)
 	ft_cleanup_lst(vars);
 	if (ft_check_redirect_file(vars))
 		return ;
+	ft_heredoc(vars);
 	ft_comb_progs(vars);
 	ft_expand_all_vars(vars);
 	ft_red_file(vars, vars->p_start);
 	ft_cleanup_reds(vars);
 	ft_quote_remover(vars);
 	ft_pipecount(vars);
-	ft_heredoc(vars);
 }
