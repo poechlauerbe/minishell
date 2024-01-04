@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 15:30:48 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/04 17:59:11 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/04 18:08:03 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	ft_check_string_count(t_vars *vars, char *inp)
 				ft_new_node(vars, &temp, &inp);
 			temp->str_c += 1;
 		}
-		while ((*inp >= 33 || *inp < 0) && *inp != 127)
+		while (*inp && (*inp >= 33 || *inp < 0) && *inp != 127)
 		{
 			if (*inp == '\'' || *inp == '\"')
 				ft_check_quotes(&inp);
@@ -45,7 +45,8 @@ void	ft_check_string_count(t_vars *vars, char *inp)
 				ft_new_node(vars, &temp, &inp);
 				break ;
 			}
-			inp++;
+			if (*inp)
+				inp++;
 		}
 	}
 }
