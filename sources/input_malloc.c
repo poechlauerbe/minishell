@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:46:54 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/30 12:50:30 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/04 17:34:20 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_input_strlen_2(char **temp, int *strlen)
 {
-	while ((**temp >= 33 || **temp < 0) && **temp != 127 && **temp != '|')
+	while (**temp && ((**temp >= 33 || **temp < 0) && **temp != 127 && **temp != '|'))
 	{
 		if (**temp == '\'')
 		{
@@ -36,8 +36,11 @@ void	ft_input_strlen_2(char **temp, int *strlen)
 					break ;
 			}
 		}
-		*temp += 1;
-		*strlen += 1;
+		if (**temp)
+		{
+			*temp += 1;
+			*strlen += 1;
+		}
 	}
 }
 
