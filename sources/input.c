@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 15:30:48 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/04 12:13:18 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/04 13:53:51 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,8 @@ int	ft_check_redirect_file(t_vars *vars)
 				vars->exit_code = SYNTAX_ERROR;
 				return (SYNTAX_ERROR);
 			}
+			else if(temp->oper == O_HEREDOC && temp->prog[0])
+				ft_heredoc_exec(vars, temp);
 		}
 		temp = temp->next;
 	}
@@ -194,7 +196,6 @@ void	ft_check_input(t_vars *vars)
 	ft_cleanup_lst(vars);
 	if (ft_check_redirect_file(vars))
 		return ;
-	ft_heredoc(vars);
 	ft_comb_progs(vars);
 	ft_expand_all_vars(vars);
 	ft_red_file(vars, vars->p_start);

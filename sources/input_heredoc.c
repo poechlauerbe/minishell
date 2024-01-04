@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_heredoc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 20:34:56 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/04 12:15:29 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/04 14:18:30 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,21 @@ void	ft_make_tmp_file(t_vars *vars, t_prg *prog)
 	close(fd);
 }
 
+void	ft_prep_delimiter(t_vars *vars, t_prg *prog)
+{
+	char	*new;
+	int		len;
+
+	len = ft_strlen(prog->prog[0]);
+	new = ft_calloc((len + 2), sizeof(char));
+	if (!new)
+		ft_exit(vars, MALLOC_ERROR);
+	ft_strlcpy(new, prog->prog[0], len + 1);
+	free(prog->prog[0]);
+	new[len] = '\n';
+	prog->prog[0] = new;
+}
+
 void	ft_heredoc_exec(t_vars *vars, t_prg *prog)
 {
 	char	*str;
@@ -52,6 +67,7 @@ void	ft_heredoc_exec(t_vars *vars, t_prg *prog)
 	int		len;
 
 	prog->heredoc = NULL;
+	ft_prep_delimiter(vars, prog);
 	len = ft_strlen(prog->prog[0]);
 	str = get_next_line(0);
 	while (ft_strncmp(str, prog->prog[0], len) != 0)
