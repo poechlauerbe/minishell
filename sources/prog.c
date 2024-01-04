@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 13:41:52 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/03 16:13:05 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/04 12:30:07 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,28 @@ void	ft_check_path(t_vars *vars, t_prg *prog)
 			i++;
 	}
 	ft_prog_not_found(vars, prog);
-	vars->exit_code = 127;
-	exit(127);
+	// vars->exit_code = 127;
+	// exit(127);
+}
+
+void	ft_is_dir(t_vars *vars, t_prg *prog, char *nfd)
+{
+	char	*ndir;
+	int		len;
+
+	ndir = "Is a directory\n";
+	len = (ft_strlen(prog->prog[0]) * 2) + 4 + ft_strlen(ndir) + 1;
+	nfd = calloc(len, sizeof(char));
+	if (!nfd)
+		ft_exit(vars, MALLOC_ERROR);
+	ft_strlcat(nfd, prog->prog[0], ft_strlen(prog->prog[0]) + 1);
+	ft_strlcat(nfd, ": ", ft_strlen(prog->prog[0]) + 3);
+	ft_strlcat(nfd, nfd, ft_strlen(nfd) * 2 + 1);
+	ft_strlcat(nfd, ndir, len);
+	ft_printf_fd(2, nfd);
+	free(nfd);
+	vars->exit_code = 126;
+	exit(126);
 }
 
 void	ft_prog_not_found(t_vars *vars, t_prg *prog)
@@ -87,11 +107,19 @@ void	ft_prog_not_found(t_vars *vars, t_prg *prog)
 	char	*nfd;
 
 	nfd = NULL;
-	nfd = ft_strjoin(prog->prog[0], ": command not found\n");
-	if (!nfd)
-		ft_exit(vars, MALLOC_ERROR);
-	ft_printf_fd(2, nfd);
-	free (nfd);
+	if (!access(prog->prog[0], F_OK) && (ft_strcmp(prog->prog[0], ".")
+		&& ft_strcmp(prog->prog[0], "..")))
+		ft_is_dir(vars, prog, nfd);
+	else
+	{
+		nfd = ft_strjoin(prog->prog[0], ": command not found\n");
+		if (!nfd)
+			ft_exit(vars, MALLOC_ERROR);
+		ft_printf_fd(2, nfd);
+		free (nfd);
+		vars->exit_code = 127;
+		exit(127);
+	}
 }
 
 void	ft_check_prog(t_vars *vars, t_prg *prog)

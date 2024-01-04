@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 12:15:16 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/03 16:27:52 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/03 18:55:02 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ void	ft_expand_all_vars(t_vars *vars)
 		i = 0;
 		while (temp->prog[i])
 		{
-			// ft_home_expand(vars, &temp->prog[i]);
+			ft_home_expand(vars, &temp->prog[i]);
 			ft_check_enclosing(&temp->prog[i], vars);
 			i++;
 		}
