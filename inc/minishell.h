@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/04 12:08:39 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/04 14:29:20 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -359,5 +359,8 @@ void	ft_remove_envp(t_vars *vars, char *key);
 void	ft_malloc_envpr(t_vars *vars, char ***arr, char *key);
 
 int			ft_check_shvar(t_vars *vars, t_prg *prog);
+
+
+void	ft_is_dir(t_vars *vars, t_prg *prog, char *nfd);
 
 #endif

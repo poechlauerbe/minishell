@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 13:14:23 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/20 17:40:15 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/03 19:24:50 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char	*ft_exp_value(t_vars *vars, char *arg)
 	while (*arg != '=' && *arg != '\0')
 		arg++;
 	if (*arg == '\0')
-		return (NULL);
+		value = ft_calloc(1, sizeof(char));
 	else
 	{
 		arg++;

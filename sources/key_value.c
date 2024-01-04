@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 13:26:58 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/03 12:02:17 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/03 19:26:50 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	ft_add_envv(t_vars *vars, char *key, char *val, int id)
 	{
 		if (!id)
 			tmp->id = 'x';
-		if (val && val[0])
+		if (val)
 			ft_new_value(vars, key, val);
 		return ;
 	}

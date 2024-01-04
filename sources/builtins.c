@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/01/03 14:55:32 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/03 18:49:02 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,7 @@ void	ft_unset(t_vars *vars)
 	while (key)
 	{
 		ft_remove_envv(vars, key);
-		if (ft_exp_key(vars, key, 1))
-			vars->exit_code = 0;
+		vars->exit_code = 0;
 		ft_new_envp(vars);
 		key = vars->p_start->prog[++i];
 	}
@@ -85,7 +84,7 @@ void	ft_cd(t_vars *vars)
 		ft_malloc_cp(vars, &cp, vars->p_start->prog[1]);
 	else
 		cp = NULL;
-	if (!cp)
+	if (!cp || !strcmp(cp, "--"))
 	{
 		if (!ft_return_val(vars, "HOME"))
 			return (ft_print_err_cd(vars, 2));
