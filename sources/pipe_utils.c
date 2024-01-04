@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 16:52:00 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/02 16:24:28 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/04 17:31:08 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,16 @@ void	ft_pipecount(t_vars *vars)
 	while (temp)
 	{
 		if (temp->oper == O_PIPE)
+		{
 			count++;
+			if (!temp->in_file && !temp->out_file && !temp->prog[0])
+			{
+				vars->no_exec = SYNTAX_ERROR;
+				vars->exit_code = SYNTAX_ERROR;
+				ft_putstr_fd("bash: syntax error near unexpected token `|'", 2);
+				return ;
+			}
+		}
 		temp = temp->next;
 	}
 	vars->pipe_count = count;
