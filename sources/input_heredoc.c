@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 20:34:56 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/04 15:05:53 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/04 15:30:56 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,14 @@ void	ft_make_tmp_file(t_vars *vars, t_prg *prog)
 void	ft_prep_delimiter(t_vars *vars, t_prg *prog)
 {
 	char	*new;
+	char	*str_wo_q;
 	int		len;
 
+	str_wo_q = ft_create_value(vars, prog->prog[0]);
+	if (!str_wo_q)
+		ft_exit(vars, MALLOC_ERROR);
+	free(prog->prog[0]);
+	prog->prog[0] = str_wo_q;
 	len = ft_strlen(prog->prog[0]);
 	new = ft_calloc((len + 2), sizeof(char));
 	if (!new)
