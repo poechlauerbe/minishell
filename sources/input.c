@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 15:30:48 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/04 13:53:51 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/04 14:46:21 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ int	ft_check_redirect_file(t_vars *vars)
 				vars->exit_code = SYNTAX_ERROR;
 				return (SYNTAX_ERROR);
 			}
-			else if(temp->oper == O_HEREDOC && temp->prog[0])
+			else if (temp->oper == O_HEREDOC && temp->prog[0])
 				ft_heredoc_exec(vars, temp);
 		}
 		temp = temp->next;
