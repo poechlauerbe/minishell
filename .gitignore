@@ -8,3 +8,4 @@ minishell
 .nfs*
 test*
 minishell_test*
+tmp*

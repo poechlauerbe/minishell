@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 20:34:56 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/05 12:16:57 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/05 12:46:39 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,9 @@ void	ft_prep_delimiter(t_vars *vars, t_prg *prog)
 	char	*str_wo_q;
 	int		len;
 
+	prog->hdoc_flag = 0;
+	if (prog->prog[0][0] == '\'' || prog->prog[0][0] == '\"')
+		prog->hdoc_flag = 1;
 	str_wo_q = ft_create_value(vars, prog->prog[0]);
 	if (!str_wo_q)
 		ft_exit(vars, MALLOC_ERROR);
@@ -93,7 +96,8 @@ void	ft_heredoc_exec(t_vars *vars, t_prg *prog)
 		// write(2, ">", 1);
 		str = get_next_line(0);
 	}
-	ft_check_enclosing(&prog->heredoc, vars);
+	if (!prog->hdoc_flag)
+		ft_check_enclosing(&prog->heredoc, vars);
 	ft_make_tmp_file(vars, prog);
 }
 
