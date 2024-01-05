@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 13:41:52 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/05 13:36:37 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/05 16:45:33 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	ft_check_path(t_vars *vars, t_prg *prog)
 	if (!c_prog)
 		ft_exit(vars, MALLOC_ERROR);
 	if (access(c_prog, F_OK | X_OK) == OK)
-			execve(c_prog, prog->prog, vars->envp);
+		execve(c_prog, prog->prog, vars->envp);
 	ft_prog_not_found(vars, prog);
 	// vars->exit_code = 127;
 	// exit(127);
@@ -127,6 +127,13 @@ void	ft_prog_not_found(t_vars *vars, t_prg *prog)
 	}
 }
 
+void	ft_check_dir(t_vars *vars, char *str)
+{
+	char	*ptr;
+
+	ptr = opendir(str);
+}
+
 void	ft_check_prog(t_vars *vars, t_prg *prog)
 {
 	int		acc_c;
@@ -134,6 +141,7 @@ void	ft_check_prog(t_vars *vars, t_prg *prog)
 	acc_c = 1;
 	if (!prog->prog || !prog->prog[0] || !prog->prog[0][0])
 		return ;
+	// ft_check_dir(vars, prog->prog[0]);
 	if (ft_strncmp(prog->prog[0], "./", 2) == 0)
 		acc_c = access(prog->prog[0], F_OK | X_OK);
 	else if (ft_strncmp(prog->prog[0], "../", 3) == 0)

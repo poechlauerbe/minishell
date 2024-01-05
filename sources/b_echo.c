@@ -6,11 +6,28 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:20:58 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/02 17:16:43 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/05 15:43:55 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+int	ft_n_checker(char *str, int *new_line_mark, int *i)
+{
+	int	j;
+
+	j = 1;
+	while (str[j] == 'n')
+		j++;
+	if (str[j] == '\0')
+	{
+		*new_line_mark = 1;
+		*i += 1;
+	}
+	else
+		return (1);
+	return (OK);
+}
 
 void	ft_echo(t_vars *vars, char **str)
 {
@@ -25,11 +42,9 @@ void	ft_echo(t_vars *vars, char **str)
 		vars->exit_code = OK;
 		return ;
 	}
-	if (strncmp(str[1], "-n", 3) == 0)
-	{
-		new_line_mark = 1;
-		i = 1;
-	}
+	while (str[i + 1] && strncmp(str[i + 1], "-n", 2) == 0)
+		if (ft_n_checker(str[i + 1], &new_line_mark, &i))
+			break ;
 	while (str[++i])
 	{
 		ft_printf("%s", str[i]);

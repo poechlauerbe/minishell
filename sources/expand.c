@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 12:15:16 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/04 15:01:42 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/05 16:24:46 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_varlen(char *arg, t_quote *quote)
 		return (2);
 	if ((ft_isalpha(arg[i]) || arg[i] == '_'))
 	{
-		while (arg[i] && arg[i] != '\'' && arg[i] != '"' && arg[i] != ' ' && arg[i] != '$' && arg[i] != '/' && arg[i] != '\n')
+		while (arg[i] && ft_isalnum(arg[i]))
 		{
 			varlen++;
 			i++;
