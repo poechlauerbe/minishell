@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/04 15:37:13 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/05 17:07:51 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@
 # include <readline/history.h>
 # include <signal.h>
 # include <sys/wait.h>
+# include <dirent.h>
+# include <sys/types.h>
+
 
 // for the redirect sign - to handle multiple in- and out-files
 typedef struct s_red
@@ -40,6 +43,7 @@ typedef struct s_prg
 	t_red			*in_file;
 	t_red			*out_file;
 	char			*heredoc;
+	int				hdoc_flag;
 	char			**prog;
 	struct s_prg	*next;
 }		t_prg;
@@ -319,11 +323,12 @@ void		ft_pipecount(t_vars *vars);
 // closes all the open pipes of the pipeloop
 void		ft_close_pipes(int pipe_nr, int *fd);
 // checks if the input file is accesable
-int			ft_check_in_access(char *file, int *pid, int i);
+int			ft_check_in_access(char *file, int *pid, int i, t_vars *vars);
 // checks if the output file is accesable
-int			ft_check_out_access(char *file, int *pid, int i);
+int			ft_check_out_access(char *file, int *pid, int i, t_vars *vars);
 
 /* prog */
+int			ft_check_dir(t_vars *vars, char *str);
 void		ft_check_prog(t_vars *vars, t_prg *prog);
 
 /* redirect_utils */

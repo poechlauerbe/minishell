@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 16:52:00 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/04 17:31:08 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/05 17:12:33 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,28 @@ void	ft_close_pipes(int pipe_nr, int *fd)
 		close(fd[i]);
 }
 
-int	ft_check_in_access(char *file, int *pid, int i)
+int	ft_check_dir(t_vars *vars, char *str)
+{
+	void	*ptr;
+
+	ptr = opendir(str);
+	if (!ptr)
+		return (OK);
+	ft_putstr_fd("bash: ", 2);
+	ft_putstr_fd(str, 2);
+	ft_putstr_fd(": Is a directory\n", 2);
+	vars->exit_code = NO_SUCH_FILE_OR_DIRECTORY;
+	vars->no_exec = NO_SUCH_FILE_OR_DIRECTORY;
+	closedir(ptr);
+	return (1);
+}
+
+int	ft_check_in_access(char *file, int *pid, int i, t_vars *vars)
 {
 	int	j;
 
+	if (ft_check_dir(vars, file))
+		return (1);
 	if (access(file, R_OK) == 0)
 		return (OK);
 	else
@@ -65,12 +83,59 @@ int	ft_check_in_access(char *file, int *pid, int i)
 	}
 }
 
-int	ft_check_out_access(char *file, int *pid, int i)
+int	ft_path_checker(char *file, int *pid, int i, int j, t_vars *vars)
+{
+	char	*test_path;
+
+	test_path = ft_strdup(file);
+	if (!test_path)
+		ft_exit(vars, MALLOC_ERROR);
+	test_path[j] = '\0';
+	if (access(file, F_OK) == 0)
+		return (OK);
+	else
+	{
+		j = -1;
+		while (++j < i)
+			waitpid(pid[j], NULL, 0);
+		ft_putstr_fd("bash: ", 2);
+		ft_putstr_fd(file, 2);
+		ft_putstr_fd(": No such file or directory\n", 2);
+		return (1);
+	}
+	return (OK);
+}
+
+int	ft_check_command_path(char *file, int *pid, int i, t_vars *vars)
+{
+	int	j;
+	int	count;
+
+	count = 0;
+	j = 0;
+	while (file[j] == '.' || file[j] == '/')
+		j++;
+	while (file[j])
+	{
+		if (file[j] == '/' && ft_path_checker(file, pid, i, j, vars))
+			return (1);
+		j++;
+	}
+	return (OK);
+}
+
+int	ft_check_out_access(char *file, int *pid, int i, t_vars *vars)
 {
 	int	j;
 
-	if (access(file, F_OK) != 0)
-		return (OK);
+	if (ft_check_dir(vars, file))
+		return (1);
+	if (access(file, F_OK) != 0 && !ft_check_dir(vars, file))
+	{
+		if (ft_check_command_path(file, pid, i, vars))
+			return (1);
+		return (0);
+	}
 	else
 	{
 		if (access(file, W_OK) == 0)

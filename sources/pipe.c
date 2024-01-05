@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 15:46:51 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/03 17:57:33 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/05 17:36:27 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_check_input_file(t_vars *vars, t_prg *temp, t_red *reds, int i)
 	reds = temp->in_file;
 	while (reds)
 	{
-		if (ft_check_in_access(reds->file, vars->pid, i) != OK)
+		if (ft_check_in_access(reds->file, vars->pid, i, vars) != OK)
 			exit(1);
 		reds = reds->next;
 	}
@@ -40,14 +40,14 @@ void	ft_check_output_file(t_vars *vars, t_prg *temp, t_red *reds, int i)
 	reds = temp->out_file;
 	while (reds)
 	{
-		if (ft_check_out_access(reds->file, vars->pid, i) != OK)
-			exit(1);
+		if (ft_check_out_access(reds->file, vars->pid, i, vars) != OK)
+			ft_exit(vars, 1);
 		if (reds->oper == O_RED_OUTPUT)
 			fd_r_out = open(reds->file, O_RDWR | O_TRUNC | O_CREAT, 0644);
 		else
 			fd_r_out = open(reds->file, O_RDWR | O_APPEND | O_CREAT, 0644);
 		if (fd_r_out == -1)
-			ft_exit(vars, OPEN_FILE_ERROR);
+			ft_exit(vars, MALLOC_ERROR);
 		if (reds->next)
 			close (fd_r_out);
 		reds = reds->next;

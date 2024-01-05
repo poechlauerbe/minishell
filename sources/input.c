@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 15:30:48 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/04 18:08:03 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/05 18:40:11 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_check_string_count(t_vars *vars, char *inp)
 			inp++;
 		if ((*inp >= 33 || *inp < 0) && *inp != 127 && *inp != '|' && *inp != '<' && *inp != '>')
 		{
-			if ((temp->oper == '<' || temp->oper == '>' || temp->oper == O_APP_OUT) && temp->str_c == 1)
+			if ((temp->oper == '<' || temp->oper == '>' || temp->oper == O_APP_OUT || temp->oper == O_HEREDOC) && temp->str_c == 1)
 				ft_new_node(vars, &temp, &inp);
 			temp->str_c += 1;
 		}
@@ -146,13 +146,6 @@ int	ft_start(t_vars *vars)
 	char	*temp;
 
 	temp = vars->inp;
-	if (ft_strlen(vars->inp) == 2 && (ft_strncmp(vars->inp, "\"\"", 2) == 0 || ft_strncmp(vars->inp, "\'\'", 2) == 0))
-	{
-		ft_putstr_fd("Command '' not found\n", 2);
-		vars->no_exec = 127;
-		vars->exit_code = 127;
-		return (127);
-	}
 	i = 0;
 	while (temp[i] && (temp[i] == 32 || (temp[i] > 8 && temp[i] < 14)))
 		i++;
@@ -211,3 +204,24 @@ void	ft_check_input(t_vars *vars)
 	ft_quote_remover(vars);
 	ft_pipecount(vars);
 }
+
+	// temp = vars->p_start;
+	// while (temp)
+	// {
+	// 	printf("oper: %c$\n", temp->oper);
+	// 	i = -1;
+	// 	while (temp->prog[++i])
+	// 		printf("string[%i]: %s\n", i, temp->prog[i]);
+	// 	printf("\n");
+	// 	while(temp->out_file)
+	// 	{
+	// 		printf("out: %s, %c$\n", temp->out_file->file, temp->out_file->oper);
+	// 		temp->out_file = temp->out_file->next;
+	// 	}
+	// 	while(temp->in_file)
+	// 	{
+	// 		printf("in: %s, %c$\n", temp->in_file->file, temp->in_file->oper);
+	// 		temp->in_file = temp->in_file->next;
+	// 	}
+	// 	temp = temp->next;
+	// }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_cd_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:29:49 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/03 19:12:51 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/05 13:42:44 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,12 +101,16 @@ void	ft_chdir(t_vars *vars, char **curpath)
 			return ;
 		}
 		else
+		{
 			perror("cd");
+			ft_putstr_fd("\n", 2);
+		}
 	}
 	tmp = ft_strjoin("minishell: cd: ", vars->p_start->prog[1]);
 	if (!tmp)
 		ft_exit(vars, MALLOC_ERROR);
 	perror(tmp);
+	ft_putstr_fd("\n", 2);
 	free (*curpath);
 	free (tmp);
 	vars->exit_code = 1;
