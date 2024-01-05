@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 13:41:52 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/05 16:45:33 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/05 17:36:47 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,21 +127,20 @@ void	ft_prog_not_found(t_vars *vars, t_prg *prog)
 	}
 }
 
-void	ft_check_dir(t_vars *vars, char *str)
-{
-	char	*ptr;
-
-	ptr = opendir(str);
-}
-
 void	ft_check_prog(t_vars *vars, t_prg *prog)
 {
 	int		acc_c;
 
 	acc_c = 1;
-	if (!prog->prog || !prog->prog[0] || !prog->prog[0][0])
+	if (!prog->prog || !prog->prog[0])
 		return ;
-	// ft_check_dir(vars, prog->prog[0]);
+	if (prog->prog[0][0] == '\0')
+	{
+		ft_putstr_fd("Command '' not found\n", 2);
+		vars->no_exec = 127;
+		vars->exit_code = 127;
+		ft_exit(vars, 127);
+	}
 	if (ft_strncmp(prog->prog[0], "./", 2) == 0)
 		acc_c = access(prog->prog[0], F_OK | X_OK);
 	else if (ft_strncmp(prog->prog[0], "../", 3) == 0)

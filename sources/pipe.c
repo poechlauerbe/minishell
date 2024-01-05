@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 15:46:51 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/05 14:53:23 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/05 17:36:27 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_check_input_file(t_vars *vars, t_prg *temp, t_red *reds, int i)
 	reds = temp->in_file;
 	while (reds)
 	{
-		if (ft_check_in_access(reds->file, vars->pid, i) != OK)
+		if (ft_check_in_access(reds->file, vars->pid, i, vars) != OK)
 			exit(1);
 		reds = reds->next;
 	}

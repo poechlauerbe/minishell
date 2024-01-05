@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 16:52:00 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/05 14:59:55 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/05 17:12:33 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,28 @@ void	ft_close_pipes(int pipe_nr, int *fd)
 		close(fd[i]);
 }
 
-int	ft_check_in_access(char *file, int *pid, int i)
+int	ft_check_dir(t_vars *vars, char *str)
+{
+	void	*ptr;
+
+	ptr = opendir(str);
+	if (!ptr)
+		return (OK);
+	ft_putstr_fd("bash: ", 2);
+	ft_putstr_fd(str, 2);
+	ft_putstr_fd(": Is a directory\n", 2);
+	vars->exit_code = NO_SUCH_FILE_OR_DIRECTORY;
+	vars->no_exec = NO_SUCH_FILE_OR_DIRECTORY;
+	closedir(ptr);
+	return (1);
+}
+
+int	ft_check_in_access(char *file, int *pid, int i, t_vars *vars)
 {
 	int	j;
 
+	if (ft_check_dir(vars, file))
+		return (1);
 	if (access(file, R_OK) == 0)
 		return (OK);
 	else
@@ -110,7 +128,9 @@ int	ft_check_out_access(char *file, int *pid, int i, t_vars *vars)
 {
 	int	j;
 
-	if (access(file, F_OK) != 0)
+	if (ft_check_dir(vars, file))
+		return (1);
+	if (access(file, F_OK) != 0 && !ft_check_dir(vars, file))
 	{
 		if (ft_check_command_path(file, pid, i, vars))
 			return (1);

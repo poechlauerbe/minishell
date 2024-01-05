@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 20:34:56 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/05 13:01:59 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/05 18:42:43 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,14 @@ void	ft_prep_delimiter(t_vars *vars, t_prg *prog)
 
 	prog->hdoc_flag = 0;
 	i = 0;
-	while (prog->prog[0][i] && !prog->hdoc_flag)
+	while (prog->prog[0][i] && prog->prog[0][i] != ' ' && !prog->hdoc_flag)
 	{
 		if (prog->prog[0][i] == '\'' || prog->prog[0][i] == '\"')
 			prog->hdoc_flag = 1;
 		i++;
 	}
 	str_wo_q = ft_create_value(vars, prog->prog[0]);
+	// ft_printf("%s\n", str_wo_q);
 	if (!str_wo_q)
 		ft_exit(vars, MALLOC_ERROR);
 	free(prog->prog[0]);

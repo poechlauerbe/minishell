@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 11:12:25 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/05 15:49:17 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/05 18:03:51 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,17 @@ void	ft_exit_prog(t_vars *vars, char **prog)
 		str_wo_q = ft_create_value(vars, prog[1]);
 		if (!str_wo_q)
 			ft_exit(vars, MALLOC_ERROR);
-		if (str_wo_q[ft_endof_atoi(str_wo_q)])
+		if (str_wo_q[0] == '\0' || str_wo_q[ft_endof_atoi(str_wo_q)])
 		{
 			ft_putstr_fd("exit\nbash: exit: ", 2);
 			ft_putstr_fd(prog[1], 2);
 			ft_putstr_fd(": numeric argument required\n", 2);
 			ft_exit(vars, SYNTAX_ERROR);
+		}
+		else if (prog[1] && prog[2])
+		{
+			ft_putstr_fd("exit\nbash: exit: too many arguments\n", 2);
+			vars->exit_code = 1;
 		}
 		else
 		{
@@ -56,11 +61,6 @@ void	ft_exit_prog(t_vars *vars, char **prog)
 			ft_exit(vars, num);
 		}
 		free(str_wo_q);
-	}
-	else if (prog[1] && prog[2])
-	{
-		ft_putstr_fd("exit\nbash: exit: too many arguments\n", 2);
-		vars->exit_code = 1;
 	}
 	else
 		ft_exit(vars, vars->exit_code);

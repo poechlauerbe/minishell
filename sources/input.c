@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 15:30:48 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/05 13:28:10 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/05 18:40:11 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,13 +146,6 @@ int	ft_start(t_vars *vars)
 	char	*temp;
 
 	temp = vars->inp;
-	if (ft_strlen(vars->inp) == 2 && (ft_strncmp(vars->inp, "\"\"", 2) == 0 || ft_strncmp(vars->inp, "\'\'", 2) == 0))
-	{
-		ft_putstr_fd("Command '' not found\n", 2);
-		vars->no_exec = 127;
-		vars->exit_code = 127;
-		return (127);
-	}
 	i = 0;
 	while (temp[i] && (temp[i] == 32 || (temp[i] > 8 && temp[i] < 14)))
 		i++;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_malloc.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:46:54 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/04 17:34:20 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/05 18:41:32 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_input_strlen_2(char **temp, int *strlen)
 {
-	while (**temp && ((**temp >= 33 || **temp < 0) && **temp != 127 && **temp != '|'))
+	while (**temp && ((**temp >= 33 || **temp < 0) && **temp != 127 && **temp != '|' && **temp != '<' && **temp != '>'))
 	{
 		if (**temp == '\'')
 		{
