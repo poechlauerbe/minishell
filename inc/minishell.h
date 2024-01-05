@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/05 12:37:58 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/05 14:52:56 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -322,7 +322,7 @@ void		ft_close_pipes(int pipe_nr, int *fd);
 // checks if the input file is accesable
 int			ft_check_in_access(char *file, int *pid, int i);
 // checks if the output file is accesable
-int			ft_check_out_access(char *file, int *pid, int i);
+int			ft_check_out_access(char *file, int *pid, int i, t_vars *vars);
 
 /* prog */
 void		ft_check_prog(t_vars *vars, t_prg *prog);
