@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_cd_dotdot.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:28:33 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/04 18:23:29 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/05 12:15:39 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,6 @@ int	ft_remove_dd2(t_vars *vars, char **temp, int i)
 		if (i == 0 || (*temp)[i - 1] == '/')
 			cl = ft_remove_dd_currlen(*temp, i);
 	}
-
 	return (0);
 }
 
@@ -105,7 +104,6 @@ int	ft_remove_dot_dot(t_vars *vars, char **cp)
 {
 	int		i;
 	char	*temp;
-	char	*tmp;
 
 	i = 0;
 	while (cp[0][i + 1] == '/')
@@ -116,15 +114,6 @@ int	ft_remove_dot_dot(t_vars *vars, char **cp)
 	i = -1;
 	if (ft_remove_dd2(vars, &temp, i))
 		return (1);
-	if (ft_strlen(temp) > 1 && (temp)[ft_strlen(temp) - 1] == '/'
-		&& temp[ft_strlen(temp) - 2] != '/')
-	{
-		tmp = ft_substr(temp, 0, strlen(temp) - 1);
-		if (!tmp)
-			ft_exit(vars, MALLOC_ERROR);
-		free (temp);
-		temp = tmp;
-	}
 	free (*cp);
 	*cp = temp;
 	return (0);

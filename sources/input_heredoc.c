@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_heredoc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 20:34:56 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/04 18:17:20 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/05 12:16:57 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	ft_heredoc_exec(t_vars *vars, t_prg *prog)
 			if (!prog->heredoc)
 				ft_exit(vars, MALLOC_ERROR);
 		}
-		// write(1, ">", 1);
+		// write(2, ">", 1);
 		str = get_next_line(0);
 	}
 	ft_check_enclosing(&prog->heredoc, vars);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prog.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 13:41:52 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/04 18:19:56 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/05 12:17:34 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,7 @@ void	ft_check_prog(t_vars *vars, t_prg *prog)
 		exit(127);
 	}
 	else if (acc_c == OK)
-		execve(prog->prog[0], prog->prog, vars->envp);
+		execve(prog->prog[0], prog->prog, NULL);
 	if (ft_builtin_check(vars, prog) == USED)
 		ft_exit(vars, OK);
 	ft_check_path(vars, prog);
