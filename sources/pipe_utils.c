@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 16:52:00 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/05 17:12:33 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/06 10:03:51 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,9 +109,7 @@ int	ft_path_checker(char *file, int *pid, int i, int j, t_vars *vars)
 int	ft_check_command_path(char *file, int *pid, int i, t_vars *vars)
 {
 	int	j;
-	int	count;
 
-	count = 0;
 	j = 0;
 	while (file[j] == '.' || file[j] == '/')
 		j++;
