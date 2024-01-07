@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 13:26:58 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/07 18:33:55 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/07 19:04:56 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,14 @@
 
 void	ft_new_value(t_vars *vars, char *key, char *val)
 {
-	int		len;
 	t_kv	*tmp;
 
 	tmp = ft_val_retrieval(vars, key);
 	if (tmp->val)
 	{
-		len = ft_strlen(val);
 		free (tmp->val);
 		tmp->val = val;
 	}
-	free (key);
 }
 
 t_kv	*ft_val_retrieval(t_vars *vars, char *key)
@@ -57,6 +54,7 @@ void	ft_add_envv(t_vars *vars, char *key, char *val, int id)
 			tmp->id = 'x';
 		if (val)
 			ft_new_value(vars, key, val);
+		free (key);
 		return ;
 	}
 	else

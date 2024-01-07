@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 20:34:56 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/07 18:09:49 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/07 19:29:45 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	ft_heredoc_exec(t_vars *vars, t_prg *prog)
 		if (prog->heredoc)
 		{
 			temp = NULL;
-			temp = ft_substr(prog->heredoc, 0, ft_strlen(prog->heredoc));
+			temp = ft_strdup(prog->heredoc);
 			if (!temp)
 				ft_exit(vars, MALLOC_ERROR);
 			free(prog->heredoc);
@@ -104,7 +104,7 @@ void	ft_heredoc_exec(t_vars *vars, t_prg *prog)
 		}
 		else
 		{
-			prog->heredoc = ft_substr(str, 0, strlen(str));
+			prog->heredoc = ft_strdup(str);
 			if (!prog->heredoc)
 				ft_exit(vars, MALLOC_ERROR);
 		}
