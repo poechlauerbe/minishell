@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_heredoc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 20:34:56 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/05 18:42:43 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/07 18:09:49 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	ft_make_tmp_file(t_vars *vars, t_prg *prog)
 		i++;
 	}
 	close(fd);
+	free (prog->heredoc);
 }
 
 void	ft_prep_delimiter(t_vars *vars, t_prg *prog)
@@ -79,7 +80,7 @@ void	ft_prep_delimiter(t_vars *vars, t_prg *prog)
 void	ft_heredoc_exec(t_vars *vars, t_prg *prog)
 {
 	char	*str;
-	char	*old;
+	char	*temp;
 	int		len;
 
 	prog->heredoc = NULL;
@@ -89,25 +90,35 @@ void	ft_heredoc_exec(t_vars *vars, t_prg *prog)
 	str = get_next_line(0);
 	while (ft_strncmp(str, prog->prog[0], len) != 0)
 	{
-		old = prog->heredoc;
-		if (!old)
-			prog->heredoc = str;
+		if (prog->heredoc)
+		{
+			temp = NULL;
+			temp = ft_substr(prog->heredoc, 0, ft_strlen(prog->heredoc));
+			if (!temp)
+				ft_exit(vars, MALLOC_ERROR);
+			free(prog->heredoc);
+			prog->heredoc = ft_strjoin(temp, str);
+			if (!prog->heredoc)
+				ft_exit(vars, MALLOC_ERROR);
+			free (temp);
+		}
 		else
 		{
-			prog->heredoc = ft_strjoin(old, str);
-			free(old);
-			free(str);
+			prog->heredoc = ft_substr(str, 0, strlen(str));
 			if (!prog->heredoc)
 				ft_exit(vars, MALLOC_ERROR);
 		}
+		if (str)
+			free (str);
 		// write(2, ">", 1);
 		str = get_next_line(0);
 	}
+	if (str)
+		free (str);
 	if (!prog->hdoc_flag)
 		ft_check_enclosing(&prog->heredoc, vars);
 	ft_make_tmp_file(vars, prog);
 }
-
 
 void	ft_heredoc(t_vars *vars)
 {
