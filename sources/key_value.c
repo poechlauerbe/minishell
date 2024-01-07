@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 13:26:58 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/03 19:26:50 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/07 19:04:56 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,13 @@
 
 void	ft_new_value(t_vars *vars, char *key, char *val)
 {
-	int		len;
 	t_kv	*tmp;
 
-	tmp = vars->envv;
-	while (tmp)
-	{
-		if (!strcmp(tmp->key, key))
-			break ;
-		tmp = tmp->next;
-	}
+	tmp = ft_val_retrieval(vars, key);
 	if (tmp->val)
 	{
-		len = ft_strlen(val);
 		free (tmp->val);
-		tmp->val = (char *)calloc((len + 1), sizeof(char));
-		if (!tmp->val)
-			ft_exit(vars, MALLOC_ERROR);
-		ft_strlcpy(tmp->val, val, (len + 1));
+		tmp->val = val;
 	}
 }
 
@@ -65,18 +54,22 @@ void	ft_add_envv(t_vars *vars, char *key, char *val, int id)
 			tmp->id = 'x';
 		if (val)
 			ft_new_value(vars, key, val);
+		free (key);
 		return ;
 	}
-	tmp = (t_kv *)malloc(sizeof(t_kv));
-	if (!tmp)
-		ft_exit(vars, MALLOC_ERROR);
-	tmp->key = key;
-	tmp->val = val;
-	ft_set_val(vars, &vars->envv, &tmp);
-	if (!id)
-		tmp->id = 'x';
 	else
-		tmp->id = 's';
+	{
+		tmp = (t_kv *)malloc(sizeof(t_kv));
+		if (!tmp)
+			ft_exit(vars, MALLOC_ERROR);
+		tmp->key = key;
+		tmp->val = val;
+		ft_set_val(vars, &vars->envv, &tmp);
+		if (!id)
+			tmp->id = 'x';
+		else
+			tmp->id = 's';
+	}
 }
 
 char	*ft_return_val(t_vars *vars, char *key)

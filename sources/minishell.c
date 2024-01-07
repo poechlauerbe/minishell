@@ -3,44 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 14:33:20 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/05 12:20:52 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/07 19:55:44 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-// int	main(int argc, char **argv, char **envp)
-// {
-// 	t_vars	vars;
+/* int	main(int argc, char **argv, char **envp)
+{
+	t_vars	vars;
 
-// 	ft_init(&vars, argc, argv, envp);
-// 	ft_handle_signals();
-// 	while (1)
-// 	{
-// 		vars.inp = readline("Prompt> $");
-// 		if (!vars.inp)
-// 			ft_exit(&vars, vars.exit_code);
-// 		else if (ft_strlen(vars.inp) > 0)
-// 		{
-// 			add_history(vars.inp);
-// 			ft_check_input(&vars);
-// 			if (!vars.pipe_count && !vars.no_exec)
-// 			{
-// 				if (ft_builtin_check(&vars, vars.p_start) == NOT_USED)
-// 					ft_pipe(&vars);
-// 			}
-// 			else if (!vars.no_exec)
-// 				ft_pipe(&vars);
-// 			ft_free_input(&vars);
-// 			vars.no_exec = OK;
-// 		}
-// 		free(vars.inp);
-// 		vars.inp = NULL;
-// 	}
-// }
+	ft_init(&vars, argc, argv, envp);
+	ft_handle_signals();
+	while (1)
+	{
+		vars.inp = readline("Prompt> $");
+		if (!vars.inp)
+			ft_exit(&vars, vars.exit_code);
+		else if (ft_strlen(vars.inp) > 0)
+		{
+			add_history(vars.inp);
+			ft_check_input(&vars);
+			if (!vars.pipe_count && !vars.no_exec)
+			{
+				if (ft_builtin_check(&vars, vars.p_start) == NOT_USED)
+					ft_pipe(&vars);
+			}
+			else if (!vars.no_exec)
+				ft_pipe(&vars);
+			ft_free_input(&vars);
+			vars.no_exec = OK;
+		}
+		free(vars.inp);
+		vars.inp = NULL;
+	}
+} */
 
 // FOR TESTER:
 int	main(int argc, char **argv, char **envp)

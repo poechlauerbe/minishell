@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_cd_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:29:49 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/05 13:42:44 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/07 19:41:02 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,13 +89,16 @@ int	ft_can_form(t_vars *vars, char **curpath)
 void	ft_chdir(t_vars *vars, char **curpath)
 {
 	char	*tmp;
+	t_kv	*elem;
 
 	if (!access(*curpath, F_OK | X_OK))
 	{
 		if (!chdir(*curpath))
 		{
 			ft_new_value(vars, "OLDPWD", ft_return_val(vars, "PWD"));
-			ft_new_value(vars, "PWD", *curpath);
+			elem = ft_val_retrieval(vars, "PWD");
+			elem->val = ft_strdup(*curpath);
+			// ft_new_value(vars, "PWD", val);
 			free (*curpath);
 			vars->exit_code = 0;
 			return ;

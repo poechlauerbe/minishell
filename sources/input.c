@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 15:30:48 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/05 18:40:11 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/07 15:36:41 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_check_string_count(t_vars *vars, char *inp)
 {
 	t_prg	*temp;
 
-	vars->p_start = malloc(sizeof(t_prg));
+	vars->p_start = calloc(1, sizeof(t_prg));
 	if (!vars->p_start)
 		ft_exit(vars, MALLOC_ERROR);
 	vars->p_start->next = NULL;

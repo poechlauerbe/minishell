@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/01/03 18:49:02 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/07 19:40:17 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,11 @@ void	ft_cd(t_vars *vars)
 		if (!ft_return_val(vars, "HOME"))
 			return (ft_print_err_cd(vars, 2));
 		else
+		{
+			if (cp)
+				free (cp);
 			ft_malloc_cp(vars, &cp, ft_return_val(vars, "HOME"));
+		}
 	}
 	else if (cp[0] != '/')
 		ft_check_pot_path(vars, &cp);

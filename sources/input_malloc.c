@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_malloc.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:46:54 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/05 18:41:32 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/07 15:40:56 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	ft_copy_progs(t_vars *vars, char **inp, t_prg *temp, char **prog)
 		str = ft_calloc((strlen + 1), sizeof(char));
 		if (!str)
 		{
-			free(prog);
+			// free(prog);
 			ft_exit(vars, MALLOC_ERROR);
 		}
 		ft_strlcpy(str, *inp, strlen + 1);

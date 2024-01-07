@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prog.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 13:41:52 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/05 17:36:47 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/07 14:03:00 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ void	ft_check_path(t_vars *vars, t_prg *prog)
 		free(dir);
 		if (access(c_prog, F_OK | X_OK) == OK)
 			execve(c_prog, prog->prog, vars->envp);
+		else
+			free (c_prog);
 		if (line[i])
 			i++;
 	}
@@ -82,6 +84,9 @@ void	ft_check_path(t_vars *vars, t_prg *prog)
 		ft_exit(vars, MALLOC_ERROR);
 	if (access(c_prog, F_OK | X_OK) == OK)
 		execve(c_prog, prog->prog, vars->envp);
+	// i think we are missing a free here:
+	// else
+	// 	free (c_prog);
 	ft_prog_not_found(vars, prog);
 	// vars->exit_code = 127;
 	// exit(127);
