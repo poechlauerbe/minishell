@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_cd_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
+/*   By: thorben <thorben@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:29:49 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/07 19:41:02 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/08 16:42:38 by thorben          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ void	ft_pwd_conc(t_vars *vars, char **curpath)
 	{
 		plen = ft_strlen(*curpath);
 		pwd = ft_return_val(vars, "PWD");
-		pwdlen = ft_strlen(ft_return_val(vars, "PWD"));
+		pwdlen = ft_strlen(pwd);
 		slash = 0;
-		if (pwd[pwdlen - 1] != '/')
+		if (pwd && pwd[pwdlen - 1] != '/')
 			slash = 1;
 		fpath = (char *)malloc(sizeof(char) * (plen + pwdlen + slash + 1));
 		if (!fpath)
@@ -67,22 +67,13 @@ void	ft_pwd_conc(t_vars *vars, char **curpath)
 
 int	ft_can_form(t_vars *vars, char **curpath)
 {
-	// char	*tmp;
 	ft_remove_dot(vars, curpath);
 	if (ft_remove_dot_dot(vars, curpath))
 	{
 		vars->exit_code = 1;
+		free (*curpath);
 		return (1);
 	}
-	// if (ft_strlen(*curpath) > 1 && (*curpath)[ft_strlen(*curpath) - 1] == '/'
-	// 	&& *curpath[ft_strlen(*curpath) - 2] != '/')
-	// {
-	// 	tmp = ft_substr(*curpath, 0, strlen(*curpath) - 1);
-	// 	if (!tmp)
-	// 		ft_exit(vars, MALLOC_ERROR);
-	// 	free (*curpath);
-	// 	*curpath = tmp;
-	// }
 	return (0);
 }
 
@@ -90,12 +81,19 @@ void	ft_chdir(t_vars *vars, char **curpath)
 {
 	char	*tmp;
 	t_kv	*elem;
+	char	*key;
 
 	if (!access(*curpath, F_OK | X_OK))
 	{
 		if (!chdir(*curpath))
 		{
-			ft_new_value(vars, "OLDPWD", ft_return_val(vars, "PWD"));
+			if (!ft_val_retrieval(vars, "OLDPWD"))
+			{
+				key = ft_exp_key(vars, "OLDPWD", 0);
+            	ft_add_envv(vars, key, ft_return_val(vars, "PWD"), 0);
+			}
+            else
+            	ft_new_value(vars, "OLDPWD", ft_return_val(vars, "PWD"));
 			elem = ft_val_retrieval(vars, "PWD");
 			elem->val = ft_strdup(*curpath);
 			// ft_new_value(vars, "PWD", val);

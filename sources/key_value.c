@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_value.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
+/*   By: thorben <thorben@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 13:26:58 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/07 19:04:56 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/08 12:36:13 by thorben          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_new_value(t_vars *vars, char *key, char *val)
 	t_kv	*tmp;
 
 	tmp = ft_val_retrieval(vars, key);
-	if (tmp->val)
+	if (tmp && tmp->val)
 	{
 		free (tmp->val);
 		tmp->val = val;
