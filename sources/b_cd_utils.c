@@ -6,7 +6,7 @@
 /*   By: thorben <thorben@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:29:49 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/08 16:42:38 by thorben          ###   ########.fr       */
+/*   Updated: 2024/01/08 17:48:49 by thorben          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,6 @@ void	ft_chdir(t_vars *vars, char **curpath)
 	if (!tmp)
 		ft_exit(vars, MALLOC_ERROR);
 	perror(tmp);
-	ft_putstr_fd("\n", 2);
 	free (*curpath);
 	free (tmp);
 	vars->exit_code = 1;
