@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
+/*   By: thorben <thorben@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:21:46 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/02 18:57:43 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/08 15:22:08 by thorben          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,15 @@ void	ft_init(t_vars *vars, int argc, char **argv, char **envp)
 void	ft_pwd(t_vars *vars)
 {
 	char	cwd[1024];
+    char    *pwd;
 
-	if (getcwd(cwd, sizeof(cwd)) != NULL)
+    pwd = ft_return_val(vars, "PWD");
+    if (pwd)
+    {
+        ft_printf("%s\n", pwd);
+        vars->exit_code = 0;
+    }
+	else if (getcwd(cwd, sizeof(cwd)) != NULL)
 	{
 		ft_printf("%s\n", cwd);
 		vars->exit_code = 0;

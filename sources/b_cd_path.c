@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_cd_path.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
+/*   By: thorben <thorben@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 12:25:06 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/03 18:33:22 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/08 16:40:55 by thorben          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	ft_check_pot_path(t_vars *vars, char **curpath)
 			*curpath = temp;
 		}
 	}
-	if (!temp)
+	if (!temp && ft_strcmp(*curpath, ".") && ft_strcmp(*curpath, ".."))
 		ft_check_path_null(vars, curpath);
 	i = 0;
 	while (cdpath && cdpath[i])
