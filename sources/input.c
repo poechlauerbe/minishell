@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
+/*   By: thorben <thorben@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 15:30:48 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/07 15:36:41 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/09 15:29:53 by thorben          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,6 +203,7 @@ void	ft_check_input(t_vars *vars)
 	ft_cleanup_reds(vars);
 	ft_quote_remover(vars);
 	ft_pipecount(vars);
+	ft_add_underscore(vars, vars->p_start->prog);
 }
 
 	// temp = vars->p_start;

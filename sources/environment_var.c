@@ -6,11 +6,41 @@
 /*   By: thorben <thorben@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 12:51:48 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/09 12:52:21 by thorben          ###   ########.fr       */
+/*   Updated: 2024/01/09 15:54:33 by thorben          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+void	ft_add_underscore(t_vars *vars, char **prg)
+{
+	int		i;
+	char	*key;
+	char	*val;
+
+	i = 0;
+	while (prg && prg[i])
+	{
+		if (prg[i + 1])
+			i++;
+		else
+		{
+			key = ft_strdup("_");
+			val = ft_strdup(prg[i]);
+			if (!key || !val)
+			{
+				if (key)
+					free (key);
+				if (val)
+					free (val);
+				ft_exit(vars, MALLOC_ERROR);
+			}
+			ft_add_envv(vars, key, val, 0);
+			ft_new_envp(vars);
+			break ;
+		}
+	}
+}
 
 t_kv	*ft_last_entry(t_kv *elem)
 {

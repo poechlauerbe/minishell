@@ -6,7 +6,7 @@
 /*   By: thorben <thorben@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/09 10:04:34 by thorben          ###   ########.fr       */
+/*   Updated: 2024/01/09 15:45:05 by thorben          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -222,7 +222,7 @@ void		ft_env(t_vars *vars);
 void		ft_export(t_vars *vars);
 /* erases a key-value combination from the saved variables and adjusts the
 	respective pointers */
-void		ft_unset(t_vars *vars);
+void		ft_unset(t_vars *vars, char **prg);
 /* if directory exists and one has the necessary rights, moves one to the dir
 	entered*/
 void		ft_cd(t_vars *vars);
@@ -377,5 +377,7 @@ int	ft_check_validity(t_vars *vars, t_prg *prog);
 void	ft_create_shvar(t_vars *vars, t_prg *prog, int i);
 // returns an error message for directories entered into bash
 void	ft_is_dir(t_vars *vars, t_prg *prog, char *nfd);
+
+void	ft_add_underscore(t_vars *vars, char **prg);
 
 #endif
