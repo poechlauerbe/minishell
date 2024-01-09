@@ -6,11 +6,40 @@
 /*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 12:15:16 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/09 15:55:49 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/09 16:57:57 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+void	ft_exp_remove_spaces(char *str, char *arg, int *i, int *j)
+{
+	int	count;
+	int	flag;
+
+	count = 0;
+	flag = 0;
+	while (str && str[*j])
+	{
+		while (str[*j] && (str[*j] == 32 || (str[*j] > 8 && str[*j] < 14)))
+		{
+			flag = 1;
+			*j += 1;
+		}
+		if (count != 0 && str[*j] && flag)
+		{
+			arg[*i] = ' ';
+			*i += 1;
+		}
+		flag = 0;
+		if (!str[*j])
+			break ;
+		arg[*i] = str[*j];
+		*i += 1;
+		*j += 1;
+		count++;
+	}
+}
 
 void	ft_expand_str(t_vars *vars, char **arg, t_quote *quote, char *str)
 {
@@ -30,8 +59,7 @@ void	ft_expand_str(t_vars *vars, char **arg, t_quote *quote, char *str)
 	while (++i < quote->i)
 		(*arg)[i] = temp[i];
 	j = 0;
-	while (str && str[j])
-		(*arg)[i++] = str[j++];
+	ft_exp_remove_spaces(str, *arg, &i, &j);
 	j = i - j + varlen;
 	while (temp[j])
 		(*arg)[i++] = temp[j++];
