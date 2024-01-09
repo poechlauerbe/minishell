@@ -6,7 +6,7 @@
 /*   By: thorben <thorben@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:21:46 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/08 15:22:08 by thorben          ###   ########.fr       */
+/*   Updated: 2024/01/09 12:30:26 by thorben          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,15 @@
 
 void	ft_init(t_vars *vars, int argc, char **argv, char **envp)
 {
+	char	*oldpwd;
+	
 	ft_bzero(vars, sizeof(t_vars));
 	ft_create_env(vars, envp);
 	ft_order_envv(vars);
+	oldpwd = ft_strdup("OLDPWD");
+	if (!oldpwd)
+		ft_exit(vars, MALLOC_ERROR);
+	ft_add_envv(vars, oldpwd, NULL, 0);
 	vars->envp = envp;
 	if (argc == 0)
 		return ;

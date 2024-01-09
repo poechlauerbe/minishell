@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_export_print.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
+/*   By: thorben <thorben@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 14:02:10 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/20 17:36:46 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/09 13:04:52 by thorben          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	ft_export_print(t_vars *vars)
 	first = ft_first_kv(vars->envv);
 	while (first)
 	{
-		if (first->id == 'x')
+		if (first->id == 'x' && ft_strcmp(first->key, "_"))
 		{
 			if (first->val && first->val[0])
 				ft_printf("declare -x %s=\"%s\"\n", first->key, first->val);

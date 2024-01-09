@@ -6,7 +6,7 @@
 /*   By: thorben <thorben@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/08 16:30:42 by thorben          ###   ########.fr       */
+/*   Updated: 2024/01/09 10:04:34 by thorben          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,11 @@ int			ft_can_form(t_vars *vars, char **curpath);
 void		ft_chdir(t_vars *vars, char **curpath);
 // prints an error message an sets the error code
 void		ft_print_err_cd(t_vars *vars, int error);
+
+/* b_cd_utils2 */
+/* if OLDPWD is set, and cd - is received as input, changes
+	PWD to OLDPWD and OLDPWD to PWD */
+void    	ft_oldpwd(t_vars *vars);
 
 /* b_exit */
 void		ft_exit_prog(t_vars *vars, char **prog);
