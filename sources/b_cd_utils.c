@@ -6,7 +6,7 @@
 /*   By: thorben <thorben@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:29:49 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/08 17:48:49 by thorben          ###   ########.fr       */
+/*   Updated: 2024/01/09 09:50:29 by thorben          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,16 +96,12 @@ void	ft_chdir(t_vars *vars, char **curpath)
             	ft_new_value(vars, "OLDPWD", ft_return_val(vars, "PWD"));
 			elem = ft_val_retrieval(vars, "PWD");
 			elem->val = ft_strdup(*curpath);
-			// ft_new_value(vars, "PWD", val);
 			free (*curpath);
 			vars->exit_code = 0;
 			return ;
 		}
 		else
-		{
-			perror("cd");
-			ft_putstr_fd("\n", 2);
-		}
+			perror("minishell: cd: ");
 	}
 	tmp = ft_strjoin("minishell: cd: ", vars->p_start->prog[1]);
 	if (!tmp)

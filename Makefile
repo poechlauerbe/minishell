@@ -6,7 +6,7 @@
 #    By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/01/09 10:58:56 by bpochlau         ###   ########.fr        #
+#    Updated: 2024/01/09 15:46:15 by bpochlau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,7 @@ SRCS 			= $(addprefix $(SRCS_DIR),\
 				b_cd_path.c \
 				b_cd_slashes.c \
 				b_cd_utils.c \
+				b_cd_utils2.c \
 				b_echo.c \
 				b_exit.c \
 				b_export_key_utils.c \
