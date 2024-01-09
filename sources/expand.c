@@ -3,34 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thorben <thorben@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 12:15:16 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/08 18:44:01 by thorben          ###   ########.fr       */
+/*   Updated: 2024/01/09 15:49:35 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-
-int	ft_varlen(char *arg, t_quote *quote)
-{
-	int	varlen;
-	int	i;
-
-	varlen = 1;
-	i = quote->i + 1;
-	if (ft_isdigit(arg[i]) || arg[i] == '?')
-		return (2);
-	if ((ft_isalpha(arg[i]) || arg[i] == '_'))
-	{
-		while (arg[i] && (ft_isalnum(arg[i]) || arg[i] == '_'))
-		{
-			varlen++;
-			i++;
-		}
-	}
-	return (varlen);
-}
 
 void	ft_expand_str(t_vars *vars, char **arg, t_quote *quote, char *str)
 {
@@ -140,7 +120,8 @@ void	ft_expand_all_vars(t_vars *vars)
 			ft_check_enclosing(&temp->prog[i], vars);
 			i++;
 		}
-		// ft_check_resplit(vars, temp->prog[0], temp);
+		if (temp->prog[0])
+			ft_check_resplit(vars, temp->prog[0], temp);
 		temp = temp->next;
 	}
 }

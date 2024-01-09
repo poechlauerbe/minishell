@@ -5,10 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: thorben <thorben@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/29 15:30:48 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/09 15:29:53 by thorben          ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2024/01/09 16:03:10 by thorben          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../inc/minishell.h"
 
@@ -153,7 +154,8 @@ int	ft_start(t_vars *vars)
 	{
 		vars->exit_code = SYNTAX_ERROR;
 		vars->no_exec = SYNTAX_ERROR;
-		ft_printf_fd(2, "bash: syntax error near unexpected token `%c'\n", temp[i]);
+		ft_printf_fd(2, "bash: syntax error near unexpected token `%c'\n",
+			temp[i]);
 		return (SYNTAX_ERROR);
 	}
 	else if (temp[i] == '{')

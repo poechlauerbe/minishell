@@ -6,7 +6,7 @@
 #    By: thorben <thorben@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/01/09 15:55:05 by thorben          ###   ########.fr        #
+#    Updated: 2024/01/09 16:04:30 by thorben          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,11 +55,13 @@ SRCS 			= $(addprefix $(SRCS_DIR),\
 				environment_var.c \
 				exit.c \
 				expand_home.c \
+				expand_utils.c \
 				expand.c \
 				free.c \
 				input.c \
 				input_comb_progs.c \
 				input_heredoc.c \
+				input_heredoc_utils.c \
 				input_malloc.c \
 				input_resplit.c \
 				input_utils.c \
