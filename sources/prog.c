@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prog.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
+/*   By: thorben <thorben@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 13:41:52 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/07 14:03:00 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/09 15:43:59 by thorben          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	ft_builtin_check(t_vars *vars, t_prg *prog)
 	else if (ft_strncmp(prog->prog[0], "env", 4) == 0)
 		ft_env(vars);
 	else if (ft_strncmp(prog->prog[0], "unset", 6) == 0)
-		ft_unset(vars);
+		ft_unset(vars, prog->prog);
 	else if (ft_strncmp(prog->prog[0], "cd", 3) == 0)
 		ft_cd(vars);
 	else

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+         #
+#    By: thorben <thorben@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/01/09 15:46:15 by bpochlau         ###   ########.fr        #
+#    Updated: 2024/01/09 16:04:30 by thorben          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 

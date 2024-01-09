@@ -6,7 +6,7 @@
 /*   By: thorben <thorben@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/01/09 11:57:37 by thorben          ###   ########.fr       */
+/*   Updated: 2024/01/09 15:44:50 by thorben          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,20 +56,21 @@ void	ft_export(t_vars *vars)
 		ft_export_print(vars);
 }
 
-void	ft_unset(t_vars *vars)
+void	ft_unset(t_vars *vars, char **prg)
 {
 	char	*key;
 	int		i;
 
 	i = 1;
-	key = vars->p_start->prog[i];
+	key = prg[i];
 	while (key)
 	{
 		ft_remove_envv(vars, key);
 		vars->exit_code = 0;
 		ft_new_envp(vars);
-		key = vars->p_start->prog[++i];
+		key = prg[++i];
 	}
+	ft_add_underscore(vars, prg);
 }
 
 void	ft_cd(t_vars *vars)

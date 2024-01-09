@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
+/*   By: thorben <thorben@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/29 15:30:48 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/09 11:26:47 by bpochlau         ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2024/01/09 16:03:10 by thorben          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../inc/minishell.h"
 
@@ -204,6 +205,7 @@ void	ft_check_input(t_vars *vars)
 	ft_cleanup_reds(vars);
 	ft_quote_remover(vars);
 	ft_pipecount(vars);
+	ft_add_underscore(vars, vars->p_start->prog);
 }
 
 	// temp = vars->p_start;
