@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_heredoc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
+/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 20:34:56 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/07 19:29:45 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/09 11:04:59 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,15 +54,11 @@ void	ft_prep_delimiter(t_vars *vars, t_prg *prog)
 	int		i;
 
 	prog->hdoc_flag = 0;
-	i = 0;
-	while (prog->prog[0][i] && prog->prog[0][i] != ' ' && !prog->hdoc_flag)
-	{
+	i = -1;
+	while (prog->prog[0][++i] && prog->prog[0][i] != ' ' && !prog->hdoc_flag)
 		if (prog->prog[0][i] == '\'' || prog->prog[0][i] == '\"')
 			prog->hdoc_flag = 1;
-		i++;
-	}
 	str_wo_q = ft_create_value(vars, prog->prog[0]);
-	// ft_printf("%s\n", str_wo_q);
 	if (!str_wo_q)
 		ft_exit(vars, MALLOC_ERROR);
 	free(prog->prog[0]);
@@ -80,7 +76,6 @@ void	ft_prep_delimiter(t_vars *vars, t_prg *prog)
 void	ft_heredoc_exec(t_vars *vars, t_prg *prog)
 {
 	char	*str;
-	char	*temp;
 	int		len;
 
 	prog->heredoc = NULL;
@@ -88,30 +83,15 @@ void	ft_heredoc_exec(t_vars *vars, t_prg *prog)
 	len = ft_strlen(prog->prog[0]);
 	// write(2, ">", 1);
 	str = get_next_line(0);
+	if (!str)
+		ft_exit(vars, MALLOC_ERROR);
 	while (ft_strncmp(str, prog->prog[0], len) != 0)
 	{
-		if (prog->heredoc)
-		{
-			temp = NULL;
-			temp = ft_strdup(prog->heredoc);
-			if (!temp)
-				ft_exit(vars, MALLOC_ERROR);
-			free(prog->heredoc);
-			prog->heredoc = ft_strjoin(temp, str);
-			if (!prog->heredoc)
-				ft_exit(vars, MALLOC_ERROR);
-			free (temp);
-		}
-		else
-		{
-			prog->heredoc = ft_strdup(str);
-			if (!prog->heredoc)
-				ft_exit(vars, MALLOC_ERROR);
-		}
-		if (str)
-			free (str);
+		ft_add_on_heredoc_str(vars, prog, str);
 		// write(2, ">", 1);
 		str = get_next_line(0);
+		if (!str)
+			ft_exit(vars, MALLOC_ERROR);
 	}
 	if (str)
 		free (str);
