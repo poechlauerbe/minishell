@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_export_value_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
+/*   By: thorben <thorben@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 13:14:23 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/03 19:24:50 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/09 11:56:14 by thorben          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char	*ft_exp_value(t_vars *vars, char *arg)
 	while (*arg != '=' && *arg != '\0')
 		arg++;
 	if (*arg == '\0')
-		value = ft_calloc(1, sizeof(char));
+		value = NULL;
 	else
 	{
 		arg++;

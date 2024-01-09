@@ -6,7 +6,7 @@
 /*   By: thorben <thorben@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/01/08 16:39:55 by thorben          ###   ########.fr       */
+/*   Updated: 2024/01/09 11:57:37 by thorben          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ void	ft_env(t_vars *vars)
 		{
 			if (tmp->val)
 				printf("%s=%s\n", tmp->key, tmp->val);
-			else
-				printf("%s\n", tmp->key);
 		}
 		tmp = tmp->next;
 	}
@@ -80,6 +78,11 @@ void	ft_cd(t_vars *vars)
 
 	if (vars->p_start->prog[1] && vars->p_start->prog[2])
 		return (ft_print_err_cd(vars, 1));
+    else if (!ft_strcmp(vars->p_start->prog[1], "-"))
+    {
+		ft_oldpwd(vars);
+		return ;
+	}
 	else if (vars->p_start->prog[1])
 		ft_malloc_cp(vars, &cp, vars->p_start->prog[1]);
 	else

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_home.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
+/*   By: thorben <thorben@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 14:39:12 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/03 12:23:00 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/08 18:20:57 by thorben          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,15 @@ void	ft_home(t_vars *vars, char **curpath)
 	char	*pwd;
 	int		plen;
 	int		pwdlen;
-	int		slash;
 
 	plen = ft_strlen(&(*curpath)[1]);
 	pwd = ft_return_val(vars, "HOME");
 	pwdlen = ft_strlen(ft_return_val(vars, "HOME"));
-	slash = 0;
-	if (pwd[pwdlen - 1] != '/')
-		slash = 1;
-	fpath = (char *)malloc(sizeof(char) * (plen + pwdlen + slash + 1));
+	fpath = (char *)malloc(sizeof(char) * (plen + pwdlen + 1));
 	if (!fpath)
 		ft_exit(vars, MALLOC_ERROR);
 	ft_strlcpy(fpath, pwd, (pwdlen + 1));
-	if (slash)
-		ft_strlcat(fpath, "/", pwdlen + 2);
-	ft_strlcat(fpath, &(*curpath)[1], (plen + pwdlen + slash + 1));
+	ft_strlcat(fpath, &(*curpath)[1], (plen + pwdlen + 1));
 	free (*curpath);
 	*curpath = fpath;
 }

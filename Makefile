@@ -6,7 +6,7 @@
 #    By: thorben <thorben@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/01/08 17:37:51 by thorben          ###   ########.fr        #
+#    Updated: 2024/01/09 12:27:24 by thorben          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,7 @@ SRCS 			= $(addprefix $(SRCS_DIR),\
 				b_cd_path.c \
 				b_cd_slashes.c \
 				b_cd_utils.c \
+				b_cd_utils2.c \
 				b_echo.c \
 				b_exit.c \
 				b_export_key_utils.c \

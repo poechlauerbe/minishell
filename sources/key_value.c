@@ -6,7 +6,7 @@
 /*   By: thorben <thorben@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 13:26:58 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/08 12:36:13 by thorben          ###   ########.fr       */
+/*   Updated: 2024/01/09 12:36:25 by thorben          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	ft_new_value(t_vars *vars, char *key, char *val)
 		free (tmp->val);
 		tmp->val = val;
 	}
+	else if (tmp)
+		tmp->val = val;
 }
 
 t_kv	*ft_val_retrieval(t_vars *vars, char *key)
