@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: thorben <thorben@student.42.fr>            +#+  +:+       +#+         #
+#    By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/01/08 17:37:51 by thorben          ###   ########.fr        #
+#    Updated: 2024/01/09 10:34:10 by bpochlau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,6 +54,7 @@ SRCS 			= $(addprefix $(SRCS_DIR),\
 				environment_var.c \
 				exit.c \
 				expand_home.c \
+				expand_utils.c \
 				expand.c \
 				free.c \
 				input.c \

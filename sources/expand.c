@@ -6,31 +6,11 @@
 /*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 12:15:16 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/09 10:25:31 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/09 10:32:17 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-
-int	ft_varlen(char *arg, t_quote *quote)
-{
-	int	varlen;
-	int	i;
-
-	varlen = 1;
-	i = quote->i + 1;
-	if (ft_isdigit(arg[i]) || arg[i] == '?')
-		return (2);
-	if ((ft_isalpha(arg[i]) || arg[i] == '_'))
-	{
-		while (arg[i] && ft_isalnum(arg[i]))
-		{
-			varlen++;
-			i++;
-		}
-	}
-	return (varlen);
-}
 
 void	ft_expand_str(t_vars *vars, char **arg, t_quote *quote, char *str)
 {

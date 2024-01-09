@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thorben <thorben@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/08 16:30:42 by thorben          ###   ########.fr       */
+/*   Updated: 2024/01/09 10:33:45 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -252,6 +252,9 @@ void		ft_expand_all_vars(t_vars *vars);
 void		ft_expander(t_vars *vars, char **arg, t_quote *quote);
 // function for $?
 int			ft_check_exit_code(t_vars *vars);
+
+/* expand_utils */
+int			ft_varlen(char *arg, t_quote *quote);
 
 /* free */
 void		ft_free_pipe_fd_and_pid(t_vars *vars);
