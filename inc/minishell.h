@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thorben <thorben@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/09 10:04:34 by thorben          ###   ########.fr       */
+/*   Updated: 2024/01/09 15:47:50 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -258,6 +258,9 @@ void		ft_expander(t_vars *vars, char **arg, t_quote *quote);
 // function for $?
 int			ft_check_exit_code(t_vars *vars);
 
+/* expand_utils */
+int			ft_varlen(char *arg, t_quote *quote);
+
 /* free */
 void		ft_free_pipe_fd_and_pid(t_vars *vars);
 void		ft_free_input(t_vars *vars);
@@ -301,9 +304,10 @@ void		ft_add_envv(t_vars *vars, char *key, char *val, int id);
 // retrieves and returns the element with the matching key. Otherwise returns 0.
 t_kv		*ft_val_retrieval(t_vars *vars, char *key);
 
-/* heredoc */
+/* input heredoc */
 void		ft_heredoc_exec(t_vars *vars, t_prg *prog);
 void		ft_heredoc(t_vars *vars);
+void		ft_add_on_heredoc_str(t_vars *vars, t_prg *prog, char *str);
 
 /* key_value_remove */
 /* removes an environment variable from the key_value list, matching the key.
