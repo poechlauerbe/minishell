@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 12:15:16 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/05 16:24:46 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/09 10:25:31 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,8 @@ void	ft_expand_all_vars(t_vars *vars)
 			ft_check_enclosing(&temp->prog[i], vars);
 			i++;
 		}
-		// ft_check_resplit(vars, temp->prog[0], temp);
+		if (temp->prog[0])
+			ft_check_resplit(vars, temp->prog[0], temp);
 		temp = temp->next;
 	}
 }
