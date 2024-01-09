@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
+/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 15:30:48 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/07 15:36:41 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/09 11:26:47 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,8 @@ int	ft_start(t_vars *vars)
 	{
 		vars->exit_code = SYNTAX_ERROR;
 		vars->no_exec = SYNTAX_ERROR;
-		ft_printf_fd(2, "bash: syntax error near unexpected token `%c'\n", temp[i]);
+		ft_printf_fd(2, "bash: syntax error near unexpected token `%c'\n",
+			temp[i]);
 		return (SYNTAX_ERROR);
 	}
 	else if (temp[i] == '{')

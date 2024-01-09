@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_malloc.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
+/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:46:54 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/07 15:40:56 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/09 11:42:36 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,33 +14,30 @@
 
 void	ft_input_strlen_2(char **temp, int *strlen)
 {
-	while (**temp && ((**temp >= 33 || **temp < 0) && **temp != 127 && **temp != '|' && **temp != '<' && **temp != '>'))
+	if (**temp == '\'')
 	{
-		if (**temp == '\'')
-		{
-			while (**temp)
-			{
-				*temp += 1;
-				*strlen += 1;
-				if (**temp == '\'')
-					break ;
-			}
-		}
-		if (**temp == '\"')
-		{
-			while (**temp)
-			{
-				*temp += 1;
-				*strlen += 1;
-				if (**temp == '\"')
-					break ;
-			}
-		}
-		if (**temp)
+		while (**temp)
 		{
 			*temp += 1;
 			*strlen += 1;
+			if (**temp == '\'')
+				break ;
 		}
+	}
+	if (**temp == '\"')
+	{
+		while (**temp)
+		{
+			*temp += 1;
+			*strlen += 1;
+			if (**temp == '\"')
+				break ;
+		}
+	}
+	if (**temp)
+	{
+		*temp += 1;
+		*strlen += 1;
 	}
 }
 
@@ -53,11 +50,13 @@ int	ft_input_strlen(char **inp)
 	if (!*inp && !**inp)
 		return (strlen);
 	while ((**inp == ' ' || **inp == '\n' || **inp == '\t'
-		|| **inp == '\r' || **inp == '\f' || **inp == '\v'
-		|| **inp == '|' || **inp == '<' || **inp == '>') && **inp > 0)
+			|| **inp == '\r' || **inp == '\f' || **inp == '\v'
+			|| **inp == '|' || **inp == '<' || **inp == '>') && **inp > 0)
 		*inp += 1;
 	temp = *inp;
-	ft_input_strlen_2(&temp, &strlen);
+	while (*temp && ((*temp >= 33 || *temp < 0) && *temp != 127
+			&& *temp != '|' && *temp != '<' && *temp != '>'))
+		ft_input_strlen_2(&temp, &strlen);
 	return (strlen);
 }
 

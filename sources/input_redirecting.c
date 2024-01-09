@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_redirecting.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 12:23:55 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/29 14:42:40 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/09 11:32:53 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void	ft_cleanup_reds(t_vars *vars)
 	while (temp)
 	{
 		next = temp->next;
-		if (temp->oper == '<' || temp->oper == '>' || temp->oper == O_APP_OUT || temp->oper == O_HEREDOC)
+		if (temp->oper == '<' || temp->oper == '>' || temp->oper == O_APP_OUT
+			|| temp->oper == O_HEREDOC)
 		{
 			if (temp->prog)
 				free(temp->prog);
@@ -39,10 +40,19 @@ void	ft_cleanup_reds(t_vars *vars)
 	}
 }
 
+void	ft_append_new_node(t_red *lst, t_red *new)
+{
+	t_red	*temp;
+
+	temp = lst;
+	while (temp->next)
+		temp = temp->next;
+	temp->next = new;
+}
+
 void	ft_red_new_node(t_vars *vars, t_red **lst, char *file, char oper)
 {
 	t_red	*new;
-	t_red	*temp;
 	char	*str_wo_q;
 
 	new = ft_calloc(1, sizeof(t_red));
@@ -61,12 +71,7 @@ void	ft_red_new_node(t_vars *vars, t_red **lst, char *file, char oper)
 	if (*lst == NULL)
 		*lst = new;
 	else
-	{
-		temp = *lst;
-		while (temp->next)
-			temp = temp->next;
-		temp->next = new;
-	}
+		ft_append_new_node(*lst, new);
 }
 
 void	ft_cleanup_lst(t_vars *vars)
