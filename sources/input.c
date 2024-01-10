@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thorben <thorben@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/01/09 16:03:10 by thorben          ###   ########.fr       */
+/*   Updated: 2024/01/10 11:56:20 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,6 +190,11 @@ void	ft_quote_remover(t_vars *vars)
 	}
 }
 
+void	ft_check_empty_progs(t_vars *vars)
+{
+
+}
+
 void	ft_check_input(t_vars *vars)
 {
 	if (ft_start(vars))
@@ -203,6 +208,7 @@ void	ft_check_input(t_vars *vars)
 	ft_expand_all_vars(vars);
 	ft_red_file(vars, vars->p_start);
 	ft_cleanup_reds(vars);
+	ft_check_empty_progs(vars);
 	ft_quote_remover(vars);
 	ft_pipecount(vars);
 	ft_add_underscore(vars, vars->p_start->prog);
