@@ -6,33 +6,64 @@
 /*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 12:15:16 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/09 15:55:49 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/10 11:34:11 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+int	ft_exp_remove_spaces(char *str, char *arg, int *i, int *j)
+{
+	int	flag;
+	int	printed_signs;
+
+	flag = 0;
+	printed_signs = 0;
+	while (str && str[*j])
+	{
+		while (str[*j] && (str[*j] == 32 || (str[*j] > 8 && str[*j] < 14)))
+		{
+			flag = 1;
+			*j += 1;
+		}
+		if (*i != 0 && flag)
+		{
+			arg[*i] = ' ';
+			*i += 1;
+			printed_signs++;
+		}
+		flag = 0;
+		if (!str[*j])
+			return (printed_signs);
+		arg[*i] = str[*j];
+		*i += 1;
+		*j += 1;
+		printed_signs++;
+	}
+	return (printed_signs);
+}
 
 void	ft_expand_str(t_vars *vars, char **arg, t_quote *quote, char *str)
 {
 	int		strlen;
 	int		varlen;
 	char	*temp;
+	int		printed_signs;
 	int		i;
 	int		j;
 
 	temp = *arg;
 	varlen = ft_varlen(*arg, quote);
 	strlen = ft_strlen(*arg) - varlen + ft_strlen(str);
-	*arg = malloc((strlen + 1) * sizeof(char));
+	*arg = ft_calloc((strlen + 1), sizeof(char));
 	if (!arg)
 		ft_exit(vars, MALLOC_ERROR);
 	i = -1;
 	while (++i < quote->i)
 		(*arg)[i] = temp[i];
 	j = 0;
-	while (str && str[j])
-		(*arg)[i++] = str[j++];
-	j = i - j + varlen;
+	printed_signs = ft_exp_remove_spaces(str, *arg, &i, &j);
+	j = i - printed_signs + varlen;
 	while (temp[j])
 		(*arg)[i++] = temp[j++];
 	(*arg)[i] = '\0';
