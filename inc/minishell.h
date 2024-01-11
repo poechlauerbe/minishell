@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thorben <thorben@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/09 16:04:13 by thorben          ###   ########.fr       */
+/*   Updated: 2024/01/11 17:54:05 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -282,6 +282,9 @@ void		ft_cleanup_lst(t_vars *vars);
 /* input */
 // checks for input and stores each input in a 2d array
 void		ft_check_input(t_vars *vars);
+
+/* input_check_s_count */
+void		ft_check_string_count(t_vars *vars, char *inp);
 
 /* input_comb_progs */
 void		ft_comb_progs(t_vars *vars);
