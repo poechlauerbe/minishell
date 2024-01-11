@@ -6,26 +6,31 @@
 /*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/01/11 10:49:11 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/11 17:44:57 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../inc/minishell.h"
 
-void	ft_check_string_count(t_vars *vars, char *inp)
+void	ft_init_s_count(t_vars *vars, t_prg **temp)
 {
-	t_prg	*temp;
-
 	vars->p_start = calloc(1, sizeof(t_prg));
 	if (!vars->p_start)
 		ft_exit(vars, MALLOC_ERROR);
 	vars->p_start->next = NULL;
 	vars->p_start->oper = '0';
-	temp = vars->p_start;
-	temp->str_c = 0;
-	temp->in_file = NULL;
-	temp->out_file = NULL;
+	*temp = vars->p_start;
+	(*temp)->str_c = 0;
+	(*temp)->in_file = NULL;
+	(*temp)->out_file = NULL;
+}
+
+void	ft_check_string_count(t_vars *vars, char *inp)
+{
+	t_prg	*temp;
+
+	temp = NULL;
+	ft_init_s_count(vars, &temp);
 	while (*inp)
 	{
 		while (*inp == ' ' || *inp == '\n' || *inp == '\t'
