@@ -6,7 +6,7 @@
 #    By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/01/11 17:53:09 by bpochlau         ###   ########.fr        #
+#    Updated: 2024/01/11 18:06:52 by bpochlau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,6 +64,7 @@ SRCS 			= $(addprefix $(SRCS_DIR),\
 				input_heredoc.c \
 				input_heredoc_utils.c \
 				input_malloc.c \
+				input_red_files.c \
 				input_resplit.c \
 				input_utils.c \
 				key_value.c \

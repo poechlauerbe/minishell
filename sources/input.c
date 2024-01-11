@@ -5,51 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/01/11 17:52:00 by bpochlau         ###   ########.fr       */
+/*   Created: 2024/01/11 18:05:10 by bpochlau          #+#    #+#             */
+/*   Updated: 2024/01/11 18:06:07 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-void	ft_red_file(t_vars *vars, t_prg *lst)
-{
-	t_prg	*prog;
-	t_prg	*temp;
 
-	temp = lst;
-	while (lst)
-	{
-		prog = NULL;
-		if (temp->oper == '|')
-		{
-			prog = temp;
-			temp = temp->next;
-			lst = temp;
-		}
-		while (temp && temp->oper != '|')
-		{
-			if (temp->oper == '0')
-			{
-				if (prog == NULL)
-					prog = temp;
-			}
-			temp = temp->next;
-		}
-		temp = lst;
-		while (temp && temp->oper != '|')
-		{
-			if (temp->oper == '>' || temp->oper == O_APP_OUT)
-				ft_red_new_node(vars, &prog->out_file, temp->prog[0], temp->oper);
-			else if (temp->oper == '<')
-				ft_red_new_node(vars, &prog->in_file, temp->prog[0], temp->oper);
-			else if (temp->oper == O_HEREDOC)
-				ft_red_new_node(vars, &prog->in_file, temp->prog[0], temp->oper);
-			temp = temp->next;
-		}
-		lst = temp;
-	}
-}
 
 int	ft_check_redirect_file(t_vars *vars)
 {
