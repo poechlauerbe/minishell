@@ -6,7 +6,7 @@
 /*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/01/10 11:56:20 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/11 10:49:11 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,9 +190,42 @@ void	ft_quote_remover(t_vars *vars)
 	}
 }
 
+void	ft_remove_empty_prog(char **prog, int i)
+{
+	int	j;
+
+	j = i;
+	while (prog[j])
+	{
+		if (prog[j][0] == '\0')
+		{
+			free(prog[j]);
+			prog[j] = NULL;
+			j++;
+		}
+		else
+			prog[i++] = prog[j++];
+	}
+	prog[i] = NULL;
+}
+
 void	ft_check_empty_progs(t_vars *vars)
 {
+	t_prg	*temp;
+	int		i;
 
+	temp = vars->p_start;
+	while (temp)
+	{
+		i = 0;
+		while (temp->prog && temp->prog[i])
+		{
+			if (temp->prog[i][0] == '\0' && temp->prog[i + 1])
+				ft_remove_empty_prog(temp->prog, i);
+			i++;
+		}
+		temp = temp->next;
+	}
 }
 
 void	ft_check_input(t_vars *vars)
