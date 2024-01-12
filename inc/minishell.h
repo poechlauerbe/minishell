@@ -6,7 +6,7 @@
 /*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/11 17:54:05 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/12 08:24:19 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -289,8 +289,14 @@ void		ft_check_string_count(t_vars *vars, char *inp);
 /* input_comb_progs */
 void		ft_comb_progs(t_vars *vars);
 
+/* input_new_node */
+void		ft_new_node(t_vars *vars, t_prg **temp, char **inp);
+
 /* input_malloc */
 void		ft_malloc_prog_2d_str(t_vars *vars);
+
+/* input_red_files */
+void		ft_red_file(t_vars *vars, t_prg *lst);
 
 /* input_resplit */
 void		ft_check_resplit(t_vars *vars, char *str, t_prg *prg);

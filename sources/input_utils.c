@@ -3,53 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   input_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 16:24:39 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/05 18:38:08 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/12 08:18:32 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-
-void	ft_new_node(t_vars *vars, t_prg **temp, char **inp)
-{
-	(*temp)->next = malloc(sizeof(t_prg));
-	if (!(*temp)->next)
-		ft_exit(vars, MALLOC_ERROR);
-	(*temp) = (*temp)->next;
-	(*temp)->next = NULL;
-	(*temp)->str_c = 0;
-	(*temp)->in_file = NULL;
-	(*temp)->out_file = NULL;
-	if (**inp == '|' || **inp == '<' || **inp == '>')
-	{
-		if (**inp == '<' && inp[0][1] == '<')
-		{
-			(*temp)->oper = O_HEREDOC;
-			*inp += 1;
-		}
-		else if (**inp == '>' && inp[0][1] == '>')
-		{
-			(*temp)->oper = O_APP_OUT;
-			*inp += 1;
-		}
-		else
-			(*temp)->oper = **inp;
-	}
-	else
-	{
-		(*temp)->oper = '0';
-		while (**inp && **inp != '|' && **inp != '<' && **inp != '>'
-			&& **inp != ' ' && **inp != '\n' && **inp != '\t'
-			&& **inp != '\r' && **inp != '\f' && **inp != '\v')
-		{
-			(*inp) += 1;
-		}
-		return ;
-	}
-	(*inp) += 1;
-}
 
 void	ft_check_quotes(char **inp)
 {

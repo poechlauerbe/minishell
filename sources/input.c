@@ -6,13 +6,11 @@
 /*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 18:05:10 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/11 18:06:07 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/11 18:11:33 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-
-
 
 int	ft_check_redirect_file(t_vars *vars)
 {
