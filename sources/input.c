@@ -6,61 +6,11 @@
 /*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 18:05:10 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/11 18:11:33 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/12 08:34:42 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-
-int	ft_check_redirect_file(t_vars *vars)
-{
-	t_prg	*temp;
-
-	temp = vars->p_start;
-	while (temp)
-	{
-		if (temp->oper == '<' || temp->oper == '>' || temp->oper == O_APP_OUT || temp->oper == O_HEREDOC)
-		{
-			if (!temp->prog[0] && !temp->next)
-			{
-				ft_printf_fd(2, "bash: syntax error near unexpected token `newline'\n");
-				vars->no_exec = SYNTAX_ERROR;
-				vars->exit_code = SYNTAX_ERROR;
-				return (SYNTAX_ERROR);
-			}
-			else if (!temp->prog[0] && (temp->next->oper == '<' || temp->next->oper == '>'))
-			{
-				ft_printf_fd(2, "bash: syntax error near unexpected token `%c'\n", temp->next->oper);
-				vars->no_exec = SYNTAX_ERROR;
-				vars->exit_code = SYNTAX_ERROR;
-				return (SYNTAX_ERROR);
-			}
-			else if (!temp->prog[0] && (temp->next->oper == O_APP_OUT || temp->next->oper == O_HEREDOC))
-			{
-				if (temp->next->oper == O_HEREDOC && !temp->next->prog[0] && temp->next->next && (temp->next->next->oper == '<' || temp->next->next->oper == O_HEREDOC))
-					ft_printf_fd(2, "bash: syntax error near unexpected token `<<<'\n");
-				else if (temp->next->oper == O_APP_OUT)
-					ft_printf_fd(2, "bash: syntax error near unexpected token `>>'\n");
-				else
-					ft_printf_fd(2, "bash: syntax error near unexpected token `<<'\n");
-				vars->no_exec = SYNTAX_ERROR;
-				vars->exit_code = SYNTAX_ERROR;
-				return (SYNTAX_ERROR);
-			}
-			else if (!temp->prog[0] && temp->next && temp->next->oper == '|')
-			{
-				ft_printf_fd(2, "bash: syntax error near unexpected token `|'\n");
-				vars->no_exec = SYNTAX_ERROR;
-				vars->exit_code = SYNTAX_ERROR;
-				return (SYNTAX_ERROR);
-			}
-			else if (temp->oper == O_HEREDOC && temp->prog[0])
-				ft_heredoc_exec(vars, temp);
-		}
-		temp = temp->next;
-	}
-	return (OK);
-}
 
 int	ft_start(t_vars *vars)
 {
@@ -87,28 +37,6 @@ int	ft_start(t_vars *vars)
 		return (SYNTAX_ERROR);
 	}
 	return (OK);
-}
-
-void	ft_quote_remover(t_vars *vars)
-{
-	t_prg	*temp;
-	int		i;
-	char	*str_wo_q;
-
-	temp = vars->p_start;
-	while (temp)
-	{
-		i = -1;
-		while (temp->prog[++i])
-		{
-			str_wo_q = ft_create_value(vars, temp->prog[i]);
-			if (!str_wo_q)
-				ft_exit(vars, MALLOC_ERROR);
-			free(temp->prog[i]);
-			temp->prog[i] = str_wo_q;
-		}
-		temp = temp->next;
-	}
 }
 
 void	ft_remove_empty_prog(char **prog, int i)

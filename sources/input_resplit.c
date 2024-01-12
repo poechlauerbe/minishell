@@ -6,7 +6,7 @@
 /*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 14:29:20 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/09 15:53:52 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/12 09:12:29 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,6 @@ void	ft_check_resplit(t_vars *vars, char *str, t_prg *prg)
 				count++;
 			i++;
 		}
-		// ft_printf("check: %i\n", count);
 		ft_resplit(vars, prg, count);
 	}
 }

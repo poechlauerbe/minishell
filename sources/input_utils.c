@@ -6,7 +6,7 @@
 /*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 16:24:39 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/12 08:18:32 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/12 09:11:58 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,31 +28,24 @@ void	ft_check_quotes(char **inp)
 	}
 }
 
-void	ft_cleanup_redirectings(t_vars *vars)
+void	ft_quote_remover(t_vars *vars)
 {
 	t_prg	*temp;
-	t_prg	*last;
+	int		i;
+	char	*str_wo_q;
 
-	last = NULL;
 	temp = vars->p_start;
 	while (temp)
 	{
-		if (temp->oper == '<' || temp->oper == '>')
+		i = -1;
+		while (temp->prog[++i])
 		{
-			if (last == NULL)
-				vars->p_start = temp->next;
-			else
-				last->next = temp->next;
-			free(temp->prog);
-			free(temp);
-			temp = NULL;
+			str_wo_q = ft_create_value(vars, temp->prog[i]);
+			if (!str_wo_q)
+				ft_exit(vars, MALLOC_ERROR);
+			free(temp->prog[i]);
+			temp->prog[i] = str_wo_q;
 		}
-		if (temp != NULL)
-		{
-			last = temp;
-			temp = temp->next;
-		}
-		if (!last)
-			temp = vars->p_start;
+		temp = temp->next;
 	}
 }
