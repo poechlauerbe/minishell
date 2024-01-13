@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thorben <thorben@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/01/09 15:44:50 by thorben          ###   ########.fr       */
+/*   Created: 2024/01/12 16:14:25 by bpochlau          #+#    #+#             */
+/*   Updated: 2024/01/13 12:05:19 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../inc/minishell.h"
 
@@ -79,8 +78,8 @@ void	ft_cd(t_vars *vars)
 
 	if (vars->p_start->prog[1] && vars->p_start->prog[2])
 		return (ft_print_err_cd(vars, 1));
-    else if (!ft_strcmp(vars->p_start->prog[1], "-"))
-    {
+	else if (!ft_strcmp(vars->p_start->prog[1], "-"))
+	{
 		ft_oldpwd(vars);
 		return ;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
+/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 16:24:45 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/07 17:48:20 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/12 16:06:18 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,21 +65,21 @@ void	ft_free_t_prg(t_prg *temp)
 		free(temp);
 }
 
-	void	ft_free_input(t_vars *vars)
-	{
-		t_prg	*temp;
-		t_prg	*temp2;
+void	ft_free_input(t_vars *vars)
+{
+	t_prg	*temp;
+	t_prg	*temp2;
 
-		temp = vars->p_start;
-		while (temp)
-		{
-			temp2 = temp->next;
-			if (temp->in_file)
-				ft_free_reds(&temp->in_file);
-			if (temp->out_file)
-				ft_free_reds(&temp->out_file);
-			ft_free_t_prg(temp);
-			temp = temp2;
-		}
-		vars->p_start = NULL;
+	temp = vars->p_start;
+	while (temp)
+	{
+		temp2 = temp->next;
+		if (temp->in_file)
+			ft_free_reds(&temp->in_file);
+		if (temp->out_file)
+			ft_free_reds(&temp->out_file);
+		ft_free_t_prg(temp);
+		temp = temp2;
 	}
+	vars->p_start = NULL;
+}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prog.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thorben <thorben@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 13:41:52 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/09 15:43:59 by thorben          ###   ########.fr       */
+/*   Updated: 2024/01/12 16:11:25 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int	ft_builtin_check(t_vars *vars, t_prg *prog)
 		if (ft_check_shvar(vars, prog))
 			return (NOT_USED);
 	}
-	// vars->exit_code = OK;
 	return (USED);
 }
 
@@ -90,6 +89,7 @@ void	ft_check_path(t_vars *vars, t_prg *prog)
 	ft_prog_not_found(vars, prog);
 	// vars->exit_code = 127;
 	// exit(127);
+	// ev. ft_exit(vars, 127);
 }
 
 void	ft_is_dir(t_vars *vars, t_prg *prog, char *nfd)
@@ -110,6 +110,7 @@ void	ft_is_dir(t_vars *vars, t_prg *prog, char *nfd)
 	free(nfd);
 	vars->exit_code = 126;
 	exit(126);
+	// kein ft_exit?
 }
 
 void	ft_prog_not_found(t_vars *vars, t_prg *prog)
@@ -118,7 +119,7 @@ void	ft_prog_not_found(t_vars *vars, t_prg *prog)
 
 	nfd = NULL;
 	if (!access(prog->prog[0], F_OK) && (ft_strcmp(prog->prog[0], ".")
-		&& ft_strcmp(prog->prog[0], "..")))
+			&& ft_strcmp(prog->prog[0], "..")))
 		ft_is_dir(vars, prog, nfd);
 	else
 	{
@@ -129,6 +130,7 @@ void	ft_prog_not_found(t_vars *vars, t_prg *prog)
 		free (nfd);
 		vars->exit_code = 127;
 		exit(127);
+		// kein ft_exit?
 	}
 }
 
@@ -157,6 +159,7 @@ void	ft_check_prog(t_vars *vars, t_prg *prog)
 		ft_prog_not_found(vars, prog);
 		vars->exit_code = 127;
 		exit(127);
+		// kein ft_exit?
 	}
 	else if (acc_c == OK)
 		execve(prog->prog[0], prog->prog, vars->envp);

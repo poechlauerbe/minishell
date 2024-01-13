@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thorben <thorben@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:21:46 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/09 12:30:26 by thorben          ###   ########.fr       */
+/*   Updated: 2024/01/12 16:13:38 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_init(t_vars *vars, int argc, char **argv, char **envp)
 {
 	char	*oldpwd;
-	
+
 	ft_bzero(vars, sizeof(t_vars));
 	ft_create_env(vars, envp);
 	ft_order_envv(vars);
@@ -33,14 +33,14 @@ void	ft_init(t_vars *vars, int argc, char **argv, char **envp)
 void	ft_pwd(t_vars *vars)
 {
 	char	cwd[1024];
-    char    *pwd;
+	char	*pwd;
 
     pwd = ft_return_val(vars, "PWD");
-    if (pwd)
-    {
-        ft_printf("%s\n", pwd);
-        vars->exit_code = 0;
-    }
+	if (pwd)
+	{
+		ft_printf("%s\n", pwd);
+		vars->exit_code = 0;
+	}
 	else if (getcwd(cwd, sizeof(cwd)) != NULL)
 	{
 		ft_printf("%s\n", cwd);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
+/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 13:28:25 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/07 16:34:34 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/12 16:12:11 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ void	err_mes(int errcd)
 	ft_putnbr_fd(errcd, 2);
 	ft_putstr_fd("\n", 2);
 }
-
-
 
 void	ft_free_envv(t_vars *vars)
 {
