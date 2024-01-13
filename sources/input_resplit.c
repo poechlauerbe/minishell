@@ -6,7 +6,7 @@
 /*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 14:29:20 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/09 15:53:52 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/12 15:03:03 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,25 +27,12 @@ int	ft_strlen_resplit(char *str, int *i)
 	return (str_len);
 }
 
-void	ft_resplit(t_vars *vars, t_prg *prg, int count)
+void	ft_resplit2(t_vars *vars, char *str_wo_q, t_prg *prg, char **new)
 {
-	int		c_progs;
-	char	**new;
-	char	*str_wo_q;
 	int		i;
 	int		str_len;
+	int		c_progs;
 
-	str_wo_q = ft_create_value(vars, prg->prog[0]);
-	if (!str_wo_q)
-		ft_exit(vars, MALLOC_ERROR);
-	free(prg->prog[0]);
-	prg->prog[0] = str_wo_q;
-	c_progs = 0;
-	while (prg->prog[c_progs])
-		c_progs++;
-	new = ft_calloc((c_progs + count), sizeof(char *));
-	if (!new)
-		ft_exit(vars, MALLOC_ERROR);
 	i = 0;
 	c_progs = 0;
 	while (str_wo_q[i])
@@ -68,26 +55,42 @@ void	ft_resplit(t_vars *vars, t_prg *prg, int count)
 	prg->prog = new;
 }
 
+void	ft_resplit(t_vars *vars, t_prg *prg, int count)
+{
+	int		c_progs;
+	char	**new;
+	char	*str_wo_q;
+
+	str_wo_q = ft_create_value(vars, prg->prog[0]);
+	if (!str_wo_q)
+		ft_exit(vars, MALLOC_ERROR);
+	free(prg->prog[0]);
+	prg->prog[0] = str_wo_q;
+	c_progs = 0;
+	while (prg->prog[c_progs])
+		c_progs++;
+	new = ft_calloc((c_progs + count), sizeof(char *));
+	if (!new)
+		ft_exit(vars, MALLOC_ERROR);
+	ft_resplit2(vars, prg->prog[0], prg, new);
+}
+
 void	ft_check_resplit(t_vars *vars, char *str, t_prg *prg)
 {
 	int	count;
 	int	i;
-	int	assign_f;
 
 	count = 1;
 	i = 0;
-	assign_f = 0;
-
 	while (str[i] && (str[i] == 32 || (str[i] > 8 && str[i] < 14)))
 		i++;
 	while (str[i] && ft_isalpha(str[i]))
 		i++;
-	if (str[i] == ' ' || (str[i] > 8 && str[i] < 14))
+	if (str[i] == ' ' || (str[i] > 8 && str[i++] < 14))
 		count++;
-	i++;
 	if (count > 1)
 	{
-		while (str[i] && !assign_f)
+		while (str[i])
 		{
 			while (str[i] && (str[i] == 32 || (str[i] > 8 && str[i] < 14)))
 				i++;
@@ -97,7 +100,6 @@ void	ft_check_resplit(t_vars *vars, char *str, t_prg *prg)
 				count++;
 			i++;
 		}
-		// ft_printf("check: %i\n", count);
 		ft_resplit(vars, prg, count);
 	}
 }

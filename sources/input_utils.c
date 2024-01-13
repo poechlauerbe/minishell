@@ -3,53 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   input_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 16:24:39 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/05 18:38:08 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/12 09:11:58 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-
-void	ft_new_node(t_vars *vars, t_prg **temp, char **inp)
-{
-	(*temp)->next = malloc(sizeof(t_prg));
-	if (!(*temp)->next)
-		ft_exit(vars, MALLOC_ERROR);
-	(*temp) = (*temp)->next;
-	(*temp)->next = NULL;
-	(*temp)->str_c = 0;
-	(*temp)->in_file = NULL;
-	(*temp)->out_file = NULL;
-	if (**inp == '|' || **inp == '<' || **inp == '>')
-	{
-		if (**inp == '<' && inp[0][1] == '<')
-		{
-			(*temp)->oper = O_HEREDOC;
-			*inp += 1;
-		}
-		else if (**inp == '>' && inp[0][1] == '>')
-		{
-			(*temp)->oper = O_APP_OUT;
-			*inp += 1;
-		}
-		else
-			(*temp)->oper = **inp;
-	}
-	else
-	{
-		(*temp)->oper = '0';
-		while (**inp && **inp != '|' && **inp != '<' && **inp != '>'
-			&& **inp != ' ' && **inp != '\n' && **inp != '\t'
-			&& **inp != '\r' && **inp != '\f' && **inp != '\v')
-		{
-			(*inp) += 1;
-		}
-		return ;
-	}
-	(*inp) += 1;
-}
 
 void	ft_check_quotes(char **inp)
 {
@@ -67,31 +28,24 @@ void	ft_check_quotes(char **inp)
 	}
 }
 
-void	ft_cleanup_redirectings(t_vars *vars)
+void	ft_quote_remover(t_vars *vars)
 {
 	t_prg	*temp;
-	t_prg	*last;
+	int		i;
+	char	*str_wo_q;
 
-	last = NULL;
 	temp = vars->p_start;
 	while (temp)
 	{
-		if (temp->oper == '<' || temp->oper == '>')
+		i = -1;
+		while (temp->prog[++i])
 		{
-			if (last == NULL)
-				vars->p_start = temp->next;
-			else
-				last->next = temp->next;
-			free(temp->prog);
-			free(temp);
-			temp = NULL;
+			str_wo_q = ft_create_value(vars, temp->prog[i]);
+			if (!str_wo_q)
+				ft_exit(vars, MALLOC_ERROR);
+			free(temp->prog[i]);
+			temp->prog[i] = str_wo_q;
 		}
-		if (temp != NULL)
-		{
-			last = temp;
-			temp = temp->next;
-		}
-		if (!last)
-			temp = vars->p_start;
+		temp = temp->next;
 	}
 }

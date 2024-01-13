@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: thorben <thorben@student.42.fr>            +#+  +:+       +#+         #
+#    By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/01/09 16:04:30 by thorben          ###   ########.fr        #
+#    Updated: 2024/01/12 08:24:48 by bpochlau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,10 +59,13 @@ SRCS 			= $(addprefix $(SRCS_DIR),\
 				expand.c \
 				free.c \
 				input.c \
+				input_check_s_count.c \
 				input_comb_progs.c \
 				input_heredoc.c \
 				input_heredoc_utils.c \
+				input_new_node.c \
 				input_malloc.c \
+				input_red_files.c \
 				input_resplit.c \
 				input_utils.c \
 				key_value.c \

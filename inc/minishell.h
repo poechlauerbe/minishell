@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thorben <thorben@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/09 16:04:13 by thorben          ###   ########.fr       */
+/*   Updated: 2024/01/12 08:38:54 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -270,24 +270,35 @@ void		ft_free_input(t_vars *vars);
 void		ft_echo(t_vars *vars, char **str);
 
 /* input utils*/
-// create new node in input linked list
-void		ft_new_node(t_vars *vars, t_prg **temp, char **inp);
 // check input for quotes
 void		ft_check_quotes(char **inp);
-// clean all nodes after storing them in the programs
-void		ft_cleanup_reds(t_vars *vars);
-// clean list if there is a redirecting sign at the beginning
-void		ft_cleanup_lst(t_vars *vars);
+void		ft_quote_remover(t_vars *vars);
 
 /* input */
 // checks for input and stores each input in a 2d array
 void		ft_check_input(t_vars *vars);
 
+/* input_check_s_count */
+void		ft_check_string_count(t_vars *vars, char *inp);
+
 /* input_comb_progs */
 void		ft_comb_progs(t_vars *vars);
 
+/* input_new_node */
+void		ft_new_node(t_vars *vars, t_prg **temp, char **inp);
+
 /* input_malloc */
 void		ft_malloc_prog_2d_str(t_vars *vars);
+
+/* input_red_files */
+void		ft_red_file(t_vars *vars, t_prg *lst);
+int			ft_check_redirect_file(t_vars *vars);
+
+/* input_redirecting */
+// clean all nodes after storing them in the programs
+void		ft_cleanup_reds(t_vars *vars);
+// clean list if there is a redirecting sign at the beginning
+void		ft_cleanup_lst(t_vars *vars);
 
 /* input_resplit */
 void		ft_check_resplit(t_vars *vars, char *str, t_prg *prg);

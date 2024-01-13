@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   macros_minishell.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 13:52:29 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/30 21:28:00 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/12 08:43:22 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,8 @@
 # define O_RED_INPUT 60
 //  <<
 # define O_HEREDOC 61
+
+// Text macros:
+# define M_SYN "bash: syntax error near unexpected token `"
 
 #endif
