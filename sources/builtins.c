@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
+/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 16:14:25 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/13 12:05:19 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/15 14:05:09 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,21 +31,37 @@ void	ft_env(t_vars *vars)
 	vars->exit_code = 0;
 }
 
+void	ft_option_error(t_vars *vars, char *prog)
+{
+		ft_putchar_fd(prog[0], 2);
+		ft_putchar_fd(prog[1], 2);
+		ft_putstr_fd(": invalid option\n", 2);
+		vars->exit_code = 2;
+}
+
 void	ft_export(t_vars *vars)
 {
 	int		i;
 	char	*key;
 	char	*value;
+	char	**prog;
 
+	prog = vars->p_start->prog;
 	i = 1;
-	if (vars->p_start->prog[i])
+	if (prog[i])
 	{
-		while (vars->p_start->prog[i])
+		if (prog[i] && prog[i][0] == '-' && prog[i][1] != '\0')
 		{
-			key = ft_exp_key(vars, vars->p_start->prog[i], 0);
+			ft_putstr_fd("minishell: export: ", 2);
+			ft_option_error(vars, prog[i]);
+			return ;
+		}
+		while (prog[i])
+		{
+			key = ft_exp_key(vars, prog[i], 0);
 			if (!key)
 				return ;
-			value = ft_exp_value(vars, vars->p_start->prog[i]);
+			value = ft_exp_value(vars, prog[i]);
 			ft_add_envv(vars, key, value, 0);
 			ft_new_envp(vars);
 			i++;
@@ -61,6 +77,12 @@ void	ft_unset(t_vars *vars, char **prg)
 	int		i;
 
 	i = 1;
+	if (prg[i] && prg[i][0] == '-' && prg[i][1] != '\0')
+	{
+		ft_putstr_fd("minishell: unset: ", 2);
+		ft_option_error(vars, prg[i]);
+		return ;
+	}
 	key = prg[i];
 	while (key)
 	{
