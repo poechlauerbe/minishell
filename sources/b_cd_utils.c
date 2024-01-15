@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_cd_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thorben <thorben@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:29:49 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/09 09:50:29 by thorben          ###   ########.fr       */
+/*   Updated: 2024/01/15 13:09:20 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,26 +40,30 @@ void	ft_malloc_cp(t_vars *vars, char **cp, char *str)
 void	ft_pwd_conc(t_vars *vars, char **curpath)
 {
 	char	*fpath;
-	char	*pwd;
 	int		plen;
-	int		pwdlen;
+	int		cwdlen;
 	int		slash;
+	char	cwd[1024];
 
 	if (*curpath && (*curpath)[0] != '/')
 	{
 		plen = ft_strlen(*curpath);
-		pwd = ft_return_val(vars, "PWD");
-		pwdlen = ft_strlen(pwd);
+		if (!getcwd(cwd, sizeof(cwd)))
+		{
+			perror("getcwd() error");
+			vars->exit_code = 1;
+		}
+		cwdlen = ft_strlen(cwd);
 		slash = 0;
-		if (pwd && pwd[pwdlen - 1] != '/')
+		if (cwd[cwdlen - 1] != '/')
 			slash = 1;
-		fpath = (char *)malloc(sizeof(char) * (plen + pwdlen + slash + 1));
+		fpath = (char *)malloc(sizeof(char) * (plen + cwdlen + slash + 1));
 		if (!fpath)
 			ft_exit(vars, MALLOC_ERROR);
-		ft_strlcpy(fpath, pwd, (pwdlen + 1));
+		ft_strlcpy(fpath, cwd, (cwdlen + 1));
 		if (slash)
-			ft_strlcat(fpath, "/", pwdlen + 2);
-		ft_strlcat(fpath, *curpath, (plen + pwdlen + slash + 1));
+			ft_strlcat(fpath, "/", cwdlen + 2);
+		ft_strlcat(fpath, *curpath, (plen + cwdlen + slash + 1));
 		free (*curpath);
 		*curpath = fpath;
 	}
@@ -95,7 +99,8 @@ void	ft_chdir(t_vars *vars, char **curpath)
             else
             	ft_new_value(vars, "OLDPWD", ft_return_val(vars, "PWD"));
 			elem = ft_val_retrieval(vars, "PWD");
-			elem->val = ft_strdup(*curpath);
+			if (elem)
+				elem->val = ft_strdup(*curpath);
 			free (*curpath);
 			vars->exit_code = 0;
 			return ;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
+/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:21:46 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/12 16:13:38 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/15 13:42:11 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,11 @@ void	ft_init(t_vars *vars, int argc, char **argv, char **envp)
 	char	*oldpwd;
 
 	ft_bzero(vars, sizeof(t_vars));
-	ft_create_env(vars, envp);
-	ft_order_envv(vars);
+	if (*envp)
+	{
+		ft_create_env(vars, envp);
+		ft_order_envv(vars);
+	}
 	oldpwd = ft_strdup("OLDPWD");
 	if (!oldpwd)
 		ft_exit(vars, MALLOC_ERROR);
