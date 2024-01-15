@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prog.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 13:41:52 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/12 16:11:25 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/15 13:49:07 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,26 @@ int	ft_builtin_check(t_vars *vars, t_prg *prog)
 	return (USED);
 }
 
+void	ft_no_path(t_vars *vars, t_prg *prog)
+{
+	char	cwd[1024];
+	char	*path;
+	char	*c_prog;
+
+	path = ft_strjoin(getcwd(cwd, sizeof(cwd)), "/");
+	if (!path)
+		ft_exit(vars, MALLOC_ERROR);
+	c_prog = ft_strjoin(path, prog->prog[0]);
+	free(path);
+	if (!c_prog)
+		ft_exit(vars, MALLOC_ERROR);
+	if (access(c_prog, F_OK | X_OK) == OK)
+		execve(c_prog, prog->prog, vars->envp);
+	free(c_prog);
+	ft_prog_not_found(vars, prog);
+	ft_exit(vars, vars->exit_code);
+}
+
 void	ft_check_path(t_vars *vars, t_prg *prog)
 {
 	char	*line;
@@ -49,7 +69,7 @@ void	ft_check_path(t_vars *vars, t_prg *prog)
 
 	line = ft_return_val(vars, "PATH");
 	if (!line)
-		exit(NOT_DEFINED);
+		ft_no_path(vars, prog);
 	i = 0;
 	while (line[i])
 	{
@@ -129,8 +149,7 @@ void	ft_prog_not_found(t_vars *vars, t_prg *prog)
 		ft_printf_fd(2, nfd);
 		free (nfd);
 		vars->exit_code = 127;
-		exit(127);
-		// kein ft_exit?
+		ft_exit(vars, 127);
 	}
 }
 
