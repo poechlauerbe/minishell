@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_resplit.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 14:29:20 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/12 15:03:03 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/15 12:46:58 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,28 +27,28 @@ int	ft_strlen_resplit(char *str, int *i)
 	return (str_len);
 }
 
-void	ft_resplit2(t_vars *vars, char *str_wo_q, t_prg *prg, char **new)
+void	ft_resplit2(t_vars *vars, char *str, t_prg *prg, char **new)
 {
 	int		i;
 	int		str_len;
-	int		c_progs;
 
 	i = 0;
-	c_progs = 0;
-	while (str_wo_q[i])
-	{
-		str_len = ft_strlen_resplit(str_wo_q, &i);
-		new[c_progs] = ft_calloc(str_len + 1, sizeof(char));
-		if (!new[c_progs])
-			ft_exit(vars, MALLOC_ERROR);
-		ft_strlcpy(new[c_progs], &str_wo_q[i - str_len], str_len + 1);
-		c_progs++;
-	}
+	str_len = ft_strlen_resplit(str, &i);
+	new[0] = ft_calloc(str_len + 1, sizeof(char));
+	if (!new[0])
+		ft_exit(vars, MALLOC_ERROR);
+	ft_strlcpy(new[0], &str[i - str_len], str_len + 1);
+	while (str[i] && (str[i] == 32 || (str[i] > 8 && str[i] < 14)))
+		i += 1;
+	str_len = ft_strlen(&str[i]);
+	new[1] = ft_calloc(str_len + 1, sizeof(char));
+	if (!new[1])
+		ft_exit(vars, MALLOC_ERROR);
+	ft_strlcpy(new[1], &str[i], str_len + 1);
 	i = 1;
 	while (prg->prog[i])
 	{
-		new[c_progs] = prg->prog[i];
-		c_progs++;
+		new[i + 1] = prg->prog[i];
 		i++;
 	}
 	free(prg->prog);
@@ -84,22 +84,10 @@ void	ft_check_resplit(t_vars *vars, char *str, t_prg *prg)
 	i = 0;
 	while (str[i] && (str[i] == 32 || (str[i] > 8 && str[i] < 14)))
 		i++;
-	while (str[i] && ft_isalpha(str[i]))
+	while (str[i] && (ft_isalpha(str[i]) || str[i] == '/'))
 		i++;
 	if (str[i] == ' ' || (str[i] > 8 && str[i++] < 14))
 		count++;
 	if (count > 1)
-	{
-		while (str[i])
-		{
-			while (str[i] && (str[i] == 32 || (str[i] > 8 && str[i] < 14)))
-				i++;
-			while (str[i] && ft_isalpha(str[i]))
-				i++;
-			if (str[i] == ' ' || (str[i] > 8 && str[i] < 14))
-				count++;
-			i++;
-		}
 		ft_resplit(vars, prg, count);
-	}
 }

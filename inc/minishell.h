@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/12 08:38:54 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/15 09:38:58 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -288,7 +288,7 @@ void		ft_comb_progs(t_vars *vars);
 void		ft_new_node(t_vars *vars, t_prg **temp, char **inp);
 
 /* input_malloc */
-void		ft_malloc_prog_2d_str(t_vars *vars);
+void		ft_malloc_prog_2d_str(t_vars *vars, char *inp);
 
 /* input_red_files */
 void		ft_red_file(t_vars *vars, t_prg *lst);
