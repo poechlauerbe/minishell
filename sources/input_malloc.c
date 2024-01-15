@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_malloc.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:46:54 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/09 11:42:36 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/15 09:37:59 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,10 +84,9 @@ void	ft_copy_progs(t_vars *vars, char **inp, t_prg *temp, char **prog)
 	prog[i] = NULL;
 }
 
-void	ft_malloc_prog_2d_str(t_vars *vars)
+void	ft_malloc_prog_2d_str(t_vars *vars, char *inp)
 {
 	char	**prog;
-	char	*inp;
 	t_prg	*temp;
 
 	inp = vars->inp;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 18:05:10 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/12 08:34:42 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/15 09:38:24 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	ft_check_input(t_vars *vars)
 	if (ft_start(vars))
 		return ;
 	ft_check_string_count(vars, vars->inp);
-	ft_malloc_prog_2d_str(vars);
+	ft_malloc_prog_2d_str(vars, vars->inp);
 	ft_cleanup_lst(vars);
 	if (ft_check_redirect_file(vars))
 		return ;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_resplit.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 14:29:20 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/12 15:03:03 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/15 12:02:34 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	ft_check_resplit(t_vars *vars, char *str, t_prg *prg)
 	i = 0;
 	while (str[i] && (str[i] == 32 || (str[i] > 8 && str[i] < 14)))
 		i++;
-	while (str[i] && ft_isalpha(str[i]))
+	while (str[i] && (ft_isalpha(str[i]) || str[i] == '/'))
 		i++;
 	if (str[i] == ' ' || (str[i] > 8 && str[i++] < 14))
 		count++;
@@ -98,6 +98,11 @@ void	ft_check_resplit(t_vars *vars, char *str, t_prg *prg)
 				i++;
 			if (str[i] == ' ' || (str[i] > 8 && str[i] < 14))
 				count++;
+			// if (str[i] == '|' || str[i] == '>' || str[i] == '<')
+			// {
+			// 	ft_resplit_new_node();
+			// 	count = 0;
+			// }
 			i++;
 		}
 		ft_resplit(vars, prg, count);
