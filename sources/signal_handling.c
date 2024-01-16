@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 14:56:01 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/16 10:10:34 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/16 10:12:23 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 void	ft_handler_s(int signum, siginfo_t *info, void *no)
 {
 	no = NULL;
+	g_flag = 1;
 	if (signum == SIGINT)
 	{
-		g_flag = 1;
 		rl_replace_line("", 0);
 		write(1, "\n", 1);
 		rl_on_new_line();
