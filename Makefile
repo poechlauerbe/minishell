@@ -3,12 +3,13 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+         #
+#    By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/01/16 11:03:09 by bpochlau         ###   ########.fr        #
+#    Updated: 2024/01/16 12:54:55 by tbenz            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
 
 
 NAME			= minishell
