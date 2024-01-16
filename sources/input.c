@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 18:05:10 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/16 10:09:46 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/16 10:35:00 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ void	ft_check_input(t_vars *vars)
 	ft_add_underscore(vars, vars->p_start->prog);
 	if (g_flag != 0)
 	{
-		ft_printf("test\n");
 		vars->no_exec = 130;
 		vars->exit_code = 130;
 	}

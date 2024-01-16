@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/16 10:05:49 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/16 11:01:13 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,7 +160,7 @@ void		ft_print_err_cd(t_vars *vars, int error);
 /* b_cd_utils2 */
 /* if OLDPWD is set, and cd - is received as input, changes
 	PWD to OLDPWD and OLDPWD to PWD */
-void    	ft_oldpwd(t_vars *vars);
+void		ft_oldpwd(t_vars *vars);
 
 /* b_exit */
 void		ft_exit_prog(t_vars *vars, char **prog);
@@ -303,7 +303,11 @@ void		ft_cleanup_reds(t_vars *vars);
 void		ft_cleanup_lst(t_vars *vars);
 
 /* input_resplit */
+int			ft_strlen_resplit(char *str, int *i);
 void		ft_check_resplit(t_vars *vars, char *str, t_prg *prg);
+
+/* input_resplit_addon */
+void		ft_check_addon_resplit(t_vars *vars, char *str, t_prg *prg);
 
 /* key_value */
 // changes the value of a given key value to val
