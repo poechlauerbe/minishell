@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_export_value_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thorben <thorben@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 13:14:23 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/09 11:56:14 by thorben          ###   ########.fr       */
+/*   Updated: 2024/01/16 12:43:23 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,10 @@ char	*ft_create_value(t_vars *vars, char *arg)
 	quote.value = (char *)malloc(sizeof(char) * (quote.len + 1));
 	if (!quote.value)
 		ft_exit(vars, MALLOC_ERROR);
-	ft_copy_value(&quote, arg);
+	if (quote.len == 0)
+		quote.value[0] = '\0';
+	else
+		ft_copy_value(&quote, arg);
 	return (quote.value);
 }
 
