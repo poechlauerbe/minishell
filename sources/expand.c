@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 12:15:16 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/16 11:07:47 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/16 11:12:34 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,26 +155,6 @@ void	ft_expand_all_vars(t_vars *vars)
 			ft_check_resplit(vars, temp->prog[0], temp);
 		if (temp->prog[1] && (temp->prog[1][0] == '-'))
 			ft_check_addon_resplit(vars, temp->prog[1], temp);
-		temp = temp->next;
-	}
-	temp = vars->p_start;
-	while (temp)
-	{
-		printf("oper: %c$\n", temp->oper);
-		i = -1;
-		while (temp->prog[++i])
-			printf("string[%i]: %s\n", i, temp->prog[i]);
-		printf("\n");
-		while(temp->out_file)
-		{
-			printf("out: %s, %c$\n", temp->out_file->file, temp->out_file->oper);
-			temp->out_file = temp->out_file->next;
-		}
-		while(temp->in_file)
-		{
-			printf("in: %s, %c$\n", temp->in_file->file, temp->in_file->oper);
-			temp->in_file = temp->in_file->next;
-		}
 		temp = temp->next;
 	}
 }
