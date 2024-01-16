@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_heredoc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 20:34:56 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/09 11:04:59 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/16 10:22:37 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,21 +83,22 @@ void	ft_heredoc_exec(t_vars *vars, t_prg *prog)
 	len = ft_strlen(prog->prog[0]);
 	// write(2, ">", 1);
 	str = get_next_line(0);
-	if (!str)
+	if (!str && !g_flag)
 		ft_exit(vars, MALLOC_ERROR);
-	while (ft_strncmp(str, prog->prog[0], len) != 0)
+	while (str && ft_strncmp(str, prog->prog[0], len) != 0 && !g_flag)
 	{
 		ft_add_on_heredoc_str(vars, prog, str);
 		// write(2, ">", 1);
 		str = get_next_line(0);
-		if (!str)
+		if (!str && !g_flag)
 			ft_exit(vars, MALLOC_ERROR);
 	}
 	if (str)
 		free (str);
 	if (!prog->hdoc_flag)
 		ft_check_enclosing(&prog->heredoc, vars);
-	ft_make_tmp_file(vars, prog);
+	if (!g_flag)
+		ft_make_tmp_file(vars, prog);
 }
 
 void	ft_heredoc(t_vars *vars)
