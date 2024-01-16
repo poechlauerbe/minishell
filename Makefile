@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+         #
+#    By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/01/12 08:24:48 by bpochlau         ###   ########.fr        #
+#    Updated: 2024/01/16 11:03:09 by bpochlau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,6 +67,7 @@ SRCS 			= $(addprefix $(SRCS_DIR),\
 				input_malloc.c \
 				input_red_files.c \
 				input_resplit.c \
+				input_resplit_addon.c \
 				input_utils.c \
 				key_value.c \
 				key_value_remove.c \
