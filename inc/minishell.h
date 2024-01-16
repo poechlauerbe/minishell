@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/16 11:01:13 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/16 13:08:56 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <readline/history.h>
 # include <signal.h>
 # include <sys/wait.h>
+# include <sys/stat.h>
 # include <dirent.h>
 # include <sys/types.h>
 
@@ -397,7 +398,7 @@ int	ft_check_validity(t_vars *vars, t_prg *prog);
 // creates the new shell variables
 void	ft_create_shvar(t_vars *vars, t_prg *prog, int i);
 // returns an error message for directories entered into bash
-void	ft_is_dir(t_vars *vars, t_prg *prog, char *nfd);
+void	ft_is_dir(t_vars *vars, t_prg *prog);
 
 void	ft_add_underscore(t_vars *vars, char **prg);
 

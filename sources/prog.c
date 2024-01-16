@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 13:41:52 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/15 13:49:07 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/16 13:47:27 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,14 @@ void	ft_no_path(t_vars *vars, t_prg *prog)
 	ft_exit(vars, vars->exit_code);
 }
 
+void	ft_no_rights(t_vars *vars, char *prog)
+{
+	ft_putstr_fd("bash: ", 2);
+	ft_putstr_fd(prog, 2);
+	ft_putstr_fd(": Permission denied\n", 2);
+	ft_exit(vars, 126);
+}
+
 void	ft_check_path(t_vars *vars, t_prg *prog)
 {
 	char	*line;
@@ -88,11 +96,16 @@ void	ft_check_path(t_vars *vars, t_prg *prog)
 		dir[j] = '/';
 		dir[j + 1] = '\0';
 		c_prog = ft_strjoin(dir, prog->prog[0]);
+		free(dir);
 		if (!c_prog)
 			ft_exit(vars, MALLOC_ERROR);
-		free(dir);
 		if (access(c_prog, F_OK | X_OK) == OK)
 			execve(c_prog, prog->prog, vars->envp);
+		else if (access(c_prog, F_OK) == OK)
+		{
+			ft_no_rights(vars, c_prog);
+			free (c_prog);
+		}
 		else
 			free (c_prog);
 		if (line[i])
@@ -103,51 +116,36 @@ void	ft_check_path(t_vars *vars, t_prg *prog)
 		ft_exit(vars, MALLOC_ERROR);
 	if (access(c_prog, F_OK | X_OK) == OK)
 		execve(c_prog, prog->prog, vars->envp);
-	// i think we are missing a free here:
-	// else
-	// 	free (c_prog);
+	else
+		free (c_prog);
 	ft_prog_not_found(vars, prog);
-	// vars->exit_code = 127;
-	// exit(127);
-	// ev. ft_exit(vars, 127);
 }
 
-void	ft_is_dir(t_vars *vars, t_prg *prog, char *nfd)
+void	ft_is_dir(t_vars *vars, t_prg *prog)
 {
-	char	*ndir;
-	int		len;
-
-	ndir = "Is a directory\n";
-	len = (ft_strlen(prog->prog[0]) * 2) + 4 + ft_strlen(ndir) + 1;
-	nfd = calloc(len, sizeof(char));
-	if (!nfd)
-		ft_exit(vars, MALLOC_ERROR);
-	ft_strlcat(nfd, prog->prog[0], ft_strlen(prog->prog[0]) + 1);
-	ft_strlcat(nfd, ": ", ft_strlen(prog->prog[0]) + 3);
-	ft_strlcat(nfd, nfd, ft_strlen(nfd) * 2 + 1);
-	ft_strlcat(nfd, ndir, len);
-	ft_printf_fd(2, nfd);
-	free(nfd);
+	ft_putstr_fd("bash: ", 2);
+	ft_putstr_fd(prog->prog[0], 2);
+	ft_putstr_fd(": Is a directory\n", 2);
 	vars->exit_code = 126;
-	exit(126);
-	// kein ft_exit?
+	ft_exit(vars, 126);
 }
 
 void	ft_prog_not_found(t_vars *vars, t_prg *prog)
 {
-	char	*nfd;
+	struct stat fileInfo;
 
-	nfd = NULL;
-	if (!access(prog->prog[0], F_OK) && (ft_strcmp(prog->prog[0], ".")
+	if (stat(prog->prog[0], &fileInfo) == 0 && (ft_strcmp(prog->prog[0], ".")
 			&& ft_strcmp(prog->prog[0], "..")))
-		ft_is_dir(vars, prog, nfd);
+	{
+		if (S_ISDIR(fileInfo.st_mode))
+			ft_is_dir(vars, prog);
+		else if (!access(prog->prog[0], F_OK))
+			ft_no_rights(vars, prog->prog[0]);
+	}
 	else
 	{
-		nfd = ft_strjoin(prog->prog[0], ": command not found\n");
-		if (!nfd)
-			ft_exit(vars, MALLOC_ERROR);
-		ft_printf_fd(2, nfd);
-		free (nfd);
+		ft_putstr_fd(prog->prog[0], 2);
+		ft_putstr_fd(": command not found\n", 2);
 		vars->exit_code = 127;
 		ft_exit(vars, 127);
 	}
@@ -177,8 +175,7 @@ void	ft_check_prog(t_vars *vars, t_prg *prog)
 	{
 		ft_prog_not_found(vars, prog);
 		vars->exit_code = 127;
-		exit(127);
-		// kein ft_exit?
+		ft_exit(vars, 127);
 	}
 	else if (acc_c == OK)
 		execve(prog->prog[0], prog->prog, vars->envp);
