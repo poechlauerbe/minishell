@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/28 14:33:20 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/16 10:07:38 by bpochlau         ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2024/01/16 12:54:38 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../inc/minishell.h"
 

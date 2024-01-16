@@ -6,9 +6,10 @@
 #    By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/01/16 14:01:38 by bpochlau         ###   ########.fr        #
+#    Updated: 2024/01/16 15:02:32 by bpochlau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
 
 
 NAME			= minishell
