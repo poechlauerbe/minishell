@@ -6,9 +6,10 @@
 #    By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/01/16 12:48:52 by tbenz            ###   ########.fr        #
+#    Updated: 2024/01/16 12:54:55 by tbenz            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
 
 
 NAME			= minishell
@@ -67,6 +68,7 @@ SRCS 			= $(addprefix $(SRCS_DIR),\
 				input_malloc.c \
 				input_red_files.c \
 				input_resplit.c \
+				input_resplit_addon.c \
 				input_utils.c \
 				key_value.c \
 				key_value_remove.c \

@@ -5,12 +5,15 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/28 14:33:20 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/16 12:48:55 by tbenz            ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2024/01/16 12:54:38 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #include "../inc/minishell.h"
+
+int	g_flag;
 
 // int	main(int argc, char **argv, char **envp)
 // {
@@ -39,6 +42,7 @@
 // 		}
 // 		free(vars.inp);
 // 		vars.inp = NULL;
+// 		g_flag = 0;
 // 	}
 // }
 
@@ -78,6 +82,7 @@ int	main(int argc, char **argv, char **envp)
 		}
 		free(vars.inp);
 		vars.inp = NULL;
+		g_flag = 0;
 	}
 }
 

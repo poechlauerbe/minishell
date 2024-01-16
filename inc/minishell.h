@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/15 09:38:58 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/16 11:01:13 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 # include <dirent.h>
 # include <sys/types.h>
 
+// global variable
+extern int	g_flag;
 
 // for the redirect sign - to handle multiple in- and out-files
 typedef struct s_red
@@ -63,17 +65,17 @@ typedef struct s_kv
 
 typedef struct s_vars
 {
-	char		*inp;
-	t_prg		*p_start;
-	int			pipe_count;
-	t_kv		*envv;
-	char		exit_code;
-	char		**envp;
-	int			alloc;
-	int			no_exec;
-	int			*pid;
-	int			*fd;
-	int			tmp_count;
+	char			*inp;
+	t_prg			*p_start;
+	int				pipe_count;
+	t_kv			*envv;
+	unsigned char	exit_code;
+	char			**envp;
+	int				alloc;
+	int				no_exec;
+	int				*pid;
+	int				*fd;
+	int				tmp_count;
 }		t_vars;
 
 typedef struct s_quote
@@ -158,7 +160,7 @@ void		ft_print_err_cd(t_vars *vars, int error);
 /* b_cd_utils2 */
 /* if OLDPWD is set, and cd - is received as input, changes
 	PWD to OLDPWD and OLDPWD to PWD */
-void    	ft_oldpwd(t_vars *vars);
+void		ft_oldpwd(t_vars *vars);
 
 /* b_exit */
 void		ft_exit_prog(t_vars *vars, char **prog);
@@ -301,7 +303,11 @@ void		ft_cleanup_reds(t_vars *vars);
 void		ft_cleanup_lst(t_vars *vars);
 
 /* input_resplit */
+int			ft_strlen_resplit(char *str, int *i);
 void		ft_check_resplit(t_vars *vars, char *str, t_prg *prg);
+
+/* input_resplit_addon */
+void		ft_check_addon_resplit(t_vars *vars, char *str, t_prg *prg);
 
 /* key_value */
 // changes the value of a given key value to val
