@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+         #
+#    By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/01/16 12:54:55 by tbenz            ###   ########.fr        #
+#    Updated: 2024/01/16 15:02:32 by bpochlau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,6 +76,8 @@ SRCS 			= $(addprefix $(SRCS_DIR),\
 				pipe.c \
 				pipe_utils.c \
 				prog.c \
+				prog_err.c \
+				prog_path.c \
 				input_redirecting.c \
 				signal_handling.c \
 				shell_variables.c \

@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 13:41:52 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/15 13:49:07 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/16 14:33:38 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,135 +38,11 @@ int	ft_builtin_check(t_vars *vars, t_prg *prog)
 	return (USED);
 }
 
-void	ft_no_path(t_vars *vars, t_prg *prog)
-{
-	char	cwd[1024];
-	char	*path;
-	char	*c_prog;
-
-	path = ft_strjoin(getcwd(cwd, sizeof(cwd)), "/");
-	if (!path)
-		ft_exit(vars, MALLOC_ERROR);
-	c_prog = ft_strjoin(path, prog->prog[0]);
-	free(path);
-	if (!c_prog)
-		ft_exit(vars, MALLOC_ERROR);
-	if (access(c_prog, F_OK | X_OK) == OK)
-		execve(c_prog, prog->prog, vars->envp);
-	free(c_prog);
-	ft_prog_not_found(vars, prog);
-	ft_exit(vars, vars->exit_code);
-}
-
-void	ft_check_path(t_vars *vars, t_prg *prog)
-{
-	char	*line;
-	char	*dir;
-	char	*c_prog;
-	int		i;
-	int		j;
-	int		i_start;
-
-	line = ft_return_val(vars, "PATH");
-	if (!line)
-		ft_no_path(vars, prog);
-	i = 0;
-	while (line[i])
-	{
-		i_start = i;
-		while (line && line[i] != ':' && line[i] != '\0')
-			i++;
-		dir = malloc((i - i_start + 2) * sizeof(char));
-		if (!dir)
-			ft_exit(vars, MALLOC_ERROR);
-		j = 0;
-		while (j < i - i_start)
-		{
-			dir[j] = line[i_start + j];
-			j++;
-		}
-		dir[j] = '/';
-		dir[j + 1] = '\0';
-		c_prog = ft_strjoin(dir, prog->prog[0]);
-		if (!c_prog)
-			ft_exit(vars, MALLOC_ERROR);
-		free(dir);
-		if (access(c_prog, F_OK | X_OK) == OK)
-			execve(c_prog, prog->prog, vars->envp);
-		else
-			free (c_prog);
-		if (line[i])
-			i++;
-	}
-	c_prog = ft_strjoin("./", prog->prog[0]);
-	if (!c_prog)
-		ft_exit(vars, MALLOC_ERROR);
-	if (access(c_prog, F_OK | X_OK) == OK)
-		execve(c_prog, prog->prog, vars->envp);
-	// i think we are missing a free here:
-	// else
-	// 	free (c_prog);
-	ft_prog_not_found(vars, prog);
-	// vars->exit_code = 127;
-	// exit(127);
-	// ev. ft_exit(vars, 127);
-}
-
-void	ft_is_dir(t_vars *vars, t_prg *prog, char *nfd)
-{
-	char	*ndir;
-	int		len;
-
-	ndir = "Is a directory\n";
-	len = (ft_strlen(prog->prog[0]) * 2) + 4 + ft_strlen(ndir) + 1;
-	nfd = calloc(len, sizeof(char));
-	if (!nfd)
-		ft_exit(vars, MALLOC_ERROR);
-	ft_strlcat(nfd, prog->prog[0], ft_strlen(prog->prog[0]) + 1);
-	ft_strlcat(nfd, ": ", ft_strlen(prog->prog[0]) + 3);
-	ft_strlcat(nfd, nfd, ft_strlen(nfd) * 2 + 1);
-	ft_strlcat(nfd, ndir, len);
-	ft_printf_fd(2, nfd);
-	free(nfd);
-	vars->exit_code = 126;
-	exit(126);
-	// kein ft_exit?
-}
-
-void	ft_prog_not_found(t_vars *vars, t_prg *prog)
-{
-	char	*nfd;
-
-	nfd = NULL;
-	if (!access(prog->prog[0], F_OK) && (ft_strcmp(prog->prog[0], ".")
-			&& ft_strcmp(prog->prog[0], "..")))
-		ft_is_dir(vars, prog, nfd);
-	else
-	{
-		nfd = ft_strjoin(prog->prog[0], ": command not found\n");
-		if (!nfd)
-			ft_exit(vars, MALLOC_ERROR);
-		ft_printf_fd(2, nfd);
-		free (nfd);
-		vars->exit_code = 127;
-		ft_exit(vars, 127);
-	}
-}
-
-void	ft_check_prog(t_vars *vars, t_prg *prog)
+void	ft_check_w_stand_path(t_vars *vars, t_prg *prog)
 {
 	int		acc_c;
 
 	acc_c = 1;
-	if (!prog->prog || !prog->prog[0])
-		return ;
-	if (prog->prog[0][0] == '\0')
-	{
-		ft_putstr_fd("Command '' not found\n", 2);
-		vars->no_exec = 127;
-		vars->exit_code = 127;
-		ft_exit(vars, 127);
-	}
 	if (ft_strncmp(prog->prog[0], "./", 2) == 0)
 		acc_c = access(prog->prog[0], F_OK | X_OK);
 	else if (ft_strncmp(prog->prog[0], "../", 3) == 0)
@@ -177,11 +53,24 @@ void	ft_check_prog(t_vars *vars, t_prg *prog)
 	{
 		ft_prog_not_found(vars, prog);
 		vars->exit_code = 127;
-		exit(127);
-		// kein ft_exit?
+		ft_exit(vars, 127);
 	}
 	else if (acc_c == OK)
 		execve(prog->prog[0], prog->prog, vars->envp);
+}
+
+void	ft_check_prog(t_vars *vars, t_prg *prog)
+{
+	if (!prog->prog || !prog->prog[0])
+		return ;
+	if (prog->prog[0][0] == '\0')
+	{
+		ft_putstr_fd("Command '' not found\n", 2);
+		vars->no_exec = 127;
+		vars->exit_code = 127;
+		ft_exit(vars, 127);
+	}
+	ft_check_w_stand_path(vars, prog);
 	if (ft_builtin_check(vars, prog) == USED)
 		ft_exit(vars, OK);
 	ft_check_path(vars, prog);
