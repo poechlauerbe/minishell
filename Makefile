@@ -6,7 +6,7 @@
 #    By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/01/16 11:03:09 by bpochlau         ###   ########.fr        #
+#    Updated: 2024/01/16 14:01:38 by bpochlau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,6 +75,8 @@ SRCS 			= $(addprefix $(SRCS_DIR),\
 				pipe.c \
 				pipe_utils.c \
 				prog.c \
+				prog_err.c \
+				prog_path.c \
 				input_redirecting.c \
 				signal_handling.c \
 				shell_variables.c \

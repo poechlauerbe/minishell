@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell_variables.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 14:51:31 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/04 15:32:59 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/16 13:53:33 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	ft_prog_not_found_shvar(t_vars *vars, char *arg)
 
 int	ft_check_validity(t_vars *vars, t_prg *prog)
 {
-	int 	i;
+	int		i;
 	char	*key;
 	char	*val;
 
@@ -86,7 +86,7 @@ int	ft_check_shvar(t_vars *vars, t_prg *prog)
 	val = ft_check_validity(vars, prog);
 	if (!val)
 	{
-		while(prog->prog[i])
+		while (prog->prog[i])
 		{
 			ft_create_shvar(vars, prog, i);
 			i++;

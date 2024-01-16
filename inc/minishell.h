@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/16 13:08:56 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/16 14:14:31 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -357,6 +357,14 @@ int			ft_check_out_access(char *file, int *pid, int i, t_vars *vars);
 /* prog */
 int			ft_check_dir(t_vars *vars, char *str);
 void		ft_check_prog(t_vars *vars, t_prg *prog);
+
+/* prog_err */
+void		ft_no_rights(t_vars *vars, char *prog, char *to_free);
+void		ft_is_dir(t_vars *vars, t_prg *prog);
+void		ft_prog_not_found(t_vars *vars, t_prg *prog);
+
+/* prog_path */
+void		ft_check_path(t_vars *vars, t_prg *prog);
 
 /* redirect_utils */
 void		ft_red_new_node(t_vars *vars, t_red **lst, char *file, char oper);
