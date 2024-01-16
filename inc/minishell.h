@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/16 14:14:31 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/16 16:56:47 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,10 @@ typedef struct s_vars
 	int				*pid;
 	int				*fd;
 	int				tmp_count;
+	int				fd_open_in;
+	int				fd_open_out;
+	int				std_in;
+	int				std_out;
 }		t_vars;
 
 typedef struct s_quote
@@ -267,6 +271,7 @@ int			ft_varlen(char *arg, t_quote *quote);
 /* free */
 void		ft_free_pipe_fd_and_pid(t_vars *vars);
 void		ft_free_input(t_vars *vars);
+void		ft_close_var_open(t_vars *vars);
 
 /* fun echo */
 // writes to the shell in standard output
@@ -341,6 +346,8 @@ void		ft_remove_links_ao(t_kv **tmp);
 
 /* pipe */
 // pipe function
+void		ft_check_input_file(t_vars *vars, t_prg *temp, t_red *reds, int i);
+void		ft_check_output_file(t_vars *vars, t_prg *temp, t_red *reds, int i);
 void		ft_pipecount(t_vars *vars);
 void		ft_pipe(t_vars *vars);
 
@@ -369,7 +376,8 @@ void		ft_check_path(t_vars *vars, t_prg *prog);
 /* redirect_utils */
 void		ft_red_new_node(t_vars *vars, t_red **lst, char *file, char oper);
 
-int			ft_builtin_check(t_vars *vars, t_prg *prog);
+int			ft_builtin_single_prog(t_vars *vars, t_prg *prog);
+int			ft_builtin(t_vars *vars, t_prg *prog);
 
 void		ft_prog_not_found(t_vars *vars, t_prg *prog);
 
