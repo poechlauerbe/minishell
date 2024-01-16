@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 13:41:52 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/16 14:24:15 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/16 14:33:38 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	ft_check_prog(t_vars *vars, t_prg *prog)
 		vars->exit_code = 127;
 		ft_exit(vars, 127);
 	}
-	ft_check_w_stand_path();
+	ft_check_w_stand_path(vars, prog);
 	if (ft_builtin_check(vars, prog) == USED)
 		ft_exit(vars, OK);
 	ft_check_path(vars, prog);
