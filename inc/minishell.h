@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/15 09:38:58 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/16 10:05:49 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 # include <dirent.h>
 # include <sys/types.h>
 
+// global variable
+extern int	g_flag;
 
 // for the redirect sign - to handle multiple in- and out-files
 typedef struct s_red
@@ -63,17 +65,17 @@ typedef struct s_kv
 
 typedef struct s_vars
 {
-	char		*inp;
-	t_prg		*p_start;
-	int			pipe_count;
-	t_kv		*envv;
-	char		exit_code;
-	char		**envp;
-	int			alloc;
-	int			no_exec;
-	int			*pid;
-	int			*fd;
-	int			tmp_count;
+	char			*inp;
+	t_prg			*p_start;
+	int				pipe_count;
+	t_kv			*envv;
+	unsigned char	exit_code;
+	char			**envp;
+	int				alloc;
+	int				no_exec;
+	int				*pid;
+	int				*fd;
+	int				tmp_count;
 }		t_vars;
 
 typedef struct s_quote

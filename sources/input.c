@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 18:05:10 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/15 09:38:24 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/16 10:09:46 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,25 +94,10 @@ void	ft_check_input(t_vars *vars)
 	ft_quote_remover(vars);
 	ft_pipecount(vars);
 	ft_add_underscore(vars, vars->p_start->prog);
+	if (g_flag != 0)
+	{
+		ft_printf("test\n");
+		vars->no_exec = 130;
+		vars->exit_code = 130;
+	}
 }
-
-	// temp = vars->p_start;
-	// while (temp)
-	// {
-	// 	printf("oper: %c$\n", temp->oper);
-	// 	i = -1;
-	// 	while (temp->prog[++i])
-	// 		printf("string[%i]: %s\n", i, temp->prog[i]);
-	// 	printf("\n");
-	// 	while(temp->out_file)
-	// 	{
-	// 		printf("out: %s, %c$\n", temp->out_file->file, temp->out_file->oper);
-	// 		temp->out_file = temp->out_file->next;
-	// 	}
-	// 	while(temp->in_file)
-	// 	{
-	// 		printf("in: %s, %c$\n", temp->in_file->file, temp->in_file->oper);
-	// 		temp->in_file = temp->in_file->next;
-	// 	}
-	// 	temp = temp->next;
-	// }

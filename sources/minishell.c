@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thorben <thorben@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 14:33:20 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/09 16:02:18 by thorben          ###   ########.fr       */
+/*   Updated: 2024/01/16 10:07:38 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+int	g_flag;
 
 // int	main(int argc, char **argv, char **envp)
 // {
@@ -39,6 +41,7 @@
 // 		}
 // 		free(vars.inp);
 // 		vars.inp = NULL;
+// 		g_flag = 0;
 // 	}
 // }
 
@@ -78,6 +81,7 @@ int	main(int argc, char **argv, char **envp)
 		}
 		free(vars.inp);
 		vars.inp = NULL;
+		g_flag = 0;
 	}
 }
 

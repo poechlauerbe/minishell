@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:21:46 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/15 13:42:11 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/16 10:02:38 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	ft_init(t_vars *vars, int argc, char **argv, char **envp)
 {
 	char	*oldpwd;
 
+	g_flag = 0;
 	ft_bzero(vars, sizeof(t_vars));
 	if (*envp)
 	{
