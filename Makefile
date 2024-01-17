@@ -6,7 +6,7 @@
 #    By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/01/17 12:04:57 by bpochlau         ###   ########.fr        #
+#    Updated: 2024/01/17 12:53:03 by bpochlau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,6 +75,7 @@ SRCS 			= $(addprefix $(SRCS_DIR),\
 				minishell.c \
 				pipe.c \
 				pipe_utils.c \
+				pipe_dir.c \
 				prog.c \
 				prog_err.c \
 				prog_path.c \

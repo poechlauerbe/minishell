@@ -6,42 +6,11 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 12:15:16 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/16 11:12:34 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/17 13:19:13 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-
-int	ft_exp_remove_spaces(char *str, char *arg, int *i, int *j)
-{
-	int	flag;
-	int	printed_signs;
-
-	flag = 0;
-	printed_signs = 0;
-	while (str && str[*j])
-	{
-		while (str[*j] && (str[*j] == 32 || (str[*j] > 8 && str[*j] < 14)))
-		{
-			flag = 1;
-			*j += 1;
-		}
-		if (*i != 0 && flag)
-		{
-			arg[*i] = ' ';
-			*i += 1;
-			printed_signs++;
-		}
-		flag = 0;
-		if (!str[*j])
-			return (printed_signs);
-		arg[*i] = str[*j];
-		*i += 1;
-		*j += 1;
-		printed_signs++;
-	}
-	return (printed_signs);
-}
 
 void	ft_expand_str(t_vars *vars, char **arg, t_quote *quote, char *str)
 {
@@ -49,8 +18,7 @@ void	ft_expand_str(t_vars *vars, char **arg, t_quote *quote, char *str)
 	int		varlen;
 	char	*temp;
 	int		printed_signs;
-	int		i;
-	int		j;
+	t_count	num;
 
 	temp = *arg;
 	varlen = ft_varlen(*arg, quote);
@@ -58,15 +26,15 @@ void	ft_expand_str(t_vars *vars, char **arg, t_quote *quote, char *str)
 	*arg = ft_calloc((strlen + 1), sizeof(char));
 	if (!arg)
 		ft_exit(vars, MALLOC_ERROR);
-	i = -1;
-	while (++i < quote->i)
-		(*arg)[i] = temp[i];
-	j = 0;
-	printed_signs = ft_exp_remove_spaces(str, *arg, &i, &j);
-	j = i - printed_signs + varlen;
-	while (temp[j])
-		(*arg)[i++] = temp[j++];
-	(*arg)[i] = '\0';
+	num.i = -1;
+	while (++num.i < quote->i)
+		(*arg)[num.i] = temp[num.i];
+	num.j = 0;
+	printed_signs = ft_exp_remove_spaces(str, *arg, &num.i, &num.j);
+	num.j = num.i - printed_signs + varlen;
+	while (temp[num.j])
+		(*arg)[num.i++] = temp[num.j++];
+	(*arg)[num.i] = '\0';
 	if (temp)
 		free(temp);
 }

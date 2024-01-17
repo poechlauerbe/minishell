@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 16:52:00 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/06 10:03:51 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/17 13:03:00 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,57 +47,22 @@ void	ft_close_pipes(int pipe_nr, int *fd)
 		close(fd[i]);
 }
 
-int	ft_check_dir(t_vars *vars, char *str)
-{
-	void	*ptr;
-
-	ptr = opendir(str);
-	if (!ptr)
-		return (OK);
-	ft_putstr_fd("bash: ", 2);
-	ft_putstr_fd(str, 2);
-	ft_putstr_fd(": Is a directory\n", 2);
-	vars->exit_code = NO_SUCH_FILE_OR_DIRECTORY;
-	vars->no_exec = NO_SUCH_FILE_OR_DIRECTORY;
-	closedir(ptr);
-	return (1);
-}
-
-int	ft_check_in_access(char *file, int *pid, int i, t_vars *vars)
-{
-	int	j;
-
-	if (ft_check_dir(vars, file))
-		return (1);
-	if (access(file, R_OK) == 0)
-		return (OK);
-	else
-	{
-		j = -1;
-		while (++j < i)
-			waitpid(pid[j], NULL, 0);
-		ft_putstr_fd("bash: ", 2);
-		ft_putstr_fd(file, 2);
-		ft_putstr_fd(": No such file or directory\n", 2);
-		return (1);
-	}
-}
-
-int	ft_path_checker(char *file, int *pid, int i, int j, t_vars *vars)
+int	ft_path_checker(char *file, int *pid, t_count *num, t_vars *vars)
 {
 	char	*test_path;
+	int		k;
 
 	test_path = ft_strdup(file);
 	if (!test_path)
 		ft_exit(vars, MALLOC_ERROR);
-	test_path[j] = '\0';
+	test_path[num->j] = '\0';
 	if (access(file, F_OK) == 0)
 		return (OK);
 	else
 	{
-		j = -1;
-		while (++j < i)
-			waitpid(pid[j], NULL, 0);
+		k = -1;
+		while (++k < num->i)
+			waitpid(pid[k], NULL, 0);
 		ft_putstr_fd("bash: ", 2);
 		ft_putstr_fd(file, 2);
 		ft_putstr_fd(": No such file or directory\n", 2);
@@ -108,45 +73,17 @@ int	ft_path_checker(char *file, int *pid, int i, int j, t_vars *vars)
 
 int	ft_check_command_path(char *file, int *pid, int i, t_vars *vars)
 {
-	int	j;
+	t_count	num;
 
-	j = 0;
-	while (file[j] == '.' || file[j] == '/')
-		j++;
-	while (file[j])
+	num.j = 0;
+	while (file[num.j] == '.' || file[num.j] == '/')
+		num.j++;
+	while (file[num.j])
 	{
-		if (file[j] == '/' && ft_path_checker(file, pid, i, j, vars))
+		num.i = i;
+		if (file[num.j] == '/' && ft_path_checker(file, pid, &num, vars))
 			return (1);
-		j++;
+		num.j++;
 	}
 	return (OK);
-}
-
-int	ft_check_out_access(char *file, int *pid, int i, t_vars *vars)
-{
-	int	j;
-
-	if (ft_check_dir(vars, file))
-		return (1);
-	if (access(file, F_OK) != 0 && !ft_check_dir(vars, file))
-	{
-		if (ft_check_command_path(file, pid, i, vars))
-			return (1);
-		return (0);
-	}
-	else
-	{
-		if (access(file, W_OK) == 0)
-			return (OK);
-		else
-		{
-			j = -1;
-			while (++j < i)
-				waitpid(pid[j], NULL, 0);
-			ft_putstr_fd("bash: ", 2);
-			ft_putstr_fd(file, 2);
-			ft_putstr_fd(": Permission denied\n", 2);
-			return (1);
-		}
-	}
 }

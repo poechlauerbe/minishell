@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/17 12:07:50 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/17 13:12:18 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,12 @@ typedef struct s_quote
 	int		len;
 	char	*value;
 }				t_quote;
+
+typedef struct s_count
+{
+	int	i;
+	int	j;
+}		t_count;
 
 /* functions */
 
@@ -267,6 +273,7 @@ int			ft_check_exit_code(t_vars *vars);
 
 /* expand_utils */
 int			ft_varlen(char *arg, t_quote *quote);
+int			ft_exp_remove_spaces(char *str, char *arg, int *i, int *j);
 
 /* free */
 void		ft_free_pipe_fd_and_pid(t_vars *vars);
@@ -356,6 +363,8 @@ void		ft_pipe(t_vars *vars);
 void		ft_pipecount(t_vars *vars);
 // closes all the open pipes of the pipeloop
 void		ft_close_pipes(int pipe_nr, int *fd);
+int			ft_check_command_path(char *file, int *pid, int i, t_vars *vars);
+
 // checks if the input file is accesable
 int			ft_check_in_access(char *file, int *pid, int i, t_vars *vars);
 // checks if the output file is accesable
