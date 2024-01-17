@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:29:49 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/17 15:51:54 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/17 16:16:26 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,15 @@ void	ft_malloc_cp(t_vars *vars, char **cp, char *str)
 
 void	ft_getcwd(t_vars *vars, char **cwd, int *slash, int *cwdlen)
 {
-	if (!getcwd(*cwd, sizeof(*cwd)))
+	*cwd = getcwd(NULL, 0);
+	if (!*cwd)
 	{
 		perror("getcwd() error");
 		vars->exit_code = 1;
 	}
 	*cwdlen = ft_strlen(*cwd);
 	*slash = 0;
-	if (*cwd[*cwdlen - 1] != '/')
+	if ((*cwd)[*cwdlen - 1] != '/')
 		*slash = 1;
 }
 
