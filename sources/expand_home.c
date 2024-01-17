@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 14:39:12 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/17 14:19:47 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/17 14:38:48 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,48 +29,6 @@ void	ft_home(t_vars *vars, char **curpath)
 	ft_strlcat(fpath, &(*curpath)[1], (plen + pwdlen + 1));
 	free (*curpath);
 	*curpath = fpath;
-}
-
-void	ft_etc_arr_free(char ***arr, char **line)
-{
-	int		i;
-
-
-	i = 0;
-	while ((*arr)[i])
-	{
-		free ((*arr)[i]);
-		i++;
-	}
-	free (*arr);
-	if (*line)
-		free (*line);
-}
-
-void	ft_etc_passwd_loop(t_vars *vars, char **str, char **tmp, int fd)
-{
-	char	*line;
-	char	**arr;
-	int		i;
-
-	line = get_next_line(fd);
-	while (line && !*tmp)
-	{
-		arr = ft_split(line, ':');
-		if (!arr)
-			ft_exit(vars, MALLOC_ERROR);
-		i = 0;
-		if (!ft_strcmp(&(*str)[1], arr[0]))
-		{
-			*tmp = ft_strdup(arr[5]);
-			if (!*tmp)
-				ft_exit(vars, MALLOC_ERROR);
-		}
-		ft_etc_arr_free(&arr, &line);
-		line = get_next_line(fd);
-	}
-	if (line)
-		free (line);
 }
 
 void	ft_etc_passwd(t_vars *vars, char **str, char **tmp)

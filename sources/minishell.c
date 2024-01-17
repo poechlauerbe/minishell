@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/01/17 14:25:46 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/17 14:47:40 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	main(int argc, char **argv, char **envp)
 			ft_check_input(&vars);
 			if (!vars.pipe_count && !vars.no_exec)
 			{
-				if (ft_builtin_check(&vars, vars.p_start) == NOT_USED)
+				if (ft_builtin(&vars, vars.p_start) == NOT_USED)
 					ft_pipe(&vars);
 			}
 			else if (!vars.no_exec)

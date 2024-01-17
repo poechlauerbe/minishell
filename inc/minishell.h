@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/17 14:30:50 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/17 16:04:20 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,8 +163,6 @@ void		ft_malloc_cp(t_vars *vars, char **cp, char *str);
 void		ft_pwd_conc(t_vars *vars, char **curpath);
 // converts curpath according to the canonical form
 int			ft_can_form(t_vars *vars, char **curpath);
-// if possible, changes the current directory to curpath
-void		ft_chdir(t_vars *vars, char **curpath);
 // prints an error message an sets the error code
 void		ft_print_err_cd(t_vars *vars, int error);
 
@@ -172,6 +170,10 @@ void		ft_print_err_cd(t_vars *vars, int error);
 /* if OLDPWD is set, and cd - is received as input, changes
 	PWD to OLDPWD and OLDPWD to PWD */
 void		ft_oldpwd(t_vars *vars);
+// if possible, changes the current directory to curpath
+void		ft_chdir(t_vars *vars, char **curpath);
+// changes the OLDPWD and PWD envv if they exist
+void		ft_chdir_pwd_envv(t_vars *vars, char **curpath);
 
 /* b_exit */
 void		ft_exit_prog(t_vars *vars, char **prog);
@@ -190,6 +192,20 @@ char		*ft_exp_key(t_vars *vars, char *arg, int func);
 int			ft_exp_keychecker(t_vars *vars, char *arg, char *comp, int func);
 // gets the length
 int			ft_key_len(char *arg);
+
+/* b_export_new_envp */
+/* creates a new array of envp variables which can be passed to child processses
+	if there is an existing allocation already, it frees these variables first
+*/
+void		ft_new_envp(t_vars *vars);
+// frees the existing envp variables
+void		ft_free_envp(char **envp);
+// mallocs the new envp
+void		ft_malloc_envp(t_vars *vars, char ***arr);
+// allocates a new envp from the envv variables
+void		ft_create_envp(t_vars *vars, int i, t_kv *tmp2, char ***arr);
+// counts the number of envv variables, for which memory has to be allocated
+int			ft_envp_len(t_vars *vars);
 
 /* b_export_print */
 // orders all the key-value elements alphabetically in a linked list
@@ -230,15 +246,24 @@ void		ft_quote_len(t_quote *quote, char *arg);
 /* builtins */
 // prints the environment variables present
 void		ft_env(t_vars *vars);
-/* prints the env variables when it does not have arguments, otherwise tries to
-	add a key value pair */
-void		ft_export(t_vars *vars);
 /* erases a key-value combination from the saved variables and adjusts the
 	respective pointers */
 void		ft_unset(t_vars *vars, char **prg);
 /* if directory exists and one has the necessary rights, moves one to the dir
 	entered*/
 void		ft_cd(t_vars *vars);
+/* handles cd and cd -- which should resolve to the home directory or returns an
+	error if HOME is not set */
+void		ft_cd2(t_vars *vars, char **cp);
+// description
+void		ft_option_error(t_vars *vars, char *prog);
+
+/* builtins2 */
+/* prints the env variables when it does not have arguments, otherwise tries to
+	add a key value pair */
+void		ft_export(t_vars *vars);
+// creates an environment variable
+void		ft_export_prog(t_vars *vars, char **prog, int i);
 
 /* signal_handling */
 // ignores SIGQUIT and handles SIGINT
@@ -251,6 +276,8 @@ void		ft_handler_s(int signum, siginfo_t *info, void *no);
 void		ft_create_env(t_vars *vars, char **envp);
 // returns the last kvue entry
 t_kv		*ft_last_entry(t_kv *elem);
+//  updates the underscore variable
+void		ft_add_underscore(t_vars *vars, char **prg);
 
 /* exit */
 // prints an error message
@@ -270,6 +297,22 @@ void		ft_expand_all_vars(t_vars *vars);
 void		ft_expander(t_vars *vars, char **arg, t_quote *quote);
 // function for $?
 int			ft_check_exit_code(t_vars *vars);
+
+/* expand_home */
+// expands to home with consecutive path
+void		ft_home(t_vars *vars, char **curpath);
+// opens the /etc/passwd file
+void		ft_etc_passwd(t_vars *vars, char **str, char **tmp);
+// expands home
+void		ft_home_expand(t_vars *vars, char **str);
+// expands to user home directory
+void		ft_user_home(t_vars *vars, char **str, char **tmp);
+// retrieves the home directory of the user
+void		ft_home_usr_retrvl(t_vars *vars, char **home, char **usr);
+
+/* expand_home2 */
+void		ft_etc_passwd_loop(t_vars *vars, char **str, char **tmp, int fd);
+void		ft_etc_arr_free(char ***arr, char **line);
 
 /* expand_utils */
 int			ft_varlen(char *arg, t_quote *quote);
@@ -390,42 +433,7 @@ int			ft_builtin(t_vars *vars, t_prg *prog);
 
 void		ft_prog_not_found(t_vars *vars, t_prg *prog);
 
-/* utils */
-// sets all variables to zero and initiates envp variables
-void		ft_init(t_vars *vars, int argc, char **argv, char **envp);
-// prints the current working directory or an error if this is not possible
-void		ft_pwd(t_vars *vars);
-// sets the values for the tmp variable (except for key and value)
-void		ft_set_val(t_vars *vars, t_kv **var, t_kv **tmp);
-// compares two strings (here: key-pairs) and returns 0 if they match.
-int			ft_strcmp(const char *s1, const char *s2);
-
-void		ft_home(t_vars *vars, char **curpath);
-void		ft_etc_passwd_loop(t_vars *vars, char **str, char **tmp, int fd);
-void		ft_etc_arr_free(char ***arr, char **line);
-void		ft_etc_passwd(t_vars *vars, char **str, char **tmp);
-void		ft_home_expand(t_vars *vars, char **str);
-void		ft_user_home(t_vars *vars, char **str, char **tmp);
-void		ft_home_usr_retrvl(t_vars *vars, char **home, char **usr);
-
-/* b_export_new_envp */
-/* creates a new array of envp variables which can be passed to child processses
-	if there is an existing allocation already, it frees these variables first
-*/
-void		ft_new_envp(t_vars *vars);
-// frees the existing envp variables
-void		ft_free_envp(char **envp);
-// mallocs the new envp
-void		ft_malloc_envp(t_vars *vars, char ***arr);
-// allocates a new envp from the envv variables
-void		ft_create_envp(t_vars *vars, int i, t_kv *tmp2, char ***arr);
-// counts the number of envv variables, for which memory has to be allocated
-int			ft_envp_len(t_vars *vars);
-
-// void		ft_remove_envp(t_vars *vars, char *key);
-// void		ft_malloc_envpr(t_vars *vars, char ***arr, char *key);
-
-
+/* shell variables */
 // checks whether a shell variable has to be created
 int			ft_check_shvar(t_vars *vars, t_prg *prog);
 /* checks whether the instructions are valid and all the shell variables can be
@@ -440,7 +448,18 @@ void		ft_create_shvar(t_vars *vars, t_prg *prog, int i);
 // returns an error message for directories entered into bash
 void		ft_is_dir(t_vars *vars, t_prg *prog);
 
-void		ft_add_underscore(t_vars *vars, char **prg);
+/* utils */
+// sets all variables to zero and initiates envp variables
+void		ft_init(t_vars *vars, int argc, char **argv, char **envp);
+// prints the current working directory or an error if this is not possible
+void		ft_pwd(t_vars *vars);
+// sets the values for the tmp variable (except for key and value)
+void		ft_set_val(t_vars *vars, t_kv **var, t_kv **tmp);
+// compares two strings (here: key-pairs) and returns 0 if they match.
+int			ft_strcmp(const char *s1, const char *s2);
+
+// void		ft_remove_envp(t_vars *vars, char *key);
+// void		ft_malloc_envpr(t_vars *vars, char ***arr, char *key);
 
 /* prog_single_files */
 int			ft_c_infile_sp(t_vars *vars, t_prg *temp, t_red *reds, int i);
