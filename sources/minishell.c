@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/01/17 14:25:46 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/17 15:02:27 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,12 @@ int	main(int argc, char **argv, char **envp)
 	ft_handle_signals();
 	while (1)
 	{
-		vars.inp = readline("Prompt> $");
+		vars.inp = readline("$>");
 		if (g_flag)
 		{
 			vars.exit_code = g_flag;
 			g_flag = 0;
+			ft_handle_signals();
 		}
 		if (!vars.inp)
 			ft_exit(&vars, vars.exit_code);
@@ -36,7 +37,7 @@ int	main(int argc, char **argv, char **envp)
 			ft_check_input(&vars);
 			if (!vars.pipe_count && !vars.no_exec)
 			{
-				if (ft_builtin_check(&vars, vars.p_start) == NOT_USED)
+				if (ft_builtin_single_prog(&vars, vars.p_start) == NOT_USED)
 					ft_pipe(&vars);
 			}
 			else if (!vars.no_exec)
@@ -46,7 +47,6 @@ int	main(int argc, char **argv, char **envp)
 		}
 		free(vars.inp);
 		vars.inp = NULL;
-		g_flag = 0;
 	}
 }
 
