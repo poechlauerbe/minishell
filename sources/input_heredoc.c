@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 20:34:56 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/17 16:34:20 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/17 17:47:06 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,25 +73,44 @@ void	ft_prep_delimiter(t_vars *vars, t_prg *prog)
 	prog->prog[0] = new;
 }
 
+void ft_test(int signum)
+{
+	g_flag = 1;
+	if (signum == SIGINT)
+	{
+		rl_callback_handler_remove();
+		// rl_replace_line("", 0);
+		// rl_on_new_line();
+		// rl_redisplay();
+		write(1, "\n", 1);
+	}
+}
+
 void	ft_heredoc_exec(t_vars *vars, t_prg *prog)
 {
 	char	*str;
 	int		len;
 
+	// signal(SIGINT, ft_test);
+	// signal(SIGQUIT, SIG_DFL);
+	rl_callback_handler_install();
 	prog->heredoc = NULL;
 	ft_prep_delimiter(vars, prog);
 	len = ft_strlen(prog->prog[0]);
 	// write(2, ">", 1);
-	str = get_next_line(0);
-	if (!str && !g_flag)
-		ft_exit(vars, MALLOC_ERROR);
+	// str = get_next_line(0);
+	str = readline("");
+	// if (!str && !g_flag)
+	// 	ft_exit(vars, MALLOC_ERROR);
+	printf("test");
 	while (str && ft_strncmp(str, prog->prog[0], len) != 0 && !g_flag)
 	{
 		ft_add_on_heredoc_str(vars, prog, str);
 		// write(2, ">", 1);
-		str = get_next_line(0);
-		if (!str && !g_flag)
-			ft_exit(vars, MALLOC_ERROR);
+		// str = get_next_line(0);
+		str = readline("");
+		// if (!str && !g_flag)
+		// 	ft_exit(vars, MALLOC_ERROR);
 	}
 	if (str)
 		free (str);
@@ -99,7 +118,8 @@ void	ft_heredoc_exec(t_vars *vars, t_prg *prog)
 		ft_check_enclosing(&prog->heredoc, vars);
 	if (!g_flag)
 		ft_make_tmp_file(vars, prog);
-	ft_putstr_fd("\n", 1);
+	// ft_handle_signals();
+	rl_catch_signals = 1;
 }
 
 void	ft_heredoc(t_vars *vars)
