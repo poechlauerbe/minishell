@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 16:14:25 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/15 14:05:09 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/17 09:32:15 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ void	ft_env(t_vars *vars)
 
 void	ft_option_error(t_vars *vars, char *prog)
 {
-		ft_putchar_fd(prog[0], 2);
-		ft_putchar_fd(prog[1], 2);
-		ft_putstr_fd(": invalid option\n", 2);
-		vars->exit_code = 2;
+	ft_putchar_fd(prog[0], 2);
+	ft_putchar_fd(prog[1], 2);
+	ft_putstr_fd(": invalid option\n", 2);
+	vars->exit_code = 2;
 }
 
 void	ft_export(t_vars *vars)
