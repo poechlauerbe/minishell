@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/17 16:04:20 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/17 16:57:55 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -457,6 +457,8 @@ void		ft_pwd(t_vars *vars);
 void		ft_set_val(t_vars *vars, t_kv **var, t_kv **tmp);
 // compares two strings (here: key-pairs) and returns 0 if they match.
 int			ft_strcmp(const char *s1, const char *s2);
+// checks it there are any open quotes in the command
+int			ft_enclosing_open_quotes(t_vars *vars, t_quote quote);
 
 // void		ft_remove_envp(t_vars *vars, char *key);
 // void		ft_malloc_envpr(t_vars *vars, char ***arr, char *key);

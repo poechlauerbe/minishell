@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 08:54:41 by thorben           #+#    #+#             */
-/*   Updated: 2024/01/17 15:53:16 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/17 16:25:54 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,21 +72,29 @@ void	ft_chdir_pwd_envv(t_vars *vars, char **curpath)
 		elem->val = ft_strdup(*curpath);
 	free (*curpath);
 	vars->exit_code = 0;
-	return ;
 }
 
 void	ft_chdir(t_vars *vars, char **curpath)
 {
 	char	*tmp;
 
+	tmp = NULL;
 	if (!access(*curpath, F_OK | X_OK))
 	{
 		if (!chdir(*curpath))
+		{
 			ft_chdir_pwd_envv(vars, curpath);
+			return ;
+		}
 		else
-			perror("minishell: cd: ");
+		{
+			tmp = ft_strdup("minishell: cd");
+			if (!tmp)
+				ft_exit(vars, MALLOC_ERROR);
+		}
 	}
-	tmp = ft_strjoin("minishell: cd: ", vars->p_start->prog[1]);
+	if (!tmp)
+		tmp = ft_strjoin("minishell: cd: ", vars->p_start->prog[1]);
 	if (!tmp)
 		ft_exit(vars, MALLOC_ERROR);
 	perror(tmp);

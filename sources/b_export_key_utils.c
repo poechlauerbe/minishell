@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 15:22:09 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/07 18:15:44 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/17 16:47:37 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,7 @@ int	ft_check_enclosing(char **arg, t_vars *vars)
 			ft_expander(vars, arg, &quote);
 		quote.i++;
 	}
-	if (quote.sq != 0 || quote.dq != 0)
-	{
-		ft_putstr_fd("It seems like you forgot to close your quotes\n", 2);
-		return (1);
-	}
-	return (0);
+	return (ft_enclosing_open_quotes(vars, quote));
 }
 
 char	*ft_copy_key(t_vars *vars, char *arg)
