@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:46:54 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/15 09:37:59 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/17 12:45:54 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	ft_copy_progs(t_vars *vars, char **inp, t_prg *temp, char **prog)
 		str = ft_calloc((strlen + 1), sizeof(char));
 		if (!str)
 		{
-			// free(prog);
+			free(prog);
 			ft_exit(vars, MALLOC_ERROR);
 		}
 		ft_strlcpy(str, *inp, strlen + 1);

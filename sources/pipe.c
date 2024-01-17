@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 15:46:51 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/05 17:36:27 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/16 16:48:54 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_check_input_file(t_vars *vars, t_prg *temp, t_red *reds, int i)
 	while (reds)
 	{
 		if (ft_check_in_access(reds->file, vars->pid, i, vars) != OK)
-			exit(1);
+			ft_exit(vars, 1);
 		reds = reds->next;
 	}
 	reds = temp->in_file;
@@ -29,6 +29,8 @@ void	ft_check_input_file(t_vars *vars, t_prg *temp, t_red *reds, int i)
 	fd_r_in = open(reds->file, O_RDONLY);
 	if (fd_r_in < 0)
 		ft_exit(vars, OPEN_FILE_ERROR);
+	vars->fd_open_in = fd_r_in;
+	vars->std_in = dup(STDIN_FILENO);
 	if (dup2(fd_r_in, STDIN_FILENO) == -1)
 		ft_exit(vars, DUP_ERROR);
 }
@@ -52,6 +54,8 @@ void	ft_check_output_file(t_vars *vars, t_prg *temp, t_red *reds, int i)
 			close (fd_r_out);
 		reds = reds->next;
 	}
+	vars->fd_open_out = fd_r_out;
+	vars->std_out = dup(STDOUT_FILENO);
 	if (dup2(fd_r_out, STDOUT_FILENO) == -1)
 		ft_exit(vars, DUP_ERROR);
 }

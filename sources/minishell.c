@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/01/16 12:54:38 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/16 16:06:25 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	g_flag;
 // 			ft_check_input(&vars);
 // 			if (!vars.pipe_count && !vars.no_exec)
 // 			{
-// 				if (ft_builtin_check(&vars, vars.p_start) == NOT_USED)
+// 				if (ft_builtin_single_prog(&vars, vars.p_start) == NOT_USED)
 // 					ft_pipe(&vars);
 // 			}
 // 			else if (!vars.no_exec)
@@ -72,7 +72,7 @@ int	main(int argc, char **argv, char **envp)
 			ft_check_input(&vars);
 			if (!vars.pipe_count && !vars.no_exec)
 			{
-				if (ft_builtin_check(&vars, vars.p_start) == NOT_USED)
+				if (ft_builtin_single_prog(&vars, vars.p_start) == NOT_USED)
 					ft_pipe(&vars);
 			}
 			else if (!vars.no_exec)

@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/16 14:14:31 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/17 13:12:18 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,10 @@ typedef struct s_vars
 	int				*pid;
 	int				*fd;
 	int				tmp_count;
+	int				fd_open_in;
+	int				fd_open_out;
+	int				std_in;
+	int				std_out;
 }		t_vars;
 
 typedef struct s_quote
@@ -87,6 +91,12 @@ typedef struct s_quote
 	int		len;
 	char	*value;
 }				t_quote;
+
+typedef struct s_count
+{
+	int	i;
+	int	j;
+}		t_count;
 
 /* functions */
 
@@ -263,10 +273,12 @@ int			ft_check_exit_code(t_vars *vars);
 
 /* expand_utils */
 int			ft_varlen(char *arg, t_quote *quote);
+int			ft_exp_remove_spaces(char *str, char *arg, int *i, int *j);
 
 /* free */
 void		ft_free_pipe_fd_and_pid(t_vars *vars);
 void		ft_free_input(t_vars *vars);
+void		ft_close_var_open(t_vars *vars);
 
 /* fun echo */
 // writes to the shell in standard output
@@ -341,6 +353,8 @@ void		ft_remove_links_ao(t_kv **tmp);
 
 /* pipe */
 // pipe function
+void		ft_check_input_file(t_vars *vars, t_prg *temp, t_red *reds, int i);
+void		ft_check_output_file(t_vars *vars, t_prg *temp, t_red *reds, int i);
 void		ft_pipecount(t_vars *vars);
 void		ft_pipe(t_vars *vars);
 
@@ -349,6 +363,8 @@ void		ft_pipe(t_vars *vars);
 void		ft_pipecount(t_vars *vars);
 // closes all the open pipes of the pipeloop
 void		ft_close_pipes(int pipe_nr, int *fd);
+int			ft_check_command_path(char *file, int *pid, int i, t_vars *vars);
+
 // checks if the input file is accesable
 int			ft_check_in_access(char *file, int *pid, int i, t_vars *vars);
 // checks if the output file is accesable
@@ -369,7 +385,8 @@ void		ft_check_path(t_vars *vars, t_prg *prog);
 /* redirect_utils */
 void		ft_red_new_node(t_vars *vars, t_red **lst, char *file, char oper);
 
-int			ft_builtin_check(t_vars *vars, t_prg *prog);
+int			ft_builtin_single_prog(t_vars *vars, t_prg *prog);
+int			ft_builtin(t_vars *vars, t_prg *prog);
 
 void		ft_prog_not_found(t_vars *vars, t_prg *prog);
 
@@ -409,5 +426,10 @@ void	ft_create_shvar(t_vars *vars, t_prg *prog, int i);
 void	ft_is_dir(t_vars *vars, t_prg *prog);
 
 void	ft_add_underscore(t_vars *vars, char **prg);
+
+/* prog_single_files */
+int			ft_c_infile_sp(t_vars *vars, t_prg *temp, t_red *reds, int i);
+int			ft_c_outfile_sp(t_vars *vars, t_prg *temp, t_red *reds, int i);
+int			ft_check_files_sp(t_vars *vars, t_prg *prog);
 
 #endif
