@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/16 16:56:47 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/17 12:07:50 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -417,5 +417,10 @@ void	ft_create_shvar(t_vars *vars, t_prg *prog, int i);
 void	ft_is_dir(t_vars *vars, t_prg *prog);
 
 void	ft_add_underscore(t_vars *vars, char **prg);
+
+/* prog_single_files */
+int			ft_c_infile_sp(t_vars *vars, t_prg *temp, t_red *reds, int i);
+int			ft_c_outfile_sp(t_vars *vars, t_prg *temp, t_red *reds, int i);
+int			ft_check_files_sp(t_vars *vars, t_prg *prog);
 
 #endif
