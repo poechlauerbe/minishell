@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   b_cd_utils2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thorben <thorben@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 08:54:41 by thorben           #+#    #+#             */
-/*   Updated: 2024/01/09 11:48:59 by thorben          ###   ########.fr       */
+/*   Updated: 2024/01/17 11:39:17 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-void    ft_oldpwd(t_vars *vars)
+void	ft_oldpwd(t_vars *vars)
 {
-    t_kv	*oldpwd;
+	t_kv	*oldpwd;
 	t_kv	*pwd;
 	char	*tmp;
 
@@ -36,7 +36,7 @@ void    ft_oldpwd(t_vars *vars)
 			else
 				perror("minishell: cd: ");
 		}
-		else 
+		else
 		{
 			tmp = ft_strjoin("minishell: cd: ", vars->p_start->prog[1]);
 			if (!tmp)

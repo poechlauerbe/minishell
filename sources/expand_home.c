@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_home.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thorben <thorben@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 14:39:12 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/08 18:20:57 by thorben          ###   ########.fr       */
+/*   Updated: 2024/01/17 14:19:47 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,22 @@ void	ft_home(t_vars *vars, char **curpath)
 	*curpath = fpath;
 }
 
+void	ft_etc_arr_free(char ***arr, char **line)
+{
+	int		i;
+
+
+	i = 0;
+	while ((*arr)[i])
+	{
+		free ((*arr)[i]);
+		i++;
+	}
+	free (*arr);
+	if (*line)
+		free (*line);
+}
+
 void	ft_etc_passwd_loop(t_vars *vars, char **str, char **tmp, int fd)
 {
 	char	*line;
@@ -50,16 +66,11 @@ void	ft_etc_passwd_loop(t_vars *vars, char **str, char **tmp, int fd)
 			if (!*tmp)
 				ft_exit(vars, MALLOC_ERROR);
 		}
-		free (line);
+		ft_etc_arr_free(&arr, &line);
 		line = get_next_line(fd);
-		i = 0;
-		while (arr[i])
-		{
-			free (arr[i]);
-			i++;
-		}
-		free (arr);
 	}
+	if (line)
+		free (line);
 }
 
 void	ft_etc_passwd(t_vars *vars, char **str, char **tmp)
@@ -70,7 +81,8 @@ void	ft_etc_passwd(t_vars *vars, char **str, char **tmp)
 	if (fd == -1)
 	{
 		perror("Error opening file");
-		return ; // error code
+		vars->exit_code = 1;
+		return ;
 	}
 	ft_etc_passwd_loop(vars, str, tmp, fd);
 	close (fd);

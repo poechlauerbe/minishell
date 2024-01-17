@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:29:49 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/15 13:09:20 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/17 11:35:30 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,10 +94,10 @@ void	ft_chdir(t_vars *vars, char **curpath)
 			if (!ft_val_retrieval(vars, "OLDPWD"))
 			{
 				key = ft_exp_key(vars, "OLDPWD", 0);
-            	ft_add_envv(vars, key, ft_return_val(vars, "PWD"), 0);
+				ft_add_envv(vars, key, ft_return_val(vars, "PWD"), 0);
 			}
-            else
-            	ft_new_value(vars, "OLDPWD", ft_return_val(vars, "PWD"));
+			else
+				ft_new_value(vars, "OLDPWD", ft_return_val(vars, "PWD"));
 			elem = ft_val_retrieval(vars, "PWD");
 			if (elem)
 				elem->val = ft_strdup(*curpath);

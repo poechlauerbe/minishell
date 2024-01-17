@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 13:14:23 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/16 12:43:23 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/17 11:38:40 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,6 @@ char	*ft_exp_value(t_vars *vars, char *arg)
 	else
 	{
 		arg++;
-		// if (ft_check_enclosing(&arg, vars))
-		// 	return (NULL);
 		value = ft_create_value(vars, arg);
 	}
 	return (value);

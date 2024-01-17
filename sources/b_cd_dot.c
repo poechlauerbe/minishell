@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_cd_dot.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thorben <thorben@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 12:10:13 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/08 16:36:04 by thorben          ###   ########.fr       */
+/*   Updated: 2024/01/17 11:43:05 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ int	ft_remove_dot_counter(char *curpath)
 	{
 		if (!ft_strncmp(&curpath[i], "/./", 3))
 			i += 1;
-        else if (!ft_strncmp(&curpath[i], "/.\0", 3) || !ft_strncmp(&curpath[i], "/\0", 2))
+		else if (!ft_strncmp(&curpath[i], "/.\0", 3)
+			|| !ft_strncmp(&curpath[i], "/\0", 2))
 			return (len);
 		else
 			len++;
@@ -47,7 +48,8 @@ void	ft_cur_wo_dot(t_vars *vars, char **curpath, int len)
 		{
 			i += 1;
 		}
-		else if (!ft_strncmp(&curpath[0][i], "/.\0", 3) || !ft_strncmp(&curpath[0][i], "/\0", 2))
+		else if (!ft_strncmp(&curpath[0][i], "/.\0", 3)
+				|| !ft_strncmp(&curpath[0][i], "/\0", 2))
 			break ;
 		else
 			temp[len++] = (*curpath)[i];
