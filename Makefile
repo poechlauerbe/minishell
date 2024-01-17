@@ -1,16 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/01/17 14:31:10 by tbenz            ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
-
 
 NAME			= minishell
 NAME_BONUS		= minishell_bonus
@@ -23,7 +10,7 @@ LIBFT 			= ./libraries/libft/libft.a
 
 CC 				= cc
 
-CFLAGS 		= -Wall -Werror -Wextra -g
+CFLAGS 		= -Wall -Werror -Wextra -g -MD -MP
 
 LRL				= -lreadline
 
@@ -88,6 +75,9 @@ SRCS 			= $(addprefix $(SRCS_DIR),\
 
 OBJ				= $(SRCS:.c=.o)
 OBJ_BONUS 		= $(SRCS_BONUS:.c=.o)
+DEP_BONUS 		= $(SRCS_BONUS:.c=.d)
+
+-include $(DEP_BONUS)
 
 SRCS_BONUS 		= $(addprefix $(BONUS_SRCS_DIR),\
 					)

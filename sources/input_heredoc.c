@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 20:34:56 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/16 10:22:37 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/17 16:34:20 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	ft_make_tmp_file(t_vars *vars, t_prg *prog)
 	if (fd < 0)
 		ft_exit(vars, OPEN_FILE_ERROR);
 	i = 0;
-	while (prog->heredoc[i])
+	while (prog->heredoc && prog->heredoc[i])
 	{
 		write(fd, &prog->heredoc[i], 1);
 		i++;
@@ -99,6 +99,7 @@ void	ft_heredoc_exec(t_vars *vars, t_prg *prog)
 		ft_check_enclosing(&prog->heredoc, vars);
 	if (!g_flag)
 		ft_make_tmp_file(vars, prog);
+	ft_putstr_fd("\n", 1);
 }
 
 void	ft_heredoc(t_vars *vars)

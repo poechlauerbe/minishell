@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/01/17 15:02:27 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/17 16:44:01 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,26 @@ int	g_flag = 0;
 int	main(int argc, char **argv, char **envp)
 {
 	t_vars	vars;
+	// char	*line;
 
 	ft_init(&vars, argc, argv, envp);
 	ft_handle_signals();
 	while (1)
 	{
+		if (g_flag)
+			ft_handle_signals();
+		if (isatty(fileno(stdin)))
 		vars.inp = readline("$>");
+		// else
+		// {
+		// 	line = get_next_line(fileno(stdin));
+		// 	vars.inp = ft_strtrim(line, "\n");
+		// 	free(line);
+		// }
 		if (g_flag)
 		{
 			vars.exit_code = g_flag;
 			g_flag = 0;
-			ft_handle_signals();
 		}
 		if (!vars.inp)
 			ft_exit(&vars, vars.exit_code);

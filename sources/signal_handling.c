@@ -6,11 +6,20 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 14:56:01 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/17 14:50:45 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/17 16:41:50 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+void	ft_handler_child(int signum)
+{
+	if (signum == SIGINT)
+	{
+		ft_putchar_fd('\n', 1);
+		g_flag = signum + 128;
+	}
+}
 
 void	ft_handler_remove(int signum)
 {
