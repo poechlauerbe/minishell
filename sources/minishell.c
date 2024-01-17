@@ -6,15 +6,15 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/01/17 16:08:57 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/17 16:46:35 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-// int	g_flag = 0;
+int	g_flag = 0;
 
-/* int	main(int argc, char **argv, char **envp)
+int	main(int argc, char **argv, char **envp)
 {
 	t_vars	vars;
 
@@ -48,7 +48,7 @@
 		vars.inp = NULL;
 		g_flag = 0;
 	}
-} */
+}
 
 // FOR TESTER:
 /* int	main(int argc, char **argv, char **envp)
