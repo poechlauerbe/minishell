@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:21:46 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/16 10:02:38 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/17 11:19:09 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	ft_pwd(t_vars *vars)
 	char	cwd[1024];
 	char	*pwd;
 
-    pwd = ft_return_val(vars, "PWD");
+	pwd = ft_return_val(vars, "PWD");
 	if (pwd)
 	{
 		ft_printf("%s\n", pwd);

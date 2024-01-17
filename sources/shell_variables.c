@@ -3,21 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   shell_variables.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 14:51:31 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/16 13:53:33 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/17 12:51:32 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-
 void	ft_create_shvar(t_vars *vars, t_prg *prog, int i)
 {
 	char	*key;
 	char	*val;
-
 
 	key = ft_exp_key(vars, prog->prog[i], 1);
 	val = ft_exp_value(vars, prog->prog[i]);
@@ -34,7 +32,7 @@ void	ft_create_shvar(t_vars *vars, t_prg *prog, int i)
 
 void	ft_prog_not_found_shvar(t_vars *vars, char *arg)
 {
-	char *nfd;
+	char	*nfd;
 
 	nfd = ft_strjoin(arg, ": command not found\n");
 	if (!nfd)
@@ -45,11 +43,28 @@ void	ft_prog_not_found_shvar(t_vars *vars, char *arg)
 	exit(127);
 }
 
+int	ft_check_key_val(t_vars *vars, char *prg)
+{
+	char	*key;
+	char	*val;
+
+	key = ft_exp_key(vars, prg, 1);
+	val = ft_exp_value(vars, prg);
+	if (!key || ! val)
+	{
+		if (key)
+			free (key);
+		if (val)
+			free (val);
+		ft_prog_not_found_shvar(vars, prg);
+		return (1);
+	}
+	return (0);
+}
+
 int	ft_check_validity(t_vars *vars, t_prg *prog)
 {
 	int		i;
-	char	*key;
-	char	*val;
 
 	i = 0;
 	while (prog->prog[i])
@@ -61,17 +76,8 @@ int	ft_check_validity(t_vars *vars, t_prg *prog)
 			ft_prog_not_found_shvar(vars, prog->prog[i]);
 			return (2);
 		}
-		key = ft_exp_key(vars, prog->prog[i], 1);
-		val = ft_exp_value(vars, prog->prog[i]);
-		if (!key || ! val)
-		{
-			if (key)
-				free (key);
-			if (val)
-				free (val);
-			ft_prog_not_found_shvar(vars, prog->prog[i]);
+		if (ft_check_key_val(vars, prog->prog[i]))
 			return (2);
-		}
 		i++;
 	}
 	return (0);

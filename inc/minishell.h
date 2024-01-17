@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/16 14:14:31 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/17 14:20:20 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -383,31 +383,46 @@ void		ft_set_val(t_vars *vars, t_kv **var, t_kv **tmp);
 // compares two strings (here: key-pairs) and returns 0 if they match.
 int			ft_strcmp(const char *s1, const char *s2);
 
+void		ft_home(t_vars *vars, char **curpath);
+void		ft_etc_passwd_loop(t_vars *vars, char **str, char **tmp, int fd);
+void		ft_etc_arr_free(char ***arr, char **line);
+void		ft_etc_passwd(t_vars *vars, char **str, char **tmp);
+void		ft_home_expand(t_vars *vars, char **str);
+void		ft_user_home(t_vars *vars, char **str, char **tmp);
+void		ft_home_usr_retrvl(t_vars *vars, char **home, char **usr);
 
-void	ft_home(t_vars *vars, char **curpath);
-void	ft_etc_passwd_loop(t_vars *vars, char **str, char **tmp, int fd);
-void	ft_etc_passwd(t_vars *vars, char **str, char **tmp);
-void	ft_home_expand(t_vars *vars, char **str);
-void	ft_user_home(t_vars *vars, char **str, char **tmp);
-void	ft_home_usr_retrvl(t_vars *vars, char **home, char **usr);
+/* b_export_new_envp */
+/* creates a new array of envp variables which can be passed to child processses
+	if there is an existing allocation already, it frees these variables first
+*/
+void		ft_new_envp(t_vars *vars);
+// frees the existing envp variables
+void		ft_free_envp(char **envp);
+// mallocs the new envp
+void		ft_malloc_envp(t_vars *vars, char ***arr);
+// allocates a new envp from the envv variables
+void		ft_create_envp(t_vars *vars, int i, t_kv *tmp2, char ***arr);
+// counts the number of envv variables, for which memory has to be allocated
+int			ft_envp_len(t_vars *vars);
 
-void	ft_new_envp(t_vars *vars);
-void	ft_free_envp(char **envp);
-void	ft_malloc_envp(t_vars *vars, char ***arr);
-int		ft_envp_len(t_vars *vars);
-void	ft_remove_envp(t_vars *vars, char *key);
-void	ft_malloc_envpr(t_vars *vars, char ***arr, char *key);
+// void		ft_remove_envp(t_vars *vars, char *key);
+// void		ft_malloc_envpr(t_vars *vars, char ***arr, char *key);
+
 
 // checks whether a shell variable has to be created
 int			ft_check_shvar(t_vars *vars, t_prg *prog);
 /* checks whether the instructions are valid and all the shell variables can be
 	created */
-int	ft_check_validity(t_vars *vars, t_prg *prog);
+int			ft_check_validity(t_vars *vars, t_prg *prog);
+/* creates the validity of the key and value of a possible shell variable
+ 	returns 0 if the key and value are valid
+	returns 1 if the key and value entered are invalid */
+int			ft_check_key_val(t_vars *vars, char *prg);
 // creates the new shell variables
-void	ft_create_shvar(t_vars *vars, t_prg *prog, int i);
+void		ft_create_shvar(t_vars *vars, t_prg *prog, int i);
 // returns an error message for directories entered into bash
-void	ft_is_dir(t_vars *vars, t_prg *prog);
+void		ft_is_dir(t_vars *vars, t_prg *prog);
 
-void	ft_add_underscore(t_vars *vars, char **prg);
+void		ft_add_underscore(t_vars *vars, char **prg);
 
 #endif

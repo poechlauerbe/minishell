@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal_handling.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 14:56:01 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/16 14:33:17 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/17 11:12:43 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_handler_s(int signum, siginfo_t *info, void *no)
 {
 	no = NULL;
-	g_flag = 1;
+	g_flag = signum + 128;
 	if (signum == SIGINT)
 	{
 		rl_replace_line("", 0);
