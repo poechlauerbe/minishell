@@ -6,13 +6,13 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 13:41:52 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/16 14:33:38 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/17 10:22:55 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-int	ft_builtin_check(t_vars *vars, t_prg *prog)
+int	ft_builtin(t_vars *vars, t_prg *prog)
 {
 	if (!prog->prog || !prog->prog[0] || !prog->prog[0][0])
 		return (NOT_USED);
@@ -71,7 +71,7 @@ void	ft_check_prog(t_vars *vars, t_prg *prog)
 		ft_exit(vars, 127);
 	}
 	ft_check_w_stand_path(vars, prog);
-	if (ft_builtin_check(vars, prog) == USED)
+	if (ft_builtin(vars, prog) == USED)
 		ft_exit(vars, OK);
 	ft_check_path(vars, prog);
 }

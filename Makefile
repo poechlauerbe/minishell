@@ -6,7 +6,7 @@
 #    By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/01/17 13:59:56 by tbenz            ###   ########.fr        #
+#    Updated: 2024/01/17 14:31:10 by tbenz            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,9 +75,12 @@ SRCS 			= $(addprefix $(SRCS_DIR),\
 				minishell.c \
 				pipe.c \
 				pipe_utils.c \
+				pipe_dir.c \
 				prog.c \
 				prog_err.c \
 				prog_path.c \
+				prog_single.c \
+				prog_single_files.c \
 				input_redirecting.c \
 				signal_handling.c \
 				shell_variables.c \

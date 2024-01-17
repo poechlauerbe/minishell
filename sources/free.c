@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 16:24:45 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/12 16:06:18 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/16 16:55:58 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,32 @@ void	ft_free_input(t_vars *vars)
 		temp = temp2;
 	}
 	vars->p_start = NULL;
+}
+
+void	ft_close_var_open(t_vars *vars)
+{
+	if (vars->std_out && dup2(vars->std_out, STDOUT_FILENO) == -1)
+		ft_exit(vars, DUP_ERROR);
+	if (vars->std_out)
+	{
+		close(vars->std_out);
+		vars->std_out = 0;
+	}
+	if (vars->fd_open_out)
+	{
+		close(vars->fd_open_out);
+		vars->fd_open_out = 0;
+	}
+	if (vars->std_in && dup2(vars->std_in, STDIN_FILENO) == -1)
+		ft_exit(vars, DUP_ERROR);
+	if (vars->std_in)
+	{
+		close(vars->std_in);
+		vars->std_in = 0;
+	}
+	if (vars->fd_open_in)
+	{
+		close(vars->fd_open_in);
+		vars->fd_open_in = 0;
+	}
 }

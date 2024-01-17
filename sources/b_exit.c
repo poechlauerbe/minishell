@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 11:12:25 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/17 11:42:08 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/17 14:30:18 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,28 @@ int	ft_endof_atoi(const char *nptr)
 	return (i);
 }
 
+void	ft_calc_exit_code(t_vars *vars, char *str_wo_q)
+{
+	int	num;
+
+	num = ft_atoi(str_wo_q);
+	while (num >= 256)
+		num -= 256;
+	while (num < 0)
+		num += 256;
+	free(str_wo_q);
+	ft_exit(vars, num);
+}
+
+void	ft_err_mes_numeric(char *prog)
+{
+	ft_putstr_fd("exit\nbash: exit: ", 2);
+	ft_putstr_fd(prog, 2);
+	ft_putstr_fd(": numeric argument required\n", 2);
+}
+
 void	ft_exit_prog(t_vars *vars, char **prog)
 {
-	int		num;
 	char	*str_wo_q;
 
 	if (prog[1])
@@ -39,9 +58,8 @@ void	ft_exit_prog(t_vars *vars, char **prog)
 			ft_exit(vars, MALLOC_ERROR);
 		if (str_wo_q[0] == '\0' || str_wo_q[ft_endof_atoi(str_wo_q)])
 		{
-			ft_putstr_fd("exit\nbash: exit: ", 2);
-			ft_putstr_fd(prog[1], 2);
-			ft_putstr_fd(": numeric argument required\n", 2);
+			ft_err_mes_numeric(prog[1]);
+			free(str_wo_q);
 			ft_exit(vars, SYNTAX_ERROR);
 		}
 		else if (prog[1] && prog[2])
@@ -50,15 +68,7 @@ void	ft_exit_prog(t_vars *vars, char **prog)
 			vars->exit_code = 1;
 		}
 		else
-		{
-			num = ft_atoi(str_wo_q);
-			while (num >= 256)
-				num -= 256;
-			while (num < 0)
-				num += 256;
-			free(str_wo_q);
-			ft_exit(vars, num);
-		}
+			ft_calc_exit_code(vars, str_wo_q);
 		free(str_wo_q);
 	}
 	else

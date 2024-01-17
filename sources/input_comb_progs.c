@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:16:04 by bpochlau          #+#    #+#             */
-/*   Updated: 2023/12/14 15:20:43 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/17 09:27:27 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,25 +50,26 @@ void	ft_transfer_prog_str(char **new_prog, char **p_prog, char **prog)
 	}
 }
 
-void	ft_combine(t_vars *vars, t_prg *prog, t_prg *p_prog, t_prg *last)
+void	ft_combine(t_vars *vars, t_prg **prog, t_prg *p_prog, t_prg *last)
 {
 	int		count;
 	char	**new_prog;
 
 	count = 0;
-	ft_check_prog_len(&count, p_prog, prog);
+	ft_check_prog_len(&count, p_prog, (*prog));
 	new_prog = malloc((count + 1) * sizeof(char *));
 	if (!new_prog)
 		ft_exit(vars, MALLOC_ERROR);
 	new_prog[count] = NULL;
-	ft_transfer_prog_str(new_prog, p_prog->prog, prog->prog);
+	ft_transfer_prog_str(new_prog, p_prog->prog, (*prog)->prog);
 	if (p_prog->prog)
 		free(p_prog->prog);
 	p_prog->prog = new_prog;
-	last->next = prog->next;
-	if (prog->prog)
-		free(prog->prog);
-	free(prog);
+	last->next = (*prog)->next;
+	if ((*prog)->prog)
+		free((*prog)->prog);
+	free((*prog));
+	*prog = NULL;
 }
 
 void	ft_comb_progs(t_vars *vars)
@@ -76,6 +77,7 @@ void	ft_comb_progs(t_vars *vars)
 	t_prg	*temp;
 	t_prg	*p_last;
 	t_prg	*last;
+	t_prg	*saved;
 	int		i;
 
 	i = 0;
@@ -83,15 +85,17 @@ void	ft_comb_progs(t_vars *vars)
 	p_last = vars->p_start;
 	while (temp)
 	{
-		if (temp->oper == '0')
-		{
-			if (i != 0)
-				ft_combine(vars, temp, p_last, last);
-			i++;
-		}
-		if (temp->oper == '|')
+		saved = temp->next;
+		if (temp->oper == '0' && (i++ != 0))
+			ft_combine(vars, &temp, p_last, last);
+		else if (temp->oper == '|')
 			p_last = temp;
-		last = temp;
-		temp = temp->next;
+		if (i == 1)
+			last = temp;
+		else if (!temp)
+			last = last->next;
+		else
+			last = temp;
+		temp = saved;
 	}
 }
