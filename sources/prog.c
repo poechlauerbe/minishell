@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 13:41:52 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/17 09:34:56 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/17 09:48:14 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,8 @@ int	ft_builtin_single_prog(t_vars *vars, t_prg *prog)
 		ft_unset(vars, prog->prog);
 	else if (ft_strncmp(prog->prog[0], "cd", 3) == 0)
 		ft_cd(vars);
-	else
-	{
-		if (ft_check_shvar(vars, prog))
-			return (NOT_USED);
-	}
+	else if (ft_check_shvar(vars, prog))
+		return (NOT_USED);
 	ft_close_var_open(vars);
 	return (USED);
 }
