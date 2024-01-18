@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/17 14:54:29 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/18 11:02:03 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,7 +177,7 @@ void		ft_oldpwd(t_vars *vars);
 void		ft_exit_prog(t_vars *vars, char **prog);
 
 /* b_export_key_utils */
-// checks if parenthesis are properly closed
+// checks if quotes are properly closed
 int			ft_check_enclosing(char **arg, t_vars *vars);
 // extracts the key of argument
 char		*ft_copy_key(t_vars *vars, char *arg);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_heredoc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 20:34:56 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/17 17:47:06 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/18 10:51:42 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,19 +73,6 @@ void	ft_prep_delimiter(t_vars *vars, t_prg *prog)
 	prog->prog[0] = new;
 }
 
-void ft_test(int signum)
-{
-	g_flag = 1;
-	if (signum == SIGINT)
-	{
-		rl_callback_handler_remove();
-		// rl_replace_line("", 0);
-		// rl_on_new_line();
-		// rl_redisplay();
-		write(1, "\n", 1);
-	}
-}
-
 void	ft_heredoc_exec(t_vars *vars, t_prg *prog)
 {
 	char	*str;
@@ -93,7 +80,7 @@ void	ft_heredoc_exec(t_vars *vars, t_prg *prog)
 
 	// signal(SIGINT, ft_test);
 	// signal(SIGQUIT, SIG_DFL);
-	rl_callback_handler_install();
+	// rl_callback_handler_install();
 	prog->heredoc = NULL;
 	ft_prep_delimiter(vars, prog);
 	len = ft_strlen(prog->prog[0]);
