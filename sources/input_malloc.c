@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_malloc.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: thorben <thorben@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:46:54 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/17 12:45:54 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/18 17:38:49 by thorben          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,10 @@ void	ft_malloc_prog_2d_str(t_vars *vars, char *inp)
 	temp = vars->p_start;
 	while (temp)
 	{
-		prog = ft_calloc(temp->str_c + 1, sizeof(char *));
+		if (!temp->str_c)
+			prog = ft_calloc(2, sizeof(char *));
+		else
+			prog = ft_calloc(temp->str_c + 1, sizeof(char *));
 		if (!prog)
 			ft_exit(vars, MALLOC_ERROR);
 		if (*inp == '|')
