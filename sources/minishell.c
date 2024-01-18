@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
+/*   By: thorben <thorben@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/01/17 16:46:35 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/18 12:48:53 by thorben          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	main(int argc, char **argv, char **envp)
 			ft_check_input(&vars);
 			if (!vars.pipe_count && !vars.no_exec)
 			{
-				if (ft_builtin(&vars, vars.p_start) == NOT_USED)
+				if (ft_builtin_single_prog(&vars, vars.p_start) == NOT_USED)
 					ft_pipe(&vars);
 			}
 			else if (!vars.no_exec)

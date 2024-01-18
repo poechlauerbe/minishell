@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_home2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
+/*   By: thorben <thorben@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:37:46 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/17 14:38:52 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/18 11:55:38 by thorben          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	ft_etc_passwd_loop(t_vars *vars, char **str, char **tmp, int fd)
 {
 	char	*line;
 	char	**arr;
-	int		i;
 
 	line = get_next_line(fd);
 	while (line && !*tmp)
@@ -39,7 +38,6 @@ void	ft_etc_passwd_loop(t_vars *vars, char **str, char **tmp, int fd)
 		arr = ft_split(line, ':');
 		if (!arr)
 			ft_exit(vars, MALLOC_ERROR);
-		i = 0;
 		if (!ft_strcmp(&(*str)[1], arr[0]))
 		{
 			*tmp = ft_strdup(arr[5]);
