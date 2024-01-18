@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
+/*   By: thorben <thorben@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/17 16:57:55 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/18 13:23:28 by thorben          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -322,6 +322,8 @@ int			ft_exp_remove_spaces(char *str, char *arg, int *i, int *j);
 void		ft_free_pipe_fd_and_pid(t_vars *vars);
 void		ft_free_input(t_vars *vars);
 void		ft_close_var_open(t_vars *vars);
+void		ft_free_reds(t_red **file);
+void		ft_free_t_prg(t_prg *temp);
 
 /* fun echo */
 // writes to the shell in standard output

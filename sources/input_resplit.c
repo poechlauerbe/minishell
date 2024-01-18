@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_resplit.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: thorben <thorben@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 14:29:20 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/16 10:45:10 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/18 13:24:25 by thorben          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void	ft_resplit2(t_vars *vars, char *str, t_prg *prg, char **new)
 		new[i + 1] = prg->prog[i];
 		i++;
 	}
+	free (str);
 	free(prg->prog);
 	prg->prog = new;
 }
