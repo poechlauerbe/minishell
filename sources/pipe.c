@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 15:46:51 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/17 14:55:34 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/18 14:45:40 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	ft_check_input_file(t_vars *vars, t_prg *temp, t_red *reds, int i)
 	reds = temp->in_file;
 	while (reds)
 	{
+		if (reds->oper == O_HEREDOC)
+			ft_heredoc_exec(vars, reds);
 		if (ft_check_in_access(reds->file, vars->pid, i, vars) != OK)
 			ft_exit(vars, 1);
 		reds = reds->next;
