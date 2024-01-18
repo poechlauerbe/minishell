@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell_variables.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
+/*   By: thorben <thorben@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 14:51:31 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/17 12:51:32 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/18 12:48:12 by thorben          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,12 @@ int	ft_check_key_val(t_vars *vars, char *prg)
 		ft_prog_not_found_shvar(vars, prg);
 		return (1);
 	}
-	return (0);
+	else
+	{
+		free (key);
+		free (val);
+		return (0);
+	}
 }
 
 int	ft_check_validity(t_vars *vars, t_prg *prog)
