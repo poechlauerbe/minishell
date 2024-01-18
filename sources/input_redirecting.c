@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_redirecting.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
+/*   By: thorben <thorben@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 12:23:55 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/12 08:32:40 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/18 16:38:38 by thorben          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	ft_red_new_node(t_vars *vars, t_red **lst, char *file, char oper)
 	free(file);
 	new->file = str_wo_q;
 	new->oper = oper;
-	if (*lst == NULL)
+	if (!(*lst))
 		*lst = new;
 	else
 		ft_append_new_node(*lst, new);
