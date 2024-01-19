@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/19 13:48:45 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/19 14:19:21 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -394,6 +394,12 @@ void		ft_remove_links(t_kv **tmp, t_kv **var);
 /* adjusts the links of the previous and following element of the one being
 	removed for the alphabetical ordering */
 void		ft_remove_links_ao(t_kv **tmp);
+
+/* minishell */
+// the actual minishell which gets input from readline, executes it and free inp
+void		ft_minishell_inner_loop(t_vars *vars);
+// handles the input to the minishell (if it is not EOF)
+void		ft_minishell_input_handling(t_vars *vars);
 
 /* pipe */
 // pipe function

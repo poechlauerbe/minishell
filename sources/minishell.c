@@ -3,16 +3,50 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 13:40:48 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/19 13:47:02 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/19 14:15:59 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
 int	g_flag = 0;
+
+void	ft_minishell_input_handling(t_vars *vars)
+{
+	add_history(vars->inp);
+	ft_check_input(&vars);
+	if (!vars->pipe_count && !vars->no_exec)
+	{
+		if (ft_builtin_single_prog(&vars, vars->p_start) == NOT_USED)
+			ft_pipe(&vars);
+	}
+	else if (!vars->no_exec)
+		ft_pipe(&vars);
+	ft_free_input(&vars);
+	vars->no_exec = OK;
+}
+
+void	ft_minishell_inner_loop(t_vars *vars)
+{
+	if (g_flag)
+		ft_handle_signals();
+	vars->inp = readline("$> ");
+	if (g_flag)
+	{
+		vars->exit_code = g_flag;
+		g_flag = 0;
+	}
+	if (!vars->inp)
+		ft_exit(&vars, vars->exit_code);
+	else if (ft_strlen(vars->inp) > 0)
+		ft_minishell_input_handling(vars);
+	ft_reset(&vars);
+	free(vars->inp);
+	vars->inp = NULL;
+}
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -21,35 +55,7 @@ int	main(int argc, char **argv, char **envp)
 	ft_init(&vars, argc, argv, envp);
 	ft_handle_signals();
 	while (1)
-	{
-		if (g_flag)
-			ft_handle_signals();
-		vars.inp = readline("$> ");
-		if (g_flag)
-		{
-			vars.exit_code = g_flag;
-			g_flag = 0;
-		}
-		if (!vars.inp)
-			ft_exit(&vars, vars.exit_code);
-		else if (ft_strlen(vars.inp) > 0)
-		{
-			add_history(vars.inp);
-			ft_check_input(&vars);
-			if (!vars.pipe_count && !vars.no_exec)
-			{
-				if (ft_builtin_single_prog(&vars, vars.p_start) == NOT_USED)
-					ft_pipe(&vars);
-			}
-			else if (!vars.no_exec)
-				ft_pipe(&vars);
-			ft_free_input(&vars);
-			vars.no_exec = OK;
-		}
-		ft_reset(&vars);
-		free(vars.inp);
-		vars.inp = NULL;
-	}
+		ft_minishell_inner_loop(&vars);
 }
 
 // FOR TESTER:
