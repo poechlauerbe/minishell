@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:28:33 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/17 11:34:08 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/19 16:43:53 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ int	ft_remove_dot_dot(t_vars *vars, char **cp)
 	char	*tmp;
 
 	i = 0;
-	while (cp[0][i + 1] == '/')
+	while (cp[0] && cp[0][i + 1] == '/')
 		i++;
 	temp = ft_substr(*cp, i, (ft_strlen(*cp) - i));
 	if (!temp)

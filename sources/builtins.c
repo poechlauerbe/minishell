@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 16:14:25 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/17 15:00:27 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/19 16:50:09 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,15 +62,19 @@ void	ft_unset(t_vars *vars, char **prg)
 	ft_add_underscore(vars, prg);
 }
 
-void	ft_cd2(t_vars *vars, char **cp)
+int		ft_cd2(t_vars *vars, char **cp)
 {
 	if (!ft_return_val(vars, "HOME"))
-		return (ft_print_err_cd(vars, 2));
+	{
+		ft_print_err_cd(vars, 2);
+		return (1);
+	}
 	else
 	{
 		if (*cp)
 			free (*cp);
 		ft_malloc_cp(vars, cp, ft_return_val(vars, "HOME"));
+		return (0);
 	}
 }
 
@@ -90,7 +94,10 @@ void	ft_cd(t_vars *vars)
 	else
 		cp = NULL;
 	if (!cp || !strcmp(cp, "--"))
-		ft_cd2(vars, &cp);
+	{
+		if (ft_cd2(vars, &cp))
+			return ;
+	}
 	else if (cp[0] != '/')
 		ft_check_pot_path(vars, &cp);
 	ft_pwd_conc(vars, &cp);
