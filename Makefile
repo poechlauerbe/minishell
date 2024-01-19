@@ -6,7 +6,7 @@
 #    By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/01/19 13:56:09 by bpochlau         ###   ########.fr        #
+#    Updated: 2024/01/19 14:03:42 by bpochlau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,6 @@ REMOVE_DIR		= rm -rf
 
 INC_DIR			= ./inc
 SRCS_DIR		= ./sources
-DEPDIR			= ./deps
 OBJDIR			= ./objs
 
 HEADER			= $(addprefix $(INC_DIR)/,\
@@ -90,24 +89,14 @@ SRCS 			= $(addprefix $(SRCS_DIR)/,\
 				utils.c)
 
 OBJS := $(SRCS:$(SRCS_DIR)/%.c=$(OBJDIR)/%.o)
-DEPS := $(SRCS:$(SRCS_DIR)/%.c=$(DEPDIR)/%.d)
 
 all:			${LIBFT} ${NAME}
-
--include $(DEPS)
 
 $(OBJDIR)/%.o: $(SRCS_DIR)/%.c | $(OBJDIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJDIR):
 	mkdir -p $(OBJDIR)
-
-$(DEPDIR)/%.d: $(SRCS_DIR)/%.c | $(DEPDIR)
-	$(CC) $(CFLAGS) -M $< -MT '$(OBJDIR)/$*.o' -MF $@ -o $@
-
-$(DEPDIR):
-	mkdir -p $(DEPDIR)
-
 
 ${NAME}:		${LIBFT} $(HEADER) $(OBJS)
 				${CC} ${OBJS} ${LIBFT} ${CFLAGS} ${LRL} -o ${NAME}
@@ -121,13 +110,13 @@ ${LIBFT}:
 clean:
 				make clean -C libraries/libft
 				rm -f $(OBJDIR)/*.o $(DEPDIR)/*.d
-				${REMOVE_DIR} ${OBJDIR} ${DEPDIR}
+				${REMOVE_DIR} ${OBJDIR}
 				@echo
 
 fclean:
 				${REMOVE} ${NAME}
 				make fclean -C libraries/libft
-				${REMOVE_DIR} ${OBJDIR} ${DEPDIR}
+				${REMOVE_DIR} ${OBJDIR}
 				@echo "${NAME}: ${RED}${NAME} and libft.a were deleted${RESET}"
 				@echo
 
