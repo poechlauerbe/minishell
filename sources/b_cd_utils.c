@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_cd_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:29:49 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/17 16:16:26 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/19 13:35:49 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	ft_getcwd(t_vars *vars, char **cwd, int *slash, int *cwdlen)
 	}
 	*cwdlen = ft_strlen(*cwd);
 	*slash = 0;
-	if ((*cwd)[*cwdlen - 1] != '/')
+	if ((*cwd) && (*cwd)[*cwdlen - 1] != '/')
 		*slash = 1;
 }
 
@@ -63,6 +63,8 @@ void	ft_pwd_conc(t_vars *vars, char **curpath)
 	{
 		plen = ft_strlen(*curpath);
 		ft_getcwd(vars, &cwd, &slash, &cwdlen);
+		if (!cwd)
+			return ;
 		fpath = (char *)malloc(sizeof(char) * (plen + cwdlen + slash + 1));
 		if (!fpath)
 			ft_exit(vars, MALLOC_ERROR);

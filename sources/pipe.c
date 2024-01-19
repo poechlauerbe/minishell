@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 15:46:51 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/18 14:45:40 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/19 13:32:11 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,5 +125,6 @@ void	ft_pipe(t_vars *vars)
 		waitpid(vars->pid[i], &status, 0);
 	if (WIFEXITED(status))
 		vars->exit_code = WEXITSTATUS(status);
+	signal(SIGINT, ft_handler_s);
 	ft_free_pipe_fd_and_pid(vars);
 }
