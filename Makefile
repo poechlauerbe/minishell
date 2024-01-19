@@ -1,3 +1,16 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: Invalid date        by                   #+#    #+#              #
+#    Updated: 2024/01/19 12:31:22 by bpochlau         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+
 
 NAME			= minishell
 
@@ -27,6 +40,7 @@ HEADER			= $(addprefix $(INC_DIR)/,\
 
 SRCS 			= $(addprefix $(SRCS_DIR)/,\
 				builtins.c \
+				builtins2.c \
 				b_cd_dot.c \
 				b_cd_dotdot.c \
 				b_cd_dotdot2.c \
@@ -44,6 +58,7 @@ SRCS 			= $(addprefix $(SRCS_DIR)/,\
 				environment_var.c \
 				exit.c \
 				expand_home.c \
+				expand_home2.c \
 				expand_utils.c \
 				expand.c \
 				free.c \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_heredoc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 20:34:56 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/18 15:11:21 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/19 12:36:07 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ft_make_tmp_file(t_vars *vars, t_red *reds)
 		ft_exit(vars, OPEN_FILE_ERROR);
 	write(fd, "\n", 1);
 	i = 0;
-	while (reds->heredoc && reds->heredoc[i])
+	while (reds && reds->heredoc && reds->heredoc[i])
 	{
 		write(fd, &reds->heredoc[i], 1);
 		i++;

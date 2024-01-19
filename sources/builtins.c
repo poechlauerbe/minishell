@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 16:14:25 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/17 14:26:16 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/17 15:00:27 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,38 +39,6 @@ void	ft_option_error(t_vars *vars, char *prog)
 	vars->exit_code = 2;
 }
 
-void	ft_export(t_vars *vars)
-{
-	int		i;
-	char	*key;
-	char	*value;
-	char	**prog;
-
-	prog = vars->p_start->prog;
-	i = 1;
-	if (prog[i])
-	{
-		if (prog[i] && prog[i][0] == '-' && prog[i][1] != '\0')
-		{
-			ft_putstr_fd("minishell: export: ", 2);
-			ft_option_error(vars, prog[i]);
-			return ;
-		}
-		while (prog[i])
-		{
-			key = ft_exp_key(vars, prog[i], 0);
-			if (!key)
-				return ;
-			value = ft_exp_value(vars, prog[i]);
-			ft_add_envv(vars, key, value, 0);
-			ft_new_envp(vars);
-			i++;
-		}
-	}
-	else
-		ft_export_print(vars);
-}
-
 void	ft_unset(t_vars *vars, char **prg)
 {
 	char	*key;
@@ -94,6 +62,18 @@ void	ft_unset(t_vars *vars, char **prg)
 	ft_add_underscore(vars, prg);
 }
 
+void	ft_cd2(t_vars *vars, char **cp)
+{
+	if (!ft_return_val(vars, "HOME"))
+		return (ft_print_err_cd(vars, 2));
+	else
+	{
+		if (*cp)
+			free (*cp);
+		ft_malloc_cp(vars, cp, ft_return_val(vars, "HOME"));
+	}
+}
+
 void	ft_cd(t_vars *vars)
 {
 	char	*cp;
@@ -110,16 +90,7 @@ void	ft_cd(t_vars *vars)
 	else
 		cp = NULL;
 	if (!cp || !strcmp(cp, "--"))
-	{
-		if (!ft_return_val(vars, "HOME"))
-			return (ft_print_err_cd(vars, 2));
-		else
-		{
-			if (cp)
-				free (cp);
-			ft_malloc_cp(vars, &cp, ft_return_val(vars, "HOME"));
-		}
-	}
+		ft_cd2(vars, &cp);
 	else if (cp[0] != '/')
 		ft_check_pot_path(vars, &cp);
 	ft_pwd_conc(vars, &cp);
