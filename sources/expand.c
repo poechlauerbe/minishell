@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 12:15:16 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/19 12:33:44 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/19 13:20:32 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_expand_str(t_vars *vars, char **arg, t_quote *quote, char *str)
 	varlen = ft_varlen(*arg, quote);
 	strlen = ft_strlen(*arg) - varlen + ft_strlen(str);
 	*arg = ft_calloc((strlen + 1), sizeof(char));
-	if (!arg)
+	if (!(*arg))
 		ft_exit(vars, MALLOC_ERROR);
 	num.i = -1;
 	while (++num.i < quote->i)

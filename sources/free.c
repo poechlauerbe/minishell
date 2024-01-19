@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 16:24:45 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/19 12:13:55 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/19 13:16:58 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void	ft_free_reds(t_red **file)
 			free(temp->file);
 			temp->file = NULL;
 		}
+		if (temp->heredoc)
+			free(temp->heredoc);
 		free(temp);
 		if (temp == *file)
 			*file = NULL;

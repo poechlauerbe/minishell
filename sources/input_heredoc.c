@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 20:34:56 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/19 12:36:07 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/19 13:18:50 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,14 @@ void	ft_make_tmp_file(t_vars *vars, t_red *reds)
 		ft_exit(vars, OPEN_FILE_ERROR);
 	write(fd, "\n", 1);
 	i = 0;
-	while (reds && reds->heredoc && reds->heredoc[i])
+	while (reds->heredoc && reds->heredoc[i])
 	{
 		write(fd, &reds->heredoc[i], 1);
 		i++;
 	}
 	close(fd);
 	free (reds->heredoc);
+	reds->heredoc = NULL;
 }
 
 void	ft_prep_delimiter(t_vars *vars, t_red *reds)

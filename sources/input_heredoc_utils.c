@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_heredoc_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 10:55:29 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/18 15:07:39 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/19 13:18:05 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void	ft_heredoc_append(t_vars *vars, t_red *reds, char *str)
 		free(temp);
 		ft_exit(vars, MALLOC_ERROR);
 	}
+	if (reds->heredoc)
+		free(reds->heredoc);
 	reds->heredoc = str;
 	free (temp);
 }
