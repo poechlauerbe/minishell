@@ -6,7 +6,7 @@
 #    By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/01/19 12:31:22 by bpochlau         ###   ########.fr        #
+#    Updated: 2024/01/19 13:56:09 by bpochlau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -139,7 +139,6 @@ test:			${LIBFT} $(HEADER)
 valgrind:		$(NAME)
 				valgrind --suppressions=valgrind_ignore_leaks.txt \
 				--leak-check=full --show-leak-kinds=all --track-origins=yes \
-				--verbose --show-mismatched-frees=yes --read-var-info=yes \
-				--track-fds=yes --trace-children=yes ./minishell
+				--show-mismatched-frees=yes	--track-fds=yes ./minishell
 
 .PHONY:			all clean fclean re valgrind

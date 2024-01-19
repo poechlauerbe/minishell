@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 13:28:25 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/19 12:13:16 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/19 13:50:20 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,9 @@ void	ft_free_envv(t_vars *vars)
 
 void	ft_exit(t_vars *vars, int errcd)
 {
+	if (vars->inp)
+		free(vars->inp);
+	vars->inp = NULL;
 	if (errcd > 256)
 		err_mes(errcd);
 	ft_free_input(vars);
@@ -48,8 +51,12 @@ void	ft_exit(t_vars *vars, int errcd)
 	exit(errcd);
 }
 
-int	ft_reset(t_vars *vars)
+void	ft_reset(t_vars *vars)
 {
+	if (vars->inp)
+		free(vars->inp);
+	vars->inp = NULL;
 	ft_free_input(vars);
-	return (1);
+	ft_free_pipe_fd_and_pid(vars);
+	ft_close_var_open(vars);
 }

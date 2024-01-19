@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 13:40:48 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/19 13:40:51 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/19 13:47:02 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int	main(int argc, char **argv, char **envp)
 			ft_free_input(&vars);
 			vars.no_exec = OK;
 		}
+		ft_reset(&vars);
 		free(vars.inp);
 		vars.inp = NULL;
 	}

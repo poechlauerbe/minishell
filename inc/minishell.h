@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/19 12:31:37 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/19 13:48:45 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -288,7 +288,7 @@ void		ft_free_input(t_vars *vars);
 void		ft_exit(t_vars *vars, int errcd);
 /* resets the input of the shell and returns 1 - might have to add free
 	additional functions, depending on other elements that might be added  */
-int			ft_reset(t_vars *vars);
+void		ft_reset(t_vars *vars);
 // frees the environment variables
 void		ft_free_envv(t_vars *vars);
 
