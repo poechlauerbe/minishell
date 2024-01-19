@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_exit.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 11:12:25 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/17 14:30:18 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/19 19:02:04 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,33 @@ int	ft_endof_atoi(const char *nptr)
 	return (i);
 }
 
-void	ft_calc_exit_code(t_vars *vars, char *str_wo_q)
+long long	ft_atoi_ll(const char *nptr, int *err)
 {
-	int	num;
+	long long	sign;
+	long long	sum;
 
-	num = ft_atoi(str_wo_q);
-	while (num >= 256)
-		num -= 256;
-	while (num < 0)
-		num += 256;
-	free(str_wo_q);
-	ft_exit(vars, num);
+	sign = 1;
+	if (*nptr == 43 || *nptr == 45)
+	{
+		if (*nptr == 45)
+			sign *= -1;
+		nptr++;
+	}
+	sum = 0;
+	while (*nptr > 47 && *nptr < 58)
+	{
+		if (sum > LONG_MAX / 10
+			|| (sum == LONG_MAX / 10 && sign == 1 && *nptr > '7')
+			|| (sum == LONG_MAX / 10 && sign == -1 && *nptr > '8'))
+		{
+			*err = 1;
+			return (1);
+		}
+		sum *= 10;
+		sum += (*nptr - '0');
+		nptr++;
+	}
+	return (sum * sign);
 }
 
 void	ft_err_mes_numeric(char *prog)
@@ -45,6 +61,29 @@ void	ft_err_mes_numeric(char *prog)
 	ft_putstr_fd("exit\nbash: exit: ", 2);
 	ft_putstr_fd(prog, 2);
 	ft_putstr_fd(": numeric argument required\n", 2);
+}
+
+void	ft_calc_exit_code(t_vars *vars, char *str_wo_q, char *prog)
+{
+	long long	num;
+	int			err;
+	int			i;
+
+	err = OK;
+	i = 0;
+	while (str_wo_q[i] == 32 || (str_wo_q[i] > 8 && str_wo_q[i] < 14))
+		i++;
+	num = ft_atoi_ll(&str_wo_q[i], &err);
+	num %= 256;
+	if (num < 0)
+		num += 256;
+	if (err == OK)
+	{
+		free(str_wo_q);
+		ft_exit(vars, num);
+	}
+	else
+		ft_err_mes_numeric(prog);
 }
 
 void	ft_exit_prog(t_vars *vars, char **prog)
@@ -68,7 +107,7 @@ void	ft_exit_prog(t_vars *vars, char **prog)
 			vars->exit_code = 1;
 		}
 		else
-			ft_calc_exit_code(vars, str_wo_q);
+			ft_calc_exit_code(vars, str_wo_q, prog[1]);
 		free(str_wo_q);
 	}
 	else
