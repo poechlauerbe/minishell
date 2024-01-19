@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 16:24:45 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/16 16:55:58 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/19 12:13:55 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	ft_free_pipe_fd_and_pid(t_vars *vars)
 	}
 	if (vars->fd)
 	{
+		ft_close_pipes(vars->pipe_count, vars->fd);
 		free(vars->fd);
 		vars->fd = NULL;
 	}

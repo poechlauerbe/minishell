@@ -3,17 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: thorben <thorben@student.42.fr>            +#+  +:+       +#+         #
+#    By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/01/18 17:44:45 by thorben          ###   ########.fr        #
+#    Updated: 2024/01/19 12:31:22 by bpochlau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 
 NAME			= minishell
-NAME_BONUS		= minishell_bonus
 
 GREEN			= \033[0;32m
 RED				= \033[0;31m
@@ -23,21 +22,23 @@ LIBFT 			= ./libraries/libft/libft.a
 
 CC 				= cc
 
-CFLAGS 		= -Wall -Werror -Wextra -g
+CFLAGS 			= -Wall -Werror -Wextra -g
 
 LRL				= -lreadline
 
 REMOVE 			= rm -f
+REMOVE_DIR		= rm -rf
 
 INC_DIR			= ./inc
-SRCS_DIR		= ./sources/
-BONUS_SRCS_DIR	= ./bonus_sources/
+SRCS_DIR		= ./sources
+DEPDIR			= ./deps
+OBJDIR			= ./objs
 
 HEADER			= $(addprefix $(INC_DIR)/,\
 				macros_minishell.h \
 				minishell.h)
 
-SRCS 			= $(addprefix $(SRCS_DIR),\
+SRCS 			= $(addprefix $(SRCS_DIR)/,\
 				builtins.c \
 				builtins2.c \
 				b_cd_dot.c \
@@ -88,48 +89,49 @@ SRCS 			= $(addprefix $(SRCS_DIR),\
 				shell_variables.c \
 				utils.c)
 
-OBJ				= $(SRCS:.c=.o)
-OBJ_BONUS 		= $(SRCS_BONUS:.c=.o)
-
-SRCS_BONUS 		= $(addprefix $(BONUS_SRCS_DIR),\
-					)
+OBJS := $(SRCS:$(SRCS_DIR)/%.c=$(OBJDIR)/%.o)
+DEPS := $(SRCS:$(SRCS_DIR)/%.c=$(DEPDIR)/%.d)
 
 all:			${LIBFT} ${NAME}
 
-${NAME}:		${LIBFT} $(HEADER) $(OBJ)
-				${CC} ${OBJ} ${LIBFT} ${CFLAGS} ${LRL} -o ${NAME}
+-include $(DEPS)
+
+$(OBJDIR)/%.o: $(SRCS_DIR)/%.c | $(OBJDIR)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJDIR):
+	mkdir -p $(OBJDIR)
+
+$(DEPDIR)/%.d: $(SRCS_DIR)/%.c | $(DEPDIR)
+	$(CC) $(CFLAGS) -M $< -MT '$(OBJDIR)/$*.o' -MF $@ -o $@
+
+$(DEPDIR):
+	mkdir -p $(DEPDIR)
+
+
+${NAME}:		${LIBFT} $(HEADER) $(OBJS)
+				${CC} ${OBJS} ${LIBFT} ${CFLAGS} ${LRL} -o ${NAME}
 				@echo "$(NAME): $(GREEN)$(NAME) was compiled.$(RESET)"
-				@echo
-
-bonus:			${LIBFT} ${NAME_BONUS}
-
-${NAME_BONUS}:	${LIBFT} ${OBJ_BONUS}
-				${CC} ${OBJ_BONUS} ${LIBFT} ${CFLAGS} -o ${NAME_BONUS}
-				@echo "\n$(NAME): $(GREEN)$(NAME) was compiled with Bonus.$(RESET)"
 				@echo
 
 ${LIBFT}:
 				@echo
 				make all -C libraries/libft
 
-%.o: %.c
-				${CC} ${CFLAGS} -c $< -o $@
-
 clean:
 				make clean -C libraries/libft
-				${REMOVE} ${OBJ} ${OBJ_BONUS}
+				rm -f $(OBJDIR)/*.o $(DEPDIR)/*.d
+				${REMOVE_DIR} ${OBJDIR} ${DEPDIR}
 				@echo
 
 fclean:
-				${REMOVE} ${NAME} ${NAME_BONUS}
+				${REMOVE} ${NAME}
 				make fclean -C libraries/libft
-				${REMOVE} ${OBJ} {OBJ_BONUS}
-				@echo "${NAME}: ${RED}${NAME}, ${NAME_BONUS} and libft.a were deleted${RESET}"
+				${REMOVE_DIR} ${OBJDIR} ${DEPDIR}
+				@echo "${NAME}: ${RED}${NAME} and libft.a were deleted${RESET}"
 				@echo
 
 re:				fclean all
-
-rebonus:		fclean ${NAME_BONUS}
 
 test:			${LIBFT} $(HEADER)
 				${CC} -g $(SRCS) ${LIBFT} ${LRL} -o ${NAME}
@@ -140,4 +142,4 @@ valgrind:		$(NAME)
 				--verbose --show-mismatched-frees=yes --read-var-info=yes \
 				--track-fds=yes --trace-children=yes ./minishell
 
-.PHONY:			all clean fclean re rebonus valgrind
+.PHONY:			all clean fclean re valgrind

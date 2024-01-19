@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thorben <thorben@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 12:15:16 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/18 17:41:18 by thorben          ###   ########.fr       */
+/*   Updated: 2024/01/19 12:33:44 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,23 +106,24 @@ void	ft_expander(t_vars *vars, char **arg, t_quote *quote)
 
 void	ft_expand_all_vars(t_vars *vars)
 {
-	t_prg	*temp;
+	t_prg	*tmp;
 	int		i;
 
-	temp = vars->p_start;
-	while (temp)
+	tmp = vars->p_start;
+	while (tmp)
 	{
 		i = 0;
-		while (temp->prog[i])
+		while (tmp->prog[i])
 		{
-			ft_home_expand(vars, &temp->prog[i]);
-			ft_check_enclosing(&temp->prog[i], vars);
+			if (tmp->oper != O_HEREDOC)
+				ft_home_expand(vars, &tmp->prog[i]);
+			ft_check_enclosing(&tmp->prog[i], vars);
 			i++;
 		}
-		if (temp->prog[0])
-			ft_check_resplit(vars, temp->prog[0], temp);
-		if (temp->prog[1] && (temp->prog[1][0] == '-'))
-			ft_check_addon_resplit(vars, temp->prog[1], temp);
-		temp = temp->next;
+		if (tmp->oper != O_HEREDOC && tmp->prog[0])
+			ft_check_resplit(vars, tmp->prog[0], tmp);
+		if (tmp->oper != O_HEREDOC && tmp->prog[1] && (tmp->prog[1][0] == '-'))
+			ft_check_addon_resplit(vars, tmp->prog[1], tmp);
+		tmp = tmp->next;
 	}
 }

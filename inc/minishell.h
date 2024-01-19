@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thorben <thorben@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/18 13:23:28 by thorben          ###   ########.fr       */
+/*   Updated: 2024/01/19 12:31:37 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_red
 	char			oper;
 	char			*file;
 	char			*heredoc;
+	int				hdoc_flag;
 	struct s_red	*next;
 }		t_red;
 
@@ -46,7 +47,6 @@ typedef struct s_prg
 	t_red			*in_file;
 	t_red			*out_file;
 	char			*heredoc;
-	int				hdoc_flag;
 	char			**prog;
 	struct s_prg	*next;
 }		t_prg;
@@ -179,7 +179,7 @@ void		ft_chdir_pwd_envv(t_vars *vars, char **curpath);
 void		ft_exit_prog(t_vars *vars, char **prog);
 
 /* b_export_key_utils */
-// checks if parenthesis are properly closed
+// checks if quotes are properly closed
 int			ft_check_enclosing(char **arg, t_vars *vars);
 // extracts the key of argument
 char		*ft_copy_key(t_vars *vars, char *arg);
@@ -269,8 +269,8 @@ void		ft_export_prog(t_vars *vars, char **prog, int i);
 // ignores SIGQUIT and handles SIGINT
 void		ft_handle_signals(void);
 // handles SIGINT
-void		ft_handler_s(int signum, siginfo_t *info, void *no);
-
+void		ft_handler_s(int signum);
+void		ft_handler_remove(int signum);
 /* environment_var */
 // creates a struct that stores all the environment values in order
 void		ft_create_env(t_vars *vars, char **envp);
@@ -380,9 +380,8 @@ void		ft_add_envv(t_vars *vars, char *key, char *val, int id);
 t_kv		*ft_val_retrieval(t_vars *vars, char *key);
 
 /* input heredoc */
-void		ft_heredoc_exec(t_vars *vars, t_prg *prog);
-void		ft_heredoc(t_vars *vars);
-void		ft_add_on_heredoc_str(t_vars *vars, t_prg *prog, char *str);
+void		ft_heredoc_exec(t_vars *vars, t_red *reds);
+void		ft_add_on_heredoc_str(t_vars *vars, t_red *reds, char *str);
 
 /* key_value_remove */
 /* removes an environment variable from the key_value list, matching the key.

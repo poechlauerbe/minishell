@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_red_files.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thorben <thorben@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 18:05:51 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/18 17:22:00 by thorben          ###   ########.fr       */
+/*   Updated: 2024/01/19 12:36:13 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,8 @@ void	ft_check_red_signs(t_vars *vars, t_prg *temp)
 	}
 	else if (!temp->prog[0] && temp->next && temp->next->oper == '|')
 		ft_print_red_file_error(vars, NULL, '|');
-	else if (temp->oper == O_HEREDOC && temp->prog[0])
-		ft_heredoc_exec(vars, temp);
+	// else if (temp->oper == O_HEREDOC && temp->prog[0])
+	// 	ft_heredoc_exec(vars, temp);
 }
 
 int	ft_check_redirect_file(t_vars *vars)

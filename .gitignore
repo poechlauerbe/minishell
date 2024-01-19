@@ -1,6 +1,7 @@
 a.out
 *.o
 *.a
+*.d
 *.h.*
 minishell
 .vscode
