@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 13:40:48 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/19 14:15:59 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/19 14:22:50 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,15 @@ int	g_flag = 0;
 void	ft_minishell_input_handling(t_vars *vars)
 {
 	add_history(vars->inp);
-	ft_check_input(&vars);
+	ft_check_input(vars);
 	if (!vars->pipe_count && !vars->no_exec)
 	{
-		if (ft_builtin_single_prog(&vars, vars->p_start) == NOT_USED)
-			ft_pipe(&vars);
+		if (ft_builtin_single_prog(vars, vars->p_start) == NOT_USED)
+			ft_pipe(vars);
 	}
 	else if (!vars->no_exec)
-		ft_pipe(&vars);
-	ft_free_input(&vars);
+		ft_pipe(vars);
+	ft_free_input(vars);
 	vars->no_exec = OK;
 }
 
@@ -40,10 +40,10 @@ void	ft_minishell_inner_loop(t_vars *vars)
 		g_flag = 0;
 	}
 	if (!vars->inp)
-		ft_exit(&vars, vars->exit_code);
+		ft_exit(vars, vars->exit_code);
 	else if (ft_strlen(vars->inp) > 0)
 		ft_minishell_input_handling(vars);
-	ft_reset(&vars);
+	ft_reset(vars);
 	free(vars->inp);
 	vars->inp = NULL;
 }
