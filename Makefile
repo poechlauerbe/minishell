@@ -6,7 +6,7 @@
 #    By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/01/19 14:03:42 by bpochlau         ###   ########.fr        #
+#    Updated: 2024/01/19 14:25:16 by bpochlau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -109,7 +109,6 @@ ${LIBFT}:
 
 clean:
 				make clean -C libraries/libft
-				rm -f $(OBJDIR)/*.o $(DEPDIR)/*.d
 				${REMOVE_DIR} ${OBJDIR}
 				@echo
 
