@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 20:34:56 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/19 13:18:50 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/19 13:38:08 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,21 +80,12 @@ void	ft_heredoc_exec(t_vars *vars, t_red *reds)
 	char	*str;
 	int		len;
 
-	// ft_prep_delimiter(vars, reds);
 	len = ft_strlen(reds->file) + 1;
-	// write(2, ">", 1);
-	// str = get_next_line(0);
-	str = readline("");
-	// if (!str && !g_flag)
-	// 	ft_exit(vars, MALLOC_ERROR);
+	str = readline("> ");
 	while (str && ft_strncmp(str, reds->file, len) != 0 && !g_flag)
 	{
 		ft_add_on_heredoc_str(vars, reds, str);
-		// write(2, ">", 1);
-		// str = get_next_line(0);
-		str = readline("");
-		// if (!str && !g_flag)
-		// 	ft_exit(vars, MALLOC_ERROR);
+		str = readline("> ");
 	}
 	if (str)
 		free (str);
