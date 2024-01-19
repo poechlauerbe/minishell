@@ -10,4 +10,4 @@ minishell
 test*
 minishell_test*
 tmp*
-
+valgrind_ignore_leaks.txt
