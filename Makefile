@@ -21,9 +21,6 @@ SRCS_DIR		= ./sources
 DEPDIR			= ./deps
 OBJDIR			= ./objs
 
-$(shell mkdir -p $(OBJDIR))
-$(shell mkdir -p $(DEPDIR))
-
 HEADER			= $(addprefix $(INC_DIR)/,\
 				macros_minishell.h \
 				minishell.h)
@@ -84,12 +81,17 @@ all:			${LIBFT} ${NAME}
 
 -include $(DEPS)
 
-$(OBJDIR)/%.o: $(SRCS_DIR)/%.c
+$(OBJDIR)/%.o: $(SRCS_DIR)/%.c | $(OBJDIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
+$(OBJDIR):
+	mkdir -p $(OBJDIR)
 
-$(DEPDIR)/%.d: $(SRCS_DIR)/%.c
+$(DEPDIR)/%.d: $(SRCS_DIR)/%.c | $(DEPDIR)
 	$(CC) $(CFLAGS) -M $< -MT '$(OBJDIR)/$*.o' -MF $@ -o $@
+
+$(DEPDIR):
+	mkdir -p $(DEPDIR)
 
 
 ${NAME}:		${LIBFT} $(HEADER) $(OBJS)
@@ -103,6 +105,7 @@ ${LIBFT}:
 
 clean:
 				make clean -C libraries/libft
+				rm -f $(OBJDIR)/*.o $(DEPDIR)/*.d
 				${REMOVE_DIR} ${OBJDIR} ${DEPDIR}
 				@echo
 
@@ -114,6 +117,9 @@ fclean:
 				@echo
 
 re:				fclean all
+
+test:			${LIBFT} $(HEADER)
+				${CC} -g $(SRCS) ${LIBFT} ${LRL} -o ${NAME}
 
 valgrind:		$(NAME)
 				valgrind --suppressions=valgrind_ignore_leaks.txt \
