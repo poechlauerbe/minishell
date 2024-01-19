@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/19 14:19:21 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/19 16:49:31 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -254,7 +254,7 @@ void		ft_unset(t_vars *vars, char **prg);
 void		ft_cd(t_vars *vars);
 /* handles cd and cd -- which should resolve to the home directory or returns an
 	error if HOME is not set */
-void		ft_cd2(t_vars *vars, char **cp);
+int			ft_cd2(t_vars *vars, char **cp);
 // description
 void		ft_option_error(t_vars *vars, char *prog);
 

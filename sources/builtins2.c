@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:41:53 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/17 14:46:10 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/19 16:55:51 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,10 @@ void	ft_export_prog(t_vars *vars, char **prog, int i)
 	{
 		key = ft_exp_key(vars, prog[i], 0);
 		if (!key)
-			return ;
+		{
+			i++;
+			continue ;
+		}
 		value = ft_exp_value(vars, prog[i]);
 		ft_add_envv(vars, key, value, 0);
 		ft_new_envp(vars);

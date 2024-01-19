@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 12:10:13 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/17 11:43:05 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/19 16:42:38 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_remove_dot_counter(char *curpath)
 
 	len = 0;
 	i = -1;
-	while (curpath[++i])
+	while (curpath && curpath[++i])
 	{
 		if (!ft_strncmp(&curpath[i], "/./", 3))
 			i += 1;
