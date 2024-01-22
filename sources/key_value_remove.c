@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:55:38 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/20 16:53:12 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/22 12:17:13 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,26 +25,31 @@ int	ft_remove_envv(t_vars *vars, char *key)
 
 int	ft_remove_helper(t_vars *vars, t_kv *tmp)
 {
-	t_kv	**var;
-
-	var = &vars->envv;
 	ft_remove_links_ao(&tmp);
-	if (!tmp->prev && !tmp->next)
-		*var = NULL;
-	else
-		ft_remove_links(&tmp, var);
 	free(tmp->key);
 	free(tmp->val);
-	free (tmp);
+	if (!tmp->prev && !tmp->next)
+	{
+		free (tmp);
+		vars->envv = NULL;
+	}
+	else
+	{
+		ft_remove_links(&tmp, &vars->envv);
+		free (tmp);
+	}
 	return (0);
 }
 
-void	ft_remove_links(t_kv **tmp, t_kv **var)
+void	ft_remove_links(t_kv **tmp, t_kv **envv)
 {
 	t_kv	*tmp2;
 
 	if (!(*tmp)->prev)
-		*var = (*tmp)->next;
+	{
+		*envv = (*tmp)->next;
+		(*envv)->prev = NULL;
+	}
 	else
 	{
 		if ((*tmp)->prev)
