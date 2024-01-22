@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 18:05:51 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/22 12:43:03 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/22 14:47:17 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,11 +93,12 @@ int	ft_check_redirect_file(t_vars *vars)
 	temp = vars->p_start;
 	while (temp)
 	{
+		vars->no_exec = OK;
 		if (temp->oper == '<' || temp->oper == '>' || temp->oper == O_APP_OUT
 			|| temp->oper == O_HEREDOC)
 		{
 			ft_check_red_signs(vars, temp);
-			if (vars->exit_code && vars->exit_code != 130)
+			if (vars->no_exec)
 				return (vars->exit_code);
 		}
 		temp = temp->next;
