@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 18:05:51 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/19 13:39:56 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/22 12:43:03 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int	ft_check_redirect_file(t_vars *vars)
 			|| temp->oper == O_HEREDOC)
 		{
 			ft_check_red_signs(vars, temp);
-			if (vars->exit_code)
+			if (vars->exit_code && vars->exit_code != 130)
 				return (vars->exit_code);
 		}
 		temp = temp->next;
