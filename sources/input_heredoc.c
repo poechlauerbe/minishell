@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 20:34:56 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/22 13:55:23 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/22 18:13:49 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ void	ft_heredoc_exec(t_vars *vars, t_red *reds)
 	signal(SIGINT, ft_handler_child);
 	len = ft_strlen(reds->file) + 1;
 	str = readline("> ");
+	if (!str)
+		FEHLERMELDUNG
 	while (str && ft_strncmp(str, reds->file, len) != 0 && !g_flag)
 	{
 		ft_add_on_heredoc_str(vars, reds, str);
