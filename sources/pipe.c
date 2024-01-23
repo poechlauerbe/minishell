@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 15:46:51 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/22 17:11:57 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/23 17:54:32 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_check_input_file(t_vars *vars, t_prg *temp, t_red *reds, int i)
 	while (reds)
 	{
 		if (reds->oper == O_HEREDOC)
-			ft_heredoc_exec(vars, reds);
+			ft_heredoc_exec(vars, reds, i);
 		if (g_flag)
 			ft_exit(vars, 130);
 		if (ft_check_in_access(reds->file, vars->pid, i, vars) != OK)
@@ -103,6 +103,18 @@ void	ft_pipe_loop(t_vars *vars, int commands)
 	}
 }
 
+void	ft_close_pipes2(int pipe_nr, int *fd)
+{
+	int	i;
+
+	pipe_nr *= 2;
+	i = -1;
+	while (++i < pipe_nr)
+	{
+		close(fd[i]);
+	}
+}
+
 void	ft_pipe(t_vars *vars)
 {
 	int		i;
@@ -121,8 +133,8 @@ void	ft_pipe(t_vars *vars)
 		if (pipe(vars->fd + i * 2) == -1)
 			ft_exit(vars, PIPE_ERROR);
 	ft_pipe_loop(vars, commands);
-	ft_close_pipes(vars->pipe_count, vars->fd);
 	i = -1;
+	ft_close_pipes2(vars->pipe_count, vars->fd);
 	while (++i < commands)
 		waitpid(vars->pid[i], &status, 0);
 	if (WIFEXITED(status))
