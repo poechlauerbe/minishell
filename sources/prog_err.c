@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prog_err.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 13:56:05 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/16 14:20:47 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/23 17:48:25 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	ft_prog_not_found(t_vars *vars, t_prg *prog)
 	}
 	else
 	{
+		waitpid(-1, NULL, 0);
 		ft_putstr_fd(prog->prog[0], 2);
 		ft_putstr_fd(": command not found\n", 2);
 		vars->exit_code = 127;

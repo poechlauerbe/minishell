@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/22 13:02:32 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/23 18:07:57 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ typedef struct s_vars
 	int				fd_open_out;
 	int				std_in;
 	int				std_out;
+	int				stop;
 }		t_vars;
 
 typedef struct s_quote
@@ -383,7 +384,7 @@ void		ft_add_envv(t_vars *vars, char *key, char *val, int id);
 t_kv		*ft_val_retrieval(t_vars *vars, char *key);
 
 /* input heredoc */
-void		ft_heredoc_exec(t_vars *vars, t_red *reds);
+void		ft_heredoc_exec(t_vars *vars, t_red *reds, int i);
 void		ft_add_on_heredoc_str(t_vars *vars, t_red *reds, char *str);
 
 /* key_value_remove */

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 16:52:00 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/17 13:03:00 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/23 17:45:21 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,11 @@ void	ft_close_pipes(int pipe_nr, int *fd)
 	pipe_nr *= 2;
 	i = -1;
 	while (++i < pipe_nr)
+	{
+		if (i % 2)
+			write(fd[i], "\0", 1);
 		close(fd[i]);
+	}
 }
 
 int	ft_path_checker(char *file, int *pid, t_count *num, t_vars *vars)
