@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_heredoc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 20:34:56 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/22 18:13:49 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/23 12:33:15 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,13 @@ void	ft_prep_delimiter(t_vars *vars, t_red *reds)
 	reds->file = new;
 }
 
+void	ft_err_m_hered(t_red *reds)
+{
+	ft_putstr_fd("ERROR ", 2);
+	ft_putstr_fd(reds->file, 2);
+	ft_putstr_fd(" ERROR\n", 2);
+}
+
 void	ft_heredoc_exec(t_vars *vars, t_red *reds)
 {
 	char	*str;
@@ -84,11 +91,13 @@ void	ft_heredoc_exec(t_vars *vars, t_red *reds)
 	len = ft_strlen(reds->file) + 1;
 	str = readline("> ");
 	if (!str)
-		FEHLERMELDUNG
+		ft_err_m_hered(reds);
 	while (str && ft_strncmp(str, reds->file, len) != 0 && !g_flag)
 	{
 		ft_add_on_heredoc_str(vars, reds, str);
 		str = readline("> ");
+		if (!str)
+			ft_err_m_hered(reds);
 	}
 	if (str)
 		free (str);
