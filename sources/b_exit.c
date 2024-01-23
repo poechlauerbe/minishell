@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 11:12:25 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/19 19:02:04 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/22 17:20:32 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,13 +77,10 @@ void	ft_calc_exit_code(t_vars *vars, char *str_wo_q, char *prog)
 	num %= 256;
 	if (num < 0)
 		num += 256;
-	if (err == OK)
-	{
-		free(str_wo_q);
-		ft_exit(vars, num);
-	}
-	else
+	if (err != OK)
 		ft_err_mes_numeric(prog);
+	free(str_wo_q);
+	ft_exit(vars, num);
 }
 
 void	ft_exit_prog(t_vars *vars, char **prog)

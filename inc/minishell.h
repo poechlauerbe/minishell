@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/19 19:05:28 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/22 13:02:32 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -272,6 +272,8 @@ void		ft_handle_signals(void);
 // handles SIGINT
 void		ft_handler_s(int signum);
 void		ft_handler_remove(int signum);
+void		ft_handler_child(int signum);
+
 /* environment_var */
 // creates a struct that stores all the environment values in order
 void		ft_create_env(t_vars *vars, char **envp);

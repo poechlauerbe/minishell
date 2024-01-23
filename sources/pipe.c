@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 15:46:51 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/19 13:32:11 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/22 17:11:57 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	ft_check_input_file(t_vars *vars, t_prg *temp, t_red *reds, int i)
 	{
 		if (reds->oper == O_HEREDOC)
 			ft_heredoc_exec(vars, reds);
+		if (g_flag)
+			ft_exit(vars, 130);
 		if (ft_check_in_access(reds->file, vars->pid, i, vars) != OK)
 			ft_exit(vars, 1);
 		reds = reds->next;
