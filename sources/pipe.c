@@ -6,20 +6,20 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 15:46:51 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/24 12:55:01 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/24 14:37:52 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-void	ft_check_input_file(t_vars *vars, t_prg *temp, t_red *reds, int i)
+void	ft_check_input_file(t_vars *vars, t_prg *temp, t_red *reds)
 {
 	int		fd_r_in;
 
 	reds = temp->in_file;
 	while (reds)
 	{
-		if (ft_check_in_access(reds->file, vars->pid, i, vars) != OK)
+		if (ft_check_in_access(reds->file, vars) != OK)
 			ft_exit(vars, 1);
 		reds = reds->next;
 	}
@@ -35,14 +35,14 @@ void	ft_check_input_file(t_vars *vars, t_prg *temp, t_red *reds, int i)
 		ft_exit(vars, DUP_ERROR);
 }
 
-void	ft_check_output_file(t_vars *vars, t_prg *temp, t_red *reds, int i)
+void	ft_check_output_file(t_vars *vars, t_prg *temp, t_red *reds)
 {
 	int		fd_r_out;
 
 	reds = temp->out_file;
 	while (reds)
 	{
-		if (ft_check_out_access(reds->file, vars->pid, i, vars) != OK)
+		if (ft_check_out_access(reds->file, vars) != OK)
 			ft_exit(vars, 1);
 		if (reds->oper == O_RED_OUTPUT)
 			fd_r_out = open(reds->file, O_RDWR | O_TRUNC | O_CREAT, 0644);
@@ -67,11 +67,11 @@ void	ft_child_process(t_vars *vars, int commands, t_prg *temp, int i)
 	signal(SIGINT, SIG_DFL);
 	reds = NULL;
 	if (temp->in_file != NULL)
-		ft_check_input_file(vars, temp, reds, i);
+		ft_check_input_file(vars, temp, reds);
 	else if (i != 0 && dup2(vars->fd[2 * i - 2], STDIN_FILENO) == -1)
 		ft_exit(vars, DUP_ERROR);
 	if (temp->out_file != NULL)
-		ft_check_output_file(vars, temp, reds, i);
+		ft_check_output_file(vars, temp, reds);
 	else if (i != --commands && dup2(vars->fd[2 * i + 1], STDOUT_FILENO) == -1)
 		ft_exit(vars, DUP_ERROR);
 	ft_check_prog(vars, temp);
@@ -117,8 +117,8 @@ void	ft_pipe(t_vars *vars)
 		if (pipe(vars->fd + i * 2) == -1)
 			ft_exit(vars, PIPE_ERROR);
 	ft_pipe_loop(vars, commands);
-	i = -1;
 	ft_close_pipes(vars->pipe_count, vars->fd);
+	i = -1;
 	while (++i < commands)
 		waitpid(vars->pid[i], &status, 0);
 	if (WIFEXITED(status))

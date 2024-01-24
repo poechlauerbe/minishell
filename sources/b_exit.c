@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 11:12:25 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/22 17:20:32 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/24 14:44:12 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,11 @@ long long	ft_atoi_ll(const char *nptr, int *err)
 
 void	ft_err_mes_numeric(char *prog)
 {
+	err_handler();
 	ft_putstr_fd("exit\nbash: exit: ", 2);
 	ft_putstr_fd(prog, 2);
 	ft_putstr_fd(": numeric argument required\n", 2);
+	err_handle_free();
 }
 
 void	ft_calc_exit_code(t_vars *vars, char *str_wo_q, char *prog)
@@ -100,8 +102,10 @@ void	ft_exit_prog(t_vars *vars, char **prog)
 		}
 		else if (prog[1] && prog[2])
 		{
+			err_handler();
 			ft_putstr_fd("exit\nbash: exit: too many arguments\n", 2);
 			vars->exit_code = 1;
+			err_handle_free();
 		}
 		else
 			ft_calc_exit_code(vars, str_wo_q, prog[1]);

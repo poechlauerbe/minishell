@@ -6,20 +6,20 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 12:03:36 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/17 12:07:36 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/24 14:37:06 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-int	ft_c_infile_sp(t_vars *vars, t_prg *temp, t_red *reds, int i)
+int	ft_c_infile_sp(t_vars *vars, t_prg *temp, t_red *reds)
 {
 	int		fd_r_in;
 
 	reds = temp->in_file;
 	while (reds)
 	{
-		if (ft_check_in_access(reds->file, vars->pid, i, vars) != OK)
+		if (ft_check_in_access(reds->file, vars) != OK)
 			return (1);
 		reds = reds->next;
 	}
@@ -36,14 +36,14 @@ int	ft_c_infile_sp(t_vars *vars, t_prg *temp, t_red *reds, int i)
 	return (OK);
 }
 
-int	ft_c_outfile_sp(t_vars *vars, t_prg *temp, t_red *reds, int i)
+int	ft_c_outfile_sp(t_vars *vars, t_prg *temp, t_red *reds)
 {
 	int		fd_r_out;
 
 	reds = temp->out_file;
 	while (reds)
 	{
-		if (ft_check_out_access(reds->file, vars->pid, i, vars) != OK)
+		if (ft_check_out_access(reds->file, vars) != OK)
 			return (1);
 		if (reds->oper == O_RED_OUTPUT)
 			fd_r_out = open(reds->file, O_RDWR | O_TRUNC | O_CREAT, 0644);
@@ -70,8 +70,8 @@ int	ft_check_files_sp(t_vars *vars, t_prg *prog)
 	reds = NULL;
 	errcd = OK;
 	if (prog->in_file != NULL)
-		errcd = ft_c_infile_sp(vars, prog, reds, 0);
+		errcd = ft_c_infile_sp(vars, prog, reds);
 	if (prog->out_file != NULL && errcd == OK)
-		errcd = ft_c_outfile_sp(vars, prog, reds, 0);
+		errcd = ft_c_outfile_sp(vars, prog, reds);
 	return (errcd);
 }

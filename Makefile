@@ -6,7 +6,7 @@
 #    By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/01/19 14:25:16 by bpochlau         ###   ########.fr        #
+#    Updated: 2024/01/24 14:19:20 by bpochlau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,6 +55,7 @@ SRCS 			= $(addprefix $(SRCS_DIR)/,\
 				b_export_print.c \
 				b_export_print_utils.c \
 				environment_var.c \
+				err_mes_handler.c \
 				exit.c \
 				expand_home.c \
 				expand_home2.c \

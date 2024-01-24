@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 14:39:12 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/19 17:57:19 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/24 15:12:41 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,9 @@ void	ft_etc_passwd(t_vars *vars, char **str, char **tmp)
 	fd = open("/etc/passwd", O_RDONLY);
 	if (fd == -1)
 	{
+		err_handler();
 		perror("Error opening file");
+		err_handle_free();
 		vars->exit_code = 1;
 		return ;
 	}

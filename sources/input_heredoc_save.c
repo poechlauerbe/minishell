@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   input_heredoc.c                                    :+:      :+:    :+:   */
+/*   input_heredoc_save.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 20:34:56 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/24 10:52:25 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/24 13:21:47 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,19 +85,6 @@ void	ft_err_m_hered(t_red *reds, int line_num)
 
 }
 
-void	ft_stop(t_vars *vars, int i)
-{
-	char	buf[1];
-
-	if (i > 0)
-	{
-		read(vars->fd[2 * i - 2], buf, 1);
-		while (buf[0] != '\0' && !vars->stop)
-			read(vars->fd[2 * i - 2], buf, 1);
-		vars->stop = 1;
-	}
-}
-
 void	ft_heredoc_exec(t_vars *vars, t_red *reds, int i)
 {
 	char	*str;
@@ -105,7 +92,6 @@ void	ft_heredoc_exec(t_vars *vars, t_red *reds, int i)
 	int		j;
 
 	j = 1;
-	ft_stop(vars, i);
 	signal(SIGINT, ft_handler_child);
 	len = ft_strlen(reds->file) + 1;
 	str = readline("> ");

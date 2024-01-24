@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_red_files.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 18:05:51 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/12 09:10:49 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/24 13:39:47 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,18 +88,69 @@ void	ft_check_red_signs(t_vars *vars, t_prg *temp)
 		ft_heredoc_exec(vars, temp);
 }
 
+// int	ft_check_redirect_file(t_vars *vars)
+// {
+// 	t_prg	*temp;
+
+// 	temp = vars->p_start;
+// 	while (temp)
+// 	{
+// 		if (temp->oper == '<' || temp->oper == '>' || temp->oper == O_APP_OUT
+// 			|| temp->oper == O_HEREDOC)
+// 		{
+// 			ft_check_red_signs(vars, temp);
+// 			if (vars->no_exec)
+// 				return (vars->exit_code);
+// 		}
+// 		temp = temp->next;
+// 	}
+// 	return (OK);
+// }
+
+int	ft_check_enclosing_heredoc(char **arg, t_vars *vars)
+{
+	t_quote	quote;
+
+	ft_init_quote(&quote);
+	while (*arg && (*arg)[quote.i])
+	{
+		if (quote.i == 0)
+			ft_init_quote(&quote);
+		if ((*arg)[quote.i] == '\'' && !quote.dq && !quote.sq)
+			quote.sq = 1;
+		else if ((*arg)[quote.i] == '\'' && !quote.dq && quote.sq)
+			quote.sq = 0;
+		else if ((*arg)[quote.i] == '"' && !quote.sq && !quote.dq)
+			quote.dq = 1;
+		else if ((*arg)[quote.i] == '"' && !quote.sq && quote.dq)
+			quote.dq = 0;
+		quote.i++;
+	}
+	return (ft_enclosing_open_quotes(vars, quote));
+}
+
 int	ft_check_redirect_file(t_vars *vars)
 {
 	t_prg	*temp;
+	int		errcd;
 
+	errcd = OK;
 	temp = vars->p_start;
 	while (temp)
 	{
+		vars->no_exec = OK;
 		if (temp->oper == '<' || temp->oper == '>' || temp->oper == O_APP_OUT
 			|| temp->oper == O_HEREDOC)
 		{
+			if (temp->oper == O_HEREDOC)
+				errcd = ft_check_enclosing_heredoc(temp->prog, vars);
+			if (errcd)
+			{
+				vars->no_exec = SYNTAX_ERROR;
+				vars->exit_code = SYNTAX_ERROR;
+			}
 			ft_check_red_signs(vars, temp);
-			if (vars->exit_code)
+			if (vars->no_exec)
 				return (vars->exit_code);
 		}
 		temp = temp->next;

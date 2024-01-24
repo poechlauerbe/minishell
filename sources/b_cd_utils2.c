@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_cd_utils2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 08:54:41 by thorben           #+#    #+#             */
-/*   Updated: 2024/01/17 16:25:54 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/24 15:14:15 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,16 @@ void	ft_oldpwd_access(t_vars *vars, t_kv *oldpwd)
 		return ;
 	}
 	else
+	{
+		err_handler();
 		perror("minishell: cd: ");
+		err_handle_free();
+	}
 }
 
 void	ft_oldpwd(t_vars *vars)
 {
 	t_kv	*oldpwd;
-	char	*tmp;
 
 	oldpwd = ft_val_retrieval(vars, "OLDPWD");
 	if (oldpwd && oldpwd->val)
@@ -43,15 +46,18 @@ void	ft_oldpwd(t_vars *vars)
 			ft_oldpwd_access(vars, oldpwd);
 		else
 		{
-			tmp = ft_strjoin("minishell: cd: ", vars->p_start->prog[1]);
-			if (!tmp)
-				ft_exit(vars, MALLOC_ERROR);
-			perror(tmp);
-			free (tmp);
+			err_handler();
+			ft_putstr_fd("minishell: cd: ", 2);
+			perror(vars->p_start->prog[1]);
+			err_handle_free();
 		}
 	}
 	else
+	{
+		err_handler();
 		ft_printf_fd(2, "minishell: cd: OLDPWD not set\n");
+		err_handle_free();
+	}
 	vars->exit_code = 1;
 }
 
@@ -76,9 +82,6 @@ void	ft_chdir_pwd_envv(t_vars *vars, char **curpath)
 
 void	ft_chdir(t_vars *vars, char **curpath)
 {
-	char	*tmp;
-
-	tmp = NULL;
 	if (!access(*curpath, F_OK | X_OK))
 	{
 		if (!chdir(*curpath))
@@ -86,19 +89,11 @@ void	ft_chdir(t_vars *vars, char **curpath)
 			ft_chdir_pwd_envv(vars, curpath);
 			return ;
 		}
-		else
-		{
-			tmp = ft_strdup("minishell: cd");
-			if (!tmp)
-				ft_exit(vars, MALLOC_ERROR);
-		}
 	}
-	if (!tmp)
-		tmp = ft_strjoin("minishell: cd: ", vars->p_start->prog[1]);
-	if (!tmp)
-		ft_exit(vars, MALLOC_ERROR);
-	perror(tmp);
+	err_handler();
+	ft_putstr_fd("minishell: cd: ", 2);
+	perror(vars->p_start->prog[1]);
+	err_handle_free();
 	free (*curpath);
-	free (tmp);
 	vars->exit_code = 1;
 }

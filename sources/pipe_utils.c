@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 16:52:00 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/24 12:49:49 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/24 14:34:39 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,9 @@ void	ft_close_pipes(int pipe_nr, int *fd)
 	}
 }
 
-int	ft_path_checker(char *file, int *pid, t_count *num, t_vars *vars)
+int	ft_path_checker(char *file, t_count *num, t_vars *vars)
 {
 	char	*test_path;
-	int		k;
 
 	test_path = ft_strdup(file);
 	if (!test_path)
@@ -62,18 +61,17 @@ int	ft_path_checker(char *file, int *pid, t_count *num, t_vars *vars)
 		return (OK);
 	else
 	{
-		k = -1;
-		while (++k < num->i)
-			waitpid(pid[k], NULL, 0);
+		err_handler();
 		ft_putstr_fd("bash: ", 2);
 		ft_putstr_fd(file, 2);
 		ft_putstr_fd(": No such file or directory\n", 2);
+		err_handle_free();
 		return (1);
 	}
 	return (OK);
 }
 
-int	ft_check_command_path(char *file, int *pid, int i, t_vars *vars)
+int	ft_check_command_path(char *file, t_vars *vars)
 {
 	t_count	num;
 
@@ -82,8 +80,7 @@ int	ft_check_command_path(char *file, int *pid, int i, t_vars *vars)
 		num.j++;
 	while (file[num.j])
 	{
-		num.i = i;
-		if (file[num.j] == '/' && ft_path_checker(file, pid, &num, vars))
+		if (file[num.j] == '/' && ft_path_checker(file, &num, vars))
 			return (1);
 		num.j++;
 	}

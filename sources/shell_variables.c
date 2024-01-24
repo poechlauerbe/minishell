@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell_variables.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thorben <thorben@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 14:51:31 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/18 12:48:12 by thorben          ###   ########.fr       */
+/*   Updated: 2024/01/24 15:01:03 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,9 @@ void	ft_prog_not_found_shvar(t_vars *vars, char *arg)
 	nfd = ft_strjoin(arg, ": command not found\n");
 	if (!nfd)
 		ft_exit(vars, MALLOC_ERROR);
+	err_handler();
 	ft_printf_fd(2, nfd);
+	err_handle_free();
 	free (nfd);
 	vars->exit_code = 127;
 	exit(127);

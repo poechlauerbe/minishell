@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 12:15:16 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/19 16:41:56 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/24 13:15:07 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,15 +113,15 @@ void	ft_expand_all_vars(t_vars *vars)
 	while (tmp)
 	{
 		i = 0;
-		while (tmp->oper != O_HEREDOC && tmp->prog[i])
+		while (tmp->prog[i])
 		{
 			ft_home_expand(vars, &tmp->prog[i]);
 			ft_check_enclosing(&tmp->prog[i], vars);
 			i++;
 		}
-		if (tmp->oper != O_HEREDOC && tmp->prog[0])
+		if (tmp->prog[0])
 			ft_check_resplit(vars, tmp->prog[0], tmp);
-		if (tmp->oper != O_HEREDOC && tmp->prog[1] && (tmp->prog[1][0] == '-'))
+		if (tmp->prog[1] && (tmp->prog[1][0] == '-'))
 			ft_check_addon_resplit(vars, tmp->prog[1], tmp);
 		tmp = tmp->next;
 	}

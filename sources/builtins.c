@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 16:14:25 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/24 12:55:36 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/24 14:45:19 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,10 @@ void	ft_unset(t_vars *vars, char **prg)
 	i = 1;
 	if (prg[i] && prg[i][0] == '-' && prg[i][1] != '\0')
 	{
+		err_handler();
 		ft_putstr_fd("minishell: unset: ", 2);
 		ft_option_error(vars, prg[i]);
+		err_handle_free();
 		return ;
 	}
 	key = prg[i];

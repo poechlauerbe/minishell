@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 13:28:25 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/22 11:58:32 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/24 13:11:30 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ void	ft_reset(t_vars *vars)
 	if (vars->inp)
 		free(vars->inp);
 	vars->inp = NULL;
+	vars->no_exec = OK;
+	vars->pipe_count = 0;
 	ft_free_input(vars);
 	ft_free_pipe_fd_and_pid(vars);
 	ft_close_var_open(vars);

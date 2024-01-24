@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 13:41:52 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/17 10:22:55 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/24 14:50:27 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,9 @@ void	ft_check_prog(t_vars *vars, t_prg *prog)
 		return ;
 	if (prog->prog[0][0] == '\0')
 	{
+		err_handler();
 		ft_putstr_fd("Command '' not found\n", 2);
+		err_handle_free();
 		vars->no_exec = 127;
 		vars->exit_code = 127;
 		ft_exit(vars, 127);

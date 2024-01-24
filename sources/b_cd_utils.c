@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:29:49 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/19 13:35:49 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/24 15:01:41 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,9 @@ void	ft_getcwd(t_vars *vars, char **cwd, int *slash, int *cwdlen)
 	*cwd = getcwd(NULL, 0);
 	if (!*cwd)
 	{
+		err_handler();
 		perror("getcwd() error");
+		err_handle_free();
 		vars->exit_code = 1;
 	}
 	*cwdlen = ft_strlen(*cwd);
@@ -93,9 +95,11 @@ int	ft_can_form(t_vars *vars, char **curpath)
 
 void	ft_print_err_cd(t_vars *vars, int error)
 {
+	err_handler();
 	if (error == 1)
 		ft_printf_fd(2, "minishell: cd: too many arguments\n");
 	else if (error == 2)
 		ft_printf_fd(2, "cd: HOME not set\n");
+	err_handle_free();
 	vars->exit_code = 1;
 }

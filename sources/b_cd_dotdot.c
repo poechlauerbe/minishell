@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_cd_dotdot.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:28:33 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/19 16:43:53 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/24 14:52:56 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,10 @@ int	ft_test_dir(t_vars *vars, char **cp, int i)
 	{
 		free(dir);
 		free (*cp);
+		err_handler();
 		ft_printf_fd(2, "cd: No such file or directory: %s\n", \
 					vars->p_start->prog[1]);
+		err_handle_free();
 		return (1);
 	}
 	free (dir);

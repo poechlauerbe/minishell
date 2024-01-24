@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_export_print_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:36:23 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/22 13:01:26 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/24 14:54:57 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,9 @@ void	ft_key_err_print(t_vars *vars, char *key, char *val)
 	free(tmp2);
 	if (!tmp1)
 		ft_exit(vars, MALLOC_ERROR);
+	err_handler();
 	ft_printf_fd(2, tmp1);
+	err_handle_free();
 	free (tmp1);
 	vars->exit_code = 1;
 }

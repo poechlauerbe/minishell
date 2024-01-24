@@ -6,11 +6,24 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 18:05:10 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/19 12:36:57 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/24 15:15:09 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+void	ft_start_err(t_vars *vars, char *temp, int i, int j)
+{
+	vars->exit_code = SYNTAX_ERROR;
+	vars->no_exec = SYNTAX_ERROR;
+	err_handler();
+	if (!j)
+		ft_printf_fd(2, "bash: syntax error near unexpected token `%c'\n",
+			temp[i]);
+	else
+		ft_printf_fd(2, "bash: not handled in minishell`%c'\n", temp[i]);
+	err_handle_free();
+}
 
 int	ft_start(t_vars *vars)
 {
@@ -23,17 +36,21 @@ int	ft_start(t_vars *vars)
 		i++;
 	if (temp[i] == '|' || temp[i] == '}')
 	{
-		vars->exit_code = SYNTAX_ERROR;
-		vars->no_exec = SYNTAX_ERROR;
-		ft_printf_fd(2, "bash: syntax error near unexpected token `%c'\n",
-			temp[i]);
+		// vars->exit_code = SYNTAX_ERROR;
+		// vars->no_exec = SYNTAX_ERROR;
+		// ft_printf_fd(2, "bash: syntax error near unexpected token `%c'\n",
+		// 	temp[i]);
+		// return (SYNTAX_ERROR);
+		ft_start_err(vars, temp, i, 0);
 		return (SYNTAX_ERROR);
 	}
 	else if (temp[i] == '{')
 	{
-		vars->exit_code = SYNTAX_ERROR;
-		vars->no_exec = SYNTAX_ERROR;
-		ft_printf_fd(2, "bash: not handled in minishell`%c'\n", temp[i]);
+		// vars->exit_code = SYNTAX_ERROR;
+		// vars->no_exec = SYNTAX_ERROR;
+		// ft_printf_fd(2, "bash: not handled in minishell`%c'\n", temp[i]);
+		// return (SYNTAX_ERROR);
+		ft_start_err(vars, temp, i, 1);
 		return (SYNTAX_ERROR);
 	}
 	return (OK);

@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/24 12:57:07 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/24 15:15:34 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ typedef struct s_vars
 	int				fd_open_out;
 	int				std_in;
 	int				std_out;
-	int				stop;
 }		t_vars;
 
 typedef struct s_quote
@@ -411,8 +410,8 @@ void		ft_minishell_input_handling(t_vars *vars);
 
 /* pipe */
 // pipe function
-void		ft_check_input_file(t_vars *vars, t_prg *temp, t_red *reds, int i);
-void		ft_check_output_file(t_vars *vars, t_prg *temp, t_red *reds, int i);
+void		ft_check_input_file(t_vars *vars, t_prg *temp, t_red *reds);
+void		ft_check_output_file(t_vars *vars, t_prg *temp, t_red *reds);
 void		ft_pipecount(t_vars *vars);
 void		ft_pipe(t_vars *vars);
 
@@ -421,12 +420,12 @@ void		ft_pipe(t_vars *vars);
 void		ft_pipecount(t_vars *vars);
 // closes all the open pipes of the pipeloop
 void		ft_close_pipes(int pipe_nr, int *fd);
-int			ft_check_command_path(char *file, int *pid, int i, t_vars *vars);
+int			ft_check_command_path(char *file, t_vars *vars);
 
 // checks if the input file is accesable
-int			ft_check_in_access(char *file, int *pid, int i, t_vars *vars);
+int			ft_check_in_access(char *file, t_vars *vars);
 // checks if the output file is accesable
-int			ft_check_out_access(char *file, int *pid, int i, t_vars *vars);
+int			ft_check_out_access(char *file, t_vars *vars);
 
 /* prog */
 int			ft_check_dir(t_vars *vars, char *str);
@@ -479,8 +478,12 @@ int			ft_enclosing_open_quotes(t_vars *vars, t_quote quote);
 // void		ft_malloc_envpr(t_vars *vars, char ***arr, char *key);
 
 /* prog_single_files */
-int			ft_c_infile_sp(t_vars *vars, t_prg *temp, t_red *reds, int i);
-int			ft_c_outfile_sp(t_vars *vars, t_prg *temp, t_red *reds, int i);
+int			ft_c_infile_sp(t_vars *vars, t_prg *temp, t_red *reds);
+int			ft_c_outfile_sp(t_vars *vars, t_prg *temp, t_red *reds);
 int			ft_check_files_sp(t_vars *vars, t_prg *prog);
+
+void		err_handler(void);
+void		err_handle_free(void);
+void		ft_start_err(t_vars *vars, char *temp, int i, int j);
 
 #endif
