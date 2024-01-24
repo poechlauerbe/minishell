@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:21:46 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/24 15:13:32 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/24 15:44:39 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	ft_init(t_vars *vars, int argc, char **argv, char **envp)
 	char	*oldpwd;
 
 	g_flag = 0;
+	err_handle_free();
 	ft_bzero(vars, sizeof(t_vars));
 	if (*envp)
 	{
