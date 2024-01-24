@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 15:46:51 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/23 17:54:32 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/24 11:11:33 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	ft_check_input_file(t_vars *vars, t_prg *temp, t_red *reds, int i)
 	reds = temp->in_file;
 	while (reds)
 	{
-		if (reds->oper == O_HEREDOC)
-			ft_heredoc_exec(vars, reds, i);
+		// if (reds->oper == O_HEREDOC)
+		// 	ft_heredoc_exec(vars, reds, i);
 		if (g_flag)
 			ft_exit(vars, 130);
 		if (ft_check_in_access(reds->file, vars->pid, i, vars) != OK)
@@ -78,8 +78,8 @@ void	ft_child_process(t_vars *vars, int commands, t_prg *temp, int i)
 		ft_check_output_file(vars, temp, reds, i);
 	else if (i != --commands && dup2(vars->fd[2 * i + 1], STDOUT_FILENO) == -1)
 		ft_exit(vars, DUP_ERROR);
-	ft_close_pipes(vars->pipe_count, vars->fd);
 	ft_check_prog(vars, temp);
+	ft_close_pipes(vars->pipe_count, vars->fd);
 	ft_free_pipe_fd_and_pid(vars);
 	ft_exit(vars, vars->exit_code);
 }
