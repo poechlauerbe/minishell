@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 10:55:29 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/24 12:45:59 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/24 12:56:48 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,19 @@ void	ft_add_on_heredoc_str(t_vars *vars, t_prg *prog, char *str)
 	if (str)
 		free (str);
 	str = NULL;
+}
+
+void	ft_err_m_hered(t_prg *prog, int line_num)
+{
+	int	i;
+
+	i = 0;
+	ft_putstr_fd("bash: warning: here-document at line ", 2);
+	ft_putnbr_fd(line_num, 2);
+	ft_putstr_fd(" delimited by end-of-file (wanted `", 2);
+	while (prog->prog[0][i + 1])
+		i++;
+	prog->prog[0][i] = '\0';
+	ft_putstr_fd(prog->prog[0], 2);
+	ft_putstr_fd("')\n", 2);
 }

@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 14:56:01 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/24 12:12:06 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/24 12:55:57 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	ft_handler_child(int signum)
 	(void) signum;
 	g_flag = signum + 128;
 	ioctl(STDIN_FILENO, TIOCSTI, "\n");
-
 }
 
 void	ft_handler_remove(int signum)

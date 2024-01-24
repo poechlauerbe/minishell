@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 16:14:25 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/19 16:50:09 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/24 12:55:36 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	ft_unset(t_vars *vars, char **prg)
 	ft_add_underscore(vars, prg);
 }
 
-int		ft_cd2(t_vars *vars, char **cp)
+int	ft_cd2(t_vars *vars, char **cp)
 {
 	if (!ft_return_val(vars, "HOME"))
 	{

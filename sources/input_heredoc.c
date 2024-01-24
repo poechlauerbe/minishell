@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 20:34:56 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/24 12:47:31 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/24 12:56:32 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,22 +72,6 @@ void	ft_prep_delimiter(t_vars *vars, t_prg *prog)
 	free(prog->prog[0]);
 	new[len] = '\n';
 	prog->prog[0] = new;
-}
-
-void	ft_err_m_hered(t_prg *prog, int line_num)
-{
-	int	i;
-
-	i = 0;
-	ft_putstr_fd("bash: warning: here-document at line ", 2);
-	ft_putnbr_fd(line_num, 2);
-	ft_putstr_fd(" delimited by end-of-file (wanted `", 2);
-	while (prog->prog[0][i + 1])
-		i++;
-	prog->prog[0][i] = '\0';
-	ft_putstr_fd(prog->prog[0], 2);
-	ft_putstr_fd("')\n", 2);
-
 }
 
 void	ft_heredoc_exec(t_vars *vars, t_prg *prog)
