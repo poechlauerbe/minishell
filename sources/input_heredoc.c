@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 20:34:56 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/24 11:52:54 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/24 12:47:31 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	ft_make_tmp_file(t_vars *vars, t_prg *prog)
 		write(fd, &prog->heredoc[i], 1);
 		i++;
 	}
-	write(fd, "\n", 1);
 	close(fd);
 	free (prog->heredoc);
 	prog->heredoc = NULL;
@@ -98,14 +97,9 @@ void	ft_heredoc_exec(t_vars *vars, t_prg *prog)
 	int		j;
 
 	j = 1;
-	signal(SIGINT, ft_handler_child);
 	prog->heredoc = NULL;
 	ft_prep_delimiter(vars, prog);
 	len = ft_strlen(prog->prog[0] + 1);
-	// write(2, ">", 1);
-	// str = get_next_line(0);
-	// if (!str && !g_flag)
-	// 	ft_exit(vars, MALLOC_ERROR);
 	str = readline("> ");
 	if (!str)
 		ft_err_m_hered(prog, j);
@@ -113,10 +107,6 @@ void	ft_heredoc_exec(t_vars *vars, t_prg *prog)
 	{
 		j++;
 		ft_add_on_heredoc_str(vars, prog, str);
-		// write(2, ">", 1);
-		// str = get_next_line(0);
-		// if (!str && !g_flag)
-		// 	ft_exit(vars, MALLOC_ERROR);
 		str = readline("> ");
 		if (!str)
 			ft_err_m_hered(prog, j);
@@ -127,13 +117,13 @@ void	ft_heredoc_exec(t_vars *vars, t_prg *prog)
 		ft_check_enclosing(&prog->heredoc, vars);
 	if (!g_flag)
 		ft_make_tmp_file(vars, prog);
-	signal(SIGINT, ft_handler_s);
 }
 
 void	ft_heredoc(t_vars *vars)
 {
 	t_prg	*prog;
 
+	signal(SIGINT, ft_handler_child);
 	prog = vars->p_start;
 	while (prog)
 	{
@@ -141,4 +131,5 @@ void	ft_heredoc(t_vars *vars)
 			ft_heredoc_exec(vars, prog);
 		prog = prog->next;
 	}
+	signal(SIGINT, ft_handler_s);
 }
