@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 11:12:25 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/24 15:53:11 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/24 16:35:50 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ long long	ft_atoi_ll(const char *nptr, int *err)
 	return (sum * sign);
 }
 
-void	ft_err_mes_numeric(char *prog, char *tofree)
+int	ft_err_mes_numeric(char *prog, char *tofree)
 {
 	err_handler();
 	ft_putstr_fd("exit\nbash: exit: ", 2);
@@ -65,6 +65,7 @@ void	ft_err_mes_numeric(char *prog, char *tofree)
 	err_handle_free();
 	if (tofree)
 		free(tofree);
+	return (2);
 }
 
 void	ft_calc_exit_code(t_vars *vars, char *str_wo_q, char *prog)
@@ -82,7 +83,7 @@ void	ft_calc_exit_code(t_vars *vars, char *str_wo_q, char *prog)
 	if (num < 0)
 		num += 256;
 	if (err != OK)
-		ft_err_mes_numeric(prog, str_wo_q);
+		num = ft_err_mes_numeric(prog, str_wo_q);
 	ft_exit(vars, num);
 }
 

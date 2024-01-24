@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 15:46:51 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/24 14:37:52 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/24 16:54:27 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,8 @@ void	ft_child_process(t_vars *vars, int commands, t_prg *temp, int i)
 		ft_check_output_file(vars, temp, reds);
 	else if (i != --commands && dup2(vars->fd[2 * i + 1], STDOUT_FILENO) == -1)
 		ft_exit(vars, DUP_ERROR);
-	ft_check_prog(vars, temp);
 	ft_close_pipes(vars->pipe_count, vars->fd);
+	ft_check_prog(vars, temp);
 	ft_free_pipe_fd_and_pid(vars);
 	ft_exit(vars, vars->exit_code);
 }
@@ -120,7 +120,7 @@ void	ft_pipe(t_vars *vars)
 	ft_close_pipes(vars->pipe_count, vars->fd);
 	i = -1;
 	while (++i < commands)
-		waitpid(vars->pid[i], &status, 0);
+		waitpid(-1, &status, 0);
 	if (WIFEXITED(status))
 		vars->exit_code = WEXITSTATUS(status);
 	signal(SIGINT, ft_handler_s);
