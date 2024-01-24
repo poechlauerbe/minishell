@@ -6,11 +6,40 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 10:55:29 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/24 12:56:48 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/24 16:07:30 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+int	ft_check_enclosing_heredoc(char **arg, t_vars *vars)
+{
+	t_quote	quote;
+	int		errcd;
+
+	ft_init_quote(&quote);
+	while (*arg && (*arg)[quote.i])
+	{
+		if (quote.i == 0)
+			ft_init_quote(&quote);
+		if ((*arg)[quote.i] == '\'' && !quote.dq && !quote.sq)
+			quote.sq = 1;
+		else if ((*arg)[quote.i] == '\'' && !quote.dq && quote.sq)
+			quote.sq = 0;
+		else if ((*arg)[quote.i] == '"' && !quote.sq && !quote.dq)
+			quote.dq = 1;
+		else if ((*arg)[quote.i] == '"' && !quote.sq && quote.dq)
+			quote.dq = 0;
+		quote.i++;
+	}
+	errcd = ft_enclosing_open_quotes(vars, quote);
+	if (errcd)
+	{
+		vars->no_exec = SYNTAX_ERROR;
+		vars->exit_code = SYNTAX_ERROR;
+	}
+	return (errcd);
+}
 
 void	ft_heredoc_append(t_vars *vars, t_prg *prog, char **str)
 {

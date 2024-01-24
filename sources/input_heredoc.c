@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 20:34:56 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/24 12:56:32 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/24 16:03:44 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,11 @@ void	ft_heredoc(t_vars *vars)
 	while (prog)
 	{
 		if (prog->oper == O_HEREDOC)
+		{
+			if (ft_check_enclosing_heredoc(prog->prog, vars))
+				break ;
 			ft_heredoc_exec(vars, prog);
+		}
 		prog = prog->next;
 	}
 	signal(SIGINT, ft_handler_s);
