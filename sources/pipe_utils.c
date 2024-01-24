@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 16:52:00 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/23 17:45:21 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/24 12:49:49 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ void	ft_close_pipes(int pipe_nr, int *fd)
 	i = -1;
 	while (++i < pipe_nr)
 	{
-		if (i % 2)
-			write(fd[i], "\0", 1);
 		close(fd[i]);
 	}
 }

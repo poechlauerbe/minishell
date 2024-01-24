@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/23 18:07:57 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/24 12:12:24 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <readline/history.h>
 # include <signal.h>
 # include <sys/wait.h>
+# include <sys/ioctl.h>
 # include <sys/stat.h>
 # include <dirent.h>
 # include <sys/types.h>
@@ -48,6 +49,7 @@ typedef struct s_prg
 	t_red			*in_file;
 	t_red			*out_file;
 	char			*heredoc;
+	int				hdoc_flag;
 	char			**prog;
 	struct s_prg	*next;
 }		t_prg;
@@ -384,8 +386,9 @@ void		ft_add_envv(t_vars *vars, char *key, char *val, int id);
 t_kv		*ft_val_retrieval(t_vars *vars, char *key);
 
 /* input heredoc */
-void		ft_heredoc_exec(t_vars *vars, t_red *reds, int i);
-void		ft_add_on_heredoc_str(t_vars *vars, t_red *reds, char *str);
+void		ft_heredoc_exec(t_vars *vars, t_prg *prog);
+void		ft_heredoc(t_vars *vars);
+void		ft_add_on_heredoc_str(t_vars *vars, t_prg *prog, char *str);
 
 /* key_value_remove */
 /* removes an environment variable from the key_value list, matching the key.

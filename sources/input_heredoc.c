@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   input_heredoc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 20:34:56 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/23 18:08:59 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/24 12:47:31 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-void	ft_create_name(t_vars *vars, t_red *reds)
+void	ft_create_name(t_vars *vars, t_prg *prog)
 {
 	char	*num_itoa;
 
@@ -20,104 +20,116 @@ void	ft_create_name(t_vars *vars, t_red *reds)
 	num_itoa = ft_itoa(vars->tmp_count);
 	if (!num_itoa)
 		ft_exit(vars, MALLOC_ERROR);
-	free(reds->file);
-	reds->file = ft_strjoin("/tmp/m_s_h_", num_itoa);
+	free(prog->prog[0]);
+	prog->prog[0] = ft_strjoin("/tmp/m_s_h_", num_itoa);
 	free(num_itoa);
-	if (!reds->file)
+	if (!prog->prog[0])
 		ft_exit(vars, MALLOC_ERROR);
 }
 
-void	ft_make_tmp_file(t_vars *vars, t_red *reds)
+void	ft_make_tmp_file(t_vars *vars, t_prg *prog)
 {
 	int	i;
 	int	fd;
 
-	ft_create_name(vars, reds);
-	fd = open(reds->file, O_RDWR | O_TRUNC | O_CREAT, 0644);
+	ft_create_name(vars, prog);
+	fd = open(prog->prog[0], O_RDWR | O_TRUNC | O_CREAT, 0644);
 	if (fd < 0)
 		ft_exit(vars, OPEN_FILE_ERROR);
-	write(fd, "\n", 1);
 	i = 0;
-	while (reds->heredoc && reds->heredoc[i])
+	while (prog->heredoc && prog->heredoc[i])
 	{
-		write(fd, &reds->heredoc[i], 1);
+		write(fd, &prog->heredoc[i], 1);
 		i++;
 	}
 	close(fd);
-	free (reds->heredoc);
-	reds->heredoc = NULL;
+	free (prog->heredoc);
+	prog->heredoc = NULL;
 }
 
-void	ft_prep_delimiter(t_vars *vars, t_red *reds)
+void	ft_prep_delimiter(t_vars *vars, t_prg *prog)
 {
 	char	*new;
 	char	*str_wo_q;
 	int		len;
 	int		i;
 
-	reds->hdoc_flag = 0;
+	prog->hdoc_flag = 0;
 	i = -1;
-	while (reds->file[++i] && reds->file[i] != ' ' && !reds->hdoc_flag)
-		if (reds->file[i] == '\'' || reds->file[i] == '\"')
-			reds->hdoc_flag = 1;
-	str_wo_q = ft_create_value(vars, reds->file);
+	while (prog->prog[0][++i] && prog->prog[0][i] != ' ' && !prog->hdoc_flag)
+		if (prog->prog[0][i] == '\'' || prog->prog[0][i] == '\"')
+			prog->hdoc_flag = 1;
+	str_wo_q = ft_create_value(vars, prog->prog[0]);
 	if (!str_wo_q)
 		ft_exit(vars, MALLOC_ERROR);
-	free(reds->file);
-	reds->file = str_wo_q;
-	len = ft_strlen(reds->file);
+	free(prog->prog[0]);
+	prog->prog[0] = str_wo_q;
+	len = ft_strlen(prog->prog[0]);
 	new = ft_calloc((len + 2), sizeof(char));
 	if (!new)
 		ft_exit(vars, MALLOC_ERROR);
-	ft_strlcpy(new, reds->file, len + 1);
-	free(reds->file);
+	ft_strlcpy(new, prog->prog[0], len + 1);
+	free(prog->prog[0]);
 	new[len] = '\n';
-	reds->file = new;
+	prog->prog[0] = new;
 }
 
-void	ft_err_m_hered(t_red *reds)
+void	ft_err_m_hered(t_prg *prog, int line_num)
 {
-	ft_putstr_fd("ERROR ", 2);
-	ft_putstr_fd(reds->file, 2);
-	ft_putstr_fd(" ERROR\n", 2);
+	int	i;
+
+	i = 0;
+	ft_putstr_fd("bash: warning: here-document at line ", 2);
+	ft_putnbr_fd(line_num, 2);
+	ft_putstr_fd(" delimited by end-of-file (wanted `", 2);
+	while (prog->prog[0][i + 1])
+		i++;
+	prog->prog[0][i] = '\0';
+	ft_putstr_fd(prog->prog[0], 2);
+	ft_putstr_fd("')\n", 2);
+
 }
 
-void	ft_stop(t_vars *vars, int i)
-{
-	char	buf[1];
-
-	if (i > 0)
-	{
-		read(vars->fd[2 * i - 2], buf, 1);
-		while (buf[0] != '\0' && !vars->stop)
-			read(vars->fd[2 * i - 2], buf, 1);
-		vars->stop = 1;
-	}
-}
-
-void	ft_heredoc_exec(t_vars *vars, t_red *reds, int i)
+void	ft_heredoc_exec(t_vars *vars, t_prg *prog)
 {
 	char	*str;
 	int		len;
+	int		j;
 
-	ft_stop(vars, i);
-	signal(SIGINT, ft_handler_child);
-	len = ft_strlen(reds->file) + 1;
+	j = 1;
+	prog->heredoc = NULL;
+	ft_prep_delimiter(vars, prog);
+	len = ft_strlen(prog->prog[0] + 1);
 	str = readline("> ");
 	if (!str)
-		ft_err_m_hered(reds);
-	while (str && ft_strncmp(str, reds->file, len) != 0 && !g_flag)
+		ft_err_m_hered(prog, j);
+	while (str && ft_strncmp(str, prog->prog[0], len) != 0 && !g_flag)
 	{
-		ft_add_on_heredoc_str(vars, reds, str);
+		j++;
+		ft_add_on_heredoc_str(vars, prog, str);
 		str = readline("> ");
 		if (!str)
-			ft_err_m_hered(reds);
+			ft_err_m_hered(prog, j);
 	}
 	if (str)
 		free (str);
-	if (!reds->hdoc_flag)
-		ft_check_enclosing(&reds->heredoc, vars);
+	if (!prog->hdoc_flag)
+		ft_check_enclosing(&prog->heredoc, vars);
 	if (!g_flag)
-		ft_make_tmp_file(vars, reds);
-	signal(SIGINT, SIG_DFL);
+		ft_make_tmp_file(vars, prog);
+}
+
+void	ft_heredoc(t_vars *vars)
+{
+	t_prg	*prog;
+
+	signal(SIGINT, ft_handler_child);
+	prog = vars->p_start;
+	while (prog)
+	{
+		if (prog->oper == O_HEREDOC)
+			ft_heredoc_exec(vars, prog);
+		prog = prog->next;
+	}
+	signal(SIGINT, ft_handler_s);
 }
