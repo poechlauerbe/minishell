@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 20:34:56 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/25 14:18:28 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/25 14:23:01 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ void	ft_prep_delimiter(t_vars *vars, t_prg *prog)
 		ft_exit(vars, MALLOC_ERROR);
 	ft_strlcpy(new, prog->prog[0], len + 1);
 	free(prog->prog[0]);
-	// new[len] = '\n';
 	prog->prog[0] = new;
 }
 
