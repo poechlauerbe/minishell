@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 13:40:48 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/24 16:49:39 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/25 12:05:08 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,6 @@ void	ft_minishell_inner_loop(t_vars *vars)
 	else if (ft_strlen(vars->inp) > 0)
 		ft_minishell_input_handling(vars);
 	ft_reset(vars);
-	free(vars->inp);
-	vars->inp = NULL;
 }
 
 int	main(int argc, char **argv, char **envp)

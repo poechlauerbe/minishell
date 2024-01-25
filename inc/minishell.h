@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/25 11:20:34 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/25 11:53:52 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ typedef struct s_vars
 	int				fd_open_out;
 	int				std_in;
 	int				std_out;
+	char			*path;
 }		t_vars;
 
 typedef struct s_quote

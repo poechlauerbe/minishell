@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 20:34:56 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/24 16:03:44 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/25 14:18:28 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	ft_prep_delimiter(t_vars *vars, t_prg *prog)
 		ft_exit(vars, MALLOC_ERROR);
 	ft_strlcpy(new, prog->prog[0], len + 1);
 	free(prog->prog[0]);
-	new[len] = '\n';
+	// new[len] = '\n';
 	prog->prog[0] = new;
 }
 
@@ -87,7 +87,7 @@ void	ft_heredoc_exec(t_vars *vars, t_prg *prog)
 	str = readline("> ");
 	if (!str)
 		ft_err_m_hered(prog, j);
-	while (str && ft_strncmp(str, prog->prog[0], len) != 0 && !g_flag)
+	while (str && ft_strcmp(str, prog->prog[0]) != 0 && !g_flag)
 	{
 		j++;
 		ft_add_on_heredoc_str(vars, prog, str);
