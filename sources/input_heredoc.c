@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 20:34:56 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/25 14:23:01 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/25 17:32:58 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,27 +96,18 @@ void	ft_heredoc_exec(t_vars *vars, t_prg *prog)
 	}
 	if (str)
 		free (str);
-	if (!prog->hdoc_flag)
+	if (!prog->hdoc_flag && !g_flag)
 		ft_check_enclosing(&prog->heredoc, vars);
 	if (!g_flag)
 		ft_make_tmp_file(vars, prog);
 }
 
-void	ft_heredoc(t_vars *vars)
+void	ft_heredoc(t_vars *vars, t_prg *prog)
 {
-	t_prg	*prog;
 
 	signal(SIGINT, ft_handler_child);
-	prog = vars->p_start;
-	while (prog)
-	{
-		if (prog->oper == O_HEREDOC)
-		{
-			if (ft_check_enclosing_heredoc(prog->prog, vars))
-				break ;
-			ft_heredoc_exec(vars, prog);
-		}
-		prog = prog->next;
-	}
+	if (ft_check_enclosing_heredoc(prog->prog, vars))
+		return ;
+	ft_heredoc_exec(vars, prog);
 	signal(SIGINT, ft_handler_s);
 }
