@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/24 16:00:06 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/25 11:20:34 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -422,6 +422,7 @@ void		ft_pipecount(t_vars *vars);
 // closes all the open pipes of the pipeloop
 void		ft_close_pipes(int pipe_nr, int *fd);
 int			ft_check_command_path(char *file, t_vars *vars);
+void		ft_wait_childs(t_vars *vars, int commands);
 
 // checks if the input file is accesable
 int			ft_check_in_access(char *file, t_vars *vars);

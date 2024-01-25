@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 15:46:51 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/24 16:54:27 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/25 11:20:00 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,12 +97,12 @@ void	ft_pipe_loop(t_vars *vars, int commands)
 			ft_child_process(vars, commands, temp, i);
 		temp = temp->next;
 	}
+	ft_close_pipes(vars->pipe_count, vars->fd);
 }
 
 void	ft_pipe(t_vars *vars)
 {
 	int		i;
-	int		status;
 	int		commands;
 
 	commands = vars->pipe_count + 1;
@@ -117,12 +117,7 @@ void	ft_pipe(t_vars *vars)
 		if (pipe(vars->fd + i * 2) == -1)
 			ft_exit(vars, PIPE_ERROR);
 	ft_pipe_loop(vars, commands);
-	ft_close_pipes(vars->pipe_count, vars->fd);
-	i = -1;
-	while (++i < commands)
-		waitpid(-1, &status, 0);
-	if (WIFEXITED(status))
-		vars->exit_code = WEXITSTATUS(status);
+	ft_wait_childs(vars, commands);
 	signal(SIGINT, ft_handler_s);
 	ft_free_pipe_fd_and_pid(vars);
 }

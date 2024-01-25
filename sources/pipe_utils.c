@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 16:52:00 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/24 14:34:39 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/25 11:27:19 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,4 +85,27 @@ int	ft_check_command_path(char *file, t_vars *vars)
 		num.j++;
 	}
 	return (OK);
+}
+
+void	ft_wait_childs(t_vars *vars, int commands)
+{
+	int		i;
+	int		status;
+
+	i = -1;
+	while (++i < commands)
+		waitpid(-1, &status, 0);
+	if (WIFEXITED(status))
+		vars->exit_code = WEXITSTATUS(status);
+	else if (WIFSIGNALED(status))
+	{
+		if (WTERMSIG(status) == 13)
+			vars->exit_code = WEXITSTATUS(status);
+		else
+			vars->exit_code = 128 + WTERMSIG(status);
+		if (vars->exit_code == 139)
+			ft_putstr_fd("Segmentation fault (core dumped)\n", 2);
+		if (vars->exit_code == 130)
+			write(1, "\n", 1);
+	}
 }
