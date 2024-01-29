@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 13:52:29 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/17 15:18:34 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/29 13:04:41 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,6 @@
 # define O_HEREDOC 61
 
 // Text macros:
-# define M_SYN "bash: syntax error near unexpected token `"
+# define M_SYN "minishell: syntax error near unexpected token `"
 
 #endif

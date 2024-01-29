@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_exit.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 11:12:25 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/29 11:15:45 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/29 13:07:22 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ long long	ft_atoi_ll(const char *nptr, int *err)
 int	ft_err_mes_numeric(char *prog, char *tofree)
 {
 	err_handler();
-	ft_putstr_fd("exit\nbash: exit: ", 2);
+	ft_putstr_fd("exit\nminishell: exit: ", 2);
 	ft_putstr_fd(prog, 2);
 	ft_putstr_fd(": numeric argument required\n", 2);
 	err_handle_free();
@@ -104,12 +104,7 @@ void	ft_exit_prog(t_vars *vars, char **prog)
 			ft_exit(vars, SYNTAX_ERROR);
 		}
 		else if (prog[1] && prog[2])
-		{
-			err_handler();
-			ft_putstr_fd("exit\nbash: exit: too many arguments\n", 2);
-			vars->exit_code = 1;
-			err_handle_free();
-		}
+			ft_err_too_many_args(vars);
 		else
 			ft_calc_exit_code(vars, str_wo_q, prog[1]);
 		if (str_wo_q)

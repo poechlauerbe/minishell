@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 13:28:25 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/25 12:05:03 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/29 13:07:28 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,12 @@ void	ft_reset(t_vars *vars)
 	ft_free_input(vars);
 	ft_free_pipe_fd_and_pid(vars);
 	ft_close_var_open(vars);
+}
+
+void	ft_err_too_many_args(t_vars *vars)
+{
+	err_handler();
+	ft_putstr_fd("exit\nminishell: exit: too many arguments\n", 2);
+	vars->exit_code = 1;
+	err_handle_free();
 }

@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/29 12:30:47 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/29 13:08:23 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -286,6 +286,7 @@ t_kv		*ft_last_entry(t_kv *elem);
 void		ft_add_underscore(t_vars *vars, char **prg);
 
 /* exit */
+void		ft_err_too_many_args(t_vars *vars);
 // prints an error message
 // void		err_mes(void);
 // frees the linked list where the input is stored

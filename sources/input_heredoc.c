@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_heredoc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 20:34:56 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/29 12:45:58 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/29 13:01:00 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ void	ft_heredoc_exec(t_vars *vars, t_prg *prog)
 	int		j;
 
 	j = 1;
-	prog->heredoc = NULL;
 	ft_prep_delimiter(vars, prog);
 	len = ft_strlen(prog->prog[0] + 1);
 	str = readline("> ");
@@ -100,17 +99,17 @@ void	ft_heredoc_exec(t_vars *vars, t_prg *prog)
 		ft_check_enclosing(&prog->heredoc, vars);
 	if (!g_flag)
 		ft_make_tmp_file(vars, prog);
-	if (prog->heredoc)
-		free (prog->heredoc);
-	prog->heredoc = NULL;
 }
 
 void	ft_heredoc(t_vars *vars, t_prg *prog)
 {
-
+	prog->heredoc = NULL;
 	signal(SIGINT, ft_handler_child);
 	if (ft_check_enclosing_heredoc(prog->prog, vars))
 		return ;
 	ft_heredoc_exec(vars, prog);
+	if (prog->heredoc)
+		free (prog->heredoc);
+	prog->heredoc = NULL;
 	signal(SIGINT, ft_handler_s);
 }
