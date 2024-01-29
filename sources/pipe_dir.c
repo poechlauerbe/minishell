@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 12:51:28 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/25 12:32:54 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/29 12:07:53 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	ft_check_dir(t_vars *vars, char *str)
 	if (!ptr)
 		return (OK);
 	err_handler();
-	ft_putstr_fd("bash: ", 2);
+	ft_putstr_fd("minishell: ", 2);
 	ft_putstr_fd(str, 2);
 	ft_putstr_fd(": Is a directory\n", 2);
 	err_handle_free();
@@ -39,7 +39,7 @@ int	ft_check_in_access(char *file, t_vars *vars)
 	else
 	{
 		err_handler();
-		ft_putstr_fd("bash: ", 2);
+		ft_putstr_fd("minishell: ", 2);
 		ft_putstr_fd(file, 2);
 		ft_putstr_fd(": No such file or directory\n", 2);
 		err_handle_free();
@@ -64,7 +64,7 @@ int	ft_check_out_access(char *file, t_vars *vars)
 		else
 		{
 			err_handler();
-			ft_putstr_fd("bash: ", 2);
+			ft_putstr_fd("minishell: ", 2);
 			ft_putstr_fd(file, 2);
 			ft_putstr_fd(": Permission denied\n", 2);
 			err_handle_free();
