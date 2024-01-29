@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prog.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 13:41:52 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/25 11:01:14 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/29 11:45:43 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,10 @@ void	ft_check_w_stand_path(t_vars *vars, t_prg *prog)
 		ft_exit(vars, 127);
 	}
 	else if (acc_c == OK)
+	{
+		signal(SIGQUIT, SIG_DFL);
 		execve(prog->prog[0], prog->prog, vars->envp);
+	}
 }
 
 void	ft_check_prog(t_vars *vars, t_prg *prog)

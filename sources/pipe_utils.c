@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 16:52:00 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/25 11:27:19 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/29 11:56:24 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ void	ft_pipecount(t_vars *vars)
 			{
 				vars->no_exec = SYNTAX_ERROR;
 				vars->exit_code = SYNTAX_ERROR;
-				ft_putstr_fd("bash: syntax error near unexpected token `|'", 2);
+				ft_putstr_fd("minishell: syntax error ", 2);
+				ft_putstr_fd("near unexpected token `|'\n", 2);
 				return ;
 			}
 		}
@@ -62,7 +63,7 @@ int	ft_path_checker(char *file, t_count *num, t_vars *vars)
 	else
 	{
 		err_handler();
-		ft_putstr_fd("bash: ", 2);
+		ft_putstr_fd("minishell: ", 2);
 		ft_putstr_fd(file, 2);
 		ft_putstr_fd(": No such file or directory\n", 2);
 		err_handle_free();
@@ -105,6 +106,8 @@ void	ft_wait_childs(t_vars *vars, int commands)
 			vars->exit_code = 128 + WTERMSIG(status);
 		if (vars->exit_code == 139)
 			ft_putstr_fd("Segmentation fault (core dumped)\n", 2);
+		if (vars->exit_code == 128 + SIGQUIT)
+			ft_putstr_fd("Quit (core dumped)\n", 2);
 		if (vars->exit_code == 130)
 			write(1, "\n", 1);
 	}

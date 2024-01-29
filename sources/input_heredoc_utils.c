@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_heredoc_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 10:55:29 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/24 16:07:30 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/29 11:53:36 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	ft_err_m_hered(t_prg *prog, int line_num)
 	int	i;
 
 	i = 0;
-	ft_putstr_fd("bash: warning: here-document at line ", 2);
+	ft_putstr_fd("minishell: warning: here-document at line ", 2);
 	ft_putnbr_fd(line_num, 2);
 	ft_putstr_fd(" delimited by end-of-file (wanted `", 2);
 	while (prog->prog[0][i + 1])

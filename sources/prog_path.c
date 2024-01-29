@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prog_path.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 14:01:04 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/16 14:19:04 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/29 11:45:29 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,10 @@ void	ft_no_path(t_vars *vars, t_prg *prog)
 	if (!c_prog)
 		ft_exit(vars, MALLOC_ERROR);
 	if (access(c_prog, F_OK | X_OK) == OK)
+	{
+		signal(SIGQUIT, SIG_DFL);
 		execve(c_prog, prog->prog, vars->envp);
+	}
 	free(c_prog);
 	ft_prog_not_found(vars, prog);
 	ft_exit(vars, vars->exit_code);
@@ -55,7 +58,10 @@ void	ft_check_prog_path(t_vars *vars, t_prg *prog, char *dir)
 	if (!c_prog)
 		ft_exit(vars, MALLOC_ERROR);
 	if (access(c_prog, F_OK | X_OK) == OK)
+	{
+		signal(SIGQUIT, SIG_DFL);
 		execve(c_prog, prog->prog, vars->envp);
+	}
 	else if (access(c_prog, F_OK) == OK)
 		ft_no_rights(vars, c_prog, c_prog);
 	else
@@ -70,7 +76,10 @@ void	ft_check_current_dir(t_vars *vars, t_prg *prog)
 	if (!c_prog)
 		ft_exit(vars, MALLOC_ERROR);
 	if (access(c_prog, F_OK | X_OK) == OK)
+	{
+		signal(SIGQUIT, SIG_DFL);
 		execve(c_prog, prog->prog, vars->envp);
+	}
 	else
 		free (c_prog);
 }
@@ -99,6 +108,6 @@ void	ft_check_path(t_vars *vars, t_prg *prog)
 		if (line[i])
 			i++;
 	}
-	ft_check_current_dir(vars, prog);
+	// ft_check_current_dir(vars, prog);
 	ft_prog_not_found(vars, prog);
 }

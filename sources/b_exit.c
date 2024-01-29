@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_exit.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 11:12:25 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/24 16:35:50 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/29 11:15:45 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ void	ft_calc_exit_code(t_vars *vars, char *str_wo_q, char *prog)
 		num += 256;
 	if (err != OK)
 		num = ft_err_mes_numeric(prog, str_wo_q);
+	if (str_wo_q)
+		free (str_wo_q);
 	ft_exit(vars, num);
 }
 
@@ -110,7 +112,8 @@ void	ft_exit_prog(t_vars *vars, char **prog)
 		}
 		else
 			ft_calc_exit_code(vars, str_wo_q, prog[1]);
-		free(str_wo_q);
+		if (str_wo_q)
+			free(str_wo_q);
 	}
 	else
 		ft_exit(vars, vars->exit_code);
