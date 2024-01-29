@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/25 11:20:34 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/25 17:20:31 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ typedef struct s_vars
 	int				fd_open_out;
 	int				std_in;
 	int				std_out;
+	char			*path;
 }		t_vars;
 
 typedef struct s_quote
@@ -386,7 +387,7 @@ t_kv		*ft_val_retrieval(t_vars *vars, char *key);
 
 /* input heredoc */
 void		ft_heredoc_exec(t_vars *vars, t_prg *prog);
-void		ft_heredoc(t_vars *vars);
+void		ft_heredoc(t_vars *vars, t_prg *prog);
 void		ft_add_on_heredoc_str(t_vars *vars, t_prg *prog, char *str);
 void		ft_err_m_hered(t_prg *prog, int line_num);
 int			ft_check_enclosing_heredoc(char **arg, t_vars *vars);

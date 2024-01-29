@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prog_err.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 13:56:05 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/29 11:54:20 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/01/29 12:10:21 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,16 +45,11 @@ void	ft_prog_not_found(t_vars *vars, t_prg *prog)
 	{
 		if (S_ISDIR(fileinfo.st_mode))
 			ft_is_dir(vars, prog);
-		else if (!access(prog->prog[0], F_OK) && !ft_return_val(vars, "PATH"))
-			ft_no_rights(vars, prog->prog[0], NULL);
 	}
-	else
-	{
-		err_handler();
-		ft_putstr_fd(prog->prog[0], 2);
-		ft_putstr_fd(": command not found\n", 2);
-		err_handle_free();
-		vars->exit_code = 127;
-		ft_exit(vars, 127);
-	}
+	err_handler();
+	ft_putstr_fd(prog->prog[0], 2);
+	ft_putstr_fd(": command not found\n", 2);
+	err_handle_free();
+	vars->exit_code = 127;
+	ft_exit(vars, 127);
 }
