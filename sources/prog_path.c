@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 14:01:04 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/29 12:11:43 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/29 12:28:48 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ void	ft_check_prog_path(t_vars *vars, t_prg *prog, char *dir)
 		execve(c_prog, prog->prog, vars->envp);
 	}
 	else if (access(c_prog, F_OK) == OK)
-		ft_no_rights(vars, c_prog, c_prog);
-	else
+		ft_no_rights(vars, c_prog, &c_prog);
+	if (c_prog)
 		free (c_prog);
 }
 
