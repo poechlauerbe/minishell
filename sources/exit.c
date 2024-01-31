@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 13:28:25 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/29 13:07:28 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/01/31 13:54:20 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ void	ft_exit(t_vars *vars, int errcd)
 		ft_free_envp(vars->envp);
 	ft_close_var_open(vars);
 	err_handle_free();
+	if (isatty(fileno(stdin)))
+		ft_putstr_fd("exit\n", 2);
 	exit(errcd);
 }
 
