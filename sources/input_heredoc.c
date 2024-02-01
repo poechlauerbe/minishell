@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_heredoc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 20:34:56 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/29 13:01:00 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/02/01 12:33:19 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,10 @@ void	ft_prep_delimiter(t_vars *vars, t_prg *prog)
 void	ft_heredoc_exec(t_vars *vars, t_prg *prog)
 {
 	char	*str;
-	int		len;
 	int		j;
 
 	j = 1;
 	ft_prep_delimiter(vars, prog);
-	len = ft_strlen(prog->prog[0] + 1);
 	str = readline("> ");
 	if (!str)
 		ft_err_m_hered(prog, j);
