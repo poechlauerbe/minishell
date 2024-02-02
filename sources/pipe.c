@@ -6,11 +6,38 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 15:46:51 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/02/02 14:09:32 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/02/02 15:21:48 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+
+int	ft_ambigious(t_red *tmp)
+{
+	int	i;
+
+	i = 0;
+	while (tmp->file[i] && (tmp->file[i] == '"' || tmp->file[i] == '\''))
+		i++;
+	if (!tmp->file[i])
+	{
+		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd(tmp->filename, 2);
+		ft_putstr_fd(": ambiguous redirect\n", 2);
+		return (1);
+	}
+	while (tmp->file[i] && tmp->file[i] != ' ')
+		i++;
+	if (tmp->file[i])
+	{
+		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd(tmp->filename, 2);
+		ft_putstr_fd(": ambiguous redirect\n", 2);
+		return (1);
+	}
+	return (OK);
+}
 
 void	ft_check_input_file(t_vars *vars, t_prg *temp, t_red *reds)
 {
@@ -19,6 +46,8 @@ void	ft_check_input_file(t_vars *vars, t_prg *temp, t_red *reds)
 	reds = temp->in_file;
 	while (reds)
 	{
+		if (ft_ambigious(reds))
+			ft_exit(vars, 1, 0);
 		if (ft_check_in_access(reds->file, vars) != OK)
 			ft_exit(vars, 1, 0);
 		reds = reds->next;
@@ -42,6 +71,8 @@ void	ft_check_output_file(t_vars *vars, t_prg *temp, t_red *reds)
 	reds = temp->out_file;
 	while (reds)
 	{
+		if (ft_ambigious(reds))
+			ft_exit(vars, 1, 0);
 		if (ft_check_out_access(reds->file, vars) != OK)
 			ft_exit(vars, 1, 0);
 		if (reds->oper == O_RED_OUTPUT)

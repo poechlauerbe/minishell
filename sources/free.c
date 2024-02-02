@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 16:24:45 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/02/02 14:05:45 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/02/02 15:47:36 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,9 @@ void	ft_free_reds(t_red **file)
 			free(temp->file);
 			temp->file = NULL;
 		}
+		if (temp->filename)
+			free(temp->filename);
+		temp->filename = NULL;
 		if (temp->heredoc)
 			free(temp->heredoc);
 		free(temp);
@@ -56,6 +59,9 @@ void	ft_free_t_prg(t_prg *temp)
 	int		i;
 
 	i = 0;
+	if (temp->filename)
+		free(temp->filename);
+	temp->filename = NULL;
 	prog = temp->prog;
 	while (prog && prog[i])
 	{

@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 12:15:16 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/02/02 13:56:08 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/02/02 15:30:12 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,10 +116,16 @@ void	ft_expand_all_vars(t_vars *vars)
 		while (tmp->prog[i])
 		{
 			ft_home_expand(vars, &tmp->prog[i]);
+			if (tmp->oper == '>' || tmp->oper == '<' || tmp->oper == O_APP_OUT)
+			{
+				tmp->filename = ft_strdup(tmp->prog[0]);
+				if (!tmp->filename)
+					ft_exit(vars, MALLOC_ERROR, 0);
+			}
 			ft_check_enclosing(&tmp->prog[i], vars);
 			i++;
 		}
-		if (tmp->prog[0])
+		if (tmp->prog[0] && (tmp->oper == '0' || tmp->oper == '|'))
 			ft_check_resplit(vars, tmp->prog[0], tmp);
 		if (tmp->prog[1] && (tmp->prog[1][0] == '-'))
 			ft_check_addon_resplit(vars, tmp->prog[1], tmp);

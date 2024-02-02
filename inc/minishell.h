@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2024/02/02 13:53:59 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/02/02 15:08:56 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_red
 {
 	char			oper;
 	char			*file;
+	char			*filename;
 	char			*heredoc;
 	int				hdoc_flag;
 	struct s_red	*next;
@@ -48,6 +49,7 @@ typedef struct s_prg
 	char			oper;
 	t_red			*in_file;
 	t_red			*out_file;
+	char			*filename;
 	char			*heredoc;
 	int				hdoc_flag;
 	char			**prog;
@@ -444,7 +446,7 @@ void		ft_prog_not_found(t_vars *vars, t_prg *prog);
 void		ft_check_path(t_vars *vars, t_prg *prog);
 
 /* redirect_utils */
-void		ft_red_new_node(t_vars *vars, t_red **lst, char *file, char oper);
+void		ft_red_new_node(t_vars *vars, t_red **lst, t_prg *tmp);
 
 int			ft_builtin_single_prog(t_vars *vars, t_prg *prog);
 int			ft_builtin(t_vars *vars, t_prg *prog);

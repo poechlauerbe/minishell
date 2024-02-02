@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 18:05:51 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/25 17:21:45 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/02/02 15:08:31 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ void	ft_assing_reds(t_vars *vars, t_prg *tmp, t_prg **lst, t_prg *prog)
 	while (tmp && tmp->oper != '|')
 	{
 		if (tmp->oper == '>' || tmp->oper == O_APP_OUT)
-			ft_red_new_node(vars, &prog->out_file, tmp->prog[0], tmp->oper);
+			ft_red_new_node(vars, &prog->out_file, tmp);
 		else if (tmp->oper == '<' || tmp->oper == O_HEREDOC)
-			ft_red_new_node(vars, &prog->in_file, tmp->prog[0], tmp->oper);
+			ft_red_new_node(vars, &prog->in_file, tmp);
 		tmp = tmp->next;
 	}
 	*lst = tmp;
