@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_export_key_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 15:22:09 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/17 16:47:37 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/02/02 13:56:08 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char	*ft_copy_key(t_vars *vars, char *arg)
 
 	id = (char *)malloc(sizeof(char) * (ft_key_len(arg) + 1));
 	if (!id)
-		ft_exit(vars, MALLOC_ERROR);
+		ft_exit(vars, MALLOC_ERROR, 0);
 	i = 0;
 	while (*arg && !(*arg == '=' || (*arg == '+' && *(arg + 1) == '=')))
 	{

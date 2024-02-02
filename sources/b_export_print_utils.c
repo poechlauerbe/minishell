@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:36:23 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/24 14:54:57 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/02/02 13:56:08 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,15 +64,15 @@ void	ft_key_err_print(t_vars *vars, char *key, char *val)
 
 	tmp1 = ft_strjoin("minishell: export: `", key);
 	if (!tmp1)
-		ft_exit(vars, MALLOC_ERROR);
+		ft_exit(vars, MALLOC_ERROR, 0);
 	tmp2 = ft_strjoin(tmp1, val);
 	free(tmp1);
 	if (!tmp2)
-		ft_exit(vars, MALLOC_ERROR);
+		ft_exit(vars, MALLOC_ERROR, 0);
 	tmp1 = ft_strjoin(tmp2, "': not a valid identifier\n");
 	free(tmp2);
 	if (!tmp1)
-		ft_exit(vars, MALLOC_ERROR);
+		ft_exit(vars, MALLOC_ERROR, 0);
 	err_handler();
 	ft_printf_fd(2, tmp1);
 	err_handle_free();

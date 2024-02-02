@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 14:39:12 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/24 15:12:41 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/02/02 13:56:08 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_home(t_vars *vars, char **curpath)
 	pwdlen = ft_strlen(ft_return_val(vars, "HOME"));
 	fpath = (char *)malloc(sizeof(char) * (plen + pwdlen + 1));
 	if (!fpath)
-		ft_exit(vars, MALLOC_ERROR);
+		ft_exit(vars, MALLOC_ERROR, 0);
 	ft_strlcpy(fpath, pwd, (pwdlen + 1));
 	ft_strlcat(fpath, &(*curpath)[1], (plen + pwdlen + 1));
 	free (*curpath);
@@ -80,7 +80,7 @@ void	ft_user_home(t_vars *vars, char **str, char **tmp)
 	len = ft_strlen(&(*str)[1]);
 	*tmp = calloc(len + ft_strlen(home) + ft_strlen(usr) + 1, sizeof(char));
 	if (!*tmp)
-		ft_exit(vars, MALLOC_ERROR);
+		ft_exit(vars, MALLOC_ERROR, 0);
 	ft_strlcpy(*tmp, home, ft_strlen(home) + 1);
 	if (usr)
 		ft_strlcat(*tmp, usr, ft_strlen(*tmp) + ft_strlen(usr) + 1);

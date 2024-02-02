@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_value.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thorben <thorben@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 13:26:58 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/09 12:36:25 by thorben          ###   ########.fr       */
+/*   Updated: 2024/02/02 13:56:08 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	ft_add_envv(t_vars *vars, char *key, char *val, int id)
 	{
 		tmp = (t_kv *)malloc(sizeof(t_kv));
 		if (!tmp)
-			ft_exit(vars, MALLOC_ERROR);
+			ft_exit(vars, MALLOC_ERROR, 0);
 		tmp->key = key;
 		tmp->val = val;
 		ft_set_val(vars, &vars->envv, &tmp);

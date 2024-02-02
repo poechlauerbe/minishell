@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 16:24:39 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/12 09:11:58 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/02/02 13:56:08 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	ft_quote_remover(t_vars *vars)
 		{
 			str_wo_q = ft_create_value(vars, temp->prog[i]);
 			if (!str_wo_q)
-				ft_exit(vars, MALLOC_ERROR);
+				ft_exit(vars, MALLOC_ERROR, 0);
 			free(temp->prog[i]);
 			temp->prog[i] = str_wo_q;
 		}

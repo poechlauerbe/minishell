@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prog.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 13:41:52 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/29 11:45:43 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/02/02 14:08:49 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	ft_check_w_stand_path(t_vars *vars, t_prg *prog)
 	{
 		ft_prog_not_found(vars, prog);
 		vars->exit_code = 127;
-		ft_exit(vars, 127);
+		ft_exit(vars, 127, 0);
 	}
 	else if (acc_c == OK)
 	{
@@ -73,10 +73,10 @@ void	ft_check_prog(t_vars *vars, t_prg *prog)
 		err_handle_free();
 		vars->no_exec = 127;
 		vars->exit_code = 127;
-		ft_exit(vars, 127);
+		ft_exit(vars, 127, 0);
 	}
 	ft_check_w_stand_path(vars, prog);
 	if (ft_builtin(vars, prog) == USED)
-		ft_exit(vars, OK);
+		ft_exit(vars, OK, 0);
 	ft_check_path(vars, prog);
 }

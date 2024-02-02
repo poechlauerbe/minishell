@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 16:52:00 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/29 12:08:40 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/02/02 13:56:08 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	ft_path_checker(char *file, t_count *num, t_vars *vars)
 
 	test_path = ft_strdup(file);
 	if (!test_path)
-		ft_exit(vars, MALLOC_ERROR);
+		ft_exit(vars, MALLOC_ERROR, 0);
 	test_path[num->j] = '\0';
 	if (access(file, F_OK) == 0)
 		return (OK);

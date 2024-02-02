@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:29:49 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/24 16:19:20 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/02/02 13:56:08 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_malloc_cp(t_vars *vars, char **cp, char *str)
 	}
 	*cp = (char *)calloc(len + 1, sizeof(char));
 	if (!*cp)
-		ft_exit(vars, MALLOC_ERROR);
+		ft_exit(vars, MALLOC_ERROR, 0);
 	len = 0;
 	i = -1;
 	while (str[++i])
@@ -69,7 +69,7 @@ void	ft_pwd_conc(t_vars *vars, char **curpath)
 			return ;
 		fpath = (char *)malloc(sizeof(char) * (plen + cwdlen + slash + 1));
 		if (!fpath)
-			ft_exit(vars, MALLOC_ERROR);
+			ft_exit(vars, MALLOC_ERROR, 0);
 		ft_strlcpy(fpath, cwd, (cwdlen + 1));
 		if (slash)
 			ft_strlcat(fpath, "/", cwdlen + 2);

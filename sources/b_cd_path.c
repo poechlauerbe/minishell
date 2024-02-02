@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_cd_path.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thorben <thorben@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 12:25:06 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/08 16:40:55 by thorben          ###   ########.fr       */
+/*   Updated: 2024/02/02 13:56:08 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*ft_create_full_path(t_vars *vars, char *path, char **cpath)
 	{
 		fpath = (char *)malloc(sizeof(char) * (plen + cplen + 2));
 		if (!fpath)
-			ft_exit(vars, MALLOC_ERROR);
+			ft_exit(vars, MALLOC_ERROR, 0);
 		ft_strlcpy(fpath, path, (plen + 1));
 		ft_strlcat(fpath, "/", (plen + 2));
 		ft_strlcat(fpath, *cpath, (plen + cplen + 2));
@@ -33,7 +33,7 @@ char	*ft_create_full_path(t_vars *vars, char *path, char **cpath)
 	{
 		fpath = (char *)malloc(sizeof(char) * (plen + cplen + 1));
 		if (!fpath)
-			ft_exit(vars, MALLOC_ERROR);
+			ft_exit(vars, MALLOC_ERROR, 0);
 		ft_strlcpy(fpath, path, (plen + 1));
 		ft_strlcat(fpath, *cpath, (plen + cplen + 1));
 	}
@@ -62,7 +62,7 @@ void	ft_check_path_null(t_vars *vars, char **curpath)
 	len = ft_strlen(*curpath);
 	fpath = (char *)malloc(sizeof(char) * (len + ft_strlen(*curpath) + 3));
 	if (!fpath)
-		ft_exit(vars, MALLOC_ERROR);
+		ft_exit(vars, MALLOC_ERROR, 0);
 	ft_strlcpy(fpath, "./", 3);
 	ft_strlcat(fpath, *curpath, (len + ft_strlen(*curpath) + 3));
 	free(*curpath);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_export_new_envp.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 11:41:51 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/22 11:59:31 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/02/02 13:56:08 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	ft_create_envp(t_vars *vars, int i, t_kv *tmp2, char ***arr)
 		vall = 0;
 	tmp = ft_calloc(idl + vall + equal, sizeof(char));
 	if (!tmp)
-		ft_exit(vars, MALLOC_ERROR);
+		ft_exit(vars, MALLOC_ERROR, 0);
 	ft_strlcpy(tmp, tmp2->key, idl + 1);
 	if (tmp2->val)
 	{
@@ -95,7 +95,7 @@ void	ft_new_envp(t_vars *vars)
 	len = ft_envp_len(vars);
 	arr = ft_calloc(len + 1, sizeof(char *));
 	if (!arr)
-		ft_exit(vars, MALLOC_ERROR);
+		ft_exit(vars, MALLOC_ERROR, 0);
 	ft_malloc_envp(vars, &arr);
 	if (vars->alloc)
 		ft_free_envp(vars->envp);
@@ -138,7 +138,7 @@ void	ft_new_envp(t_vars *vars)
 // 	len = ft_envp_len(vars);
 // 	arr = ft_calloc(len, sizeof(char *));
 // 	if (!arr)
-// 		ft_exit(vars, MALLOC_ERROR);
+// 		ft_exit(vars, MALLOC_ERROR, 0);
 // 	ft_malloc_envpr(vars, &arr, key);
 // 	if (vars->alloc)
 // 		ft_free_envp(vars->envp);

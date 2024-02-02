@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_new_node.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thorben <thorben@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 08:18:18 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/18 17:25:39 by thorben          ###   ########.fr       */
+/*   Updated: 2024/02/02 13:56:08 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_init_new_node(t_vars *vars, t_prg **temp)
 {
 	(*temp)->next = ft_calloc(1, sizeof(t_prg));
 	if (!(*temp)->next)
-		ft_exit(vars, MALLOC_ERROR);
+		ft_exit(vars, MALLOC_ERROR, 0);
 	(*temp) = (*temp)->next;
 	(*temp)->next = NULL;
 	(*temp)->str_c = 0;

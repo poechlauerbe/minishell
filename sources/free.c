@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 16:24:45 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/19 13:16:58 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/02/02 14:05:45 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	ft_free_input(t_vars *vars)
 void	ft_close_var_open(t_vars *vars)
 {
 	if (vars->std_out && dup2(vars->std_out, STDOUT_FILENO) == -1)
-		ft_exit(vars, DUP_ERROR);
+		ft_exit(vars, DUP_ERROR, 0);
 	if (vars->std_out)
 	{
 		close(vars->std_out);
@@ -102,7 +102,7 @@ void	ft_close_var_open(t_vars *vars)
 		vars->fd_open_out = 0;
 	}
 	if (vars->std_in && dup2(vars->std_in, STDIN_FILENO) == -1)
-		ft_exit(vars, DUP_ERROR);
+		ft_exit(vars, DUP_ERROR, 0);
 	if (vars->std_in)
 	{
 		close(vars->std_in);

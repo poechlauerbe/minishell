@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:16:04 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/17 09:27:27 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/02/02 13:56:08 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	ft_combine(t_vars *vars, t_prg **prog, t_prg *p_prog, t_prg *last)
 	ft_check_prog_len(&count, p_prog, (*prog));
 	new_prog = malloc((count + 1) * sizeof(char *));
 	if (!new_prog)
-		ft_exit(vars, MALLOC_ERROR);
+		ft_exit(vars, MALLOC_ERROR, 0);
 	new_prog[count] = NULL;
 	ft_transfer_prog_str(new_prog, p_prog->prog, (*prog)->prog);
 	if (p_prog->prog)

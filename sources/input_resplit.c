@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_resplit.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thorben <thorben@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 14:29:20 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/18 13:24:25 by thorben          ###   ########.fr       */
+/*   Updated: 2024/02/02 13:56:08 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,14 @@ void	ft_resplit2(t_vars *vars, char *str, t_prg *prg, char **new)
 	str_len = ft_strlen_resplit(str, &i);
 	new[0] = ft_calloc(str_len + 1, sizeof(char));
 	if (!new[0])
-		ft_exit(vars, MALLOC_ERROR);
+		ft_exit(vars, MALLOC_ERROR, 0);
 	ft_strlcpy(new[0], &str[i - str_len], str_len + 1);
 	while (str[i] && (str[i] == 32 || (str[i] > 8 && str[i] < 14)))
 		i += 1;
 	str_len = ft_strlen(&str[i]);
 	new[1] = ft_calloc(str_len + 1, sizeof(char));
 	if (!new[1])
-		ft_exit(vars, MALLOC_ERROR);
+		ft_exit(vars, MALLOC_ERROR, 0);
 	ft_strlcpy(new[1], &str[i], str_len + 1);
 	i = 1;
 	while (prg->prog[i])
@@ -64,7 +64,7 @@ void	ft_resplit(t_vars *vars, t_prg *prg, int count)
 
 	str_wo_q = ft_create_value(vars, prg->prog[0]);
 	if (!str_wo_q)
-		ft_exit(vars, MALLOC_ERROR);
+		ft_exit(vars, MALLOC_ERROR, 0);
 	free(prg->prog[0]);
 	prg->prog[0] = str_wo_q;
 	c_progs = 0;
@@ -72,7 +72,7 @@ void	ft_resplit(t_vars *vars, t_prg *prg, int count)
 		c_progs++;
 	new = ft_calloc((c_progs + count), sizeof(char *));
 	if (!new)
-		ft_exit(vars, MALLOC_ERROR);
+		ft_exit(vars, MALLOC_ERROR, 0);
 	ft_resplit2(vars, prg->prog[0], prg, new);
 }
 

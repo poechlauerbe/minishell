@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_heredoc_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 10:55:29 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/29 11:53:36 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/02/02 14:29:00 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	ft_heredoc_append(t_vars *vars, t_prg *prog, char **str)
 	if (!temp)
 	{
 		free(str);
-		ft_exit(vars, MALLOC_ERROR);
+		ft_exit(vars, MALLOC_ERROR, 0);
 	}
 	if (*str)
 		free(*str);
@@ -60,7 +60,7 @@ void	ft_heredoc_append(t_vars *vars, t_prg *prog, char **str)
 	if (!temp2)
 	{
 		free(temp);
-		ft_exit(vars, MALLOC_ERROR);
+		ft_exit(vars, MALLOC_ERROR, 0);
 	}
 	if (prog->heredoc)
 		free(prog->heredoc);
@@ -79,7 +79,7 @@ void	ft_add_on_heredoc_str(t_vars *vars, t_prg *prog, char *str)
 		if (!prog->heredoc)
 		{
 			free(str);
-			ft_exit(vars, MALLOC_ERROR);
+			ft_exit(vars, MALLOC_ERROR, 0);
 		}
 	}
 	if (str)
@@ -95,9 +95,6 @@ void	ft_err_m_hered(t_prg *prog, int line_num)
 	ft_putstr_fd("minishell: warning: here-document at line ", 2);
 	ft_putnbr_fd(line_num, 2);
 	ft_putstr_fd(" delimited by end-of-file (wanted `", 2);
-	while (prog->prog[0][i + 1])
-		i++;
-	prog->prog[0][i] = '\0';
 	ft_putstr_fd(prog->prog[0], 2);
 	ft_putstr_fd("')\n", 2);
 }

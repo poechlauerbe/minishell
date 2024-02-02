@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_redirecting.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thorben <thorben@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 12:23:55 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/18 16:38:38 by thorben          ###   ########.fr       */
+/*   Updated: 2024/02/02 13:56:08 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,13 @@ void	ft_red_new_node(t_vars *vars, t_red **lst, char *file, char oper)
 
 	new = ft_calloc(1, sizeof(t_red));
 	if (!new)
-		ft_exit(vars, MALLOC_ERROR);
+		ft_exit(vars, MALLOC_ERROR, 0);
 	new->next = NULL;
 	str_wo_q = ft_create_value(vars, file);
 	if (!str_wo_q)
 	{
 		free(new);
-		ft_exit(vars, MALLOC_ERROR);
+		ft_exit(vars, MALLOC_ERROR, 0);
 	}
 	free(file);
 	new->file = str_wo_q;

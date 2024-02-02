@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/29 13:08:23 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/02/02 13:53:59 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -292,7 +292,7 @@ void		ft_err_too_many_args(t_vars *vars);
 // frees the linked list where the input is stored
 void		ft_free_input(t_vars *vars);
 // exits and frees all open mallocs
-void		ft_exit(t_vars *vars, int errcd);
+void		ft_exit(t_vars *vars, int errcd, int message);
 /* resets the input of the shell and returns 1 - might have to add free
 	additional functions, depending on other elements that might be added  */
 void		ft_reset(t_vars *vars);

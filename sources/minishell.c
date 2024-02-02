@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 13:40:48 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/31 13:55:10 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/02/02 14:04:36 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	ft_minishell_inner_loop(t_vars *vars)
 		g_flag = 0;
 	}
 	if (!vars->inp)
-		ft_exit(vars, vars->exit_code);
+		ft_exit(vars, vars->exit_code, 1);
 	else if (ft_strlen(vars->inp) > 0)
 		ft_minishell_input_handling(vars);
 	ft_reset(vars);

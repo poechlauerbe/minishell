@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_cd_slashes.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 18:11:52 by tbenz             #+#    #+#             */
-/*   Updated: 2023/12/14 15:07:04 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/02/02 13:56:08 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_remove_trails(t_vars *vars, char **cp)
 	{
 		tmp = ft_substr(*cp, 0, (len + 1));
 		if (!tmp)
-			ft_exit(vars, MALLOC_ERROR);
+			ft_exit(vars, MALLOC_ERROR, 0);
 		free (*cp);
 		*cp = tmp;
 	}
@@ -63,7 +63,7 @@ void	ft_remove_nls(t_vars *vars, char **cp)
 	len = ft__remove_nl_len(*cp);
 	tmp = (char *)calloc((len + 1), sizeof(char));
 	if (!tmp)
-		ft_exit(vars, MALLOC_ERROR);
+		ft_exit(vars, MALLOC_ERROR, 0);
 	i = 0;
 	j = 0;
 	while ((*cp)[i] == '/')
@@ -92,7 +92,7 @@ void	ft_remove_ls(t_vars *vars, char **cp)
 	{
 		tmp = ft_substr(*cp, (len - 1), ft_strlen(*cp));
 		if (!tmp)
-			ft_exit(vars, MALLOC_ERROR);
+			ft_exit(vars, MALLOC_ERROR, 0);
 		free (*cp);
 		*cp = tmp;
 	}

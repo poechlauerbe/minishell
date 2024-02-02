@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_heredoc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 20:34:56 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/02/01 12:33:19 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/02/02 14:06:22 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ void	ft_create_name(t_vars *vars, t_prg *prog)
 	vars->tmp_count++;
 	num_itoa = ft_itoa(vars->tmp_count);
 	if (!num_itoa)
-		ft_exit(vars, MALLOC_ERROR);
+		ft_exit(vars, MALLOC_ERROR, 0);
 	free(prog->prog[0]);
 	prog->prog[0] = ft_strjoin("/tmp/m_s_h_", num_itoa);
 	free(num_itoa);
 	if (!prog->prog[0])
-		ft_exit(vars, MALLOC_ERROR);
+		ft_exit(vars, MALLOC_ERROR, 0);
 }
 
 void	ft_make_tmp_file(t_vars *vars, t_prg *prog)
@@ -35,7 +35,7 @@ void	ft_make_tmp_file(t_vars *vars, t_prg *prog)
 	ft_create_name(vars, prog);
 	fd = open(prog->prog[0], O_RDWR | O_TRUNC | O_CREAT, 0644);
 	if (fd < 0)
-		ft_exit(vars, OPEN_FILE_ERROR);
+		ft_exit(vars, OPEN_FILE_ERROR, 0);
 	i = 0;
 	while (prog->heredoc && prog->heredoc[i])
 	{
@@ -61,13 +61,13 @@ void	ft_prep_delimiter(t_vars *vars, t_prg *prog)
 			prog->hdoc_flag = 1;
 	str_wo_q = ft_create_value(vars, prog->prog[0]);
 	if (!str_wo_q)
-		ft_exit(vars, MALLOC_ERROR);
+		ft_exit(vars, MALLOC_ERROR, 0);
 	free(prog->prog[0]);
 	prog->prog[0] = str_wo_q;
 	len = ft_strlen(prog->prog[0]);
 	new = ft_calloc((len + 2), sizeof(char));
 	if (!new)
-		ft_exit(vars, MALLOC_ERROR);
+		ft_exit(vars, MALLOC_ERROR, 0);
 	ft_strlcpy(new, prog->prog[0], len + 1);
 	free(prog->prog[0]);
 	prog->prog[0] = new;

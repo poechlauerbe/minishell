@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:28:33 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/24 14:52:56 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/02/02 13:56:08 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_test_dir(t_vars *vars, char **cp, int i)
 		return (0);
 	dir = (char *)calloc((i + 1), sizeof(char));
 	if (!dir)
-		ft_exit(vars, MALLOC_ERROR);
+		ft_exit(vars, MALLOC_ERROR, 0);
 	j = -1;
 	while (++j < i)
 		dir[j] = (*cp)[j];
@@ -78,7 +78,7 @@ void	ft_create_cp(t_vars *vars, char **cp, int i, int cl)
 	{
 		temp = (char *)ft_calloc((len + 2), sizeof(char));
 		if (!temp)
-			ft_exit(vars, MALLOC_ERROR);
+			ft_exit(vars, MALLOC_ERROR, 0);
 		ft_create_cp2(cp, cl, i, &temp);
 	}
 	free (*cp);
@@ -118,7 +118,7 @@ int	ft_remove_dot_dot(t_vars *vars, char **cp)
 		i++;
 	temp = ft_substr(*cp, i, (ft_strlen(*cp) - i));
 	if (!temp)
-		ft_exit(vars, MALLOC_ERROR);
+		ft_exit(vars, MALLOC_ERROR, 0);
 	i = -1;
 	if (ft_remove_dd2(vars, &temp, i))
 		return (1);
@@ -127,7 +127,7 @@ int	ft_remove_dot_dot(t_vars *vars, char **cp)
 	{
 		tmp = ft_substr(temp, 0, strlen(temp) - 1);
 		if (!tmp)
-			ft_exit(vars, MALLOC_ERROR);
+			ft_exit(vars, MALLOC_ERROR, 0);
 		free (temp);
 		temp = tmp;
 	}

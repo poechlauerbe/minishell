@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 13:56:05 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/29 12:30:09 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/02/02 14:08:22 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_no_rights(t_vars *vars, char *prog, char **to_free)
 	if (*to_free)
 		free(*to_free);
 	*to_free = NULL;
-	ft_exit(vars, 126);
+	ft_exit(vars, 126, 0);
 }
 
 void	ft_is_dir(t_vars *vars, t_prg *prog)
@@ -33,7 +33,7 @@ void	ft_is_dir(t_vars *vars, t_prg *prog)
 	ft_putstr_fd(": Is a directory\n", 2);
 	err_handle_free();
 	vars->exit_code = 126;
-	ft_exit(vars, 126);
+	ft_exit(vars, 126, 0);
 }
 
 void	ft_prog_not_found(t_vars *vars, t_prg *prog)
@@ -51,5 +51,5 @@ void	ft_prog_not_found(t_vars *vars, t_prg *prog)
 	ft_putstr_fd(": command not found\n", 2);
 	err_handle_free();
 	vars->exit_code = 127;
-	ft_exit(vars, 127);
+	ft_exit(vars, 127, 0);
 }

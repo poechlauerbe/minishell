@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 12:15:16 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/24 13:15:07 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/02/02 13:56:08 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_expand_str(t_vars *vars, char **arg, t_quote *quote, char *str)
 	strlen = ft_strlen(*arg) - varlen + ft_strlen(str);
 	*arg = ft_calloc((strlen + 1), sizeof(char));
 	if (!(*arg))
-		ft_exit(vars, MALLOC_ERROR);
+		ft_exit(vars, MALLOC_ERROR, 0);
 	num.i = -1;
 	while (++num.i < quote->i)
 		(*arg)[num.i] = temp[num.i];
@@ -59,7 +59,7 @@ void	ft_expand_env(t_vars *vars, char **arg, t_quote *quote, int i)
 	len = ft_varlen(*arg, quote);
 	str = malloc(len * sizeof(char));
 	if (!str)
-		ft_exit(vars, MALLOC_ERROR);
+		ft_exit(vars, MALLOC_ERROR, 0);
 	ft_strlcpy(str, &(arg[0][i]), len);
 	temp = ft_return_val(vars, str);
 	free (str);
@@ -90,7 +90,7 @@ void	ft_expander(t_vars *vars, char **arg, t_quote *quote)
 	{
 		temp = ft_itoa(vars->exit_code);
 		if (!temp)
-			ft_exit(vars, MALLOC_ERROR);
+			ft_exit(vars, MALLOC_ERROR, 0);
 		ft_expand_str(vars, arg, quote, temp);
 		free(temp);
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 13:28:25 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/02/01 12:32:17 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/02/02 14:23:22 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	ft_free_envv(t_vars *vars)
 	}
 }
 
-void	ft_exit(t_vars *vars, int errcd)
+void	ft_exit(t_vars *vars, int errcd, int message)
 {
 	if (vars->inp)
 		free(vars->inp);
@@ -50,7 +50,7 @@ void	ft_exit(t_vars *vars, int errcd)
 		ft_free_envp(vars->envp);
 	ft_close_var_open(vars);
 	err_handle_free();
-	if (isatty(fileno(stdin)) && vars->pipe_count == 0)
+	if (isatty(fileno(stdin)) && vars->pipe_count == 0 && message)
 		ft_putstr_fd("exit\n", 2);
 	exit(errcd);
 }

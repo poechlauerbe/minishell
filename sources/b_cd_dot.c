@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_cd_dot.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 12:10:13 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/19 16:42:38 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/02/02 13:56:15 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	ft_cur_wo_dot(t_vars *vars, char **curpath, int len)
 
 	temp = (char *)ft_calloc(len, sizeof(char));
 	if (!temp)
-		ft_exit(vars, MALLOC_ERROR);
+		ft_exit(vars, MALLOC_ERROR, 0);
 	i = -1;
 	len = 0;
 	while ((*curpath)[++i])

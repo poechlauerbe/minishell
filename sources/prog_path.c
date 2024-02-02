@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 14:01:04 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/29 12:28:48 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/02/02 14:05:06 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_check_current_dir(t_vars *vars, t_prg *prog)
 
 	c_prog = ft_strjoin("./", prog->prog[0]);
 	if (!c_prog)
-		ft_exit(vars, MALLOC_ERROR);
+		ft_exit(vars, MALLOC_ERROR, 0);
 	if (access(c_prog, F_OK | X_OK) == OK)
 		execve(c_prog, prog->prog, vars->envp);
 	else
@@ -33,11 +33,11 @@ void	ft_no_path(t_vars *vars, t_prg *prog)
 
 	path = ft_strjoin(getcwd(cwd, sizeof(cwd)), "/");
 	if (!path)
-		ft_exit(vars, MALLOC_ERROR);
+		ft_exit(vars, MALLOC_ERROR, 0);
 	c_prog = ft_strjoin(path, prog->prog[0]);
 	free(path);
 	if (!c_prog)
-		ft_exit(vars, MALLOC_ERROR);
+		ft_exit(vars, MALLOC_ERROR, 0);
 	if (access(c_prog, F_OK | X_OK) == OK)
 	{
 		signal(SIGQUIT, SIG_DFL);
@@ -46,7 +46,7 @@ void	ft_no_path(t_vars *vars, t_prg *prog)
 	free(c_prog);
 	ft_check_current_dir(vars, prog);
 	ft_prog_not_found(vars, prog);
-	ft_exit(vars, vars->exit_code);
+	ft_exit(vars, vars->exit_code, 0);
 }
 
 void	ft_copy_path(int i, int i_start, char *dir, char *line)
@@ -70,7 +70,7 @@ void	ft_check_prog_path(t_vars *vars, t_prg *prog, char *dir)
 	c_prog = ft_strjoin(dir, prog->prog[0]);
 	free(dir);
 	if (!c_prog)
-		ft_exit(vars, MALLOC_ERROR);
+		ft_exit(vars, MALLOC_ERROR, 0);
 	if (access(c_prog, F_OK | X_OK) == OK)
 	{
 		signal(SIGQUIT, SIG_DFL);
@@ -100,7 +100,7 @@ void	ft_check_path(t_vars *vars, t_prg *prog)
 			i++;
 		dir = malloc((i - i_start + 2) * sizeof(char));
 		if (!dir)
-			ft_exit(vars, MALLOC_ERROR);
+			ft_exit(vars, MALLOC_ERROR, 0);
 		ft_copy_path(i, i_start, dir, line);
 		ft_check_prog_path(vars, prog, dir);
 		if (line[i])
