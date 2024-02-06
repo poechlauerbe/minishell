@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 12:51:28 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/29 12:07:53 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/02/06 10:48:14 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,30 @@ int	ft_check_out_access(char *file, t_vars *vars)
 			return (1);
 		}
 	}
+}
+
+int	ft_ambigious(t_red *tmp)
+{
+	int	i;
+
+	i = 0;
+	while (tmp->file[i] && (tmp->file[i] == '"' || tmp->file[i] == '\''))
+		i++;
+	if (!tmp->file[i])
+	{
+		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd(tmp->filename, 2);
+		ft_putstr_fd(": ambiguous redirect\n", 2);
+		return (1);
+	}
+	while (tmp->file[i] && tmp->file[i] != ' ')
+		i++;
+	if (tmp->file[i])
+	{
+		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd(tmp->filename, 2);
+		ft_putstr_fd(": ambiguous redirect\n", 2);
+		return (1);
+	}
+	return (OK);
 }
