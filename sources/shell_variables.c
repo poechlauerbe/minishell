@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 14:51:31 by tbenz             #+#    #+#             */
-/*   Updated: 2024/02/02 13:56:08 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/02/06 17:01:15 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	ft_prog_not_found_shvar(t_vars *vars, char *arg)
 	err_handle_free();
 	free (nfd);
 	vars->exit_code = 127;
-	exit(127);
 }
 
 int	ft_check_key_val(t_vars *vars, char *prg)
