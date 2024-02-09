@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 15:46:51 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/02/06 10:47:59 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/02/09 20:19:47 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void	ft_child_process(t_vars *vars, int commands, t_prg *temp, int i)
 	t_red	*reds;
 
 	signal(SIGINT, SIG_DFL);
+	signal(SIGPIPE, SIG_IGN);
 	reds = NULL;
 	if (temp->in_file != NULL)
 		ft_check_input_file(vars, temp, reds);
