@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_cd_utils2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: tbenz <tbenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 08:54:41 by thorben           #+#    #+#             */
-/*   Updated: 2024/02/09 16:16:05 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/02/09 16:47:18 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,14 @@ void	ft_new_oldpwd(t_vars *vars, char *key, char *val)
 	t_kv	*tmp;
 	char *new;
 
-	new = ft_strdup(val);
+	if (val && val[0])
+	{
+		new = ft_strdup(val);
+		if (!new)
+			ft_exit(vars, MALLOC_ERROR, 0);
+	}
+	else
+		new = NULL;
 	tmp = ft_val_retrieval(vars, key);
 	if (tmp && tmp->val)
 	{

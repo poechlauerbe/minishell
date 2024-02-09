@@ -6,7 +6,7 @@
 /*   By: tbenz <tbenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 11:42:38 by tbenz             #+#    #+#             */
-/*   Updated: 2024/02/09 13:29:18 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/02/09 16:40:07 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	ft_add_pwd(t_vars *vars)
 	if (getcwd(cwd, sizeof(cwd)) != NULL)
 	{
 		pwd = ft_strdup(cwd);
-		ft_printf(pwd);
 		if (pwd)
 			ft_add_envv(vars, cpwd, pwd, 0);
 		else

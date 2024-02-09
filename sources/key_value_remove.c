@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_value_remove.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
+/*   By: tbenz <tbenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:55:38 by tbenz             #+#    #+#             */
-/*   Updated: 2024/01/22 12:17:13 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/02/09 16:23:44 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int	ft_remove_helper(t_vars *vars, t_kv *tmp)
 	ft_remove_links_ao(&tmp);
 	free(tmp->key);
 	free(tmp->val);
+	tmp->key = NULL;
+	tmp->val = NULL;
 	if (!tmp->prev && !tmp->next)
 	{
 		free (tmp);
