@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_cd_utils2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbenz <tbenz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 08:54:41 by thorben           #+#    #+#             */
-/*   Updated: 2024/02/09 13:29:24 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/02/09 15:39:59 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,22 @@ void	ft_oldpwd(t_vars *vars)
 	vars->exit_code = 1;
 }
 
+void	ft_new_oldpwd(t_vars *vars, char *key, char *val)
+{
+	t_kv	*tmp;
+	char *new;
+
+	new = ft_strdup(val);
+	tmp = ft_val_retrieval(vars, key);
+	if (tmp && tmp->val)
+	{
+		free(tmp->val);
+		tmp->val = new;
+	}
+	else if (tmp)
+		tmp->val = new;
+}
+
 void	ft_chdir_pwd_envv(t_vars *vars, char **curpath)
 {
 	char	*key;
@@ -71,7 +87,7 @@ void	ft_chdir_pwd_envv(t_vars *vars, char **curpath)
 		ft_add_envv(vars, key, ft_return_val(vars, "PWD"), 0);
 	}
 	else
-		ft_new_value(vars, "OLDPWD", ft_return_val(vars, "PWD"));
+		ft_new_oldpwd(vars, "OLDPWD", ft_return_val(vars, "PWD"));
 	ft_add_pwd(vars);
 	free (*curpath);
 }
