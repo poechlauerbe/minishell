@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prog_path.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: tbenz <tbenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 14:01:04 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/02/02 14:05:06 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/02/09 17:13:55 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,8 @@ void	ft_check_path(t_vars *vars, t_prg *prog)
 		i_start = i;
 		while (line && line[i] != ':' && line[i] != '\0')
 			i++;
+		if (i_start == i)
+			vars->act_prog = 1;
 		dir = malloc((i - i_start + 2) * sizeof(char));
 		if (!dir)
 			ft_exit(vars, MALLOC_ERROR, 0);

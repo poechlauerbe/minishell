@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prog_err.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: tbenz <tbenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 13:56:05 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/02/02 14:08:22 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/02/09 17:13:59 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,9 @@ void	ft_prog_not_found(t_vars *vars, t_prg *prog)
 {
 	struct stat	fileinfo;
 
+	if (vars->act_prog)
+		ft_check_current_dir(vars, prog);
+	vars->act_prog = 0;
 	if (stat(prog->prog[0], &fileinfo) == 0 && (ft_strcmp(prog->prog[0], ".")
 			&& ft_strcmp(prog->prog[0], "..")))
 	{

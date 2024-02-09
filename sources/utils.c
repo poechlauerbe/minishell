@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:21:46 by tbenz             #+#    #+#             */
-/*   Updated: 2024/02/02 13:56:08 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/02/09 15:20:49 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	ft_init(t_vars *vars, int argc, char **argv, char **envp)
 	if (!oldpwd)
 		ft_exit(vars, MALLOC_ERROR, 0);
 	ft_add_envv(vars, oldpwd, NULL, 0);
+	ft_add_pwd(vars);
 	vars->envp = envp;
 	if (argc == 0)
 		return ;
@@ -38,15 +39,8 @@ void	ft_init(t_vars *vars, int argc, char **argv, char **envp)
 void	ft_pwd(t_vars *vars)
 {
 	char	cwd[1024];
-	char	*pwd;
 
-	pwd = ft_return_val(vars, "PWD");
-	if (pwd)
-	{
-		ft_printf("%s\n", pwd);
-		vars->exit_code = 0;
-	}
-	else if (getcwd(cwd, sizeof(cwd)) != NULL)
+	if (getcwd(cwd, sizeof(cwd)) != NULL)
 	{
 		ft_printf("%s\n", cwd);
 		vars->exit_code = 0;

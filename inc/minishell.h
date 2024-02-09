@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: tbenz <tbenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2024/02/09 13:12:15 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/02/09 17:19:09 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ typedef struct s_vars
 	int				std_in;
 	int				std_out;
 	char			*path;
+	int				act_prog;
 }		t_vars;
 
 typedef struct s_quote
@@ -446,6 +447,7 @@ void		ft_prog_not_found(t_vars *vars, t_prg *prog);
 
 /* prog_path */
 void		ft_check_path(t_vars *vars, t_prg *prog);
+void		ft_check_current_dir(t_vars *vars, t_prg *prog);
 
 /* redirect_utils */
 void		ft_red_new_node(t_vars *vars, t_red **lst, t_prg *tmp);
@@ -481,6 +483,10 @@ void		ft_set_val(t_vars *vars, t_kv **var, t_kv **tmp);
 int			ft_strcmp(const char *s1, const char *s2);
 // checks it there are any open quotes in the command
 int			ft_enclosing_open_quotes(t_vars *vars, t_quote quote);
+
+/* utils2 */
+// adds the cwd to the environment variable PWD
+void		ft_add_pwd(t_vars *vars);
 
 // void		ft_remove_envp(t_vars *vars, char *key);
 // void		ft_malloc_envpr(t_vars *vars, char ***arr, char *key);

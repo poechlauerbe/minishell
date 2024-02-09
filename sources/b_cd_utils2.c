@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_cd_utils2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: tbenz <tbenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 08:54:41 by thorben           #+#    #+#             */
-/*   Updated: 2024/01/24 15:14:15 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/02/09 16:47:18 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,23 +61,44 @@ void	ft_oldpwd(t_vars *vars)
 	vars->exit_code = 1;
 }
 
+void	ft_new_oldpwd(t_vars *vars, char *key, char *val)
+{
+	t_kv	*tmp;
+	char *new;
+
+	if (val && val[0])
+	{
+		new = ft_strdup(val);
+		if (!new)
+			ft_exit(vars, MALLOC_ERROR, 0);
+	}
+	else
+		new = NULL;
+	tmp = ft_val_retrieval(vars, key);
+	if (tmp && tmp->val)
+	{
+		free(tmp->val);
+		tmp->val = new;
+	}
+	else if (tmp)
+		tmp->val = new;
+}
+
 void	ft_chdir_pwd_envv(t_vars *vars, char **curpath)
 {
 	char	*key;
-	t_kv	*elem;
+	char	*new_oldpwd;
 
 	if (!ft_val_retrieval(vars, "OLDPWD"))
 	{
 		key = ft_exp_key(vars, "OLDPWD", 0);
-		ft_add_envv(vars, key, ft_return_val(vars, "PWD"), 0);
+		new_oldpwd = ft_strdup(ft_return_val(vars, "PWD"));
+		ft_add_envv(vars, key, new_oldpwd, 0);
 	}
 	else
-		ft_new_value(vars, "OLDPWD", ft_return_val(vars, "PWD"));
-	elem = ft_val_retrieval(vars, "PWD");
-	if (elem)
-		elem->val = ft_strdup(*curpath);
+		ft_new_oldpwd(vars, "OLDPWD", ft_return_val(vars, "PWD"));
+	ft_add_pwd(vars);
 	free (*curpath);
-	vars->exit_code = 0;
 }
 
 void	ft_chdir(t_vars *vars, char **curpath)
