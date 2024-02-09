@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+         #
+#    By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/01/24 14:19:20 by bpochlau         ###   ########.fr        #
+#    Updated: 2024/02/09 11:46:56 by tbenz            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -87,7 +87,8 @@ SRCS 			= $(addprefix $(SRCS_DIR)/,\
 				input_redirecting.c \
 				signal_handling.c \
 				shell_variables.c \
-				utils.c)
+				utils.c \
+				utils2.c)
 
 OBJS := $(SRCS:$(SRCS_DIR)/%.c=$(OBJDIR)/%.o)
 

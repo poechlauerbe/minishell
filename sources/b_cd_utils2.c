@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_cd_utils2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
+/*   By: tbenz <tbenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 08:54:41 by thorben           #+#    #+#             */
-/*   Updated: 2024/01/24 15:14:15 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/02/09 13:29:24 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ void	ft_oldpwd(t_vars *vars)
 void	ft_chdir_pwd_envv(t_vars *vars, char **curpath)
 {
 	char	*key;
-	t_kv	*elem;
 
 	if (!ft_val_retrieval(vars, "OLDPWD"))
 	{
@@ -73,11 +72,8 @@ void	ft_chdir_pwd_envv(t_vars *vars, char **curpath)
 	}
 	else
 		ft_new_value(vars, "OLDPWD", ft_return_val(vars, "PWD"));
-	elem = ft_val_retrieval(vars, "PWD");
-	if (elem)
-		elem->val = ft_strdup(*curpath);
+	ft_add_pwd(vars);
 	free (*curpath);
-	vars->exit_code = 0;
 }
 
 void	ft_chdir(t_vars *vars, char **curpath)
