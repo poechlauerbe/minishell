@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 20:34:56 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/02/02 14:06:22 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/02/09 13:12:37 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	ft_heredoc_exec(t_vars *vars, t_prg *prog)
 	if (str)
 		free (str);
 	if (!prog->hdoc_flag && !g_flag)
-		ft_check_enclosing(&prog->heredoc, vars);
+		ft_expand_heredoc(&prog->heredoc, vars);
 	if (!g_flag)
 		ft_make_tmp_file(vars, prog);
 }

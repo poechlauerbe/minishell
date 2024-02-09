@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 10:55:29 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/02/02 14:29:00 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/02/09 13:11:59 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,21 @@ int	ft_check_enclosing_heredoc(char **arg, t_vars *vars)
 		vars->exit_code = SYNTAX_ERROR;
 	}
 	return (errcd);
+}
+
+void	ft_expand_heredoc(char **arg, t_vars *vars)
+{
+	t_quote	quote;
+
+	ft_init_quote(&quote);
+	while (*arg && (*arg)[quote.i])
+	{
+		if (quote.i == 0)
+			ft_init_quote(&quote);
+		if ((*arg)[quote.i] == '$')
+			ft_expander(vars, arg, &quote);
+		quote.i++;
+	}
 }
 
 void	ft_heredoc_append(t_vars *vars, t_prg *prog, char **str)

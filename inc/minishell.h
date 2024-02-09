@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2024/02/06 10:48:59 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/02/09 13:12:15 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -394,6 +394,7 @@ void		ft_heredoc(t_vars *vars, t_prg *prog);
 void		ft_add_on_heredoc_str(t_vars *vars, t_prg *prog, char *str);
 void		ft_err_m_hered(t_prg *prog, int line_num);
 int			ft_check_enclosing_heredoc(char **arg, t_vars *vars);
+void		ft_expand_heredoc(char **arg, t_vars *vars);
 
 /* key_value_remove */
 /* removes an environment variable from the key_value list, matching the key.
