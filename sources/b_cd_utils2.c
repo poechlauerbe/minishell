@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 08:54:41 by thorben           #+#    #+#             */
-/*   Updated: 2024/02/09 15:39:59 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/02/09 16:16:05 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,11 +80,13 @@ void	ft_new_oldpwd(t_vars *vars, char *key, char *val)
 void	ft_chdir_pwd_envv(t_vars *vars, char **curpath)
 {
 	char	*key;
+	char	*new_oldpwd;
 
 	if (!ft_val_retrieval(vars, "OLDPWD"))
 	{
 		key = ft_exp_key(vars, "OLDPWD", 0);
-		ft_add_envv(vars, key, ft_return_val(vars, "PWD"), 0);
+		new_oldpwd = ft_strdup(ft_return_val(vars, "PWD"));
+		ft_add_envv(vars, key, new_oldpwd, 0);
 	}
 	else
 		ft_new_oldpwd(vars, "OLDPWD", ft_return_val(vars, "PWD"));
