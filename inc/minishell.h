@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbenz <tbenz@student.42vienna.com>         +#+  +:+       +#+        */
+/*   By: tbenz <tbenz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2024/02/09 11:46:26 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/02/09 17:13:57 by tbenz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ typedef struct s_vars
 	int				std_in;
 	int				std_out;
 	char			*path;
+	int				act_prog;
 }		t_vars;
 
 typedef struct s_quote
@@ -445,6 +446,7 @@ void		ft_prog_not_found(t_vars *vars, t_prg *prog);
 
 /* prog_path */
 void		ft_check_path(t_vars *vars, t_prg *prog);
+void		ft_check_current_dir(t_vars *vars, t_prg *prog);
 
 /* redirect_utils */
 void		ft_red_new_node(t_vars *vars, t_red **lst, t_prg *tmp);
