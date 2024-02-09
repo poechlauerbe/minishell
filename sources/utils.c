@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 17:21:46 by tbenz             #+#    #+#             */
-/*   Updated: 2024/02/09 15:20:49 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/02/09 17:34:33 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,7 @@ void	ft_pwd(t_vars *vars)
 		vars->exit_code = 0;
 	}
 	else
-	{
-		err_handler();
-		perror("getcwd() error");
-		err_handle_free();
-		vars->exit_code = 1;
-	}
+		ft_pwd_error(vars);
 }
 
 void	ft_set_val(t_vars *vars, t_kv **var, t_kv **tmp)

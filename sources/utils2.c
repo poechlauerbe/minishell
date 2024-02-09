@@ -3,14 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbenz <tbenz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 11:42:38 by tbenz             #+#    #+#             */
-/*   Updated: 2024/02/09 16:40:07 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/02/09 17:33:04 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+void	ft_pwd_error(t_vars *vars)
+{
+	err_handler();
+	perror("getcwd() error");
+	err_handle_free();
+	vars->exit_code = 1;
+}
 
 void	ft_add_pwd(t_vars *vars)
 {
@@ -36,9 +44,6 @@ void	ft_add_pwd(t_vars *vars)
 	else
 	{
 		free(cpwd);
-		err_handler();
-		perror("getcwd() error");
-		err_handle_free();
-		vars->exit_code = 1;
+		ft_pwd_error(vars);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 18:05:10 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/02/09 16:07:09 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/02/09 17:29:53 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void	ft_check_input(t_vars *vars)
 	ft_check_empty_progs(vars);
 	ft_quote_remover(vars);
 	ft_pipecount(vars);
-	// ft_add_underscore(vars, vars->p_start->prog);
+	ft_add_underscore(vars, vars->p_start->prog);
 	if (g_flag != 0)
 	{
 		vars->no_exec = 130;

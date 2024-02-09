@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbenz <tbenz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2024/02/09 17:19:09 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/02/09 17:33:44 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -487,6 +487,7 @@ int			ft_enclosing_open_quotes(t_vars *vars, t_quote quote);
 /* utils2 */
 // adds the cwd to the environment variable PWD
 void		ft_add_pwd(t_vars *vars);
+void		ft_pwd_error(t_vars *vars);
 
 // void		ft_remove_envp(t_vars *vars, char *key);
 // void		ft_malloc_envpr(t_vars *vars, char ***arr, char *key);
