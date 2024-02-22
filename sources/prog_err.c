@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prog_err.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbenz <tbenz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 13:56:05 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/02/09 17:13:59 by tbenz            ###   ########.fr       */
+/*   Updated: 2024/02/22 17:08:16 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,11 @@ void	ft_no_rights(t_vars *vars, char *prog, char **to_free)
 	ft_putstr_fd(prog, 2);
 	ft_putstr_fd(": Permission denied\n", 2);
 	err_handle_free();
-	if (*to_free)
+	if (to_free && *to_free)
+	{
 		free(*to_free);
-	*to_free = NULL;
+		*to_free = NULL;
+	}
 	ft_exit(vars, 126, 0);
 }
 

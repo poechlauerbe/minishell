@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:41:53 by tbenz             #+#    #+#             */
-/*   Updated: 2024/02/22 15:57:14 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/02/22 17:16:42 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	ft_export_prog(t_vars *vars, char **prog, int i)
 
 void	ft_export(t_vars *vars, char **prog)
 {
-	// prog = vars->p_start->prog;
 	if (prog[1])
 		ft_export_prog(vars, prog, 1);
 	else

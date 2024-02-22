@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 13:41:52 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/02/22 15:58:00 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/02/22 17:16:23 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,23 +38,39 @@ int	ft_builtin(t_vars *vars, t_prg *prog)
 	return (USED);
 }
 
+void	ft_no_file_or_dir(t_vars *vars, char *file)
+{
+	if (ft_check_dir(vars, file))
+		ft_exit(vars, 1, 0);
+	else
+	{
+		err_handler();
+		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd(file, 2);
+		ft_putstr_fd(": No such file or directory\n", 2);
+		err_handle_free();
+		vars->exit_code = 127;
+		ft_exit(vars, 127, 0);
+	}
+}
+
 void	ft_check_w_stand_path(t_vars *vars, t_prg *prog)
 {
 	int		acc_c;
 
-	acc_c = 1;
-	if (ft_strncmp(prog->prog[0], "./", 2) == 0)
-		acc_c = access(prog->prog[0], F_OK | X_OK);
-	else if (ft_strncmp(prog->prog[0], "../", 3) == 0)
-		acc_c = access(prog->prog[0], F_OK | X_OK);
-	else if (ft_strncmp(prog->prog[0], "/", 1) == 0)
-		acc_c = access(prog->prog[0], F_OK | X_OK);
-	if (acc_c == NOT_OK)
-	{
-		ft_prog_not_found(vars, prog);
-		vars->exit_code = 127;
-		ft_exit(vars, 127, 0);
-	}
+	acc_c = 0;
+	if (!ft_strncmp(prog->prog[0], "./", 2)
+		|| !ft_strncmp(prog->prog[0], "../", 3)
+		|| !ft_strncmp(prog->prog[0], "/", 1))
+		acc_c += access(prog->prog[0], F_OK);
+	if (!ft_strncmp(prog->prog[0], "./", 2)
+		|| !ft_strncmp(prog->prog[0], "../", 3)
+		|| !ft_strncmp(prog->prog[0], "/", 1))
+		acc_c += access(prog->prog[0], F_OK | X_OK);
+	if (acc_c == -1)
+		ft_no_rights(vars, prog->prog[0], NULL);
+	if (acc_c == -2)
+		ft_no_file_or_dir(vars, prog->prog[0]);
 	else if (acc_c == OK)
 	{
 		signal(SIGQUIT, SIG_DFL);
