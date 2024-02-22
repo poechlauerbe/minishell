@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 13:41:52 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/02/02 14:08:49 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/02/22 15:58:00 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_builtin(t_vars *vars, t_prg *prog)
 	else if (ft_strncmp(prog->prog[0], "pwd", 4) == 0)
 		ft_pwd(vars);
 	else if (ft_strncmp(prog->prog[0], "export", 7) == 0)
-		ft_export(vars);
+		ft_export(vars, prog->prog);
 	else if (ft_strncmp(prog->prog[0], "echo", 5) == 0)
 		ft_echo(vars, prog->prog);
 	else if (ft_strncmp(prog->prog[0], "env", 4) == 0)

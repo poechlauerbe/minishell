@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 10:22:06 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/17 12:29:42 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/02/22 15:57:43 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	ft_builtin_single_prog2(t_vars *vars, t_prg *prog, int errcd, int retval)
 	{
 		errcd = ft_check_files_sp(vars, prog);
 		if (errcd == OK)
-			ft_export(vars);
+			ft_export(vars, vars->p_start->prog);
 	}
 	else if (ft_strncmp(prog->prog[0], "echo", 5) == 0)
 	{

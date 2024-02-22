@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 13:14:23 by tbenz             #+#    #+#             */
-/*   Updated: 2024/02/02 13:56:08 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/02/22 16:39:44 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	ft_copy_value(t_quote *quote, char *arg)
 {
+	quote->sq = 0;
+	quote->dq = 0;
 	while (*arg)
 	{
 		if (*arg == '\'' && !quote->dq && !quote->sq)
@@ -43,7 +45,7 @@ char	*ft_create_value(t_vars *vars, char *arg)
 
 	ft_init_quote(&quote);
 	ft_quote_len(&quote, arg);
-	quote.value = (char *)malloc(sizeof(char) * (quote.len + 1));
+	quote.value = (char *)ft_calloc((quote.len + 1), sizeof(char));
 	if (!quote.value)
 		ft_exit(vars, MALLOC_ERROR, 0);
 	if (quote.len == 0)

@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2024/02/09 17:33:44 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/02/22 15:58:18 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -268,7 +268,7 @@ void		ft_option_error(t_vars *vars, char *prog);
 /* builtins2 */
 /* prints the env variables when it does not have arguments, otherwise tries to
 	add a key value pair */
-void		ft_export(t_vars *vars);
+void		ft_export(t_vars *vars, char **prog);
 // creates an environment variable
 void		ft_export_prog(t_vars *vars, char **prog, int i);
 

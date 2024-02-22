@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 15:22:09 by tbenz             #+#    #+#             */
-/*   Updated: 2024/02/02 13:56:08 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/02/22 16:10:14 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_check_enclosing(char **arg, t_vars *vars)
 	t_quote	quote;
 
 	ft_init_quote(&quote);
-	while (*arg && (*arg)[quote.i])
+	while (*arg && **arg && (*arg)[quote.i])
 	{
 		if (quote.i == 0)
 			ft_init_quote(&quote);
