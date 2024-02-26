@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 12:51:28 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/02/26 14:38:18 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/02/26 15:05:45 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ int	ft_check_out_access(char *file, t_vars *vars)
 			ft_putstr_fd(file, 2);
 			ft_putstr_fd(": Permission denied\n", 2);
 			err_handle_free();
+			vars->exit_code = PERMISSION_DENIED;
 			return (1);
 		}
 	}

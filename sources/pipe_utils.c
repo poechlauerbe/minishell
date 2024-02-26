@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 16:52:00 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/02/02 13:56:08 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/02/26 15:06:21 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ int	ft_path_checker(char *file, t_count *num, t_vars *vars)
 		ft_putstr_fd(file, 2);
 		ft_putstr_fd(": No such file or directory\n", 2);
 		err_handle_free();
+		vars->exit_code = 1;
 		return (1);
 	}
 	return (OK);
