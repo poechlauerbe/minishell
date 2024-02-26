@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_echo.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpochlau <poechlauerbe@gmail.com>          +#+  +:+       +#+        */
+/*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:20:58 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/18 10:33:15 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/02/26 14:17:26 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	ft_echo(t_vars *vars, char **str)
 		vars->exit_code = OK;
 		return ;
 	}
-	while (str[i + 1] && strncmp(str[i + 1], "-n", 2) == 0)
+	while (str[i + 1] && ft_strncmp(str[i + 1], "-n", 2) == 0)
 		if (ft_n_checker(str[i + 1], &new_line_mark, &i))
 			break ;
 	while (str[++i])

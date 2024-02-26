@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 17:52:13 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/02/02 13:56:08 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/02/26 14:14:09 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_init_s_count(t_vars *vars, t_prg **temp)
 {
-	vars->p_start = calloc(1, sizeof(t_prg));
+	vars->p_start = ft_calloc(1, sizeof(t_prg));
 	if (!vars->p_start)
 		ft_exit(vars, MALLOC_ERROR, 0);
 	vars->p_start->next = NULL;

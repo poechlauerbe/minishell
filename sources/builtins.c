@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 16:14:25 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/01/24 14:45:19 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/02/26 14:16:40 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_env(t_vars *vars)
 		if (tmp->id == 'x')
 		{
 			if (tmp->val)
-				printf("%s=%s\n", tmp->key, tmp->val);
+				ft_printf("%s=%s\n", tmp->key, tmp->val);
 		}
 		tmp = tmp->next;
 	}
@@ -95,7 +95,7 @@ void	ft_cd(t_vars *vars)
 		ft_malloc_cp(vars, &cp, vars->p_start->prog[1]);
 	else
 		cp = NULL;
-	if (!cp || !strcmp(cp, "--"))
+	if (!cp || !ft_strcmp(cp, "--"))
 	{
 		if (ft_cd2(vars, &cp))
 			return ;

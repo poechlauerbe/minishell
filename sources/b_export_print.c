@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 14:02:10 by tbenz             #+#    #+#             */
-/*   Updated: 2024/02/22 15:48:38 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/02/26 14:16:33 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ t_kv	*ft_next_kv(t_kv *elem, t_kv *prev, t_kv *last)
 			next = elem;
 		elem = elem->next;
 	}
-	if (strcmp(prev->key, next->key) > 1)
+	if (ft_strcmp(prev->key, next->key) > 1)
 		return (NULL);
 	return (next);
 }

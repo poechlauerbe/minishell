@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:29:49 by tbenz             #+#    #+#             */
-/*   Updated: 2024/02/02 13:56:08 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/02/26 14:13:59 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_malloc_cp(t_vars *vars, char **cp, char *str)
 		if (str[i] != '"' && str[i] != '\'')
 			len++;
 	}
-	*cp = (char *)calloc(len + 1, sizeof(char));
+	*cp = (char *)ft_calloc(len + 1, sizeof(char));
 	if (!*cp)
 		ft_exit(vars, MALLOC_ERROR, 0);
 	len = 0;

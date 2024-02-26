@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 17:28:33 by tbenz             #+#    #+#             */
-/*   Updated: 2024/02/02 13:56:08 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/02/26 14:17:06 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_test_dir(t_vars *vars, char **cp, int i)
 
 	if (!ft_strcmp(*cp, "//") || !ft_strcmp(*cp, "/.."))
 		return (0);
-	dir = (char *)calloc((i + 1), sizeof(char));
+	dir = (char *)ft_calloc((i + 1), sizeof(char));
 	if (!dir)
 		ft_exit(vars, MALLOC_ERROR, 0);
 	j = -1;
@@ -90,7 +90,7 @@ int	ft_remove_dd2(t_vars *vars, char **temp, int i)
 	int	cl;
 
 	cl = 0;
-	while ((*temp)[++i] && strcmp(*temp, "/"))
+	while ((*temp)[++i] && ft_strcmp(*temp, "/"))
 	{
 		if (!ft_strncmp(&((*temp)[i]), "/../", 4) ||
 			!ft_strncmp(&((*temp)[i]), "/..\0", 4))
@@ -125,7 +125,7 @@ int	ft_remove_dot_dot(t_vars *vars, char **cp)
 	if (ft_strlen(temp) > 1 && (temp)[ft_strlen(temp) - 1] == '/'
 		&& temp[ft_strlen(temp) - 2] != '/')
 	{
-		tmp = ft_substr(temp, 0, strlen(temp) - 1);
+		tmp = ft_substr(temp, 0, ft_strlen(temp) - 1);
 		if (!tmp)
 			ft_exit(vars, MALLOC_ERROR, 0);
 		free (temp);
