@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 15:46:51 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/02/09 20:19:47 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/02/26 14:37:38 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_check_input_file(t_vars *vars, t_prg *temp, t_red *reds)
 	reds = temp->in_file;
 	while (reds)
 	{
-		if (ft_ambigious(reds))
+		if (ft_ambigious(reds, vars))
 			ft_exit(vars, 1, 0);
 		if (ft_check_in_access(reds->file, vars) != OK)
 			ft_exit(vars, 1, 0);
@@ -44,7 +44,7 @@ void	ft_check_output_file(t_vars *vars, t_prg *temp, t_red *reds)
 	reds = temp->out_file;
 	while (reds)
 	{
-		if (ft_ambigious(reds))
+		if (ft_ambigious(reds, vars))
 			ft_exit(vars, 1, 0);
 		if (ft_check_out_access(reds->file, vars) != OK)
 			ft_exit(vars, 1, 0);

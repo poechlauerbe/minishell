@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:22 by tbenz             #+#    #+#             */
-/*   Updated: 2024/02/22 15:58:18 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/02/26 14:37:16 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -421,7 +421,7 @@ void		ft_check_input_file(t_vars *vars, t_prg *temp, t_red *reds);
 void		ft_check_output_file(t_vars *vars, t_prg *temp, t_red *reds);
 void		ft_pipecount(t_vars *vars);
 void		ft_pipe(t_vars *vars);
-int			ft_ambigious(t_red *tmp);
+int			ft_ambigious(t_red *tmp, t_vars *vars);
 
 /* pipe_utils */
 // counts how many pipes are in the input

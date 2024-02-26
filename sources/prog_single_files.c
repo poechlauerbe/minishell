@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 12:03:36 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/02/02 14:06:22 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/02/26 14:36:33 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	ft_c_infile_sp(t_vars *vars, t_prg *temp, t_red *reds)
 	reds = temp->in_file;
 	while (reds)
 	{
+		if (ft_ambigious(reds, vars))
+			return (1);
 		if (ft_check_in_access(reds->file, vars) != OK)
 			return (1);
 		reds = reds->next;
@@ -43,6 +45,8 @@ int	ft_c_outfile_sp(t_vars *vars, t_prg *temp, t_red *reds)
 	reds = temp->out_file;
 	while (reds)
 	{
+		if (ft_ambigious(reds, vars))
+			return (1);
 		if (ft_check_out_access(reds->file, vars) != OK)
 			return (1);
 		if (reds->oper == O_RED_OUTPUT)
