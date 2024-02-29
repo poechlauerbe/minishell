@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 15:46:51 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/02/29 11:29:07 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/02/29 11:34:56 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ void	ft_child_process(t_vars *vars, int commands, t_prg *temp, int i)
 	ft_close_pipes(vars->pipe_count, vars->fd);
 	ft_check_prog(vars, temp);
 	ft_free_pipe_fd_and_pid(vars);
-	// signal(SIGPIPE, SIG_DFL);
 	ft_exit(vars, vars->exit_code, 0);
 }
 
