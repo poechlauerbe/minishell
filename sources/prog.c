@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 13:41:52 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/02/29 11:30:29 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/02/29 12:34:15 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	ft_builtin(t_vars *vars, t_prg *prog)
 {
-	signal(SIGPIPE, SIG_IGN);
 	if (!prog->prog || !prog->prog[0] || !prog->prog[0][0])
 		return (NOT_USED);
+	signal(SIGPIPE, SIG_IGN);
 	if (ft_strncmp(prog->prog[0], "exit", 5) == 0)
 		ft_exit_prog(vars, prog->prog);
 	else if (ft_strncmp(prog->prog[0], "pwd", 4) == 0)
@@ -95,6 +95,6 @@ void	ft_check_prog(t_vars *vars, t_prg *prog)
 	}
 	ft_check_w_stand_path(vars, prog);
 	if (ft_builtin(vars, prog) == USED)
-		ft_exit(vars, OK, 0);
+		ft_exit(vars, vars->exit_code, 0);
 	ft_check_path(vars, prog);
 }

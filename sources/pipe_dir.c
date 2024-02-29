@@ -6,7 +6,7 @@
 /*   By: bpochlau <bpochlau@student.42vienna.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 12:51:28 by bpochlau          #+#    #+#             */
-/*   Updated: 2024/02/26 15:05:45 by bpochlau         ###   ########.fr       */
+/*   Updated: 2024/02/29 12:52:30 by bpochlau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,20 @@ int	ft_check_in_access(char *file, t_vars *vars)
 {
 	if (ft_check_dir(vars, file))
 		return (1);
-	if (access(file, R_OK) == 0)
-		return (OK);
+	if (access(file, F_OK) == 0)
+	{
+		if (access(file, R_OK) == 0)
+			return (OK);
+		else
+		{
+			err_handler();
+			ft_putstr_fd("minishell: ", 2);
+			ft_putstr_fd(file, 2);
+			ft_putstr_fd(": Permission denied\n", 2);
+			err_handle_free();
+			return (1);
+		}
+	}
 	else
 	{
 		err_handler();
